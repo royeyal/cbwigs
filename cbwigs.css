@@ -1,0 +1,30 @@
+/* Initial hide to avoid FOUC */
+[data-split="heading"] { visibility: hidden; }
+
+/* When JS marks it ready, show it (force, if needed) */
+.split-ready[data-split="heading"] { visibility: visible !important; }
+
+/* Masking wrappers for smooth reveals */
+[data-split="heading"] .line { 
+  display: block;
+  overflow: hidden;   /* the vertical reveal mask */
+}
+[data-split="heading"] .word,
+[data-split="heading"] .letter {
+  display: inline-block;
+}
+
+/* Optional perf hints on hero */
+.hero [data-split="heading"],
+.hero [data-split="heading"] .line,
+.hero [data-split="heading"] .word,
+.hero [data-split="heading"] .letter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Accessibility: no animation for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-split="heading"] { visibility: visible !important; }
+}
