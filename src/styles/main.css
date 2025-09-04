@@ -3,6 +3,7 @@
 /* Import other CSS modules */
 @import url('./textreveal.css');
 @import url('./animations.css');
+@import url('./glass-button.css');
 
 /* Global styles */
 html {
