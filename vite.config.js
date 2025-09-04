@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
   root: 'src',
@@ -8,26 +9,27 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        // Main entry points for different animations
-        textreveal: resolve(__dirname, 'src/js/textreveal.js'),
-        // Add more animation entry points here as needed
-        // scrollanimations: resolve(__dirname, 'src/js/scrollanimations.js'),
-        // interactions: resolve(__dirname, 'src/js/interactions.js'),
-        
+        // Single JS entry point that includes all animations
+        'js/main': resolve(
+          fileURLToPath(new URL('.', import.meta.url)),
+          'src/js/main.js'
+        ),
+
         // CSS files
-        main: resolve(__dirname, 'src/styles/main.css'),
+        'css/main': resolve(
+          fileURLToPath(new URL('.', import.meta.url)),
+          'src/styles/main.css'
+        )
       },
       output: {
-        entryFileNames: (chunkInfo) => {
-          return chunkInfo.name.endsWith('.css') ? 'css/[name].min.css' : 'js/[name].min.js';
-        },
-        assetFileNames: (assetInfo) => {
+        entryFileNames: '[name].js',
+        assetFileNames: assetInfo => {
           if (assetInfo.name?.endsWith('.css')) {
-            return 'css/[name][extname]';
+            return '[name].css';
           }
           return 'assets/[name][extname]';
         },
-        chunkFileNames: 'js/[name]-[hash].js',
+        chunkFileNames: 'js/[name]-[hash].js'
       }
     },
     minify: 'terser',

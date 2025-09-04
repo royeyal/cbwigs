@@ -18,7 +18,13 @@ export default [
       }
     },
     rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ],
       'no-console': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
@@ -28,11 +34,12 @@ export default [
       'template-curly-spacing': 'error',
       'arrow-spacing': 'error',
       'comma-dangle': ['error', 'never'],
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'always'],
-      'indent': ['error', 2],
+      quotes: ['error', 'single'],
+      semi: ['error', 'always'],
+      indent: ['error', 2],
       'no-trailing-spaces': 'error',
-      'eol-last': 'error'
+      'eol-last': 'error',
+      'no-empty': ['error', { allowEmptyCatch: true }]
     }
   },
   {

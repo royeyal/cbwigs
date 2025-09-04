@@ -1,0 +1,32 @@
+/* Animations for text reveal effects */
+
+/* Text reveal animations */
+[data-split='heading'] {
+  visibility: hidden;
+}
+
+[data-split='heading'].split-ready {
+  visibility: visible;
+}
+
+.line {
+  overflow: hidden;
+  display: block;
+}
+
+.word {
+  display: inline-block;
+}
+
+.letter {
+  display: inline-block;
+}
+
+/* Text reveal specific utilities */
+.text-reveal-mask {
+  overflow: hidden;
+}
+
+.text-reveal-element {
+  transform: translateY(100%);
+}

@@ -1,78 +1,12 @@
 /* Main styles for GSAP animations */
 
-/* Text reveal animations */
-[data-split="heading"] {
-  visibility: hidden;
-}
+/* Import other CSS modules */
+@import url('./textreveal.css');
+@import url('./animations.css');
 
-[data-split="heading"].split-ready {
-  visibility: visible;
-}
-
-.line {
-  overflow: hidden;
-  display: block;
-}
-
-.word {
-  display: inline-block;
-}
-
-.letter {
-  display: inline-block;
-}
-
-/* Base animation utilities */
-.gsap-fade-in {
-  opacity: 0;
-}
-
-.gsap-slide-up {
-  transform: translateY(100px);
-  opacity: 0;
-}
-
-.gsap-slide-down {
-  transform: translateY(-100px);
-  opacity: 0;
-}
-
-.gsap-slide-left {
-  transform: translateX(100px);
-  opacity: 0;
-}
-
-.gsap-slide-right {
-  transform: translateX(-100px);
-  opacity: 0;
-}
-
-.gsap-scale-up {
-  transform: scale(0.8);
-  opacity: 0;
-}
-
-.gsap-rotate-in {
-  transform: rotate(5deg);
-  opacity: 0;
-}
-
-/* ScrollTrigger utilities */
-.scroll-trigger {
-  opacity: 0;
-  transform: translateY(50px);
-}
-
-/* Smooth scroll behavior */
+/* Global styles */
 html {
   scroll-behavior: smooth;
 }
 
-/* Performance optimizations for animations */
-.gsap-element {
-  will-change: transform, opacity;
-}
-
-.gsap-element.animation-complete {
-  will-change: auto;
-}
+/* Add more global styles here as needed */

@@ -8,7 +8,9 @@ try {
       gsap.registerPlugin(SplitText);
     }
   }
-} catch (_) {}
+} catch (_) {
+  // Silently fail if GSAP is not available
+}
 
 const splitConfig = {
   lines: { duration: 0.8, stagger: 0.08 },
@@ -26,8 +28,8 @@ function initMaskTextScrollReveal() {
       type === 'lines'
         ? 'lines'
         : type === 'words'
-        ? 'lines, words'
-        : 'lines, words, chars';
+          ? 'lines, words'
+          : 'lines, words, chars';
 
     SplitText.create(heading, {
       type: typesToSplit,
@@ -41,8 +43,8 @@ function initMaskTextScrollReveal() {
           type === 'lines'
             ? self.lines
             : type === 'words'
-            ? self.words
-            : self.chars;
+              ? self.words
+              : self.chars;
 
         const cfg = splitConfig[type];
 
@@ -69,15 +71,5 @@ function initMaskTextScrollReveal() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready
-      .then(initMaskTextScrollReveal)
-      .catch(initMaskTextScrollReveal);
-  } else {
-    initMaskTextScrollReveal();
-  }
-});
-
-// Export for potential module usage
+// Export function for use in main module
 export { initMaskTextScrollReveal };

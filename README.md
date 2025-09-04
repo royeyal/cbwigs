@@ -57,13 +57,13 @@ npm run build
 ```
 
 This creates optimized files in the `dist/` folder:
-- `dist/js/textreveal.min.js`
-- `dist/css/main.min.css`
+- `dist/js/main.js` - Single bundled JavaScript file with all animations
+- `dist/css/main.css` - Minified CSS
 
 ## 📝 Adding New Animations
 
 1. Create a new JavaScript file in `src/js/`
-2. Add the entry point to `vite.config.js`
+2. Import and initialize it in `src/js/main.js`
 3. Create corresponding CSS in `src/styles/`
 4. Build and upload to Webflow
 
@@ -75,8 +75,8 @@ This creates optimized files in the `dist/` folder:
 
 Example:
 ```html
-<script src="https://your-site.webflow.io/js/textreveal.min.js"></script>
-<link rel="stylesheet" href="https://your-site.webflow.io/css/main.min.css">
+<script src="https://your-site.webflow.io/js/main.js"></script>
+<link rel="stylesheet" href="https://your-site.webflow.io/css/main.css">
 ```
 
 ## 🧹 Code Quality
