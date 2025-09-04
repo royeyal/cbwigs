@@ -3,12 +3,12 @@ Code for cbwigs.co.il
 
 # GSAP Animations for Webflow
 
-A modern development setup for creating GSAP animations for Webflow projects with TypeScript support, PostCSS, and automated linting.
+A modern development setup for creating GSAP animations for Webflow projects with PostCSS and automated linting.
 
 ## 🚀 Features
 
 - **Vite** for fast development and optimized builds
-- **GSAP** with TypeScript support
+- **GSAP** animations and interactions
 - **PostCSS** with Autoprefixer and CSS minification
 - **ESLint + Prettier** for code quality
 - **Stylelint** for CSS linting
@@ -37,7 +37,7 @@ dist/                   # Built files for production
 npm install
 ```
 
-2. Install Husky hooks:
+2. Initialize Husky (if needed):
 ```bash
 npm run prepare
 ```
