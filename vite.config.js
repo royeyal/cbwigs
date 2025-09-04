@@ -8,24 +8,15 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
-      input: {
-        // Single JS entry point that includes all animations
-        'js/main': resolve(
-          fileURLToPath(new URL('.', import.meta.url)),
-          'src/js/main.js'
-        ),
-
-        // CSS files
-        'css/main': resolve(
-          fileURLToPath(new URL('.', import.meta.url)),
-          'src/styles/main.css'
-        )
-      },
+      input: resolve(
+        fileURLToPath(new URL('.', import.meta.url)),
+        'src/js/main.js'
+      ),
       output: {
-        entryFileNames: '[name].js',
+        entryFileNames: 'js/main.js',
         assetFileNames: assetInfo => {
           if (assetInfo.name?.endsWith('.css')) {
-            return '[name].css';
+            return 'css/main.css';
           }
           return 'assets/[name][extname]';
         },
