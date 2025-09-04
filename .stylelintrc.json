@@ -1,0 +1,23 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "declaration-block-trailing-semicolon": "always",
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "function-comma-space-after": "always",
+    "media-feature-colon-space-after": "always",
+    "media-feature-colon-space-before": "never",
+    "no-duplicate-selectors": true,
+    "number-leading-zero": "always",
+    "number-no-trailing-zeros": true,
+    "property-no-unknown": true,
+    "selector-pseudo-element-colon-notation": "double",
+    "string-quotes": "single",
+    "unit-no-unknown": true,
+    "max-empty-lines": 2,
+    "indentation": 2
+  },
+  "ignoreFiles": ["dist/**", "node_modules/**"]
+}
