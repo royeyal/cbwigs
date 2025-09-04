@@ -41,7 +41,6 @@
   border-radius: var(--glass-radius);
   border: 2px solid var(--glass-border); /* thicker outline for your style */
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   line-height: 1;
   text-decoration: none;
   transition:
@@ -67,6 +66,7 @@
 .c-btn:hover {
   filter: brightness(var(--hover-boost));
 }
+
 .c-btn:active {
   transform: translateY(1px);
 }
@@ -96,7 +96,6 @@
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
-  mask-composite: xor;
   mask-composite: exclude;
   opacity: 0.95;
 }
@@ -122,6 +121,7 @@
   padding: 8px 12px;
   font-size: 14px;
 }
+
 .c-btn.is-lg {
   padding: 14px 22px;
   font-size: 16px;
@@ -140,6 +140,7 @@
 html[dir='rtl'] .c-btn {
   direction: rtl;
 }
+
 html[dir='ltr'] .c-btn {
   direction: ltr;
 }
