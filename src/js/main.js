@@ -1,4 +1,5 @@
 // Main entry point for all GSAP animations
+import '../styles/main.css';
 import { initMaskTextScrollReveal } from './textreveal.js';
 
 // Initialize all animations when DOM is ready
