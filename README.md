@@ -69,6 +69,8 @@ This creates optimized files in the `dist/` folder:
 
 ## 🎯 Webflow Integration
 
+### Option 1: Upload Files Directly
+
 1. Run `npm run build`
 2. Upload files from `dist/js/` and `dist/css/` to Webflow
 3. Add script tags in Webflow's custom code section
@@ -78,6 +80,36 @@ Example:
 <script src="https://your-site.webflow.io/js/main.js"></script>
 <link rel="stylesheet" href="https://your-site.webflow.io/css/main.css">
 ```
+
+### Option 2: Use CDN (Recommended)
+
+Use jsdelivr CDN to link directly to the built files from this repository:
+
+#### Latest Version (Auto-updates)
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/royeyal/cbwigs@main/dist/css/main.css">
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/royeyal/cbwigs@main/dist/js/main.js"></script>
+```
+
+#### Specific Version (Recommended for production)
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/royeyal/cbwigs@v1.0.0/dist/css/main.css">
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/royeyal/cbwigs@v1.0.0/dist/js/main.js"></script>
+```
+
+**Note:** Replace `v1.0.0` with the specific version/tag you want to use. Using specific versions ensures your site won't break if the code is updated.
+
+#### CDN Benefits:
+- ✅ No need to upload files to Webflow
+- ✅ Automatic caching and fast global delivery
+- ✅ Easy version management with Git tags
+- ✅ Reduces Webflow hosting storage usage
 
 ## 🧹 Code Quality
 
