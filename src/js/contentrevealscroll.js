@@ -1,5 +1,27 @@
 // Elements Reveal on Scroll
 function initContentRevealScroll() {
+  // Ensure GSAP and ScrollTrigger are available
+  if (typeof gsap === 'undefined') {
+    console.error(
+      'GSAP is required for content reveal scroll animations. Please include GSAP in your project.'
+    );
+    return;
+  }
+
+  if (typeof ScrollTrigger === 'undefined') {
+    console.error(
+      'GSAP ScrollTrigger plugin is required for content reveal scroll animations. Please include ScrollTrigger plugin.'
+    );
+    return;
+  }
+
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+  } catch (error) {
+    console.error('Failed to register GSAP ScrollTrigger plugin:', error);
+    return;
+  }
+
   const prefersReduced = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;

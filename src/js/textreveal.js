@@ -1,16 +1,4 @@
 // filepath: /Users/royeyal/Documents/GitHub/cbwigs/src/js/textreveal.js
-// Ensure GSAP plugins are registered (GSAP is loaded elsewhere)
-try {
-  if (typeof gsap !== 'undefined' && typeof SplitText !== 'undefined') {
-    if (typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(SplitText, ScrollTrigger);
-    } else {
-      gsap.registerPlugin(SplitText);
-    }
-  }
-} catch (_) {
-  // Silently fail if GSAP is not available
-}
 
 const splitConfig = {
   lines: { duration: 0.8, stagger: 0.08 },
@@ -19,6 +7,34 @@ const splitConfig = {
 };
 
 function initMaskTextScrollReveal() {
+  // Ensure GSAP plugins are available
+  if (typeof gsap === 'undefined') {
+    console.error(
+      'GSAP is required for text reveal animations. Please include GSAP in your project.'
+    );
+    return;
+  }
+
+  if (typeof SplitText === 'undefined') {
+    console.error(
+      'GSAP SplitText plugin is required for text reveal animations. Please include SplitText plugin.'
+    );
+    return;
+  }
+
+  if (typeof ScrollTrigger === 'undefined') {
+    console.error(
+      'GSAP ScrollTrigger plugin is required for text reveal animations. Please include ScrollTrigger plugin.'
+    );
+    return;
+  }
+
+  try {
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+  } catch (error) {
+    console.error('Failed to register GSAP plugins:', error);
+    return;
+  }
   const headings = document.querySelectorAll('[data-split="heading"]');
   if (!headings.length) return;
 
