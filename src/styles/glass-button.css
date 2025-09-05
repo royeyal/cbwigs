@@ -30,7 +30,7 @@
 }
 
 /* ===== Base button (unchanged structure) ===== */
-.c-btn {
+.button {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -57,22 +57,22 @@
 @supports not (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
-  .c-btn {
+  .button {
     background: rgb(255 255 255 / 30%);
   }
 }
 
 /* Hover / active */
-.c-btn:hover {
+.button:hover {
   filter: brightness(var(--hover-boost));
 }
 
-.c-btn:active {
+.button:active {
   transform: translateY(1px);
 }
 
 /* High-contrast focus ring that fits the bold-lines aesthetic */
-.c-btn:focus-visible {
+.button:focus-visible {
   outline: 0;
   box-shadow:
     0 0 0 2px var(--bg-cream),
@@ -81,7 +81,7 @@
 }
 
 /* Faux refraction rim */
-.c-btn.c-btn--glass::before {
+.button.button--glass::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -101,7 +101,7 @@
 }
 
 /* Inner glint (adds thickness) */
-.c-btn.c-btn--glass::after {
+.button.button--glass::after {
   content: '';
   position: absolute;
   inset: 2px;
@@ -117,18 +117,18 @@
 }
 
 /* Sizes */
-.c-btn.is-sm {
+.button.is-sm {
   padding: 8px 12px;
   font-size: 14px;
 }
 
-.c-btn.is-lg {
+.button.is-lg {
   padding: 14px 22px;
   font-size: 16px;
 }
 
 /* Optional dark-on-cream accent version (keeps bold border, flips fill) */
-.c-btn.is-dark {
+.button.is-dark {
   --text: #fff;
   --glass-bg: rgb(0 0 0 / 28%);
   --glass-border: rgb(0 0 0 / 100%);
@@ -137,15 +137,15 @@
 }
 
 /* ===== Direction handling (RTL default) ===== */
-html[dir='rtl'] .c-btn {
+html[dir='rtl'] .button {
   direction: rtl;
 }
 
-html[dir='ltr'] .c-btn {
+html[dir='ltr'] .button {
   direction: ltr;
 }
 
 /* If you add directional icons, flip easily under RTL */
-html[dir='rtl'] .c-btn.has-icon-left {
+html[dir='rtl'] .button.has-icon-left {
   flex-direction: row-reverse;
 }

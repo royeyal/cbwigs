@@ -1,24 +1,25 @@
 /* Animations for text reveal effects */
 
-/* Text reveal animations */
+/* Masked Text Reveal */
+
+/* Initial hide to avoid FOUC */
 [data-split='heading'] {
   visibility: hidden;
 }
 
-[data-split='heading'].split-ready {
-  visibility: visible;
+/* When JS marks it ready, show it (force, if needed) */
+.split-ready[data-split='heading'] {
+  visibility: visible !important;
 }
 
-.line {
-  overflow: hidden;
+/* Masking wrappers for smooth reveals */
+[data-split='heading'] .line {
   display: block;
+  overflow: hidden; /* the vertical reveal mask */
 }
 
-.word {
-  display: inline-block;
-}
-
-.letter {
+[data-split='heading'] .word,
+[data-split='heading'] .letter {
   display: inline-block;
 }
 
@@ -29,4 +30,21 @@
 
 .text-reveal-element {
   transform: translateY(100%);
+}
+
+/* Optional perf hints on hero */
+.hero [data-split='heading'],
+.hero [data-split='heading'] .line,
+.hero [data-split='heading'] .word,
+.hero [data-split='heading'] .letter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Accessibility: no animation for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-split='heading'] {
+    visibility: visible !important;
+  }
 }
