@@ -1,13 +1,13 @@
-/* Main styles for GSAP animations */
-
-/* Import other CSS modules */
+/* Import other CSS modules - must be at the top */
 @import url('./textreveal.css');
 @import url('./animations.css');
 @import url('./glass-button.css');
 
 /* Global styles */
+:root {
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 html {
   scroll-behavior: smooth;
 }
-
-/* Add more global styles here as needed */
