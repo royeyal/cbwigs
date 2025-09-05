@@ -5,8 +5,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Build outputs
-dist/
+# Build outputs (uncomment dist/ if you don't want to commit built files)
+# dist/
 build/
 .vite/
 
