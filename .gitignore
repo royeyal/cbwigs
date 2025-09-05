@@ -6,6 +6,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Build outputs (uncomment dist/ if you don't want to commit built files)
+# Note: dist/ is included for CDN usage via jsdelivr
 # dist/
 build/
 .vite/
