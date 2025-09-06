@@ -1,6 +1,6 @@
 name = "cbwigs-assets"
-main = "src/worker.js"
-compatibility_date = "2025-09-01"
+main = "external/src/worker.js"   # <-- fix the path
+compatibility_date = "2025-09-06"
 
-# Serve the built Vite assets from dist/
+# Serve static files from the root dist/
 assets = { directory = "dist", binding = "ASSETS" }
