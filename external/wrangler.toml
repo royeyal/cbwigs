@@ -1,0 +1,6 @@
+name = "cbwigs-assets"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+
+# Serve the built Vite assets from dist/
+assets = { directory = "dist", binding = "ASSETS" }
