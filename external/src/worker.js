@@ -2,12 +2,16 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Stable endpoints for Webflow
-    if (url.pathname === "/app.js" || url.pathname === "/styles.css") {
-      const res = await env.ASSETS.fetch(new URL("/manifest.json", url.origin));
-      if (!res.ok) return new Response("manifest.json not found", { status: 500 });
-      const manifest = await res.json();
+    // Helper to get the Vite manifest (Vite places it at /.vite/manifest.json)
+    const getManifest = async () => {
+      const res = await env.ASSETS.fetch(new URL("/.vite/manifest.json", url.origin));
+      if (!res.ok) throw new Error("manifest not found");
+      return res.json();
+    };
 
+    // Stable endpoints for Webflow -> 302 to latest hashed files
+    if (url.pathname === "/app.js" || url.pathname === "/styles.css") {
+      const manifest = await getManifest();
       const map = {
         "/app.js": "src/js/app.js",
         "/styles.css": "src/styles/main.css",
@@ -15,11 +19,10 @@ export default {
       const key = map[url.pathname];
       const entry = manifest[key];
       if (!entry || !entry.file) return new Response("Entry not found in manifest", { status: 404 });
-
       return Response.redirect("/" + entry.file, 302);
     }
 
-    // Default: serve built assets from dist/
+    // Default: serve built assets
     const assetResp = await env.ASSETS.fetch(request);
 
     // Make non-hashed top-level paths revalidate
