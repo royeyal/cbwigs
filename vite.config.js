@@ -17,10 +17,11 @@ export default defineConfig({
       output: {
         // Keep your subfolders AND add a content hash for cache-busting
         entryFileNames: (chunk) => {
-          // entry name starts with 'src/js/app'
-          return chunk.name.startsWith('src/js/')
-            ? 'js/[name].[hash].js'
-            : 'assets/[name].[hash].js';
+          // For the main entry file, put it in js/ folder
+          if (chunk.name === 'main') {
+            return 'js/[name].[hash].js';
+          }
+          return 'assets/[name].[hash].js';
         },
         chunkFileNames: 'assets/[name].[hash].js',
         assetFileNames: (asset) => {
