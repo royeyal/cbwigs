@@ -6,6 +6,8 @@ export default defineConfig({
   root: 'src',
   build: {
     outDir: '../dist',
+    manifest: true,           // <-- critical for the Worker redirect
+    cssCodeSplit: true,
     emptyOutDir: true,
     rollupOptions: {
       input: resolve(
@@ -13,14 +15,20 @@ export default defineConfig({
         'src/js/main.js'
       ),
       output: {
-        entryFileNames: 'js/main.js',
-        assetFileNames: assetInfo => {
-          if (assetInfo.name?.endsWith('.css')) {
-            return 'css/main.css';
-          }
-          return 'assets/[name][extname]';
+        // Keep your subfolders AND add a content hash for cache-busting
+        entryFileNames: (chunk) => {
+          // entry name starts with 'src/js/app'
+          return chunk.name.startsWith('src/js/')
+            ? 'js/[name].[hash].js'
+            : 'assets/[name].[hash].js';
         },
-        chunkFileNames: 'js/[name]-[hash].js'
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: (asset) => {
+          if (asset.name && asset.name.endsWith('.css')) {
+            return 'css/[name].[hash][extname]';
+          }
+          return 'assets/[name].[hash][extname]';
+        }
       }
     },
     minify: 'terser',
