@@ -7,6 +7,14 @@
   visibility: hidden;
 }
 
+/* For Webflow users only: */
+
+/* Make sure the heading does not disappear in the designer or editor */
+.wf-design-mode [data-split='heading'],
+.w-editor [data-split='heading'] {
+  visibility: visible !important;
+}
+
 /* When JS marks it ready, show it (force, if needed) */
 .split-ready[data-split='heading'] {
   visibility: visible !important;
