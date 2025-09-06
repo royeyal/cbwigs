@@ -2,45 +2,76 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Load Vite manifest (Vite writes to /.vite/manifest.json)
     const getManifest = async () => {
+      // If your manifest ended up at /manifest.json instead, change the path here.
       const res = await env.ASSETS.fetch(new URL("/.vite/manifest.json", url.origin));
-      if (!res.ok) throw new Error("manifest not found");
+      if (!res.ok) return null;
       return res.json();
     };
 
-    // Map stable endpoints -> manifest entry keys
-    const stableMap = {
-      "/app.js": "src/js/app.js",
-      "/styles.css": "src/styles/main.css",
-      "/main.js": "src/js/main.js",       // add these two if your entry is main.js
-      "/main.css": "src/styles/main.css"  // or keep styles.css only; your choice
-    };
+    const redirectTo = (path) =>
+      new Response(null, { status: 302, headers: { Location: path, "Cache-Control": "no-cache" } });
 
-    if (stableMap[url.pathname]) {
+    if (url.pathname === "/main.js" || url.pathname === "/main.css") {
       const manifest = await getManifest();
+      if (!manifest) return new Response("Manifest not found", { status: 500 });
 
-      // If exact key isn't present (e.g., different input keys), fall back:
-      const key = stableMap[url.pathname];
-      let file = manifest[key]?.file;
+      const wantCss = url.pathname.endsWith(".css");
 
-      if (!file) {
-        // Fallback: find first matching JS/CSS in manifest values
-        const wantCss = url.pathname.endsWith(".css");
-        for (const v of Object.values(manifest)) {
-          if (v?.file && (wantCss ? v.file.endsWith(".css") : v.file.endsWith(".js"))) {
-            // prefer names that include "main" if present
-            if (!file || /main/i.test(v.file)) file = v.file;
+      // Preferred explicit keys
+      const preferredKeys = wantCss
+        ? ["src/styles/main.css", "src/css/main.css"]
+        : ["src/js/main.js", "src/scripts/main.js"];
+
+      // 1) Try explicit key
+      for (const key of preferredKeys) {
+        const entry = manifest[key];
+        if (!entry) continue;
+
+        if (wantCss) {
+          // CSS can be its own entry OR referenced by a JS entry's css array
+          if (entry.file && entry.file.endsWith(".css")) return redirectTo("/" + entry.file);
+          if (Array.isArray(entry.css) && entry.css.length) return redirectTo("/" + entry.css[0]);
+        } else {
+          if (entry.file && entry.file.endsWith(".js")) return redirectTo("/" + entry.file);
+        }
+      }
+
+      // 2) If requesting CSS, look for any entry that lists CSS in `css:[]`
+      if (wantCss) {
+        for (const entry of Object.values(manifest)) {
+          if (Array.isArray(entry.css) && entry.css.length) {
+            // Prefer a "main" css if present
+            const mainish = entry.css.find((p) => /main/i.test(p)) || entry.css[0];
+            return redirectTo("/" + mainish);
           }
         }
       }
 
-      if (!file) return new Response("Entry not found in manifest", { status: 404 });
-      return Response.redirect("/" + file, 302);
+      // 3) Fallback: scan all files and pick a likely candidate
+      let chosen = null;
+      for (const entry of Object.values(manifest)) {
+        // entry.file (JS or CSS)
+        if (entry?.file && entry.file.endsWith(wantCss ? ".css" : ".js")) {
+          if (!chosen || /main/i.test(entry.file)) chosen = entry.file;
+        }
+        // If CSS requested, also consider entry.css array
+        if (wantCss && Array.isArray(entry?.css)) {
+          for (const p of entry.css) {
+            if (!chosen || /main/i.test(p)) chosen = p;
+          }
+        }
+      }
+
+      if (chosen) return redirectTo("/" + chosen);
+
+      return new Response("Entry not found in manifest", { status: 404 });
     }
 
-    // Serve static assets. Make non-hashed paths revalidate.
+    // Default: serve built assets via static binding
     const resp = await env.ASSETS.fetch(request);
+
+    // Make non-hashed top-level paths revalidate (dev-friendly)
     if (!/\.[a-f0-9]{8,}\./i.test(url.pathname)) {
       const r = new Response(resp.body, resp);
       r.headers.set("Cache-Control", "no-cache");
