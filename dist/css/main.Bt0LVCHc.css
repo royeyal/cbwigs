@@ -1,0 +1,122 @@
+[data-split='heading'] {
+  visibility: hidden;
+}
+.split-ready[data-split='heading'],
+.w-editor [data-split='heading'],
+.wf-design-mode [data-split='heading'] {
+  visibility: visible !important;
+}
+[data-split='heading'] .line {
+  display: block;
+  overflow: hidden;
+}
+[data-split='heading'] .letter,
+[data-split='heading'] .word {
+  display: inline-block;
+}
+.text-reveal-mask {
+  overflow: hidden;
+}
+.text-reveal-element {
+  transform: translateY(100%);
+}
+.hero [data-split='heading'],
+.hero [data-split='heading'] .letter,
+.hero [data-split='heading'] .line,
+.hero [data-split='heading'] .word {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-split='heading'] {
+    visibility: visible !important;
+  }
+}
+.gsap-fade-in {
+  opacity: 0;
+}
+.gsap-slide-up {
+  opacity: 0;
+  transform: translateY(100px);
+}
+.gsap-slide-down {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.gsap-slide-left {
+  opacity: 0;
+  transform: translate(100px);
+}
+.gsap-slide-right {
+  opacity: 0;
+  transform: translate(-100px);
+}
+.gsap-scale-up {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.gsap-rotate-in {
+  opacity: 0;
+  transform: rotate(5deg);
+}
+.scroll-trigger {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.gsap-element {
+  will-change: transform, opacity;
+}
+.gsap-element.animation-complete {
+  will-change: auto;
+}
+[data-gsap-slider-init] {
+  --slider-status: on;
+  --slider-spv: 3;
+  --slider-gap: 1.5em;
+}
+@media screen and (max-width: 991px) {
+  [data-gsap-slider-init] {
+    --slider-status: on;
+    --slider-spv: 2.25;
+    --slider-gap: 1.5em;
+  }
+}
+@media screen and (max-width: 767px) {
+  [data-gsap-slider-init] {
+    --slider-status: on;
+    --slider-spv: 1.15;
+    --slider-gap: 1em;
+  }
+}
+[data-gsap-slider-item]:last-child {
+  margin-right: 0;
+}
+[data-gsap-slider-status='not-active'] [data-gsap-slider-controls] {
+  display: none;
+}
+[data-gsap-slider-control-status='not-active'] {
+  opacity: 0.2;
+  pointer-events: none;
+}
+.gsap-slider__control {
+  transition: opacity 0.3s ease;
+}
+.demo-card {
+  transition: all 0.3s ease;
+}
+[data-gsap-slider-item-status='not-active'] .demo-card {
+  background-color: #131313;
+}
+.demo-card__tag {
+  transition: all 0.3s ease;
+}
+[data-gsap-slider-item-status='not-active'] .demo-card__tag {
+  opacity: 0;
+}
+:root {
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+html {
+  scroll-behavior: smooth;
+}

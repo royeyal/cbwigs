@@ -17,7 +17,11 @@ export default [
         ScrollTrigger: 'readonly',
         SplitText: 'readonly',
         CustomEase: 'readonly',
-        Draggable: 'readonly'
+        Draggable: 'readonly',
+        getComputedStyle: 'readonly',
+        innerWidth: 'readonly',
+        clearTimeout: 'readonly',
+        setTimeout: 'readonly'
       }
     },
     rules: {
