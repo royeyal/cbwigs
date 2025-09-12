@@ -1,35 +1,52 @@
 function initBasicGSAPSlider() {
+  console.log('🎯 initBasicGSAPSlider: Starting initialization...');
+
   // Ensure GSAP and Draggable are available
   if (typeof gsap === 'undefined') {
     console.error(
-      'GSAP is required for slider functionality. Please include GSAP in your project.'
+      '❌ GSAP is required for slider functionality. Please include GSAP in your project.'
     );
     return;
   }
+  console.log('✅ GSAP found:', typeof gsap, gsap.version || 'version unknown');
 
   if (typeof Draggable === 'undefined') {
     console.error(
-      'GSAP Draggable plugin is required for slider functionality. Please include Draggable plugin.'
+      '❌ GSAP Draggable plugin is required for slider functionality. Please include Draggable plugin.'
     );
     return;
   }
+  console.log('✅ Draggable plugin found:', typeof Draggable);
 
   try {
     gsap.registerPlugin(Draggable);
+    console.log('✅ Draggable plugin registered successfully');
   } catch (error) {
-    console.error('Failed to register GSAP Draggable plugin:', error);
+    console.error('❌ Failed to register GSAP Draggable plugin:', error);
     return;
   }
 
   // Check if any sliders exist on the page
   const sliderElements = document.querySelectorAll('[data-gsap-slider-init]');
+  console.log('🔍 Found slider elements:', sliderElements.length);
+
   if (sliderElements.length === 0) {
-    // No sliders found - this is normal, just return silently
+    console.log(
+      'ℹ️ No sliders found on page - this is normal, exiting gracefully'
+    );
     return;
   }
 
-  sliderElements.forEach(root => {
-    if (root._sliderDraggable) root._sliderDraggable.kill();
+  sliderElements.forEach((root, index) => {
+    console.log(
+      `🎠 Initializing slider ${index + 1}/${sliderElements.length}:`,
+      root
+    );
+
+    if (root._sliderDraggable) {
+      console.log('🧹 Cleaning up existing slider instance');
+      root._sliderDraggable.kill();
+    }
 
     const collection = root.querySelector('[data-gsap-slider-collection]');
     const track = root.querySelector('[data-gsap-slider-list]');
@@ -38,7 +55,30 @@ function initBasicGSAPSlider() {
       root.querySelectorAll('[data-gsap-slider-control]')
     );
 
+    console.log('📋 Slider elements found:');
+    console.log('  - Collection:', collection);
+    console.log('  - Track:', track);
+    console.log('  - Items:', items.length, items);
+    console.log('  - Controls:', controls.length, controls);
+
+    // Validate required elements
+    if (!collection) {
+      console.error(
+        '❌ Missing required element: [data-gsap-slider-collection]'
+      );
+      return;
+    }
+    if (!track) {
+      console.error('❌ Missing required element: [data-gsap-slider-list]');
+      return;
+    }
+    if (items.length === 0) {
+      console.error('❌ No slider items found: [data-gsap-slider-item]');
+      return;
+    }
+
     // Inject aria attributes
+    console.log('♿ Setting up accessibility attributes...');
     root.setAttribute('role', 'region');
     root.setAttribute('aria-roledescription', 'carousel');
     root.setAttribute('aria-label', 'Slider');
@@ -65,6 +105,7 @@ function initBasicGSAPSlider() {
     });
 
     // Determine if slider runs
+    console.log('📏 Computing slider dimensions...');
     const styles = getComputedStyle(root);
     const statusVar = styles.getPropertyValue('--slider-status').trim();
     let spvVar = parseFloat(styles.getPropertyValue('--slider-spv'));
@@ -76,12 +117,25 @@ function initBasicGSAPSlider() {
     }
     const spv = Math.max(1, Math.min(spvVar, items.length));
     const sliderEnabled = statusVar === 'on' && spv < items.length;
+
+    console.log('📊 Slider calculations:');
+    console.log('  - Status var (--slider-status):', statusVar);
+    console.log('  - SPV var (--slider-spv):', spvVar);
+    console.log('  - First item rect:', rect);
+    console.log('  - Margin right:', marginRight);
+    console.log('  - Slide width:', slideW);
+    console.log('  - Collection width:', collection.clientWidth);
+    console.log('  - Calculated SPV:', spv);
+    console.log('  - Items length:', items.length);
+    console.log('  - Slider enabled:', sliderEnabled);
+
     root.setAttribute(
       'data-gsap-slider-status',
       sliderEnabled ? 'active' : 'not-active'
     );
 
     if (!sliderEnabled) {
+      console.log('⏹️ Slider disabled - tearing down...');
       // Teardown when disabled
       track.removeAttribute('style');
       track.onmouseenter = null;
@@ -205,45 +259,62 @@ function initBasicGSAPSlider() {
     });
 
     // Initialize Draggable
-    root._sliderDraggable = Draggable.create(track, {
-      type: 'x',
-      // cursor: 'inherit',
-      // activeCursor: 'inherit',
-      inertia: true,
-      bounds: { minX, maxX },
-      throwResistance: 2000,
-      dragResistance: 0.05,
-      maxDuration: 0.6,
-      minDuration: 0.2,
-      edgeResistance: 0.75,
-      snap: { x: snapPoints, duration: 0.4 },
-      onPress() {
-        track.setAttribute('data-gsap-slider-list-status', 'grabbing');
-        collectionRect = collection.getBoundingClientRect();
-      },
-      onDrag() {
-        setX(this.x);
-        updateStatus(this.x);
-      },
-      onThrowUpdate() {
-        setX(this.x);
-        updateStatus(this.x);
-      },
-      onThrowComplete() {
-        setX(this.endX);
-        updateStatus(this.endX);
-        track.setAttribute('data-gsap-slider-list-status', 'grab');
-      },
-      onRelease() {
-        setX(this.x);
-        updateStatus(this.x);
-        track.setAttribute('data-gsap-slider-list-status', 'grab');
-      }
-    })[0];
+    console.log('🎮 Creating Draggable instance...');
+    console.log('  - Track element:', track);
+    console.log('  - Bounds:', { minX, maxX });
+    console.log('  - Snap points:', snapPoints);
+
+    try {
+      root._sliderDraggable = Draggable.create(track, {
+        type: 'x',
+        // cursor: 'inherit',
+        // activeCursor: 'inherit',
+        inertia: true,
+        bounds: { minX, maxX },
+        throwResistance: 2000,
+        dragResistance: 0.05,
+        maxDuration: 0.6,
+        minDuration: 0.2,
+        edgeResistance: 0.75,
+        snap: { x: snapPoints, duration: 0.4 },
+        onPress() {
+          track.setAttribute('data-gsap-slider-list-status', 'grabbing');
+          collectionRect = collection.getBoundingClientRect();
+        },
+        onDrag() {
+          setX(this.x);
+          updateStatus(this.x);
+        },
+        onThrowUpdate() {
+          setX(this.x);
+          updateStatus(this.x);
+        },
+        onThrowComplete() {
+          setX(this.endX);
+          updateStatus(this.endX);
+          track.setAttribute('data-gsap-slider-list-status', 'grab');
+        },
+        onRelease() {
+          setX(this.x);
+          updateStatus(this.x);
+          track.setAttribute('data-gsap-slider-list-status', 'grab');
+        }
+      })[0];
+
+      console.log(
+        '✅ Draggable instance created successfully:',
+        root._sliderDraggable
+      );
+    } catch (error) {
+      console.error('❌ Failed to create Draggable instance:', error);
+      return;
+    }
 
     // Initial state
+    console.log('🎬 Setting initial slider state...');
     setX(0);
     updateStatus(0);
+    console.log('✅ Slider initialization complete!');
   });
 }
 
@@ -255,6 +326,7 @@ function debounceOnWidthChange(fn, ms) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       if (innerWidth !== last) {
+        console.log('📏 Window resized, reinitializing sliders...');
         last = innerWidth;
         fn.apply(this, args);
       }
@@ -267,6 +339,7 @@ export { initBasicGSAPSlider };
 
 // Set up resize handler for slider responsiveness
 if (typeof window !== 'undefined') {
+  console.log('🔄 Setting up window resize handler for sliders...');
   window.addEventListener(
     'resize',
     debounceOnWidthChange(initBasicGSAPSlider, 200)
