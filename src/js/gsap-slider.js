@@ -71,6 +71,7 @@ function initBasicGSAPSlider() {
       slide.setAttribute('aria-hidden', 'true');
       slide.setAttribute('aria-selected', 'false');
       slide.setAttribute('tabindex', '-1');
+      slide.setAttribute('inert', '');
 
       // Initially disable all focusable elements in slides
       const focusableElements = slide.querySelectorAll(
@@ -81,6 +82,7 @@ function initBasicGSAPSlider() {
         element.setAttribute('data-original-tabindex', currentTabindex);
         element.setAttribute('tabindex', '-1');
         element.setAttribute('aria-hidden', 'true');
+        element.setAttribute('inert', '');
       });
     });
     controls.forEach(btn => {
@@ -145,6 +147,7 @@ function initBasicGSAPSlider() {
         slide.removeAttribute('aria-selected');
         slide.removeAttribute('tabindex');
         slide.removeAttribute('data-gsap-slider-item-status');
+        slide.removeAttribute('inert');
 
         // Restore focusable elements
         const focusableElements = slide.querySelectorAll(
@@ -159,6 +162,7 @@ function initBasicGSAPSlider() {
             element.removeAttribute('data-original-tabindex');
           }
           element.removeAttribute('aria-hidden');
+          element.removeAttribute('inert');
         });
       });
       controls.forEach(btn => {
@@ -229,6 +233,13 @@ function initBasicGSAPSlider() {
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         slide.setAttribute('tabindex', isActive ? '0' : '-1');
 
+        // Use inert attribute for better focus management if available
+        if (isActive) {
+          slide.removeAttribute('inert');
+        } else {
+          slide.setAttribute('inert', '');
+        }
+
         // Manage focusable elements within slides to prevent focus conflicts
         const focusableElements = slide.querySelectorAll(
           'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
@@ -245,12 +256,14 @@ function initBasicGSAPSlider() {
               element.removeAttribute('data-original-tabindex');
             }
             element.removeAttribute('aria-hidden');
+            element.removeAttribute('inert');
           } else {
             // Store original tabindex and disable focus
             const currentTabindex = element.getAttribute('tabindex') || '0';
             element.setAttribute('data-original-tabindex', currentTabindex);
             element.setAttribute('tabindex', '-1');
             element.setAttribute('aria-hidden', 'true');
+            element.setAttribute('inert', '');
           }
         });
       });
