@@ -14,11 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize basic GSAP slider
   initBasicGSAPSlider();
-
-  // Add other animation initializations here as you create them
-  // Example:
-  // initScrollAnimations();
-  // initHoverInteractions();
 });
 
 // Export all animation functions for potential external access
