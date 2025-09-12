@@ -47,7 +47,3 @@
 .demo-card__tag {
   transition: all 0.3s ease;
 }
-
-[data-gsap-slider-item-status='not-active'] .demo-card__tag {
-  opacity: 0;
-}

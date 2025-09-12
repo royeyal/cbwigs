@@ -106,9 +106,6 @@
 .demo-card__tag {
   transition: all 0.3s ease;
 }
-[data-gsap-slider-item-status='not-active'] .demo-card__tag {
-  opacity: 0;
-}
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
