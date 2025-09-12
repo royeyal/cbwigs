@@ -87,43 +87,40 @@ function initMaskTextScrollReveal() {
             console.log('🚨🚨🚨 ONSPLIT CALLBACK TRIGGERED 🚨🚨🚨');
             console.log('🎭 SplitText onSplit callback triggered');
             console.log('  - Self object:', self);
-            console.log('  - Original element:', self.original);
-            console.log('  - Original element type:', typeof self.original);
+            console.log('  - Original element (self.original):', self.original);
+            console.log('  - Elements array (self.elements):', self.elements);
             console.log(
-              '  - Original element tagName:',
-              self.original?.tagName
+              '  - First element (self.elements[0]):',
+              self.elements?.[0]
             );
+            console.log('  - Heading element from scope:', heading);
             console.log('  - Lines created:', self.lines?.length || 0);
             console.log('  - Words created:', self.words?.length || 0);
 
-            // Check if original element still exists and is valid
-            if (!self.original) {
-              console.error('❌ SplitText original element is undefined!');
-              console.error(
-                '❌ THIS IS THE PROBLEM - self.original is:',
-                self.original
-              );
+            // Use the heading element from the outer scope instead of self.original
+            const targetElement =
+              self.original || self.elements?.[0] || heading;
+
+            console.log('🎯 Target element for visibility:', targetElement);
+
+            if (!targetElement) {
+              console.error('❌ No target element available!');
               return;
             }
 
-            if (!document.contains(self.original)) {
-              console.error('❌ SplitText original element is not in the DOM!');
+            if (!document.contains(targetElement)) {
+              console.error('❌ Target element is not in the DOM!');
               return;
             }
 
-            console.log('✅ About to call gsap.set() on:', self.original);
-            console.log('✅ Element is valid, proceeding with gsap.set...');
+            console.log('✅ About to call gsap.set() on:', targetElement);
 
             try {
-              // Try with a different approach - use the element directly instead of self.original
-              console.log('🔧 Attempting gsap.set with self.original...');
-              gsap.set(self.original, { visibility: 'visible' });
+              console.log('🔧 Setting visibility on target element...');
+              gsap.set(targetElement, { visibility: 'visible' });
               console.log('✅ Visibility set successfully');
             } catch (error) {
-              console.error(
-                '❌ Failed to set visibility with self.original:',
-                error
-              );
+              console.error('❌ Failed to set visibility:', error);
               console.error('❌ Error details:', error.message, error.stack);
             }
           }
