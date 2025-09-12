@@ -102,12 +102,7 @@
 .gsap-slider__control {
   transition: opacity 0.3s ease;
 }
-.demo-card {
-  transition: all 0.3s ease;
-}
-[data-gsap-slider-item-status='not-active'] .demo-card {
-  background-color: #131313;
-}
+.demo-card,
 .demo-card__tag {
   transition: all 0.3s ease;
 }
