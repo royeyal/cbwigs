@@ -3,8 +3,6 @@
 @import url('./animations.css');
 @import url('./gsap-slider.css');
 
-/* @import url('./glass-button.css'); */
-
 /* Global styles */
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
