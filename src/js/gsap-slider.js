@@ -71,6 +71,17 @@ function initBasicGSAPSlider() {
       slide.setAttribute('aria-hidden', 'true');
       slide.setAttribute('aria-selected', 'false');
       slide.setAttribute('tabindex', '-1');
+
+      // Initially disable all focusable elements in slides
+      const focusableElements = slide.querySelectorAll(
+        'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+      );
+      focusableElements.forEach(element => {
+        const currentTabindex = element.getAttribute('tabindex') || '0';
+        element.setAttribute('data-original-tabindex', currentTabindex);
+        element.setAttribute('tabindex', '-1');
+        element.setAttribute('aria-hidden', 'true');
+      });
     });
     controls.forEach(btn => {
       const dir = btn.getAttribute('data-gsap-slider-control');
@@ -134,6 +145,21 @@ function initBasicGSAPSlider() {
         slide.removeAttribute('aria-selected');
         slide.removeAttribute('tabindex');
         slide.removeAttribute('data-gsap-slider-item-status');
+
+        // Restore focusable elements
+        const focusableElements = slide.querySelectorAll(
+          'a, button, input, textarea, select, [data-original-tabindex]'
+        );
+        focusableElements.forEach(element => {
+          const originalTabindex = element.getAttribute(
+            'data-original-tabindex'
+          );
+          if (originalTabindex !== null) {
+            element.setAttribute('tabindex', originalTabindex);
+            element.removeAttribute('data-original-tabindex');
+          }
+          element.removeAttribute('aria-hidden');
+        });
       });
       controls.forEach(btn => {
         btn.disabled = false;
@@ -196,15 +222,37 @@ function initBasicGSAPSlider() {
         const inView = slideCenter > 0 && slideCenter < collectionRect.width;
         const status =
           i === activeIndex ? 'active' : inView ? 'inview' : 'not-active';
+        const isActive = i === activeIndex;
 
         slide.setAttribute('data-gsap-slider-item-status', status);
-        slide.setAttribute(
-          'aria-selected',
-          i === activeIndex ? 'true' : 'false'
+        slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        slide.setAttribute('tabindex', isActive ? '0' : '-1');
+
+        // Manage focusable elements within slides to prevent focus conflicts
+        const focusableElements = slide.querySelectorAll(
+          'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
         );
-        // Active slide should never be hidden from screen readers
-        slide.setAttribute('aria-hidden', i === activeIndex ? 'false' : 'true');
-        slide.setAttribute('tabindex', i === activeIndex ? '0' : '-1');
+
+        focusableElements.forEach(element => {
+          if (isActive) {
+            // Restore original tabindex or set to 0 if it was disabled
+            const originalTabindex = element.getAttribute(
+              'data-original-tabindex'
+            );
+            if (originalTabindex !== null) {
+              element.setAttribute('tabindex', originalTabindex);
+              element.removeAttribute('data-original-tabindex');
+            }
+            element.removeAttribute('aria-hidden');
+          } else {
+            // Store original tabindex and disable focus
+            const currentTabindex = element.getAttribute('tabindex') || '0';
+            element.setAttribute('data-original-tabindex', currentTabindex);
+            element.setAttribute('tabindex', '-1');
+            element.setAttribute('aria-hidden', 'true');
+          }
+        });
       });
 
       // Update Controls
