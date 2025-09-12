@@ -1,6 +1,4 @@
 function initBasicGSAPSlider() {
-  console.log('🎯 initBasicGSAPSlider: Starting initialization...');
-
   // Ensure GSAP and Draggable are available
   if (typeof gsap === 'undefined') {
     console.error(
@@ -8,7 +6,6 @@ function initBasicGSAPSlider() {
     );
     return;
   }
-  console.log('✅ GSAP found:', typeof gsap, gsap.version || 'version unknown');
 
   if (typeof Draggable === 'undefined') {
     console.error(
@@ -16,11 +13,9 @@ function initBasicGSAPSlider() {
     );
     return;
   }
-  console.log('✅ Draggable plugin found:', typeof Draggable);
 
   try {
     gsap.registerPlugin(Draggable);
-    console.log('✅ Draggable plugin registered successfully');
   } catch (error) {
     console.error('❌ Failed to register GSAP Draggable plugin:', error);
     return;
@@ -28,23 +23,13 @@ function initBasicGSAPSlider() {
 
   // Check if any sliders exist on the page
   const sliderElements = document.querySelectorAll('[data-gsap-slider-init]');
-  console.log('🔍 Found slider elements:', sliderElements.length);
 
   if (sliderElements.length === 0) {
-    console.log(
-      'ℹ️ No sliders found on page - this is normal, exiting gracefully'
-    );
     return;
   }
 
-  sliderElements.forEach((root, index) => {
-    console.log(
-      `🎠 Initializing slider ${index + 1}/${sliderElements.length}:`,
-      root
-    );
-
+  sliderElements.forEach((root, _index) => {
     if (root._sliderDraggable) {
-      console.log('🧹 Cleaning up existing slider instance');
       root._sliderDraggable.kill();
     }
 
@@ -54,12 +39,6 @@ function initBasicGSAPSlider() {
     const controls = Array.from(
       root.querySelectorAll('[data-gsap-slider-control]')
     );
-
-    console.log('📋 Slider elements found:');
-    console.log('  - Collection:', collection);
-    console.log('  - Track:', track);
-    console.log('  - Items:', items.length, items);
-    console.log('  - Controls:', controls.length, controls);
 
     // Validate required elements
     if (!collection) {

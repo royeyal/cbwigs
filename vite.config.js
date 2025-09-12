@@ -32,7 +32,17 @@ export default defineConfig({
         }
       }
     },
-    minify: 'esbuild',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug']
+      },
+      format: {
+        comments: false
+      }
+    },
     sourcemap: false
   },
   css: {
