@@ -21,7 +21,7 @@
 }
 
 [data-gsap-slider-item]:last-child {
-  margin-right: 0;
+  margin-inline-start: 0;
 }
 
 /* Controls */
