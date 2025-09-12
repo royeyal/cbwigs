@@ -202,7 +202,8 @@ function initBasicGSAPSlider() {
           'aria-selected',
           i === activeIndex ? 'true' : 'false'
         );
-        slide.setAttribute('aria-hidden', inView ? 'false' : 'true');
+        // Active slide should never be hidden from screen readers
+        slide.setAttribute('aria-hidden', i === activeIndex ? 'false' : 'true');
         slide.setAttribute('tabindex', i === activeIndex ? '0' : '-1');
       });
 
