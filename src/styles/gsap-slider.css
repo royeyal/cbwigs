@@ -44,6 +44,21 @@
   transition: all 0.3s ease;
 }
 
+.demo-card:hover {
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+}
+
+.demo-card .card-text-wrapper {
+  transition:
+    background-color 0.3s ease-in-out,
+    mix-blend-mode 0.5s ease-in-out;
+}
+
+.demo-card:hover .card-text-wrapper {
+  background-color: transparent;
+  mix-blend-mode: plus-lighter;
+}
+
 .demo-card__tag {
   transition: all 0.3s ease;
 }
