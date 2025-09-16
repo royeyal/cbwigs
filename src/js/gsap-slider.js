@@ -146,7 +146,6 @@ function initBasicGSAPSlider() {
         slide.removeAttribute('aria-hidden');
         slide.removeAttribute('aria-selected');
         slide.removeAttribute('tabindex');
-        slide.removeAttribute('data-gsap-slider-item-status');
         slide.removeAttribute('inert');
 
         // Restore focusable elements
@@ -214,7 +213,6 @@ function initBasicGSAPSlider() {
 
     let activeIndex = 0;
     const setX = gsap.quickSetter(track, 'x', 'px');
-    let collectionRect = collection.getBoundingClientRect();
 
     function updateStatus(x) {
       if (x > maxX || x < minX) {
@@ -233,15 +231,8 @@ function initBasicGSAPSlider() {
 
       // Update Slide Attributes
       items.forEach((slide, i) => {
-        const r = slide.getBoundingClientRect();
-        const leftEdge = r.left - collectionRect.left;
-        const slideCenter = leftEdge + r.width / 2;
-        const inView = slideCenter > 0 && slideCenter < collectionRect.width;
-        const status =
-          i === activeIndex ? 'active' : inView ? 'inview' : 'not-active';
         const isActive = i === activeIndex;
 
-        slide.setAttribute('data-gsap-slider-item-status', status);
         slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         slide.setAttribute('tabindex', isActive ? '0' : '-1');
@@ -333,7 +324,6 @@ function initBasicGSAPSlider() {
         snap: { x: snapPoints, duration: 0.4 },
         onPress() {
           track.setAttribute('data-gsap-slider-list-status', 'grabbing');
-          collectionRect = collection.getBoundingClientRect();
         },
         onDrag() {
           setX(this.x);
