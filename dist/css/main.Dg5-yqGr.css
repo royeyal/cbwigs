@@ -108,6 +108,7 @@
 }
 .gsap-slider__item {
   flex: 0 0 auto;
+  max-width: 350px;
   min-width: 200px;
   pointer-events: auto;
   touch-action: pan-y;
@@ -174,6 +175,11 @@
 .gsap-slider--breakout .gsap-slider__collection {
   max-width: none;
   width: 100%;
+}
+.testimonial-text b,
+.testimonial-text strong {
+  color: var(--_primitives---colors--neutral-darker);
+  font-weight: 900;
 }
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);

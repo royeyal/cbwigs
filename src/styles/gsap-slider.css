@@ -48,7 +48,7 @@
   transition: box-shadow 0.3s ease-in-out;
   flex: 0 0 auto;
 
-  /* Calculate proper width based on slides per view */
+  /* Calculate proper width based on slides per view with max constraint */
   width: calc(
     (100% / var(--slider-spv, 3)) -
       (
@@ -56,6 +56,7 @@
           var(--slider-spv, 3)
       )
   );
+  max-width: 350px; /* Limit maximum slide width */
   min-width: 200px; /* Minimum width fallback */
 
   /* Ensure items don't block dragging */
@@ -140,4 +141,10 @@
 .gsap-slider--breakout .gsap-slider__collection {
   width: 100%;
   max-width: none;
+}
+
+.testimonial-text strong,
+.testimonial-text b {
+  color: var(--_primitives---colors--neutral-darker);
+  font-weight: 900;
 }
