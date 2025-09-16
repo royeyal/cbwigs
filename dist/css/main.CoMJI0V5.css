@@ -149,6 +149,23 @@
   touch-action: pan-y;
   width: 100%;
 }
+.gsap-slider--full-bleed {
+  margin-left: 50%;
+  transform: translate(-50%);
+  width: 100vw;
+}
+.gsap-slider--full-bleed .gsap-slider__collection {
+  width: 100vw;
+}
+.gsap-slider--breakout {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+}
+.gsap-slider--breakout .gsap-slider__collection {
+  max-width: none;
+  width: 100%;
+}
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }

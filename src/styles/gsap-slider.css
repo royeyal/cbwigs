@@ -103,3 +103,26 @@
   width: 100%;
   touch-action: pan-y;
 }
+
+/* Full-bleed slider option */
+.gsap-slider--full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.gsap-slider--full-bleed .gsap-slider__collection {
+  width: 100vw;
+}
+
+/* Alternative: Breakout from container */
+.gsap-slider--breakout {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.gsap-slider--breakout .gsap-slider__collection {
+  width: 100%;
+  max-width: none;
+}
