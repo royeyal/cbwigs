@@ -110,18 +110,15 @@
   flex: 0 0 auto;
   min-width: 200px;
   pointer-events: auto;
-  position: relative;
   touch-action: pan-y;
   transition: box-shadow 0.3s ease-in-out;
   width: calc(
     100% / var(--slider-spv, 3) - var(--slider-gap, 1.5em) *
       (var(--slider-spv, 3) - 1) / var(--slider-spv, 3)
   );
-  z-index: 1;
 }
 .gsap-slider__item:hover {
   box-shadow: 0 10px 20px #0000001a;
-  z-index: 2;
 }
 .gsap-slider__item .card-text-wrapper {
   transition:
@@ -146,8 +143,11 @@
   cursor: grab;
   display: flex;
   gap: var(--slider-gap, 1.5em);
+  min-width: 100%;
   position: relative;
   touch-action: pan-y;
+  width: -moz-max-content;
+  width: max-content;
 }
 .gsap-slider__list[data-gsap-slider-list-status='grabbing'] {
   cursor: grabbing;

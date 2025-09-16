@@ -47,8 +47,6 @@
 .gsap-slider__item {
   transition: box-shadow 0.3s ease-in-out;
   flex: 0 0 auto;
-  position: relative; /* Ensure proper stacking */
-  z-index: 1; /* Base z-index for all slides */
 
   /* Calculate proper width based on slides per view */
   width: calc(
@@ -67,7 +65,6 @@
 
 .gsap-slider__item:hover {
   box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
-  z-index: 2; /* Bring hovered slide to front */
 }
 
 .gsap-slider__item .card-text-wrapper {
@@ -97,6 +94,10 @@
   display: flex;
   align-items: stretch;
   gap: var(--slider-gap, 1.5em); /* Ensure proper gap between slides */
+
+  /* Ensure the list is wide enough to contain all slides */
+  width: max-content; /* Allow list to expand to fit all slides */
+  min-width: 100%; /* Minimum width to fill container */
 
   /* Remove problematic height and width constraints */
   position: relative;
