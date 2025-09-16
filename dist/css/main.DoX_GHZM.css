@@ -102,18 +102,18 @@
 .gsap-slider__control {
   transition: opacity 0.3s ease;
 }
-.demo-card {
-  transition: all 0.3s ease;
+.gsap-slider__item {
+  transition: box-shadow 0.3s ease-in-out;
 }
-.demo-card:hover {
+.gsap-slider__item:hover {
   box-shadow: 0 10px 20px #0000001a;
 }
-.demo-card .card-text-wrapper {
+.gsap-slider__item .card-text-wrapper {
   transition:
     background-color 0.3s ease-in-out,
     mix-blend-mode 0.5s ease-in-out;
 }
-.demo-card:hover .card-text-wrapper {
+.gsap-slider__item:hover .card-text-wrapper {
   background-color: transparent;
   mix-blend-mode: plus-lighter;
 }
