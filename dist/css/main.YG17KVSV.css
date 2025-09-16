@@ -100,9 +100,16 @@
   pointer-events: none;
 }
 .gsap-slider__control {
+  pointer-events: auto;
+  position: relative;
+  touch-action: manipulation;
   transition: opacity 0.3s ease;
+  z-index: 10;
 }
 .gsap-slider__item {
+  flex: 0 0 auto;
+  pointer-events: auto;
+  touch-action: pan-y;
   transition: box-shadow 0.3s ease-in-out;
 }
 .gsap-slider__item:hover {
@@ -125,6 +132,25 @@
 }
 .demo-card__tag {
   transition: all 0.3s ease;
+}
+.gsap-slider__list {
+  align-items: stretch;
+  cursor: grab;
+  display: flex;
+  height: 100%;
+  position: relative;
+  touch-action: pan-y;
+  width: 100%;
+}
+.gsap-slider__list[data-gsap-slider-list-status='grabbing'] {
+  cursor: grabbing;
+}
+.gsap-slider__collection {
+  height: 470px;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+  width: 100%;
 }
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
