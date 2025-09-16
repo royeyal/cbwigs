@@ -35,9 +35,9 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: false, // Temporarily keep console logs
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug']
+        // pure_funcs: ['console.log', 'console.info', 'console.debug'] // Commented out
       },
       format: {
         comments: false
