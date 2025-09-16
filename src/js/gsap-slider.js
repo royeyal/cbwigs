@@ -183,7 +183,7 @@ function initBasicGSAPSlider() {
       track.removeAttribute('data-gsap-slider-list-status');
     };
 
-    //Ccalculate bounds and snap points
+    //Calculate bounds and snap points
     const vw = collection.clientWidth;
     const tw = track.scrollWidth;
     const maxScroll = Math.max(tw - vw, 0);
@@ -192,11 +192,24 @@ function initBasicGSAPSlider() {
     const maxIndex = maxScroll / slideW;
     const full = Math.floor(maxIndex);
     const snapPoints = [];
+
+    // Generate snap points for each slide position
     for (let i = 0; i <= full; i++) {
       snapPoints.push(-i * slideW);
     }
+
+    // Add final snap point if there's a partial slide
     if (full < maxIndex) {
-      snapPoints.push(-maxIndex * slideW);
+      snapPoints.push(-maxScroll); // Use actual maxScroll instead of calculated position
+    }
+
+    // Ensure we can access the last slide by adding extra snap point if needed
+    const lastSlidePosition = -(items.length - spv) * slideW;
+    if (
+      lastSlidePosition < -maxScroll &&
+      !snapPoints.includes(lastSlidePosition)
+    ) {
+      snapPoints.push(lastSlidePosition);
     }
 
     let activeIndex = 0;

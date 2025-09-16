@@ -137,16 +137,13 @@
   align-items: stretch;
   cursor: grab;
   display: flex;
-  height: 100%;
   position: relative;
   touch-action: pan-y;
-  width: 100%;
 }
 .gsap-slider__list[data-gsap-slider-list-status='grabbing'] {
   cursor: grabbing;
 }
 .gsap-slider__collection {
-  height: 470px;
   overflow: hidden;
   position: relative;
   touch-action: pan-y;
