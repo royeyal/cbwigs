@@ -117,6 +117,12 @@
   background-color: transparent;
   mix-blend-mode: plus-lighter;
 }
+.gsap-slider__item .image {
+  transition: transform 0.3s ease-in-out;
+}
+.gsap-slider__item:hover .image {
+  transform: scale(1.1);
+}
 .demo-card__tag {
   transition: all 0.3s ease;
 }
