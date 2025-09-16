@@ -110,16 +110,16 @@ function initBasicGSAPSlider() {
     const spv = Math.max(1, Math.min(spvVar, items.length));
     const sliderEnabled = statusVar === 'on' && spv < items.length;
 
-    console.log('📊 Slider calculations:');
-    console.log('  - Status var (--slider-status):', statusVar);
-    console.log('  - SPV var (--slider-spv):', spvVar);
-    console.log('  - First item rect:', rect);
-    console.log('  - Margin right:', marginRight);
-    console.log('  - Slide width:', slideW);
-    console.log('  - Collection width:', collection.clientWidth);
-    console.log('  - Calculated SPV:', spv);
-    console.log('  - Items length:', items.length);
-    console.log('  - Slider enabled:', sliderEnabled);
+    // console.log('📊 Slider calculations:');
+    // console.log('  - Status var (--slider-status):', statusVar);
+    // console.log('  - SPV var (--slider-spv):', spvVar);
+    // console.log('  - First item rect:', rect);
+    // console.log('  - Margin right:', marginRight);
+    // console.log('  - Slide width:', slideW);
+    // console.log('  - Collection width:', collection.clientWidth);
+    // console.log('  - Calculated SPV:', spv);
+    // console.log('  - Items length:', items.length);
+    // console.log('  - Slider enabled:', sliderEnabled);
 
     root.setAttribute(
       'data-gsap-slider-status',
