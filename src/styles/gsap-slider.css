@@ -47,6 +47,18 @@
 .gsap-slider__item {
   transition: box-shadow 0.3s ease-in-out;
   flex: 0 0 auto;
+  position: relative; /* Ensure proper stacking */
+  z-index: 1; /* Base z-index for all slides */
+
+  /* Calculate proper width based on slides per view */
+  width: calc(
+    (100% / var(--slider-spv, 3)) -
+      (
+        var(--slider-gap, 1.5em) * (var(--slider-spv, 3) - 1) /
+          var(--slider-spv, 3)
+      )
+  );
+  min-width: 200px; /* Minimum width fallback */
 
   /* Ensure items don't block dragging */
   pointer-events: auto;
@@ -55,6 +67,7 @@
 
 .gsap-slider__item:hover {
   box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+  z-index: 2; /* Bring hovered slide to front */
 }
 
 .gsap-slider__item .card-text-wrapper {
@@ -83,6 +96,7 @@
 .gsap-slider__list {
   display: flex;
   align-items: stretch;
+  gap: var(--slider-gap, 1.5em); /* Ensure proper gap between slides */
 
   /* Remove problematic height and width constraints */
   position: relative;
