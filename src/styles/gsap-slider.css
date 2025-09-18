@@ -130,51 +130,6 @@
   touch-action: pan-y;
 }
 
-/* Premium fade overlay on sides */
-.gsap-slider__collection::before,
-.gsap-slider__collection::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px; /* Desktop fade width */
-  z-index: 10;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.gsap-slider__collection::before {
-  left: 0;
-  background: linear-gradient(
-    to right,
-    var(--slider-fade-color, rgb(255 255 255 / 80%)),
-    transparent
-  );
-}
-
-.gsap-slider__collection::after {
-  right: 0;
-  background: linear-gradient(
-    to left,
-    var(--slider-fade-color, rgb(255 255 255 / 80%)),
-    transparent
-  );
-}
-
-/* Smaller fade overlay on mobile */
-@media screen and (width <= 480px) {
-  .gsap-slider__collection::before,
-  .gsap-slider__collection::after {
-    width: 20px; /* Smaller on mobile */
-  }
-}
-
-/* Hide fade overlay when not enough content */
-[data-gsap-slider-status='not-active'] .gsap-slider__collection::before,
-[data-gsap-slider-status='not-active'] .gsap-slider__collection::after {
-  opacity: 0;
-}
-
 /* Full-bleed slider option */
 .gsap-slider--full-bleed {
   width: 100vw;
