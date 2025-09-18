@@ -83,7 +83,8 @@
     mix-blend-mode 0.5s ease-in-out;
 }
 
-.gsap-slider__item:hover .card-text-wrapper {
+.gsap-slider__item:hover .card-text-wrapper,
+.gsap-slider__item:hover .testimonial-name-wrapper {
   background-color: transparent;
   mix-blend-mode: plus-lighter;
 }

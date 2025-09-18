@@ -131,15 +131,16 @@
 }
 .gsap-slider__item .card-text-wrapper {
   transition:
-    background-color 0.3s ease-in-out,
+    background-color 0.5s ease-in-out,
     mix-blend-mode 0.5s ease-in-out;
 }
-.gsap-slider__item:hover .card-text-wrapper {
+.gsap-slider__item:hover .card-text-wrapper,
+.gsap-slider__item:hover .testimonial-name-wrapper {
   background-color: transparent;
   mix-blend-mode: plus-lighter;
 }
 .gsap-slider__item .image {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.6s ease-in-out;
 }
 .gsap-slider__item:hover .image {
   transform: scale(1.1);
