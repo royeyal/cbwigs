@@ -291,10 +291,10 @@ function initBasicGSAPSlider() {
     });
 
     // Initialize Draggable
-    console.log('🎮 Creating Draggable instance...');
-    console.log('  - Track element:', track);
-    console.log('  - Bounds:', { minX, maxX });
-    console.log('  - Snap points:', snapPoints);
+    // console.log('🎮 Creating Draggable instance...');
+    // console.log('  - Track element:', track);
+    // console.log('  - Bounds:', { minX, maxX });
+    // console.log('  - Snap points:', snapPoints);
 
     try {
       root._sliderDraggable = Draggable.create(track, {
@@ -332,20 +332,20 @@ function initBasicGSAPSlider() {
         }
       })[0];
 
-      console.log(
-        '✅ Draggable instance created successfully:',
-        root._sliderDraggable
-      );
+      // console.log(
+      //   '✅ Draggable instance created successfully:',
+      //   root._sliderDraggable
+      // );
     } catch (error) {
       console.error('❌ Failed to create Draggable instance:', error);
       return;
     }
 
     // Initial state
-    console.log('🎬 Setting initial slider state...');
+    // console.log('🎬 Setting initial slider state...');
     setX(0);
     updateStatus(0);
-    console.log('✅ Slider initialization complete!');
+    // console.log('✅ Slider initialization complete!');
   });
 }
 
