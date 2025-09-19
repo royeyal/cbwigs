@@ -43,7 +43,7 @@
   pointer-events: none;
 }
 
-/* Customization */
+/* GSAP Slider Controls */
 
 .gsap-slider__control {
   transition: opacity 0.3s ease;
