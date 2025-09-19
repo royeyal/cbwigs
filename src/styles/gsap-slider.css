@@ -83,10 +83,33 @@
     mix-blend-mode 0.5s ease-in-out;
 }
 
-.gsap-slider__item:hover .card-text-wrapper,
-.gsap-slider__item:hover .testimonial-name-wrapper {
+.gsap-slider__item:hover .card-text-wrapper {
   background-color: transparent;
   mix-blend-mode: plus-lighter;
+}
+
+.gsap-slider__item .quote-icon-wrapper {
+  transition: mix-blend-mode 0.5s ease-in-out;
+}
+
+.gsap-slider__item:hover .quote-icon-wrapper {
+  mix-blend-mode: color-burn;
+}
+
+.gsap-slider__item .testimonial-name-wrapper {
+  transition: mix-blend-mode 0.5s ease-in-out;
+}
+
+.gsap-slider__item:hover .testimonial-name-wrapper {
+  mix-blend-mode: overlay;
+}
+
+.gsap-slider__item .testimonial-name-wrapper .testimonial-name {
+  transition: font-size 0.5s ease-in-out;
+}
+
+.gsap-slider__item:hover .testimonial-name-wrapper .testimonial-name {
+  font-size: 1rem;
 }
 
 .gsap-slider__item .image {
@@ -95,10 +118,6 @@
 
 .gsap-slider__item:hover .image {
   transform: scale(1.1);
-}
-
-.demo-card__tag {
-  transition: all 0.3s ease;
 }
 
 .gsap-slider__list {
