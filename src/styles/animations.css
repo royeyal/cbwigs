@@ -1,8 +1,8 @@
-.card .card__img img {
+.card .card__img {
   transition: transform 0.8s ease-in-out;
 }
 
-.card:hover .card__img img {
+.card:hover .card__img {
   transform: scale(1.05);
 }
 
