@@ -2,6 +2,7 @@
 @import url('./textreveal.css');
 @import url('./animations.css');
 @import url('./gsap-slider.css');
+@import url('./accordion.css');
 
 /* Global styles */
 :root {

@@ -3,6 +3,7 @@ import '../styles/main.css';
 import { initMaskTextScrollReveal } from './textreveal.js';
 import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
+import { initAccordionCSS } from './accordion.js';
 
 // Initialize all animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,11 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize basic GSAP slider
   initBasicGSAPSlider();
+
+  // Initialize accordion functionality
+  initAccordionCSS();
 });
 
 // Export all animation functions for potential external access
 export {
   initMaskTextScrollReveal,
   initContentRevealScroll,
-  initBasicGSAPSlider
+  initBasicGSAPSlider,
+  initAccordionCSS
 };
