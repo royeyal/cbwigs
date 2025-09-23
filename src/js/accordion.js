@@ -1,4 +1,6 @@
 function initAccordionCSS() {
+  console.log('🎵 Initializing accordion functionality...');
+
   document.querySelectorAll('[data-accordion-css-init]').forEach(accordion => {
     const closeSiblings =
       accordion.getAttribute('data-accordion-close-siblings') === 'true';
@@ -28,12 +30,9 @@ function initAccordionCSS() {
       }
     });
   });
+
+  console.log('✅ Accordion initialization complete!');
 }
 
 // Export the function for use in main.js
 export { initAccordionCSS };
-
-// Initialize Accordion CSS (keeping for backward compatibility)
-document.addEventListener('DOMContentLoaded', () => {
-  initAccordionCSS();
-});
