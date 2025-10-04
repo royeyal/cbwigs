@@ -1,0 +1,136 @@
+body {
+  --swiper-pagination-color: currentcolor;
+  --swiper-pagination-bottom: auto;
+  --swiper-pagination-bullet-size: 0.5em;
+  --swiper-pagination-bullet-inactive-color: currentcolor;
+  --swiper-pagination-bullet-inactive-opacity: 0.15;
+  --swiper-pagination-bullet-horizontal-gap: 0.25em;
+  --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
+}
+
+.swiper-group {
+  width: 100%;
+  position: relative;
+}
+
+.swiper {
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  display: flex;
+  overflow: visible !important;
+}
+
+.swiper-wrapper {
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  display: flex;
+}
+
+.swiper-slide {
+  flex: none;
+  max-width: 20em;
+  padding-right: 1.25em;
+
+  --gap: 1.25em;
+
+  padding-right: var(--gap);
+}
+
+.swiper-slide:last-of-type {
+  margin-right: calc(-1 * var(--gap));
+}
+
+.swiper-pagination {
+  pointer-events: auto;
+  z-index: 0 !important;
+}
+
+.swiper-navigation {
+  z-index: 2;
+  pointer-events: none;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translate(0, 150%);
+}
+
+.swiper-navigation__button {
+  z-index: 1;
+  aspect-ratio: 1;
+  pointer-events: auto;
+  color: #000;
+  background-color: #fff;
+  border-radius: 100em;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  padding: 1em;
+  display: flex;
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+.swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.swiper-navigation__button-arorw {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.swiper-navigation__button-arorw.is--prev {
+  transform: rotate(-180deg);
+}
+
+.demo-card {
+  aspect-ratio: 4 / 5.25;
+  background-color: #131313;
+  border: 1px solid #ffffff26;
+  border-radius: 1em;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+}
+
+.demo-card__visual {
+  background-color: #ffffff08;
+  background-image: linear-gradient(
+    135deg,
+    #ffffff08,
+    #ffffff14 11%,
+    #ffffff08 16%,
+    #ffffff12 58%,
+    #ffffff17 63%,
+    #ffffff08 73%,
+    #ffffff0d 96%,
+    #ffffff08
+  );
+  border: 1px solid #ffffff0d;
+  border-radius: 0.5em;
+  flex: 1;
+}
+
+.demo-card__text {
+  padding-top: 1em;
+  padding-bottom: 0.25em;
+  padding-left: 0.5em;
+}
+
+.demo-card__title {
+  font-size: 1.5em;
+}

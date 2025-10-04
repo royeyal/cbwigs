@@ -18,6 +18,7 @@ export default [
         SplitText: 'readonly',
         CustomEase: 'readonly',
         Draggable: 'readonly',
+        Swiper: 'readonly',
         getComputedStyle: 'readonly',
         innerWidth: 'readonly',
         clearTimeout: 'readonly',

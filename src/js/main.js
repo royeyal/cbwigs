@@ -4,6 +4,7 @@ import { initMaskTextScrollReveal } from './textreveal.js';
 import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
+import { initSwiperSlider } from './swipeslider.js';
 
 // Initialize all animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize accordion functionality
   initAccordionCSS();
+
+  // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
+  initSwiperSlider();
 });
 
 // Export all animation functions for potential external access
@@ -25,5 +29,6 @@ export {
   initMaskTextScrollReveal,
   initContentRevealScroll,
   initBasicGSAPSlider,
-  initAccordionCSS
+  initAccordionCSS,
+  initSwiperSlider
 };
