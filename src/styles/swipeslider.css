@@ -1,3 +1,54 @@
+/* Relume Container System */
+.padding-global {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media screen and (width >= 478px) {
+  .padding-global {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media screen and (width >= 768px) {
+  .padding-global {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.container-large {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding-section-large {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media screen and (width >= 768px) {
+  .padding-section-large {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+@media screen and (width >= 992px) {
+  .padding-section-large {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+.swiper-section {
+  position: relative;
+}
+
+/* Swiper Variables */
 body {
   --swiper-scrollbar-border-radius: 10px;
   --swiper-scrollbar-top: auto;
@@ -35,8 +86,9 @@ body {
 }
 
 .swiper-group {
-  width: 100%;
   position: relative;
+
+  /* Remove width: 100% to allow container control */
 }
 
 .swiper {

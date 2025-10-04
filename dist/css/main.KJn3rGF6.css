@@ -599,6 +599,47 @@ html {
 .swiper-scrollbar-lock {
   display: none;
 }
+.padding-global {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media screen and (min-width: 478px) {
+  .padding-global {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .padding-global {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+.container-large {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  width: 100%;
+}
+.padding-section-large {
+  padding-bottom: 5rem;
+  padding-top: 5rem;
+}
+@media screen and (min-width: 768px) {
+  .padding-section-large {
+    padding-bottom: 7rem;
+    padding-top: 7rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .padding-section-large {
+    padding-bottom: 9rem;
+    padding-top: 9rem;
+  }
+}
+.swiper-section {
+  position: relative;
+}
 body {
   --swiper-scrollbar-border-radius: 10px;
   --swiper-scrollbar-top: auto;
@@ -630,7 +671,6 @@ body {
 }
 .swiper-group {
   position: relative;
-  width: 100%;
 }
 .swiper {
   overflow: visible !important;

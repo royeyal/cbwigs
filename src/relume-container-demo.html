@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper - Relume Container Demo</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    
+    .demo-header {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    
+    .demo-header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    
+    .demo-header p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.8;
+    }
+    
+    .demo-info {
+      background: #fff;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .demo-info h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    
+    /* Demo Card Styling */
+    .demo-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .demo-card__visual {
+      height: 200px;
+      background: #e9ecef;
+    }
+    
+    .demo-card__text {
+      padding: 1.5rem;
+      flex-grow: 1;
+    }
+    
+    .demo-card__title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    .demo-card p {
+      margin: 0;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+    
+    /* Container Debug */
+    .container-debug {
+      outline: 2px dashed #007bff;
+      outline-offset: -2px;
+      position: relative;
+    }
+    
+    .container-debug::before {
+      content: "Container Boundary";
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      font-size: 0.75rem;
+      color: #007bff;
+      background: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>🏗️ Relume Container Demo</h1>
+    <p>Swiper contained within Relume's responsive container system</p>
+  </div>
+
+  <!-- Full structure as requested: swiper-section -> padding-global -> container-large -> padding-section-large -> swiper-group -->
+  <section class="swiper-section">
+    <div class="padding-global">
+      <div class="container-large container-debug">
+        <div class="padding-section-large">
+          
+          <div class="demo-info">
+            <h3>📐 Container Structure</h3>
+            <p><strong>Current Structure:</strong></p>
+            <ol>
+              <li><code>.swiper-section</code> - Section wrapper</li>
+              <li><code>.padding-global</code> - Global horizontal padding (responsive)</li>
+              <li><code>.container-large</code> - Max-width container (80rem/1280px)</li>
+              <li><code>.padding-section-large</code> - Vertical section padding</li>
+              <li><code>.swiper-group</code> - Swiper container</li>
+            </ol>
+            <p><strong>Container Max Width:</strong> 1280px with responsive padding</p>
+            <p><strong>Overflow:</strong> Slides extend beyond container for preview effect</p>
+          </div>
+
+          <!-- Swiper within Container -->
+          <div data-swiper-group class="swiper-group">
+            <div data-swiper-wrap class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Contained Slide 1</div>
+                      <p>The swiper is now properly contained within the Relume container system while maintaining the preview overflow effect.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Contained Slide 2</div>
+                      <p>Notice how the container (blue outline) limits the main content width while slides can extend beyond for the preview effect.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Contained Slide 3</div>
+                      <p>The responsive container ensures consistent margins and max-width across all device sizes following Relume standards.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Contained Slide 4</div>
+                      <p>Perfect integration with Relume's design system - professional and responsive!</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Contained Slide 5</div>
+                      <p>Ready for production with Webflow and Relume! ✨</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Scrollbar -->
+              <div class="swiper-scrollbar"></div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="swiper-navigation">
+              <div data-swiper-prev class="swiper-navigation__button">
+                <div class="swiper-navigation__button-arorw is--prev">→</div>
+              </div>
+              <div data-swiper-next class="swiper-navigation__button">
+                <div class="swiper-navigation__button-arorw">→</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Demo Section -->
+  <section style="background: white; padding: 3rem 0;">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="demo-info">
+          <h3>💡 Implementation Notes</h3>
+          <ul>
+            <li><strong>Responsive Container:</strong> Max-width of 1280px with automatic centering</li>
+            <li><strong>Global Padding:</strong> 1.25rem mobile → 2rem tablet → 2.5rem desktop</li>
+            <li><strong>Section Padding:</strong> 5rem mobile → 7rem tablet → 9rem desktop</li>
+            <li><strong>Overflow Handling:</strong> Slides extend beyond container for preview effect</li>
+            <li><strong>Relume Compatible:</strong> Drop-in replacement for full-width sliders</li>
+          </ul>
+          
+          <h3>🎯 Benefits</h3>
+          <ul>
+            <li>Consistent with Relume design system</li>
+            <li>Professional max-width constraints</li>
+            <li>Responsive padding on all screen sizes</li>
+            <li>Maintains slide preview functionality</li>
+            <li>Easy to integrate into existing Relume projects</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
