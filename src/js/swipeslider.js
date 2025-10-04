@@ -1,9 +1,9 @@
 // Import Swiper library and modules
 import { Swiper } from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 // Import custom swiper styles
 import '../styles/swipeslider.css';
@@ -57,11 +57,11 @@ function initializeSwiperSliders(swiperSliderGroups) {
 
     const prevButton = swiperGroup.querySelector('[data-swiper-prev]');
     const nextButton = swiperGroup.querySelector('[data-swiper-next]');
-    const pagination = swiperGroup.querySelector('.swiper-pagination');
+    const scrollbar = swiperGroup.querySelector('.swiper-scrollbar');
 
     const swiper = new Swiper(swiperSliderWrap, {
       // Register modules
-      modules: [Navigation, Pagination],
+      modules: [Navigation, Scrollbar],
 
       // RTL configuration
       direction: 'horizontal',
@@ -92,11 +92,11 @@ function initializeSwiperSliders(swiperSliderGroups) {
               prevEl: isRTLLayout ? nextButton : prevButton
             }
           : false,
-      pagination: pagination
+      scrollbar: scrollbar
         ? {
-            el: pagination,
-            type: 'bullets',
-            clickable: true
+            el: scrollbar,
+            hide: false,
+            draggable: true
           }
         : false,
       keyboard: {
