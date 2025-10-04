@@ -82,7 +82,7 @@ function initializeSwiperSliders(swiperSliderGroups) {
         },
         // when window width is >= 992px
         992: {
-          slidesPerView: 4,
+          slidesPerView: 3.5,
           spaceBetween: 32 // Larger spacing for desktop
         }
       },
