@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Side Navigation Demo</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f8f9fa;
+      color: #333;
+    }
+    
+    .demo-header {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+    }
+    
+    .demo-header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    
+    .demo-info {
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .demo-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .demo-card__visual {
+      height: 200px;
+      background: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+    }
+    
+    .demo-card__text {
+      padding: 1.5rem;
+      flex-grow: 1;
+    }
+    
+    .demo-card__title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    .demo-card p {
+      margin: 0;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>🎯 Side Navigation Demo</h1>
+    <p>Navigation buttons positioned on far sides, vertically centered with slider</p>
+  </div>
+
+  <div class="demo-info">
+    <h3>📐 Navigation Layout</h3>
+    <p><strong>Left:</strong> Previous button (◀)</p>
+    <p><strong>Center:</strong> Pagination (if present)</p>
+    <p><strong>Right:</strong> Next button (▶)</p>
+    <p><strong>Position:</strong> Vertically centered with slider content</p>
+  </div>
+
+  <!-- Swiper with your exact HTML structure -->
+  <section class="swiper-section">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="padding-section-large">
+          <div data-swiper-group class="swiper-group">
+            <div data-swiper-wrap class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">01</div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Side Navigation</div>
+                      <p>Navigation buttons are positioned on the far left and right sides, vertically centered with the slider.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">02</div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Hover Effects</div>
+                      <p>Buttons have smooth hover animations with scale and shadow effects for better user feedback.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">03</div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">SVG Icons</div>
+                      <p>Clean SVG arrow icons with proper RTL support and smooth rotation animations.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">04</div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Responsive Design</div>
+                      <p>Navigation adapts to all screen sizes while maintaining proper spacing and positioning.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="demo-card">
+                    <div class="demo-card__visual" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">05</div>
+                    <div class="demo-card__text">
+                      <div class="demo-card__title">Production Ready</div>
+                      <p>Clean, accessible navigation with keyboard support and smooth animations.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Your exact HTML structure -->
+            <div class="swiper-navigation">
+              <button data-swiper-prev="" class="swiper-navigation__button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw is--prev">
+                  <path d="M14 19L21 12L14 5" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                  <path d="M21 12H2" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                </svg>
+              </button>
+              <div class="swiper-pagination"></div>
+              <button data-swiper-next="" class="swiper-navigation__button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw">
+                  <path d="M14 19L21 12L14 5" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                  <path d="M21 12H2" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="demo-info" style="margin-top: 2rem;">
+    <h3>🎨 Styling Features</h3>
+    <ul>
+      <li><strong>Side Positioning:</strong> Buttons on far left/right using <code>justify-content: space-between</code></li>
+      <li><strong>Vertical Centering:</strong> <code>top: 50%</code> and <code>transform: translateY(-50%)</code></li>
+      <li><strong>Hover Effects:</strong> Scale, shadow, and background color transitions</li>
+      <li><strong>RTL Support:</strong> Arrow directions automatically adjust</li>
+      <li><strong>Responsive:</strong> Maintains positioning across all screen sizes</li>
+    </ul>
+    
+    <h3>🔧 CSS Structure</h3>
+    <ul>
+      <li><strong>Container:</strong> <code>.swiper-navigation</code> - Flexbox with space-between</li>
+      <li><strong>Prev Button:</strong> <code>order: 1</code> - Positioned first (left)</li>
+      <li><strong>Pagination:</strong> <code>order: 2</code> - Centered with flex: 1</li>
+      <li><strong>Next Button:</strong> <code>order: 3</code> - Positioned last (right)</li>
+    </ul>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
