@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Navigation Test</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #111;
+      color: white;
+    }
+    .test-info {
+      background: #333;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .swiper-navigation__button {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .swiper-navigation__button:hover {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+    .swiper-navigation__button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="test-info">
+    <h1>🧪 Swiper Navigation Test</h1>
+    <p>Testing if <code>data-swiper-prev</code> and <code>data-swiper-next</code> buttons advance the slider.</p>
+    <p><strong>Expected behavior:</strong></p>
+    <ul>
+      <li>✅ Clicking the arrow buttons should advance the slides</li>
+      <li>✅ Pagination dots should be clickable</li>
+      <li>✅ Keyboard arrows should work</li>
+      <li>✅ Mouse wheel should advance slides</li>
+    </ul>
+  </div>
+
+  <!-- Swiper Test -->
+  <div data-swiper-group class="swiper-group">
+    <div data-swiper-wrap class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #ff6b6b, #feca57);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Slide 1</div>
+              <p>First slide - Click the arrows to navigate!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #48cae4, #023e8a);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Slide 2</div>
+              <p>Second slide - Navigation working! 🎉</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #a8dadc, #1d3557);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Slide 3</div>
+              <p>Third slide - Keep clicking!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #f72585, #b5179e);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Slide 4</div>
+              <p>Fourth slide - Almost there!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #90e0ef, #0077b6);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Slide 5</div>
+              <p>Fifth slide - Navigation test complete! ✅</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="swiper-navigation">
+      <div data-swiper-prev class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw is--prev">→</div>
+      </div>
+      <div data-swiper-next class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-info" style="margin-top: 2rem;">
+    <h3>🔧 Debug Information</h3>
+    <p>Open browser console (F12) to see any Swiper initialization messages.</p>
+    <p>If navigation is working properly, you should see slides changing when clicking the arrow buttons.</p>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

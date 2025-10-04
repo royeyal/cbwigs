@@ -1,5 +1,6 @@
-// Import Swiper library and styles
+// Import Swiper library and modules
 import { Swiper } from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -32,6 +33,9 @@ function initializeSwiperSliders(swiperSliderGroups) {
     const pagination = swiperGroup.querySelector('.swiper-pagination');
 
     const swiper = new Swiper(swiperSliderWrap, {
+      // Register modules
+      modules: [Navigation, Pagination],
+
       slidesPerView: 1.25,
       spaceBetween: 20,
       speed: 600,
