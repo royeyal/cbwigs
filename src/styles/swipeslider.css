@@ -87,6 +87,7 @@ body {
 
 .swiper-group {
   position: relative;
+  overflow: hidden; /* Hide slides that extend beyond container */
 
   /* Remove width: 100% to allow container control */
 }

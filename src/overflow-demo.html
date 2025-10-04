@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Overflow Control Demo</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .demo-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+    
+    .demo-section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 0.5rem;
+    }
+    
+    .demo-section h3 {
+      color: #34495e;
+      margin-top: 2rem;
+    }
+    
+    .demo-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #e9ecef;
+    }
+    
+    .demo-card__visual {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    
+    .demo-card__text {
+      padding: 1rem;
+      flex-grow: 1;
+    }
+    
+    .demo-card__title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    /* Override for visible overflow demo */
+    .swiper-group-visible {
+      overflow: visible !important;
+      border: 2px dashed #e74c3c;
+    }
+    
+    .swiper-group {
+      border: 2px dashed #27ae60;
+    }
+    
+    .container-demo {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
+      background: #ecf0f1;
+      border-radius: 8px;
+    }
+    
+    .container-demo::before {
+      content: "Container Boundary";
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      color: #7f8c8d;
+      margin-bottom: 1rem;
+    }
+    
+    .overflow-legend {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    
+    .overflow-legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      border: 2px dashed;
+      border-radius: 3px;
+    }
+    
+    .legend-hidden { border-color: #27ae60; }
+    .legend-visible { border-color: #e74c3c; }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-section">
+    <h1>🎭 Swiper Overflow Control Demo</h1>
+    <p>This demo shows how <code>overflow: hidden</code> on <code>.swiper-group</code> controls slide visibility beyond the container boundaries.</p>
+    
+    <div class="overflow-legend">
+      <span><div class="legend-box legend-hidden"></div>Overflow Hidden</span>
+      <span><div class="legend-box legend-visible"></div>Overflow Visible</span>
+    </div>
+  </div>
+
+  <!-- Hidden Overflow Demo -->
+  <div class="demo-section">
+    <h2>✂️ Current: Overflow Hidden</h2>
+    <p><strong>CSS:</strong> <code>.swiper-group { overflow: hidden; }</code></p>
+    <p>Slides that extend beyond the container are clipped and hidden.</p>
+    
+    <div class="container-demo">
+      <div class="swiper-section">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-large">
+              <div data-swiper-group class="swiper-group">
+                <div data-swiper-wrap class="swiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">Slide 1</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Hidden Overflow</div>
+                          <p>This slide is contained within boundaries.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #3498db, #2980b9);">Slide 2</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Clipped Content</div>
+                          <p>Extends beyond container but gets clipped.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #2ecc71, #27ae60);">Slide 3</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Not Visible</div>
+                          <p>This slide is hidden by overflow.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-scrollbar"></div>
+                </div>
+                <div class="swiper-navigation">
+                  <div data-swiper-prev class="swiper-navigation__button">
+                    <div class="swiper-navigation__button-arorw is--prev">→</div>
+                  </div>
+                  <div data-swiper-next class="swiper-navigation__button">
+                    <div class="swiper-navigation__button-arorw">→</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visible Overflow Demo -->
+  <div class="demo-section">
+    <h2>👁️ Alternative: Overflow Visible</h2>
+    <p><strong>CSS:</strong> <code>.swiper-group { overflow: visible; }</code></p>
+    <p>Slides extend beyond the container to show preview of upcoming content.</p>
+    
+    <div class="container-demo">
+      <div class="swiper-section">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-large">
+              <div data-swiper-group class="swiper-group swiper-group-visible">
+                <div data-swiper-wrap class="swiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">Slide A</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Visible Overflow</div>
+                          <p>Shows preview of next slides.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #f39c12, #e67e22);">Slide B</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Preview Effect</div>
+                          <p>Creates anticipation for more content.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="demo-card">
+                        <div class="demo-card__visual" style="background: linear-gradient(45deg, #1abc9c, #16a085);">Slide C</div>
+                        <div class="demo-card__text">
+                          <div class="demo-card__title">Fully Visible</div>
+                          <p>Extends beyond container boundaries.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-scrollbar"></div>
+                </div>
+                <div class="swiper-navigation">
+                  <div data-swiper-prev class="swiper-navigation__button">
+                    <div class="swiper-navigation__button-arorw is--prev">→</div>
+                  </div>
+                  <div data-swiper-next class="swiper-navigation__button">
+                    <div class="swiper-navigation__button-arorw">→</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Info -->
+  <div class="demo-section">
+    <h2>📊 Comparison</h2>
+    
+    <div class="comparison-grid">
+      <div>
+        <h3>✂️ Overflow Hidden</h3>
+        <ul>
+          <li><strong>Clean Boundaries:</strong> Content stays within container</li>
+          <li><strong>Formal Look:</strong> More structured appearance</li>
+          <li><strong>Focus:</strong> Attention stays on current slide</li>
+          <li><strong>Navigation:</strong> Users rely on buttons/scrollbar</li>
+          <li><strong>Mobile Friendly:</strong> No accidental partial slides</li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3>👁️ Overflow Visible</h3>
+        <ul>
+          <li><strong>Preview Effect:</strong> Shows upcoming content</li>
+          <li><strong>Engaging:</strong> Creates curiosity</li>
+          <li><strong>Context:</strong> Users see more slides exist</li>
+          <li><strong>Touch Friendly:</strong> Can grab partial slides</li>
+          <li><strong>Modern Look:</strong> Contemporary slider design</li>
+        </ul>
+      </div>
+    </div>
+    
+    <h3>🎯 Recommendation</h3>
+    <p>Choose based on your design needs:</p>
+    <ul>
+      <li><strong>Overflow Hidden:</strong> Corporate sites, formal content, clean layouts</li>
+      <li><strong>Overflow Visible:</strong> Creative sites, portfolios, engaging experiences</li>
+    </ul>
+    
+    <h3>🔧 How to Toggle</h3>
+    <p>In your CSS, change the <code>.swiper-group</code> overflow property:</p>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 4px; font-size: 0.9rem;">
+.swiper-group {
+  overflow: hidden;  /* or 'visible' */
+}</pre>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
