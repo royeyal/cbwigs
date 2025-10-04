@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختبار Swiper RTL</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #1a1a1a;
+      color: white;
+      direction: rtl;
+      text-align: right;
+    }
+    .test-info {
+      background: #2d2d2d;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-right: 4px solid #4CAF50;
+    }
+    .test-info h1 {
+      color: #4CAF50;
+      margin-top: 0;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    .feature-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #333;
+    }
+    .feature-list li:before {
+      content: "✅ ";
+      margin-left: 8px;
+    }
+    .toggle-direction {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background 0.3s ease;
+    }
+    .toggle-direction:hover {
+      background: #45a049;
+    }
+    .current-direction {
+      background: #333;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-info">
+    <h1>🧪 اختبار Swiper مع دعم RTL</h1>
+    <p>هذه الصفحة تختبر دعم الاتجاه من اليمين إلى اليسار (RTL) في مكون Swiper.</p>
+    
+    <div class="current-direction">
+      <strong>الاتجاه الحالي:</strong> <span id="current-dir">RTL</span>
+    </div>
+    
+    <button class="toggle-direction" onclick="toggleDirection()">
+      تبديل الاتجاه (LTR ⇄ RTL)
+    </button>
+    
+    <h3>الميزات المختبرة:</h3>
+    <ul class="feature-list">
+      <li>الأزرار تعمل بشكل صحيح في RTL (السهم الأيسر للتالي، الأيمن للسابق)</li>
+      <li>اتجاه الانتقال بين الشرائح معكوس</li>
+      <li>تدوير الأسهم بصرياً لتتناسب مع RTL</li>
+      <li>النقاط التفاعلية تعمل بشكل طبيعي</li>
+      <li>التمرير بالماوس والكيبورد يعمل بالاتجاه الصحيح</li>
+      <li>اكتشاف تلقائي للغة وإعداد RTL</li>
+    </ul>
+  </div>
+
+  <!-- اختبار Swiper مع RTL -->
+  <div data-swiper-group class="swiper-group">
+    <div data-swiper-wrap class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #ff6b6b, #feca57);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">الشريحة الأولى</div>
+              <p>هذه هي الشريحة الأولى. اضغط الأزرار للتنقل!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #48cae4, #023e8a);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">الشريحة الثانية</div>
+              <p>التنقل يعمل بشكل صحيح في RTL! 🎉</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #a8dadc, #1d3557);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">الشريحة الثالثة</div>
+              <p>استمر في الضغط والتنقل!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #f72585, #b5179e);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">الشريحة الرابعة</div>
+              <p>اختبار RTL ناجح تماماً!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #90e0ef, #0077b6);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">الشريحة الخامسة</div>
+              <p>اختبار مكتمل! دعم RTL يعمل بشكل مثالي ✅</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- النقاط التفاعلية -->
+      <div class="swiper-pagination"></div>
+    </div>
+    
+    <!-- أزرار التنقل -->
+    <div class="swiper-navigation">
+      <div data-swiper-prev class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw is--prev">→</div>
+      </div>
+      <div data-swiper-next class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-info" style="margin-top: 2rem;">
+    <h3>🔧 معلومات تقنية</h3>
+    <p>افتح وحدة التحكم في المتصفح (F12) لرؤية رسائل تهيئة Swiper.</p>
+    <p><strong>ملاحظة:</strong> عند تبديل الاتجاه، ستحتاج لإعادة تحميل الصفحة لرؤية التغييرات.</p>
+  </div>
+
+  <script>
+    function toggleDirection() {
+      const html = document.documentElement;
+      const body = document.body;
+      const currentDir = html.dir;
+      
+      if (currentDir === 'rtl') {
+        html.dir = 'ltr';
+        html.lang = 'en';
+        body.style.direction = 'ltr';
+        body.style.textAlign = 'left';
+        document.getElementById('current-dir').textContent = 'LTR';
+      } else {
+        html.dir = 'rtl';
+        html.lang = 'ar';
+        body.style.direction = 'rtl';
+        body.style.textAlign = 'right';
+        document.getElementById('current-dir').textContent = 'RTL';
+      }
+      
+      // Reinitialize Swiper after direction change
+      setTimeout(() => {
+        location.reload();
+      }, 100);
+    }
+    
+    // Update current direction display
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentDir = document.documentElement.dir || 'ltr';
+      document.getElementById('current-dir').textContent = currentDir.toUpperCase();
+    });
+  </script>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

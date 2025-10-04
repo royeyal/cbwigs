@@ -760,6 +760,24 @@ body {
 .swiper-slide:last-of-type {
   margin-right: calc(var(--gap) * -1);
 }
+.swiper-rtl .swiper-slide,
+[dir='rtl'] .swiper-slide {
+  padding-left: var(--gap);
+  padding-right: 0;
+}
+.swiper-rtl .swiper-slide:last-of-type,
+[dir='rtl'] .swiper-slide:last-of-type {
+  margin-left: calc(var(--gap) * -1);
+  margin-right: 0;
+}
+.swiper-rtl .swiper-navigation__button-arorw,
+[dir='rtl'] .swiper-navigation__button-arorw {
+  transform: scaleX(-1);
+}
+.swiper-rtl .swiper-navigation__button-arorw.is--prev,
+[dir='rtl'] .swiper-navigation__button-arorw.is--prev {
+  transform: scaleX(-1) rotate(-180deg);
+}
 .swiper-navigation__button {
   transition: opacity 0.2s ease;
 }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper LTR Test</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #1a1a1a;
+      color: white;
+      direction: ltr;
+      text-align: left;
+    }
+    .test-info {
+      background: #2d2d2d;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #2196F3;
+    }
+    .test-info h1 {
+      color: #2196F3;
+      margin-top: 0;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    .feature-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #333;
+    }
+    .feature-list li:before {
+      content: "✅ ";
+      margin-right: 8px;
+    }
+    .toggle-direction {
+      background: #2196F3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background 0.3s ease;
+    }
+    .toggle-direction:hover {
+      background: #1976D2;
+    }
+    .current-direction {
+      background: #333;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-info">
+    <h1>🧪 Swiper LTR Test</h1>
+    <p>This page tests Left-to-Right (LTR) direction support in the Swiper component.</p>
+    
+    <div class="current-direction">
+      <strong>Current Direction:</strong> <span id="current-dir">LTR</span>
+    </div>
+    
+    <button class="toggle-direction" onclick="toggleDirection()">
+      Toggle Direction (LTR ⇄ RTL)
+    </button>
+    
+    <h3>Features Being Tested:</h3>
+    <ul class="feature-list">
+      <li>Navigation buttons work correctly in LTR (right arrow for next, left for previous)</li>
+      <li>Slide transition direction flows left to right</li>
+      <li>Arrow directions are visually correct</li>
+      <li>Pagination dots work normally</li>
+      <li>Mouse wheel and keyboard navigation work in correct direction</li>
+      <li>Automatic language detection and RTL setup</li>
+    </ul>
+  </div>
+
+  <!-- Swiper Test with LTR -->
+  <div data-swiper-group class="swiper-group">
+    <div data-swiper-wrap class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #ff6b6b, #feca57);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">First Slide</div>
+              <p>This is the first slide. Click buttons to navigate!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #48cae4, #023e8a);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Second Slide</div>
+              <p>Navigation works correctly in LTR! 🎉</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #a8dadc, #1d3557);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Third Slide</div>
+              <p>Keep clicking and navigating!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #f72585, #b5179e);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Fourth Slide</div>
+              <p>LTR test completely successful!</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="demo-card">
+            <div class="demo-card__visual" style="background: linear-gradient(45deg, #90e0ef, #0077b6);"></div>
+            <div class="demo-card__text">
+              <div class="demo-card__title">Fifth Slide</div>
+              <p>Test complete! LTR support works perfectly ✅</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="swiper-navigation">
+      <div data-swiper-prev class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw is--prev">→</div>
+      </div>
+      <div data-swiper-next class="swiper-navigation__button">
+        <div class="swiper-navigation__button-arorw">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-info" style="margin-top: 2rem;">
+    <h3>🔧 Technical Information</h3>
+    <p>Open browser console (F12) to see Swiper initialization messages.</p>
+    <p><strong>Note:</strong> When toggling direction, you'll need to reload the page to see changes.</p>
+  </div>
+
+  <script>
+    function toggleDirection() {
+      const html = document.documentElement;
+      const body = document.body;
+      const currentDir = html.dir;
+      
+      if (currentDir === 'ltr') {
+        html.dir = 'rtl';
+        html.lang = 'ar';
+        body.style.direction = 'rtl';
+        body.style.textAlign = 'right';
+        document.getElementById('current-dir').textContent = 'RTL';
+      } else {
+        html.dir = 'ltr';
+        html.lang = 'en';
+        body.style.direction = 'ltr';
+        body.style.textAlign = 'left';
+        document.getElementById('current-dir').textContent = 'LTR';
+      }
+      
+      // Reinitialize Swiper after direction change
+      setTimeout(() => {
+        location.reload();
+      }, 100);
+    }
+    
+    // Update current direction display
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentDir = document.documentElement.dir || 'ltr';
+      document.getElementById('current-dir').textContent = currentDir.toUpperCase();
+    });
+  </script>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

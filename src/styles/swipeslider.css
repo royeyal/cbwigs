@@ -18,6 +18,30 @@ body {
   margin-right: calc(-1 * var(--gap));
 }
 
+/* RTL Support */
+[dir='rtl'] .swiper-slide,
+.swiper-rtl .swiper-slide {
+  padding-right: 0;
+  padding-left: var(--gap);
+}
+
+[dir='rtl'] .swiper-slide:last-of-type,
+.swiper-rtl .swiper-slide:last-of-type {
+  margin-right: 0;
+  margin-left: calc(-1 * var(--gap));
+}
+
+/* RTL Navigation buttons - mirror the arrow directions */
+[dir='rtl'] .swiper-navigation__button-arorw,
+.swiper-rtl .swiper-navigation__button-arorw {
+  transform: scaleX(-1);
+}
+
+[dir='rtl'] .swiper-navigation__button-arorw.is--prev,
+.swiper-rtl .swiper-navigation__button-arorw.is--prev {
+  transform: scaleX(-1) rotate(-180deg);
+}
+
 .swiper-navigation__button {
   transition: opacity 0.2s ease;
 }

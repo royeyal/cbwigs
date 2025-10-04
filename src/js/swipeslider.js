@@ -20,7 +20,34 @@ function initSwiperSlider() {
   initializeSwiperSliders(swiperSliderGroups);
 }
 
+// Function to detect RTL direction
+function isRTL() {
+  // Check document direction
+  const htmlDir = document.documentElement.dir || document.dir;
+  const bodyDir = document.body.dir;
+
+  // Check CSS direction property
+  const computedStyle = window.getComputedStyle(document.documentElement);
+  const cssDirection = computedStyle.direction;
+
+  // Priority: explicit dir attribute > CSS direction > default (LTR)
+  if (htmlDir) return htmlDir.toLowerCase() === 'rtl';
+  if (bodyDir) return bodyDir.toLowerCase() === 'rtl';
+  if (cssDirection) return cssDirection.toLowerCase() === 'rtl';
+
+  return false;
+}
+
 function initializeSwiperSliders(swiperSliderGroups) {
+  // Detect RTL once for all swipers
+  const isRTLLayout = isRTL();
+
+  if (isRTLLayout) {
+    console.info(
+      'RTL layout detected - configuring Swiper for right-to-left direction'
+    );
+  }
+
   swiperSliderGroups.forEach(swiperGroup => {
     const swiperSliderWrap = swiperGroup.querySelector('[data-swiper-wrap]');
     if (!swiperSliderWrap) {
@@ -35,6 +62,10 @@ function initializeSwiperSliders(swiperSliderGroups) {
     const swiper = new Swiper(swiperSliderWrap, {
       // Register modules
       modules: [Navigation, Pagination],
+
+      // RTL configuration
+      direction: 'horizontal',
+      rtl: isRTLLayout,
 
       slidesPerView: 1.25,
       spaceBetween: 20,
@@ -56,8 +87,9 @@ function initializeSwiperSliders(swiperSliderGroups) {
       navigation:
         prevButton && nextButton
           ? {
-              nextEl: nextButton,
-              prevEl: prevButton
+              // In RTL, swap the button assignments to maintain intuitive navigation
+              nextEl: isRTLLayout ? prevButton : nextButton,
+              prevEl: isRTLLayout ? nextButton : prevButton
             }
           : false,
       pagination: pagination
