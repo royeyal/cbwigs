@@ -72,7 +72,7 @@ function initializeSwiperSliders(swiperSliderGroups) {
 
       // Default amount of slides per view
       slidesPerView: 1.25,
-      spaceBetween: 0, // Let CSS handle spacing via padding
+      spaceBetween: 20, // Swiper adds hardcoded margin-right (LTR) or margin-left (RTL)
       speed: 600,
       mousewheel: true,
       grabCursor: true,
@@ -80,12 +80,12 @@ function initializeSwiperSliders(swiperSliderGroups) {
         // when window width is >= 480px
         480: {
           slidesPerView: 1.8,
-          spaceBetween: 0 // Let CSS handle spacing
+          spaceBetween: 24 // Larger spacing for tablet
         },
         // when window width is >= 992px
         992: {
-          slidesPerView: 3.5,
-          spaceBetween: 0 // Let CSS handle spacing
+          slidesPerView: 4,
+          spaceBetween: 32 // Larger spacing for desktop
         }
       },
       navigation:

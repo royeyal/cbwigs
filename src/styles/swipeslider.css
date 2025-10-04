@@ -62,28 +62,8 @@ body {
   --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
 }
 
-.swiper-slide {
-  --gap: 1.25em;
-
-  padding-right: var(--gap);
-}
-
-.swiper-slide:last-of-type {
-  margin-right: calc(-1 * var(--gap));
-}
-
-/* RTL Support */
-[dir='rtl'] .swiper-slide,
-.swiper-rtl .swiper-slide {
-  padding-right: 0;
-  padding-left: var(--gap);
-}
-
-[dir='rtl'] .swiper-slide:last-of-type,
-.swiper-rtl .swiper-slide:last-of-type {
-  margin-right: 0;
-  margin-left: calc(-1 * var(--gap));
-}
+/* Swiper slides spacing is now handled by spaceBetween (hardcoded margins)
+ * Swiper will automatically add margin-right (LTR) or margin-left (RTL) based on spaceBetween value */
 
 .swiper-group {
   position: relative;
@@ -116,10 +96,10 @@ body {
   align-items: center;
   display: flex;
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  transform: translate(0, 150%);
+  transform: translate(0, -150%);
 }
 
 .swiper-navigation__button {
