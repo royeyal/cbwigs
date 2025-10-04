@@ -34,6 +34,74 @@ body {
   margin-left: calc(-1 * var(--gap));
 }
 
+.swiper-group {
+  width: 100%;
+  position: relative;
+}
+
+.swiper {
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  display: flex;
+  overflow: visible !important;
+}
+
+.swiper-wrapper {
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  display: flex;
+}
+
+.swiper-navigation {
+  z-index: 2;
+  pointer-events: none;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translate(0, 150%);
+}
+
+.swiper-navigation__button {
+  z-index: 1;
+  aspect-ratio: 1;
+  pointer-events: auto;
+  color: #000;
+  background-color: #fff;
+  border-radius: 100em;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  padding: 1em;
+  display: flex;
+  position: relative;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.swiper-navigation__button-arorw {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.swiper-navigation__button-arorw.is--prev {
+  transform: rotate(-180deg);
+}
+
 /* RTL Navigation buttons - mirror the arrow directions */
 [dir='rtl'] .swiper-navigation__button-arorw,
 .swiper-rtl .swiper-navigation__button-arorw {
@@ -43,13 +111,4 @@ body {
 [dir='rtl'] .swiper-navigation__button-arorw.is--prev,
 .swiper-rtl .swiper-navigation__button-arorw.is--prev {
   transform: scaleX(-1) rotate(-180deg);
-}
-
-.swiper-navigation__button {
-  transition: opacity 0.2s ease;
-}
-
-.swiper-button-disabled {
-  opacity: 0;
-  pointer-events: none;
 }
