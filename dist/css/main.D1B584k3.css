@@ -554,51 +554,6 @@ html {
   .swiper-navigation-icon {
   transform: rotate(90deg);
 }
-.swiper-scrollbar {
-  background: var(--swiper-scrollbar-bg-color, rgba(0, 0, 0, 0.1));
-  border-radius: var(--swiper-scrollbar-border-radius, 10px);
-  position: relative;
-  touch-action: none;
-}
-.swiper-scrollbar.swiper-scrollbar-disabled,
-.swiper-scrollbar-disabled > .swiper-scrollbar {
-  display: none !important;
-}
-.swiper-scrollbar.swiper-scrollbar-horizontal,
-.swiper-horizontal > .swiper-scrollbar {
-  bottom: var(--swiper-scrollbar-bottom, 4px);
-  height: var(--swiper-scrollbar-size, 4px);
-  left: var(--swiper-scrollbar-sides-offset, 1%);
-  position: absolute;
-  top: var(--swiper-scrollbar-top, auto);
-  width: calc(100% - var(--swiper-scrollbar-sides-offset, 1%) * 2);
-  z-index: 50;
-}
-.swiper-scrollbar.swiper-scrollbar-vertical,
-.swiper-vertical > .swiper-scrollbar {
-  height: calc(100% - var(--swiper-scrollbar-sides-offset, 1%) * 2);
-  left: var(--swiper-scrollbar-left, auto);
-  position: absolute;
-  right: var(--swiper-scrollbar-right, 4px);
-  top: var(--swiper-scrollbar-sides-offset, 1%);
-  width: var(--swiper-scrollbar-size, 4px);
-  z-index: 50;
-}
-.swiper-scrollbar-drag {
-  background: var(--swiper-scrollbar-drag-bg-color, rgba(0, 0, 0, 0.5));
-  border-radius: var(--swiper-scrollbar-border-radius, 10px);
-  height: 100%;
-  left: 0;
-  position: relative;
-  top: 0;
-  width: 100%;
-}
-.swiper-scrollbar-cursor-drag {
-  cursor: move;
-}
-.swiper-scrollbar-lock {
-  display: none;
-}
 .padding-global {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -641,15 +596,6 @@ html {
   position: relative;
 }
 body {
-  --swiper-scrollbar-border-radius: 10px;
-  --swiper-scrollbar-top: auto;
-  --swiper-scrollbar-bottom: 4px;
-  --swiper-scrollbar-left: auto;
-  --swiper-scrollbar-right: 4px;
-  --swiper-scrollbar-sides-offset: 1%;
-  --swiper-scrollbar-bg-color: rgba(0, 0, 0, 0.1);
-  --swiper-scrollbar-drag-bg-color: rgba(0, 0, 0, 0.5);
-  --swiper-scrollbar-size: 4px;
   --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
 }
 .swiper-group {

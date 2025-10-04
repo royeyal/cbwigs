@@ -50,15 +50,6 @@
 
 /* Swiper Variables */
 body {
-  --swiper-scrollbar-border-radius: 10px;
-  --swiper-scrollbar-top: auto;
-  --swiper-scrollbar-bottom: 4px;
-  --swiper-scrollbar-left: auto;
-  --swiper-scrollbar-right: 4px;
-  --swiper-scrollbar-sides-offset: 1%;
-  --swiper-scrollbar-bg-color: rgb(0 0 0 / 10%);
-  --swiper-scrollbar-drag-bg-color: rgb(0 0 0 / 50%);
-  --swiper-scrollbar-size: 4px;
   --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
 }
 
