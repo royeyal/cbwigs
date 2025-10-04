@@ -2,14 +2,6 @@
 import '../styles/swipeslider.css';
 
 function initSwiperSlider() {
-  // Check if Swiper is available
-  if (typeof Swiper === 'undefined') {
-    console.warn(
-      'Swiper JS library not found. Make sure to load the Swiper library before initializing sliders.'
-    );
-    return;
-  }
-
   const swiperSliderGroups = document.querySelectorAll('[data-swiper-group]');
 
   if (swiperSliderGroups.length === 0) {
@@ -17,6 +9,41 @@ function initSwiperSlider() {
     return;
   }
 
+  // Check if Swiper is available, if not, wait for it to load
+  if (typeof Swiper === 'undefined') {
+    console.info(
+      'Swiper library not yet loaded. Waiting for it to be available...'
+    );
+
+    // Wait for Swiper to be loaded (with timeout)
+    let attempts = 0;
+    const maxAttempts = 50; // 5 seconds max wait time
+
+    const waitForSwiper = setInterval(() => {
+      attempts++;
+
+      if (typeof Swiper !== 'undefined') {
+        clearInterval(waitForSwiper);
+        console.info(
+          'Swiper library loaded successfully. Initializing sliders...'
+        );
+        initializeSwiperSliders(swiperSliderGroups);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(waitForSwiper);
+        console.warn(
+          'Swiper JS library not found after waiting. Make sure to load the Swiper library before initializing sliders.'
+        );
+      }
+    }, 100); // Check every 100ms
+
+    return;
+  }
+
+  // Swiper is already available, initialize immediately
+  initializeSwiperSliders(swiperSliderGroups);
+}
+
+function initializeSwiperSliders(swiperSliderGroups) {
   swiperSliderGroups.forEach(swiperGroup => {
     const swiperSliderWrap = swiperGroup.querySelector('[data-swiper-wrap]');
     if (!swiperSliderWrap) {

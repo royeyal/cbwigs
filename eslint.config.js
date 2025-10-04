@@ -22,7 +22,9 @@ export default [
         getComputedStyle: 'readonly',
         innerWidth: 'readonly',
         clearTimeout: 'readonly',
-        setTimeout: 'readonly'
+        setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly'
       }
     },
     rules: {
