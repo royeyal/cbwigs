@@ -68,7 +68,7 @@ function initializeSwiperSliders(swiperSliderGroups) {
       rtl: isRTLLayout,
 
       slidesPerView: 1.25,
-      spaceBetween: 20,
+      spaceBetween: 0, // Let CSS handle spacing via padding
       speed: 600,
       mousewheel: true,
       grabCursor: true,
@@ -76,12 +76,12 @@ function initializeSwiperSliders(swiperSliderGroups) {
         // when window width is >= 480px
         480: {
           slidesPerView: 1.8,
-          spaceBetween: 20
+          spaceBetween: 0 // Let CSS handle spacing
         },
         // when window width is >= 992px
         992: {
           slidesPerView: 3.5,
-          spaceBetween: 20
+          spaceBetween: 0 // Let CSS handle spacing
         }
       },
       navigation:
