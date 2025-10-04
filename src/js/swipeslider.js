@@ -1,4 +1,10 @@
-// Import swiper styles
+// Import Swiper library and styles
+import { Swiper } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// Import custom swiper styles
 import '../styles/swipeslider.css';
 
 function initSwiperSlider() {
@@ -9,37 +15,7 @@ function initSwiperSlider() {
     return;
   }
 
-  // Check if Swiper is available, if not, wait for it to load
-  if (typeof Swiper === 'undefined') {
-    console.info(
-      'Swiper library not yet loaded. Waiting for it to be available...'
-    );
-
-    // Wait for Swiper to be loaded (with timeout)
-    let attempts = 0;
-    const maxAttempts = 50; // 5 seconds max wait time
-
-    const waitForSwiper = setInterval(() => {
-      attempts++;
-
-      if (typeof Swiper !== 'undefined') {
-        clearInterval(waitForSwiper);
-        console.info(
-          'Swiper library loaded successfully. Initializing sliders...'
-        );
-        initializeSwiperSliders(swiperSliderGroups);
-      } else if (attempts >= maxAttempts) {
-        clearInterval(waitForSwiper);
-        console.warn(
-          'Swiper JS library not found after waiting. Make sure to load the Swiper library before initializing sliders.'
-        );
-      }
-    }, 100); // Check every 100ms
-
-    return;
-  }
-
-  // Swiper is already available, initialize immediately
+  // Swiper is now bundled and available, initialize immediately
   initializeSwiperSliders(swiperSliderGroups);
 }
 
