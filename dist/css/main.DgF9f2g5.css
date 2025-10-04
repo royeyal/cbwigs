@@ -604,6 +604,7 @@ body {
 }
 .swiper {
   overflow: visible !important;
+  width: 100%;
 }
 .swiper,
 .swiper-wrapper {
@@ -611,7 +612,17 @@ body {
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
-  width: 100%;
+}
+.swiper-wrapper {
+  box-sizing: content-box;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  transition-timing-function: var(
+    --swiper-wrapper-transition-timing-function,
+    initial
+  );
+  z-index: 1;
 }
 .swiper-navigation {
   align-items: center;
