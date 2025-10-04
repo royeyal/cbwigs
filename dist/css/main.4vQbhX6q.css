@@ -597,10 +597,57 @@ html {
 }
 body {
   --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
+  --swiper-fade-start: 0%;
+  --swiper-fade-fade-in: 8%;
+  --swiper-fade-fade-out: 92%;
+  --swiper-fade-end: 100%;
 }
 .swiper-group {
+  mask-image: linear-gradient(
+    90deg,
+    transparent var(--swiper-fade-start),
+    #000 var(--swiper-fade-fade-in),
+    #000 var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent var(--swiper-fade-start),
+    #000 var(--swiper-fade-fade-in),
+    #000 var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
   overflow: hidden;
   position: relative;
+}
+.swiper-group--no-fade {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+.swiper-group--subtle-fade {
+  --swiper-fade-fade-in: 5%;
+  --swiper-fade-fade-out: 95%;
+}
+.swiper-group--strong-fade {
+  --swiper-fade-fade-in: 12%;
+  --swiper-fade-fade-out: 88%;
+}
+.swiper-rtl .swiper-group,
+[dir='rtl'] .swiper-group {
+  mask-image: linear-gradient(
+    270deg,
+    transparent var(--swiper-fade-start),
+    #000 var(--swiper-fade-fade-in),
+    #000 var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+  -webkit-mask-image: linear-gradient(
+    270deg,
+    transparent var(--swiper-fade-start),
+    #000 var(--swiper-fade-fade-in),
+    #000 var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
 }
 .swiper {
   overflow: visible !important;

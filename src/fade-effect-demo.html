@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Fade Effect Demo</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f8f9fa;
+      color: #333;
+    }
+    
+    .demo-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      border-radius: 12px;
+    }
+    
+    .demo-header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    
+    .demo-header p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    
+    .demo-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+    
+    .demo-section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 0.5rem;
+    }
+    
+    .demo-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #e9ecef;
+    }
+    
+    .demo-card__visual {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+    }
+    
+    .demo-card__text {
+      padding: 1rem;
+      flex-grow: 1;
+    }
+    
+    .demo-card__title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+      font-size: 0.9rem;
+    }
+    
+    .fade-demo {
+      margin: 2rem 0;
+    }
+    
+    .fade-label {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #e9ecef;
+      border-radius: 6px;
+      color: #495057;
+    }
+    
+    .fade-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .fade-toggle {
+      padding: 0.5rem 1rem;
+      border: 2px solid #dee2e6;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .fade-toggle:hover {
+      border-color: #007bff;
+      background: #f8f9fa;
+    }
+    
+    .fade-toggle.active {
+      background: #007bff;
+      border-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>✨ Fade Effect UX Demo</h1>
+    <p>Visual cues that indicate more slides are available for better user experience</p>
+  </div>
+
+  <div class="demo-section">
+    <h2>🎯 UX Best Practice: Edge Fade Effects</h2>
+    <p>The fade effect on the edges subtly communicates to users that there's more content to explore beyond the visible area. This is a proven UX pattern used by major platforms like Netflix, Spotify, and modern e-commerce sites.</p>
+    
+    <h3>Benefits:</h3>
+    <ul>
+      <li><strong>Visual Affordance:</strong> Users immediately understand there's more content</li>
+      <li><strong>Reduced Confusion:</strong> No question about whether content is cut off</li>
+      <li><strong>Improved Engagement:</strong> Encourages exploration and interaction</li>
+      <li><strong>Professional Polish:</strong> Adds sophisticated visual feedback</li>
+    </ul>
+  </div>
+
+  <!-- Interactive Demo Controls -->
+  <div class="demo-section">
+    <h2>🎛️ Interactive Demo Controls</h2>
+    <p>Try different fade intensities to see the effect:</p>
+    
+    <div class="fade-controls">
+      <button class="fade-toggle active" data-fade="default">Default Fade (8%)</button>
+      <button class="fade-toggle" data-fade="subtle">Subtle Fade (5%)</button>
+      <button class="fade-toggle" data-fade="strong">Strong Fade (12%)</button>
+      <button class="fade-toggle" data-fade="none">No Fade</button>
+    </div>
+  </div>
+
+  <!-- Default Fade Effect -->
+  <div class="fade-demo">
+    <div class="fade-label">🎨 Current Effect: <span id="current-effect">Default Fade (8%)</span></div>
+    
+    <section class="swiper-section">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div data-swiper-group class="swiper-group" id="demo-swiper">
+              <div data-swiper-wrap class="swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);">01</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">Fade Effect Demo</div>
+                        <p>Notice the subtle fade on the edges indicating more slides.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #A8E6CF, #3D5A80);">02</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">Visual Affordance</div>
+                        <p>The fade creates visual cues for better UX.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #FFD93D, #FF6B6B);">03</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">Professional Polish</div>
+                        <p>Used by Netflix, Spotify, and major platforms.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #A8E6CF, #88D8C0);">04</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">Improved Engagement</div>
+                        <p>Encourages users to explore more content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #FAD0C4, #FFD1FF);">05</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">Customizable</div>
+                        <p>Easy to adjust intensity with CSS variables.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="demo-card">
+                      <div class="demo-card__visual" style="background: linear-gradient(135deg, #F093FB, #F5576C);">06</div>
+                      <div class="demo-card__text">
+                        <div class="demo-card__title">RTL Support</div>
+                        <p>Works perfectly in right-to-left layouts too.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="swiper-navigation">
+                <button data-swiper-prev class="swiper-navigation__button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw is--prev">
+                    <path d="M14 19L21 12L14 5" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                    <path d="M21 12H2" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                  </svg>
+                </button>
+                <div class="swiper-pagination"></div>
+                <button data-swiper-next class="swiper-navigation__button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw">
+                    <path d="M14 19L21 12L14 5" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                    <path d="M21 12H2" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="demo-section">
+    <h2>🎨 Implementation Details</h2>
+    
+    <h3>CSS Mask Implementation:</h3>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.9rem;"><code>.swiper-group {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}</code></pre>
+
+    <h3>Customization Variables:</h3>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.9rem;"><code>body {
+  --swiper-fade-start: 0%;
+  --swiper-fade-fade-in: 8%;
+  --swiper-fade-fade-out: 92%;
+  --swiper-fade-end: 100%;
+}</code></pre>
+
+    <h3>Usage Classes:</h3>
+    <ul style="font-family: monospace; font-size: 0.9rem;">
+      <li><code>.swiper-group</code> - Default fade (8%)</li>
+      <li><code>.swiper-group--subtle-fade</code> - Subtle fade (5%)</li>
+      <li><code>.swiper-group--strong-fade</code> - Strong fade (12%)</li>
+      <li><code>.swiper-group--no-fade</code> - Disable fade effect</li>
+    </ul>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+  <script>
+    // Interactive demo controls
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggles = document.querySelectorAll('.fade-toggle');
+      const demoSwiper = document.getElementById('demo-swiper');
+      const currentEffect = document.getElementById('current-effect');
+      
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          // Remove active class from all toggles
+          toggles.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked toggle
+          toggle.classList.add('active');
+          
+          // Remove all fade classes
+          demoSwiper.classList.remove('swiper-group--no-fade', 'swiper-group--subtle-fade', 'swiper-group--strong-fade');
+          
+          const fadeType = toggle.dataset.fade;
+          let effectText = '';
+          
+          switch(fadeType) {
+            case 'none':
+              demoSwiper.classList.add('swiper-group--no-fade');
+              effectText = 'No Fade';
+              break;
+            case 'subtle':
+              demoSwiper.classList.add('swiper-group--subtle-fade');
+              effectText = 'Subtle Fade (5%)';
+              break;
+            case 'strong':
+              demoSwiper.classList.add('swiper-group--strong-fade');
+              effectText = 'Strong Fade (12%)';
+              break;
+            default:
+              effectText = 'Default Fade (8%)';
+              break;
+          }
+          
+          currentEffect.textContent = effectText;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

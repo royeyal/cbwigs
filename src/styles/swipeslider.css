@@ -51,6 +51,12 @@
 /* Swiper Variables */
 body {
   --swiper-wrapper-transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
+
+  /* UX Fade Effect Variables */
+  --swiper-fade-start: 0%;
+  --swiper-fade-fade-in: 8%;
+  --swiper-fade-fade-out: 92%;
+  --swiper-fade-end: 100%;
 }
 
 /* Swiper slides spacing is now handled by spaceBetween (hardcoded margins)
@@ -60,7 +66,58 @@ body {
   position: relative;
   overflow: hidden; /* Hide slides that extend beyond container */
 
+  /* UX Enhancement: Fade edges to indicate more slides are available */
+  mask-image: linear-gradient(
+    90deg,
+    transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+
   /* Remove width: 100% to allow container control */
+}
+
+/* Fade Effect Variations */
+.swiper-group--no-fade {
+  mask-image: none;
+  mask-image: none;
+}
+
+.swiper-group--subtle-fade {
+  --swiper-fade-fade-in: 5%;
+  --swiper-fade-fade-out: 95%;
+}
+
+.swiper-group--strong-fade {
+  --swiper-fade-fade-in: 12%;
+  --swiper-fade-fade-out: 88%;
+}
+
+/* RTL Support for Fade Effect */
+[dir='rtl'] .swiper-group,
+.swiper-rtl .swiper-group {
+  mask-image: linear-gradient(
+    270deg,
+    /* Reversed direction for RTL */ transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+  mask-image: linear-gradient(
+    270deg,
+    transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
 }
 
 .swiper {
