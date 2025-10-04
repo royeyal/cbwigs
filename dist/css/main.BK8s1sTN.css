@@ -647,7 +647,7 @@ body {
   align-items: center;
   bottom: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   left: 0;
   pointer-events: none;
   position: absolute;
