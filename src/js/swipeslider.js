@@ -67,6 +67,10 @@ function initializeSwiperSliders(swiperSliderGroups) {
       direction: 'horizontal',
       rtl: isRTLLayout,
 
+      // Infinite loop
+      loop: true,
+
+      // Default amount of slides per view
       slidesPerView: 1.25,
       spaceBetween: 0, // Let CSS handle spacing via padding
       speed: 600,
