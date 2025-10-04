@@ -78,12 +78,12 @@ function initializeSwiperSliders(swiperSliderGroups) {
         // when window width is >= 480px
         480: {
           slidesPerView: 1.8,
-          spaceBetween: 24 // Larger spacing for tablet
+          spaceBetween: 4 // Larger spacing for tablet
         },
         // when window width is >= 992px
         992: {
           slidesPerView: 3.5,
-          spaceBetween: 32 // Larger spacing for desktop
+          spaceBetween: 8 // Larger spacing for desktop
         }
       },
       navigation:
