@@ -1,4 +1,6 @@
 [data-split='heading'] {
+  font-kerning: none;
+  text-rendering: optimizeSpeed;
   visibility: hidden;
 }
 .w-editor [data-split='heading'],

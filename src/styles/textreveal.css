@@ -5,6 +5,10 @@
 /* Initial hide to avoid FOUC */
 [data-split='heading'] {
   visibility: hidden;
+
+  /* Prevent character shift when splitting */
+  font-kerning: none;
+  text-rendering: optimizespeed;
 }
 
 /* For Webflow users only: */

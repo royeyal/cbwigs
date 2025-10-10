@@ -46,10 +46,12 @@ function initMaskTextScrollReveal() {
       }
 
       try {
-        const split = new SplitText(heading, {
+        // Use GSAP 3.13.0+ autoSplit with onRevert functionality
+        SplitText.create(heading, {
           type: 'lines,words',
           linesClass: 'line',
           wordsClass: 'word',
+          autoSplit: true,
           onSplit(self) {
             // Use the heading element from the outer scope instead of self.original
             const targetElement =
@@ -70,37 +72,42 @@ function initMaskTextScrollReveal() {
             } catch (error) {
               console.error('❌ Failed to set visibility:', error);
             }
-          }
-        });
 
-        // Add split-ready class after successful split
-        if (split.lines && split.lines.length > 0) {
-          heading.classList.add('split-ready');
-        }
+            // Add split-ready class after successful split
+            if (self.lines && self.lines.length > 0) {
+              heading.classList.add('split-ready');
+            }
 
-        // Set up scroll animation only if we have words to animate
-        if (split.words && split.words.length > 0) {
-          // Set initial state
-          gsap.set(split.words, {
-            yPercent: 100,
-            opacity: 0
-          });
+            // Return animation - it will be cleaned up and time-synced on each onSplit() call
+            if (self.words && self.words.length > 0) {
+              // Set initial state
+              gsap.set(self.words, {
+                yPercent: 100,
+                opacity: 0
+              });
 
-          // Create scroll trigger
-          ScrollTrigger.create({
-            trigger: heading,
-            start: 'top 80%',
-            onEnter: () => {
-              gsap.to(split.words, {
-                yPercent: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.08,
-                ease: 'power2.out'
+              // Create and return scroll-triggered animation
+              return ScrollTrigger.create({
+                trigger: heading,
+                start: 'top 80%',
+                onEnter: () => {
+                  gsap.to(self.words, {
+                    yPercent: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.08,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                      // Revert the element to its original (unsplit) state after animation
+                      // This helps with performance and accessibility
+                      self.revert();
+                    }
+                  });
+                }
               });
             }
-          });
-        }
+          }
+        });
       } catch (error) {
         console.error('❌ Error processing heading:', error);
       }
