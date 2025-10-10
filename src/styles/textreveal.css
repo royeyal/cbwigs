@@ -18,6 +18,7 @@
 /* When JS marks it ready, show it (force, if needed) */
 .split-ready[data-split='heading'] {
   visibility: visible !important;
+  overflow: visible;
 }
 
 /* Masking wrappers for smooth reveals */

@@ -1,9 +1,12 @@
 [data-split='heading'] {
   visibility: hidden;
 }
-.split-ready[data-split='heading'],
 .w-editor [data-split='heading'],
 .wf-design-mode [data-split='heading'] {
+  visibility: visible !important;
+}
+.split-ready[data-split='heading'] {
+  overflow: visible;
   visibility: visible !important;
 }
 [data-split='heading'] .line {
