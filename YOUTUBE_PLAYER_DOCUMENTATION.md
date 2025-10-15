@@ -65,13 +65,43 @@ Add the `data-youtube-short` attribute or `youtube-short` class:
 
 ## 🎯 Creating a Webflow Component
 
-### Step 1: Create the Base Structure
+### Step 1: Create and Style the Base Class in Webflow
 
+#### 1.1 Create the Div Block
 1. **Add a Div Block** to your Webflow canvas
 2. **Add a class**: `youtube-player`
-3. **Add a custom attribute**:
+
+#### 1.2 Style the `youtube-player` Class in Webflow Designer
+
+To make the player presentable in the Webflow Designer, add these styles:
+
+**Layout Settings:**
+- Position: `Relative`
+- Display: `Block`
+- Width: `100%` (or set a specific width like `800px` for testing)
+
+**Size Settings:**
+- Height: Auto (will be controlled by aspect-ratio)
+- Min Height: `300px` (prevents it from collapsing in the Designer)
+
+**Spacing:**
+- Padding: `0px` all sides
+- Margin: `0px` (or add margin as needed for your layout)
+
+**Style Settings:**
+- Background Color: `#000000` (black)
+- Border Radius: `12px`
+- Overflow: `Hidden`
+
+**Advanced Settings (Optional):**
+- Box Shadow: `0px 8px 32px rgba(0, 0, 0, 0.3)` (for elevation)
+
+#### 1.3 Add the Custom Attribute
+3. **Add a custom attribute** (in Element Settings):
    - Name: `data-youtube-id`
    - Value: `dQw4w9WgXcQ` (or any YouTube video ID for testing)
+
+**Important Note:** The aspect ratio is controlled by the CSS file, but you need to set a min-height in Webflow to make it visible in the Designer.
 
 ### Step 2: Configure for Regular Videos (16:9)
 
@@ -88,7 +118,13 @@ Div Block
 
 Add one of these:
 - **Option A**: Add attribute `data-youtube-short` (no value needed)
-- **Option B**: Add class `youtube-short`
+- **Option B**: Add combo class `youtube-short`
+
+**For YouTube Shorts, add these additional Webflow styles to the `youtube-short` combo class:**
+
+**Size Settings:**
+- Max Width: `400px`
+- Margin: `0px auto` (centers the player)
 
 **DIV Structure:**
 ```
@@ -96,6 +132,12 @@ Div Block
   └─ Class: youtube-player
   └─ Attribute: data-youtube-id = "VIDEO_ID"
   └─ Attribute: data-youtube-short (for Shorts)
+
+OR
+
+Div Block
+  └─ Class: youtube-player youtube-short
+  └─ Attribute: data-youtube-id = "VIDEO_ID"
 ```
 
 ### Step 4: Create a Webflow Component
@@ -162,6 +204,14 @@ The player shows an elegant placeholder in the Webflow Designer/Editor:
 
 This helps you visualize and design around the player without loading videos in the editor.
 
+**What you'll see in Webflow Designer:**
+- A black background box with rounded corners
+- The minimum height you set (e.g., 300px)
+- An elegant centered label overlay showing the player type
+- The label appears semi-transparent with a backdrop blur effect
+
+**The placeholder is automatically hidden on the published site**, and the actual YouTube player appears when visitors click the play button.
+
 ## 📱 Responsive Behavior
 
 ### Regular Videos (16:9)
@@ -214,15 +264,39 @@ window.youtubePlayer().destroyAllPlayers();
 
 ## 📋 Complete Webflow Setup Checklist
 
-- [ ] Copy CSS to Project Settings → Custom Code → Head Code
-- [ ] Copy JS to Project Settings → Custom Code → Footer Code
-- [ ] Create a Div Block with class `youtube-player`
-- [ ] Add attribute `data-youtube-id` with your video ID
-- [ ] For Shorts: Add attribute `data-youtube-short` or class `youtube-short`
-- [ ] Create a Webflow Component with `videoId` property
-- [ ] Bind component property to `data-youtube-id` attribute
-- [ ] Test in Preview mode (videos won't play in Designer)
+### Initial Setup
+- [ ] Copy CSS to Project Settings → Custom Code → Head Code (wrapped in `<style>` tags)
+- [ ] Copy JS to Project Settings → Custom Code → Footer Code (wrapped in `<script>` tags)
+
+### Creating the Player
+- [ ] Add a Div Block to your canvas
+- [ ] Add class `youtube-player`
+- [ ] Style the class in Webflow Designer:
+  - [ ] Position: Relative
+  - [ ] Width: 100%
+  - [ ] Min Height: 300px (or your preferred size)
+  - [ ] Background: #000000 (black)
+  - [ ] Border Radius: 12px
+  - [ ] Overflow: Hidden
+- [ ] Add custom attribute `data-youtube-id` with your video ID
+- [ ] For Shorts: Add attribute `data-youtube-short` OR combo class `youtube-short`
+  - [ ] If using Shorts, set Max Width: 400px and Margin: 0 auto
+
+### Component Creation (Optional but Recommended)
+- [ ] Select the styled `youtube-player` div
+- [ ] Right-click → Create Component
+- [ ] Name it "YouTube Player" or "YouTube Short"
+- [ ] Add Component Property:
+  - [ ] Name: `videoId`
+  - [ ] Type: Text
+  - [ ] Bind to: `data-youtube-id` attribute
+
+### Testing
+- [ ] Verify placeholder appears in Webflow Designer
+- [ ] Test in Preview mode (videos won't play in Designer, only in Preview/Published)
 - [ ] Publish and test on live site
+- [ ] Check accessibility with keyboard navigation
+- [ ] Test on mobile devices
 
 ## 🎯 Example Use Cases
 
@@ -278,15 +352,20 @@ Add custom CSS:
 
 ### Placeholder not showing in Webflow Designer?
 
-1. Make sure CSS is in the **Head Code** section
-2. Check that the `youtube-player` class is applied
-3. Refresh the Webflow Designer
+1. Make sure CSS is in the **Head Code** section (wrapped in `<style>` tags)
+2. Check that the `youtube-player` class is applied correctly
+3. Verify the div has a **min-height** set in Webflow (e.g., 300px)
+4. Ensure **background color** is set to black (#000000)
+5. Refresh the Webflow Designer (Cmd/Ctrl + R)
+6. Try clearing your browser cache
 
 ### Play button not centered?
 
-1. Ensure the container has `position: relative`
-2. Check for conflicting Webflow styles
-3. Try adding `!important` to the button positioning
+1. Ensure the container has `position: relative` set in Webflow
+2. Check for conflicting Webflow styles (remove any flexbox or grid settings)
+3. Verify the `youtube-player` class doesn't have any alignment overrides
+4. Make sure **overflow** is set to `hidden`
+5. If still not working, try adding `!important` to the button positioning in the custom CSS
 
 ### YouTube API not loading?
 
