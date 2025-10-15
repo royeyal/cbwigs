@@ -87,21 +87,21 @@
   --slider-gap: 1.5em;
   --slider-fade-color: hsla(0, 0%, 100%, 0.8);
 }
-@media screen and (width <= 991px) {
+@media screen and (max-width: 991px) {
   [data-gsap-slider-init] {
     --slider-status: on;
     --slider-spv: 2.25;
     --slider-gap: 1.5em;
   }
 }
-@media screen and (width <= 767px) {
+@media screen and (max-width: 767px) {
   [data-gsap-slider-init] {
     --slider-status: on;
     --slider-spv: 1.15;
     --slider-gap: 1em;
   }
 }
-@media screen and (width <= 480px) {
+@media screen and (max-width: 480px) {
   [data-gsap-slider-init] {
     --slider-status: on;
     --slider-spv: 1;
@@ -257,7 +257,7 @@
   width: 100%;
 }
 .youtube-placeholder:focus-visible {
-  outline: 3px solid rgba(102, 126, 234, 0.8);
+  outline: 3px solid rgba(107, 98, 90, 0.8);
   outline-offset: 2px;
 }
 .youtube-placeholder.youtube-loading {
@@ -285,13 +285,13 @@
   align-items: center;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  background: #667eea33;
+  background: #3a353040;
   border: none;
   border-radius: 50%;
   box-shadow:
     0 4px 6px #0000001a,
     0 8px 16px #0000001a,
-    inset 0 1px #fff3;
+    inset 0 1px #f3eee733;
   cursor: pointer;
   display: flex;
   height: 80px;
@@ -303,7 +303,7 @@
   z-index: 2;
 }
 .youtube-play-button:before {
-  background: linear-gradient(135deg, #667eea26, #667eea0d);
+  background: linear-gradient(135deg, #6b625a26, #6b625a0d);
   border-radius: 50%;
   content: '';
   inset: -4px;
@@ -317,18 +317,19 @@
 }
 .youtube-placeholder:focus-visible .youtube-play-button,
 .youtube-placeholder:hover .youtube-play-button {
-  background: #667eea4d;
+  background: #4a454059;
   box-shadow:
     0 6px 12px #00000026,
     0 12px 24px #00000026,
-    inset 0 1px #ffffff4d;
+    inset 0 1px #f3eee74d;
   transform: scale(1.15);
 }
 .youtube-placeholder:active .youtube-play-button {
+  background: #2e292566;
   transform: scale(1.08);
 }
 .youtube-play-icon {
-  color: #667eea;
+  color: #3a3530;
   filter: drop-shadow(0 2px 4px rgb(0 0 0/20%));
   height: 48px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -336,9 +337,12 @@
 }
 .youtube-placeholder:focus-visible .youtube-play-icon,
 .youtube-placeholder:hover .youtube-play-icon {
-  color: #764ba2;
+  color: #4a4540;
   filter: drop-shadow(0 4px 8px rgb(0 0 0/30%));
   transform: scale(1.05);
+}
+.youtube-placeholder:active .youtube-play-icon {
+  color: #2e2925;
 }
 .youtube-iframe-container {
   height: 100%;
@@ -403,7 +407,7 @@
   opacity: 0.7;
   pointer-events: none;
 }
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .youtube-play-button {
     height: 64px;
     width: 64px;
@@ -416,7 +420,7 @@
     border-radius: 8px;
   }
 }
-@media (width <= 480px) {
+@media (max-width: 480px) {
   .youtube-play-button {
     height: 56px;
     width: 56px;
@@ -450,20 +454,24 @@
 }
 @media (prefers-contrast: high) {
   .youtube-play-button {
-    background: #667eea66;
-    border: 2px solid #667eea;
+    background: #3a353080;
+    border: 2px solid #3a3530;
   }
   .youtube-placeholder:focus-visible .youtube-play-button,
   .youtube-placeholder:hover .youtube-play-button {
-    background: #667eea99;
-    border-color: #764ba2;
+    background: #4a4540b3;
+    border-color: #4a4540;
   }
   .youtube-play-icon {
-    color: #667eea;
+    color: #f4efe8;
   }
   .youtube-placeholder:focus-visible .youtube-play-icon,
   .youtube-placeholder:hover .youtube-play-icon {
-    color: #764ba2;
+    color: #f4efe8;
+  }
+  .youtube-placeholder:focus-visible {
+    outline: 3px solid #6b625a;
+    outline-offset: 3px;
   }
 }
 @keyframes youtube-pulse {
@@ -814,13 +822,13 @@ html {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
-@media screen and (width >= 478px) {
+@media screen and (min-width: 478px) {
   .padding-global {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
-@media screen and (width >= 768px) {
+@media screen and (min-width: 768px) {
   .padding-global {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -836,13 +844,13 @@ html {
   padding-bottom: 5rem;
   padding-top: 5rem;
 }
-@media screen and (width >= 768px) {
+@media screen and (min-width: 768px) {
   .padding-section-large {
     padding-bottom: 7rem;
     padding-top: 7rem;
   }
 }
-@media screen and (width >= 992px) {
+@media screen and (min-width: 992px) {
   .padding-section-large {
     padding-bottom: 9rem;
     padding-top: 9rem;

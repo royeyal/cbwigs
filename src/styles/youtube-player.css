@@ -41,7 +41,7 @@
 
 /* Focus state for accessibility on placeholder */
 .youtube-placeholder:focus-visible {
-  outline: 3px solid rgb(102 126 234 / 80%);
+  outline: 3px solid rgb(107 98 90 / 80%); /* Brand focus-ring */
   outline-offset: 2px;
 }
 
@@ -77,7 +77,7 @@
   height: 80px;
   border: none;
   border-radius: 50%;
-  background: rgb(102 126 234 / 20%);
+  background: rgb(58 53 48 / 25%); /* Brand accent-600 with opacity */
   backdrop-filter: blur(20px);
   cursor: pointer;
   display: flex;
@@ -87,7 +87,8 @@
   box-shadow:
     0 4px 6px rgb(0 0 0 / 10%),
     0 8px 16px rgb(0 0 0 / 10%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
+    inset 0 1px 0 rgb(244 239 232 / 20%); /* text-on-dark for highlight */
+
   pointer-events: none;
 }
 
@@ -99,8 +100,8 @@
   border-radius: 50%;
   background: linear-gradient(
     135deg,
-    rgb(102 126 234 / 15%),
-    rgb(102 126 234 / 5%)
+    rgb(107 98 90 / 15%),
+    /* focus-ring */ rgb(107 98 90 / 5%)
   );
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -115,32 +116,37 @@
 .youtube-placeholder:hover .youtube-play-button,
 .youtube-placeholder:focus-visible .youtube-play-button {
   transform: scale(1.15);
-  background: rgb(102 126 234 / 30%);
+  background: rgb(74 69 64 / 35%); /* Brand accent-500-hover with opacity */
   box-shadow:
     0 6px 12px rgb(0 0 0 / 15%),
     0 12px 24px rgb(0 0 0 / 15%),
-    inset 0 1px 0 rgb(255 255 255 / 30%);
+    inset 0 1px 0 rgb(244 239 232 / 30%);
 }
 
 /* Play button active state */
 .youtube-placeholder:active .youtube-play-button {
   transform: scale(1.08);
+  background: rgb(46 41 37 / 40%); /* Brand accent-700-active with opacity */
 }
 
 /* Play Icon */
 .youtube-play-icon {
   width: 48px;
   height: 48px;
-  color: rgb(102 126 234);
+  color: rgb(58 53 48); /* Brand accent-600 */
   filter: drop-shadow(0 2px 4px rgb(0 0 0 / 20%));
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .youtube-placeholder:hover .youtube-play-icon,
 .youtube-placeholder:focus-visible .youtube-play-icon {
-  color: rgb(118 75 162);
+  color: rgb(74 69 64); /* Brand accent-500-hover */
   filter: drop-shadow(0 4px 8px rgb(0 0 0 / 30%));
   transform: scale(1.05);
+}
+
+.youtube-placeholder:active .youtube-play-icon {
+  color: rgb(46 41 37); /* Brand accent-700-active */
 }
 
 /* YouTube IFrame Container */
@@ -278,23 +284,28 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .youtube-play-button {
-    background: rgb(102 126 234 / 40%);
-    border: 2px solid rgb(102 126 234);
+    background: rgb(58 53 48 / 50%); /* Brand accent-600 */
+    border: 2px solid rgb(58 53 48);
   }
 
   .youtube-placeholder:hover .youtube-play-button,
   .youtube-placeholder:focus-visible .youtube-play-button {
-    background: rgb(102 126 234 / 60%);
-    border-color: rgb(118 75 162);
+    background: rgb(74 69 64 / 70%); /* Brand accent-500-hover */
+    border-color: rgb(74 69 64);
   }
 
   .youtube-play-icon {
-    color: rgb(102 126 234);
+    color: rgb(244 239 232); /* text-on-dark for better contrast */
   }
 
   .youtube-placeholder:hover .youtube-play-icon,
   .youtube-placeholder:focus-visible .youtube-play-icon {
-    color: rgb(118 75 162);
+    color: rgb(244 239 232); /* Keep consistent in high contrast */
+  }
+
+  .youtube-placeholder:focus-visible {
+    outline: 3px solid rgb(107 98 90); /* Brand focus-ring, full opacity */
+    outline-offset: 3px;
   }
 }
 

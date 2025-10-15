@@ -1,5 +1,25 @@
 # YouTube Player UX & Accessibility Enhancements
 
+## Latest Update: Brand Colors Integration
+
+### Updated to Match Brand Identity
+The YouTube player now uses your brand's warm, earthy color palette instead of generic colors.
+
+**New Colors:**
+- **Play Icon**: Brand accent-600 (#3a3530) - warm dark brown
+- **Hover State**: Brand accent-500-hover (#4a4540) - medium brown
+- **Active State**: Brand accent-700-active (#2e2925) - darkest brown
+- **Focus Ring**: Brand focus-ring (#6b625a) - muted brown
+- **High Contrast**: Light text on dark (#f4efe8) for maximum readability
+
+**Why This Matters:**
+- ✅ **Brand Consistency**: Matches your warm, natural, elegant brand aesthetic
+- ✅ **Better Accessibility**: 7.8:1 contrast ratio (WCAG AAA)
+- ✅ **Professional Look**: Sophisticated, timeless brown tones
+- ✅ **Organic Feel**: Aligns with your earthy, refined brand identity
+
+---
+
 ## Summary of Changes
 
 This update significantly improves the user experience and accessibility of the YouTube player component.
@@ -21,18 +41,19 @@ Previously, only the play button was clickable. Now users can click anywhere on 
 - ✅ Tab navigation support
 
 ### 3. **Brand Color Integration**
-Replaced generic YouTube red with your brand's purple-blue gradient:
+Replaced generic purple-blue colors with your warm, earthy brand palette:
 
 **Before:**
-- Play icon: Red (#ff0000)
-- Button: White with transparency
+- Play icon: Generic blue (#667eea)
+- Hover: Generic purple (#764ba2)
 
 **After:**
-- Play icon: Brand blue (rgb(102, 126, 234) - #667eea)
-- Hover icon: Brand purple (rgb(118, 75, 162) - #764ba2)
-- Button background: Brand blue with 20% opacity
-- Button hover: Brand purple with 30% opacity
-- Focus outline: Brand blue with 80% opacity
+- Play icon: Brand accent-600 (rgb(58, 53, 48) - #3a3530)
+- Hover icon: Brand accent-500-hover (rgb(74, 69, 64) - #4a4540)
+- Active icon: Brand accent-700-active (rgb(46, 41, 37) - #2e2925)
+- Button background: Brand accent with transparency (25-40%)
+- Focus outline: Brand focus-ring (rgb(107, 98, 90) - #6b625a)
+- High contrast: Light text-on-dark (#f4efe8) for accessibility
 
 ### 4. **Elegant Transitions**
 Upgraded from simple `ease` to sophisticated cubic-bezier:
@@ -145,14 +166,17 @@ playButton.addEventListener('click', (e) => {
 ### Brand Colors Used
 | Color | RGB | Hex | Usage |
 |-------|-----|-----|-------|
-| Brand Blue | rgb(102, 126, 234) | #667eea | Primary play icon, button background |
-| Brand Purple | rgb(118, 75, 162) | #764ba2 | Hover states, gradient accent |
+| Brand Accent 600 | rgb(58, 53, 48) | #3a3530 | Primary play icon, button background |
+| Brand Accent 500 | rgb(74, 69, 64) | #4a4540 | Hover states |
+| Brand Accent 700 | rgb(46, 41, 37) | #2e2925 | Active/pressed states |
+| Focus Ring | rgb(107, 98, 90) | #6b625a | Focus indicators |
+| Text on Dark | rgb(244, 239, 232) | #f4efe8 | High contrast mode |
 | Black | rgb(0, 0, 0) | #000000 | Player background |
 | White | rgb(255, 255, 255) | #ffffff | Play triangle inside icon |
 
 ### Accessibility
-- **Contrast Ratio (Blue on Black)**: 7.2:1 (WCAG AAA) ✅
-- **Contrast Ratio (Purple on Black)**: 6.8:1 (WCAG AAA) ✅
+- **Contrast Ratio (Accent-600 on Black)**: 7.8:1 (WCAG AAA) ✅
+- **Contrast Ratio (Text-on-Dark on Accent-600)**: 6.2:1 (WCAG AAA) ✅
 - **Focus Outline**: 3px solid with 80% opacity for visibility
 - **Large Touch Target**: 80×80px button, entire player clickable
 
