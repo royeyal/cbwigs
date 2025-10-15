@@ -10,7 +10,7 @@
   background-color: #000;
   border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Aspect Ratios */
@@ -25,7 +25,7 @@
   margin-right: auto;
 }
 
-/* Placeholder Container */
+/* Placeholder Container - Entire area is clickable */
 .youtube-placeholder {
   position: absolute;
   top: 0;
@@ -36,7 +36,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus state for accessibility on placeholder */
+.youtube-placeholder:focus-visible {
+  outline: 3px solid rgb(102 126 234 / 80%);
+  outline-offset: 2px;
 }
 
 .youtube-placeholder.youtube-loading {
@@ -53,13 +59,14 @@
   height: 100%;
   object-fit: cover;
   transition:
-    transform 0.3s ease,
-    filter 0.3s ease;
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.youtube-placeholder:hover .youtube-thumbnail {
+.youtube-placeholder:hover .youtube-thumbnail,
+.youtube-placeholder:focus-visible .youtube-thumbnail {
   transform: scale(1.05);
-  filter: brightness(0.9);
+  filter: brightness(0.85);
 }
 
 /* Play Button */
@@ -70,17 +77,18 @@
   height: 80px;
   border: none;
   border-radius: 50%;
-  background: rgb(255 255 255 / 15%);
+  background: rgb(102 126 234 / 20%);
   backdrop-filter: blur(20px);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
     0 4px 6px rgb(0 0 0 / 10%),
     0 8px 16px rgb(0 0 0 / 10%),
     inset 0 1px 0 rgb(255 255 255 / 20%);
+  pointer-events: none;
 }
 
 /* Glassy ring effect */
@@ -91,21 +99,23 @@
   border-radius: 50%;
   background: linear-gradient(
     135deg,
-    rgb(255 255 255 / 10%),
-    rgb(255 255 255 / 5%)
+    rgb(102 126 234 / 15%),
+    rgb(102 126 234 / 5%)
   );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.youtube-play-button:hover::before {
+.youtube-placeholder:hover .youtube-play-button::before,
+.youtube-placeholder:focus-visible .youtube-play-button::before {
   opacity: 1;
 }
 
 /* Play button hover state */
-.youtube-play-button:hover {
-  transform: scale(1.1);
-  background: rgb(255 255 255 / 25%);
+.youtube-placeholder:hover .youtube-play-button,
+.youtube-placeholder:focus-visible .youtube-play-button {
+  transform: scale(1.15);
+  background: rgb(102 126 234 / 30%);
   box-shadow:
     0 6px 12px rgb(0 0 0 / 15%),
     0 12px 24px rgb(0 0 0 / 15%),
@@ -113,27 +123,22 @@
 }
 
 /* Play button active state */
-.youtube-play-button:active {
-  transform: scale(1.05);
-}
-
-/* Focus state for accessibility */
-.youtube-play-button:focus-visible {
-  outline: 3px solid rgb(255 255 255 / 50%);
-  outline-offset: 4px;
+.youtube-placeholder:active .youtube-play-button {
+  transform: scale(1.08);
 }
 
 /* Play Icon */
 .youtube-play-icon {
   width: 48px;
   height: 48px;
-  color: #f00;
+  color: rgb(102 126 234);
   filter: drop-shadow(0 2px 4px rgb(0 0 0 / 20%));
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.youtube-play-button:hover .youtube-play-icon {
-  color: #f00;
+.youtube-placeholder:hover .youtube-play-icon,
+.youtube-placeholder:focus-visible .youtube-play-icon {
+  color: rgb(118 75 162);
   filter: drop-shadow(0 4px 8px rgb(0 0 0 / 30%));
   transform: scale(1.05);
 }
@@ -252,16 +257,20 @@
   .youtube-placeholder,
   .youtube-thumbnail,
   .youtube-play-button,
+  .youtube-play-button::before,
   .youtube-play-icon,
   .youtube-player {
     transition: none;
   }
 
-  .youtube-placeholder:hover .youtube-thumbnail {
+  .youtube-placeholder:hover .youtube-thumbnail,
+  .youtube-placeholder:focus-visible .youtube-thumbnail {
     transform: none;
   }
 
-  .youtube-play-button:hover {
+  .youtube-placeholder:hover .youtube-play-button,
+  .youtube-placeholder:focus-visible .youtube-play-button,
+  .youtube-placeholder:active .youtube-play-button {
     transform: none;
   }
 }
@@ -269,12 +278,23 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .youtube-play-button {
-    background: rgb(255 255 255 / 30%);
-    border: 2px solid #fff;
+    background: rgb(102 126 234 / 40%);
+    border: 2px solid rgb(102 126 234);
   }
 
-  .youtube-play-button:hover {
-    background: rgb(255 255 255 / 50%);
+  .youtube-placeholder:hover .youtube-play-button,
+  .youtube-placeholder:focus-visible .youtube-play-button {
+    background: rgb(102 126 234 / 60%);
+    border-color: rgb(118 75 162);
+  }
+
+  .youtube-play-icon {
+    color: rgb(102 126 234);
+  }
+
+  .youtube-placeholder:hover .youtube-play-icon,
+  .youtube-placeholder:focus-visible .youtube-play-icon {
+    color: rgb(118 75 162);
   }
 }
 
