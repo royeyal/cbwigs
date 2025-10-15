@@ -1,5 +1,32 @@
 # YouTube Player UX & Accessibility Enhancements
 
+## Latest Update: Modern color-mix() CSS & Neutral-Dark Button Color
+
+### Updated to Use Modern CSS color-mix() Function
+The YouTube player now uses the CSS `color-mix()` function for better color management and browser-native transparency handling.
+
+**What Changed:**
+- Replaced `rgb()` with opacity to `color-mix(in srgb, COLOR XX%, transparent)`
+- More maintainable and semantic color definitions
+- Better browser optimization for color blending
+- Easier to understand and customize
+
+**New Button Color:**
+- **Primary**: Neutral-dark (#a39486) instead of accent-600
+- **Hover**: Neutral-darker (#8c8176) for subtle interaction
+- **Active**: Neutral-darker with higher opacity for pressed state
+- **Ring Effect**: Brand neutral (#c8bfb3) for glassy ring
+- **Focus**: Brand focus-ring (#6b625a) for accessibility
+
+**Benefits:**
+- ✅ **Modern CSS**: Uses native color-mix() for better performance
+- ✅ **Lighter Appearance**: Neutral-dark is lighter and more elegant than accent colors
+- ✅ **Better Blending**: Browser-native color mixing vs manual RGBA
+- ✅ **Easier Customization**: Clearer color definitions
+- ✅ **Brand Consistency**: Uses neutral palette for subtlety
+
+---
+
 ## Latest Update: Brand Colors Integration
 
 ### Updated to Match Brand Identity

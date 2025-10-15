@@ -257,7 +257,7 @@
   width: 100%;
 }
 .youtube-placeholder:focus-visible {
-  outline: 3px solid rgba(107, 98, 90, 0.8);
+  outline: 3px solid color-mix(in srgb, #6b625a 80%, transparent);
   outline-offset: 2px;
 }
 .youtube-placeholder.youtube-loading {
@@ -285,13 +285,13 @@
   align-items: center;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  background: #3a353040;
+  background: color-mix(in srgb, #a39486 30%, transparent);
   border: none;
   border-radius: 50%;
   box-shadow:
-    0 4px 6px #0000001a,
-    0 8px 16px #0000001a,
-    inset 0 1px #f3eee733;
+    0 4px 6px color-mix(in srgb, #000 10%, transparent),
+    0 8px 16px color-mix(in srgb, #000 10%, transparent),
+    inset 0 1px color-mix(in srgb, #f4efe8 20%, transparent);
   cursor: pointer;
   display: flex;
   height: 80px;
@@ -303,7 +303,11 @@
   z-index: 2;
 }
 .youtube-play-button:before {
-  background: linear-gradient(135deg, #6b625a26, #6b625a0d);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #c8bfb3 15%, transparent),
+    color-mix(in srgb, #c8bfb3 5%, transparent)
+  );
   border-radius: 50%;
   content: '';
   inset: -4px;
@@ -317,32 +321,32 @@
 }
 .youtube-placeholder:focus-visible .youtube-play-button,
 .youtube-placeholder:hover .youtube-play-button {
-  background: #4a454059;
+  background: color-mix(in srgb, #8c8176 40%, transparent);
   box-shadow:
-    0 6px 12px #00000026,
-    0 12px 24px #00000026,
-    inset 0 1px #f3eee74d;
+    0 6px 12px color-mix(in srgb, #000 15%, transparent),
+    0 12px 24px color-mix(in srgb, #000 15%, transparent),
+    inset 0 1px color-mix(in srgb, #f4efe8 30%, transparent);
   transform: scale(1.15);
 }
 .youtube-placeholder:active .youtube-play-button {
-  background: #2e292566;
+  background: color-mix(in srgb, #8c8176 50%, transparent);
   transform: scale(1.08);
 }
 .youtube-play-icon {
-  color: #3a3530;
-  filter: drop-shadow(0 2px 4px rgb(0 0 0/20%));
+  color: #a39486;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
   height: 48px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   width: 48px;
 }
 .youtube-placeholder:focus-visible .youtube-play-icon,
 .youtube-placeholder:hover .youtube-play-icon {
-  color: #4a4540;
-  filter: drop-shadow(0 4px 8px rgb(0 0 0/30%));
+  color: #8c8176;
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, #000 30%, transparent));
   transform: scale(1.05);
 }
 .youtube-placeholder:active .youtube-play-icon {
-  color: #2e2925;
+  color: #6b625a;
 }
 .youtube-iframe-container {
   height: 100%;
@@ -360,10 +364,14 @@
   box-shadow: 0 8px 32px #0000004d;
 }
 .youtube-player.youtube-error {
-  background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #1a1a1ae0 100%, transparent),
+    color-mix(in srgb, #070707 100%, transparent)
+  );
 }
 .youtube-player.youtube-error:after {
-  color: #fff9;
+  color: color-mix(in srgb, #f4efe8 60%, transparent);
   content: 'Video unavailable';
   font-size: 14px;
   font-weight: 500;
@@ -377,9 +385,9 @@
 .wf-design-mode .youtube-player:before {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background: #00000080;
+  background: color-mix(in srgb, #a39486 40%, transparent);
   border-radius: 8px;
-  color: #ffffff80;
+  color: color-mix(in srgb, #f4efe8 80%, transparent);
   content: 'YouTube Player';
   font-size: 18px;
   font-weight: 600;
@@ -454,13 +462,13 @@
 }
 @media (prefers-contrast: high) {
   .youtube-play-button {
-    background: #3a353080;
-    border: 2px solid #3a3530;
+    background: color-mix(in srgb, #a39486 50%, transparent);
+    border: 2px solid #a39486;
   }
   .youtube-placeholder:focus-visible .youtube-play-button,
   .youtube-placeholder:hover .youtube-play-button {
-    background: #4a4540b3;
-    border-color: #4a4540;
+    background: color-mix(in srgb, #8c8176 70%, transparent);
+    border-color: #8c8176;
   }
   .youtube-play-icon {
     color: #f4efe8;

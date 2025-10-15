@@ -185,24 +185,24 @@ You can customize the player appearance by overriding CSS variables or targeting
   height: 100px;
 }
 
-/* Custom play button color (brand colors used by default) */
+/* Custom play button color using color-mix() */
 .youtube-play-button {
-  background: rgb(58 53 48 / 25%); /* Brand accent-600 with transparency */
+  background: color-mix(in srgb, #a39486 30%, transparent); /* neutral-dark */
 }
 
-/* Custom hover effect */
+/* Custom hover effect using color-mix() */
 .youtube-placeholder:hover .youtube-play-button {
-  background: rgb(74 69 64 / 35%); /* Brand accent-500-hover on hover */
+  background: color-mix(in srgb, #8c8176 40%, transparent); /* neutral-darker */
   transform: scale(1.2);
 }
 
 /* Custom play icon color */
 .youtube-play-icon {
-  color: rgb(58 53 48); /* Brand accent-600 */
+  color: #a39486; /* neutral-dark */
 }
 
 .youtube-placeholder:hover .youtube-play-icon {
-  color: rgb(74 69 64); /* Brand accent-500-hover on hover */
+  color: #8c8176; /* neutral-darker on hover */
 }
 ```
 
@@ -413,15 +413,17 @@ Add custom CSS:
 - **Brightness Overlay**: Darkening to 85% brightness on hover for button contrast
 
 ### Colors & Accessibility
-- **Primary Play Icon**: rgb(58, 53, 48) - Brand accent-600 (#3a3530)
-- **Hover Play Icon**: rgb(74, 69, 64) - Brand accent-500-hover (#4a4540)
-- **Active Play Icon**: rgb(46, 41, 37) - Brand accent-700-active (#2e2925)
-- **Button Background**: Semi-transparent brand accent (25% opacity)
-- **Button Hover**: Semi-transparent brand accent-hover (35% opacity)
-- **Button Active**: Semi-transparent brand accent-active (40% opacity)
+- **Primary Play Icon**: #a39486 - Brand neutral-dark
+- **Hover Play Icon**: #8c8176 - Brand neutral-darker
+- **Active Play Icon**: #6b625a - Brand focus-ring (darkest state)
+- **Button Background**: `color-mix(in srgb, #a39486 30%, transparent)` - Semi-transparent neutral-dark
+- **Button Hover**: `color-mix(in srgb, #8c8176 40%, transparent)` - Semi-transparent neutral-darker
+- **Button Active**: `color-mix(in srgb, #8c8176 50%, transparent)` - More opaque neutral-darker
+- **Ring Effect**: `color-mix(in srgb, #c8bfb3 15%, transparent)` - Brand neutral
 - **Dark Background**: Black (#000) for maximum contrast
-- **Focus Indicator**: rgb(107, 98, 90) - Brand focus-ring (#6b625a) with 80% opacity
-- **High Contrast Mode**: Light text on dark button (rgb(244, 239, 232) on dark brown)
+- **Focus Indicator**: `color-mix(in srgb, #6b625a 80%, transparent)` - Brand focus-ring with opacity
+- **High Contrast Mode**: Light text (#f4efe8) on darker button background
+- **Modern CSS**: Uses `color-mix()` function for better color management
 - **WCAG AAA Compliant**: All color combinations meet accessibility standards
 
 ### User Experience
@@ -432,11 +434,12 @@ Add custom CSS:
 - **Brand Consistency**: Colors match the warm, earthy brand palette
 
 ### Brand Palette
-The player uses your brand's warm, neutral, earthy color scheme:
-- **Warm Browns**: Professional, sophisticated accent colors
-- **Subtle Gradations**: Smooth transitions between states
+The player uses your brand's warm, neutral, earthy color scheme with modern `color-mix()` CSS:
+- **Warm Neutrals**: Professional, sophisticated accent colors (#a39486, #8c8176)
+- **Subtle Gradations**: Smooth transitions between states using color-mix()
 - **High Contrast**: Ensures readability and accessibility
 - **Natural Feel**: Organic, timeless aesthetic
+- **Modern CSS**: Uses `color-mix()` function for transparent overlays and blending
 
 ## 📄 License
 
