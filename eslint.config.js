@@ -19,6 +19,7 @@ export default [
         CustomEase: 'readonly',
         Draggable: 'readonly',
         Swiper: 'readonly',
+        YT: 'readonly',
         getComputedStyle: 'readonly',
         innerWidth: 'readonly',
         clearTimeout: 'readonly',

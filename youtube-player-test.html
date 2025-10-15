@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Player - Webflow Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+      background: #f5f5f5;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .test-section {
+      background: white;
+      padding: 32px;
+      margin-bottom: 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .test-section h2 {
+      margin-bottom: 16px;
+      color: #333;
+    }
+
+    .test-section p {
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .shorts-wrapper {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Webflow Designer Simulation */
+    .wf-design-mode-sim {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      background: #fafafa;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .wf-design-mode-sim p {
+      color: #999;
+      text-align: center;
+      margin: 0;
+      font-size: 14px;
+    }
+  </style>
+  <link rel="stylesheet" href="src/styles/youtube-player.css">
+</head>
+<body>
+  <h1>🎬 YouTube Player Test Page</h1>
+
+  <!-- Test 1: Basic Video -->
+  <div class="test-section">
+    <h2>Test 1: Basic YouTube Video</h2>
+    <p>Using video ID only: <code>jNQXAC9IVRw</code></p>
+    
+    <div class="youtube-player" data-youtube-id="jNQXAC9IVRw"></div>
+  </div>
+
+  <!-- Test 2: YouTube Short -->
+  <div class="test-section">
+    <h2>Test 2: YouTube Short (9:16)</h2>
+    <p>Vertical format with <code>data-youtube-short</code> attribute</p>
+    
+    <div class="shorts-wrapper">
+      <div class="youtube-player" data-youtube-id="5NV6Rdv1a3I" data-youtube-short></div>
+    </div>
+  </div>
+
+  <!-- Test 3: Full URL -->
+  <div class="test-section">
+    <h2>Test 3: Using Full YouTube URL</h2>
+    <p>The script extracts the ID from: <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></p>
+    
+    <div class="youtube-player" data-youtube-id="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></div>
+  </div>
+
+  <!-- Test 4: Short URL -->
+  <div class="test-section">
+    <h2>Test 4: Using YouTube Short URL</h2>
+    <p>Works with youtu.be format: <code>https://youtu.be/9bZkp7q19f0</code></p>
+    
+    <div class="youtube-player" data-youtube-id="https://youtu.be/9bZkp7q19f0"></div>
+  </div>
+
+  <!-- Test 5: Multiple Videos Grid -->
+  <div class="test-section">
+    <h2>Test 5: Multiple Videos Grid</h2>
+    <p>All players initialize independently</p>
+    
+    <div class="grid-2">
+      <div class="youtube-player" data-youtube-id="kJQP7kiw5Fk"></div>
+      <div class="youtube-player" data-youtube-id="QH2-TGUlwu4"></div>
+    </div>
+  </div>
+
+  <!-- Test 6: Webflow Designer Placeholder -->
+  <div class="test-section">
+    <h2>Test 6: Webflow Designer Placeholder</h2>
+    <p>This is what you'll see in the Webflow Designer (add class <code>wf-design-mode</code> to simulate)</p>
+    
+    <div class="wf-design-mode-sim">
+      <p>In Webflow Designer, you'll see an elegant placeholder label</p>
+    </div>
+    
+    <div class="youtube-player wf-design-mode" data-youtube-id="jNQXAC9IVRw"></div>
+  </div>
+
+  <!-- Test 7: YouTube Shorts Grid -->
+  <div class="test-section">
+    <h2>Test 7: Multiple YouTube Shorts</h2>
+    <p>Multiple vertical videos side by side</p>
+    
+    <div class="grid-2">
+      <div class="youtube-player youtube-short" data-youtube-id="5NV6Rdv1a3I"></div>
+      <div class="youtube-player youtube-short" data-youtube-id="5NV6Rdv1a3I"></div>
+    </div>
+  </div>
+
+  <script src="src/js/youtube-player.js"></script>
+</body>
+</html>

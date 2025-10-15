@@ -5,6 +5,7 @@ import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
+import './youtube-player.js';
 
 // Initialize all animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
