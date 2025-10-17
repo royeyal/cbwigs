@@ -57,7 +57,7 @@
 
 /* Individual content items */
 .layout485_content {
-  /* min-height: 50vh; */
+  min-height: 50vh;
   padding: 2rem;
 }
 

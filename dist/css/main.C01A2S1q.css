@@ -563,6 +563,7 @@
   grid-template-columns: 1fr;
 }
 .layout485_content {
+  min-height: 50vh;
   padding: 2rem;
 }
 .layout485_content h3,
