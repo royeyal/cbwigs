@@ -6,6 +6,7 @@ import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
 import { initFooterParallax } from './footer-parallax.js';
+import { initFlipCounter } from './flip-counter.js';
 import './youtube-player.js';
 
 // Initialize all animations when DOM is ready
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize footer parallax effect
   initFooterParallax();
+
+  // Initialize flip counter effect
+  initFlipCounter();
 });
 
 // Export all animation functions for potential external access
@@ -36,5 +40,6 @@ export {
   initBasicGSAPSlider,
   initAccordionCSS,
   initSwiperSlider,
-  initFooterParallax
+  initFooterParallax,
+  initFlipCounter
 };

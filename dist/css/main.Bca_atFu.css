@@ -499,7 +499,7 @@
   text-decoration: none;
 }
 [data-underline-link]:before {
-  background-color: currentColor;
+  background-color: currentcolor;
   bottom: -0.0625em;
   content: '';
   height: 0.1em;
@@ -515,6 +515,108 @@
   [data-underline-link]:hover:before {
     transform: scaleX(1) rotate(0.001deg);
     transform-origin: left;
+  }
+}
+.layout485_component {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: max-content 1fr;
+  min-height: 100vh;
+  position: relative;
+}
+.layout485_content-left {
+  align-items: flex-start;
+  display: flex;
+  font-size: 4rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  gap: 0.5rem;
+  height: -moz-fit-content;
+  height: fit-content;
+  line-height: 1;
+  position: sticky;
+  top: 20%;
+}
+.layout485_content-left > .layout485_number {
+  flex-shrink: 0;
+}
+.layout485_number-wrapper {
+  flex-shrink: 0;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  width: 1em;
+}
+.layout485_number-wrapper .layout485_number {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.layout485_content-right {
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr;
+}
+.layout485_content {
+  min-height: 50vh;
+  padding: 2rem;
+}
+.layout485_content h3,
+.layout485_content h4 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.layout485_content p {
+  color: #6b625a;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+.layout485_content .layout485_number {
+  display: none;
+}
+@media (max-width: 768px) {
+  .layout485_component {
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  .layout485_content-left {
+    display: none;
+  }
+  .layout485_content .layout485_number {
+    color: #a39486;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .layout485_content {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  .layout485_content h3,
+  .layout485_content h4 {
+    font-size: 1.5rem;
+  }
+  .layout485_content p {
+    font-size: 1rem;
+  }
+}
+@media (not (max-width: 768px)) and (max-width: 1024px) {
+  .layout485_component {
+    gap: 1.5rem;
+  }
+  .layout485_content-left {
+    font-size: 3rem;
+  }
+  .layout485_content {
+    padding: 1.5rem;
   }
 }
 :root {
