@@ -359,7 +359,7 @@ function debounceOnWidthChange(fn, ms) {
       if (innerWidth !== last) {
         console.log('📏 Window resized, reinitializing sliders...');
         last = innerWidth;
-        fn.apply(this, args);
+        fn(...args);
       }
     }, ms);
   };
