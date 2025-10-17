@@ -1,0 +1,25 @@
+[data-underline-link] {
+  text-decoration: none;
+  position: relative;
+}
+
+[data-underline-link]::before {
+  content: '';
+  position: absolute;
+  bottom: -0.0625em;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: currentcolor;
+  transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
+  transform-origin: right;
+  transform: scaleX(0) rotate(0.001deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-underline-link]:hover::before,
+  [data-hover]:hover [data-underline-link]::before {
+    transform-origin: left;
+    transform: scaleX(1) rotate(0.001deg);
+  }
+}
