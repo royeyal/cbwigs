@@ -105,10 +105,5 @@ function initializeSwiperSliders(swiperSliderGroups) {
   });
 }
 
-// Auto-initialize when DOM is ready (for direct script loading)
-document.addEventListener('DOMContentLoaded', () => {
-  initSwiperSlider();
-});
-
 // Export for module usage
 export { initSwiperSlider };
