@@ -4,7 +4,7 @@ import { initMaskTextScrollReveal } from './textreveal.js';
 import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
-import { initSwiperSlider } from './swipeslider.js';
+// import { initSwiperSlider } from './swipeslider.js';
 import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
 import './youtube-player.js';
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordionCSS();
 
   // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
-  initSwiperSlider();
+  // initSwiperSlider();
 
   // Initialize footer parallax effect
   initFooterParallax();
@@ -39,7 +39,7 @@ export {
   initContentRevealScroll,
   initBasicGSAPSlider,
   initAccordionCSS,
-  initSwiperSlider,
+  // initSwiperSlider,
   initFooterParallax,
   initFlipCounter
 };

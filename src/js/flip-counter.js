@@ -1,20 +1,14 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * Initializes the flip counter effect for layout485
  * Creates a flip-clock style animation where numbers change as content scrolls
  * @returns {void}
  */
 export function initFlipCounter() {
-  // Register ScrollTrigger plugin
-  try {
-    gsap.registerPlugin(ScrollTrigger);
-  } catch (error) {
-    console.error('Failed to register ScrollTrigger:', error);
-    return;
-  }
-
   const components = document.querySelectorAll('.layout485_component');
 
   if (components.length === 0) return;
