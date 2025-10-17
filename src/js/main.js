@@ -5,6 +5,7 @@ import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
+import { initFooterParallax } from './footer-parallax.js';
 import './youtube-player.js';
 
 // Initialize all animations when DOM is ready
@@ -23,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
   initSwiperSlider();
+
+  // Initialize footer parallax effect
+  initFooterParallax();
 });
 
 // Export all animation functions for potential external access
@@ -31,5 +35,6 @@ export {
   initContentRevealScroll,
   initBasicGSAPSlider,
   initAccordionCSS,
-  initSwiperSlider
+  initSwiperSlider,
+  initFooterParallax
 };
