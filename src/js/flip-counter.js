@@ -1,7 +1,5 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+// Use global GSAP from Webflow (no imports needed)
+// Expects window.gsap and window.ScrollTrigger to be loaded by Webflow
 
 /**
  * Initializes the flip counter effect for layout485
@@ -9,6 +7,17 @@ gsap.registerPlugin(ScrollTrigger);
  * @returns {void}
  */
 export function initFlipCounter() {
+  // Check if GSAP is available globally
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.warn(
+      '⚠️ GSAP or ScrollTrigger not found. Make sure they are loaded in Webflow.'
+    );
+    return;
+  }
+
+  // Register plugin (safe to call multiple times)
+  gsap.registerPlugin(ScrollTrigger);
+
   const components = document.querySelectorAll('.layout485_component');
 
   if (components.length === 0) return;
