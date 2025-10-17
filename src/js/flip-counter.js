@@ -40,8 +40,8 @@ export function initFlipCounter() {
         start: 'top center',
         end: 'bottom center',
         onEnter: () => updateCounter(numbers, index),
-        onEnterBack: () => updateCounter(numbers, index)
-        // markers: true, // Uncomment for debugging
+        onEnterBack: () => updateCounter(numbers, index),
+        markers: true // Uncomment for debugging
       });
     });
   });
