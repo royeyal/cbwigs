@@ -24,11 +24,41 @@ export function initFlipCounter() {
 
   components.forEach(component => {
     const contentItems = component.querySelectorAll('.layout485_content');
-    const numbers = component.querySelectorAll(
-      '.layout485_content-left .layout485_number-wrapper .layout485_number'
-    );
 
-    if (contentItems.length === 0 || numbers.length === 0) return;
+    if (contentItems.length === 0) return;
+
+    // Find or create the number wrapper
+    const contentLeft = component.querySelector('.layout485_content-left');
+    let numberWrapper = component.querySelector('.layout485_number-wrapper');
+
+    if (!contentLeft) {
+      console.warn('⚠️ .layout485_content-left not found in component');
+      return;
+    }
+
+    if (!numberWrapper) {
+      // Create the wrapper if it doesn't exist
+      numberWrapper = document.createElement('div');
+      numberWrapper.className = 'layout485_number-wrapper';
+      contentLeft.appendChild(numberWrapper);
+    }
+
+    // Clear existing numbers in the wrapper
+    numberWrapper.innerHTML = '';
+
+    // Create number divs dynamically based on content count
+    const numberDivs = [];
+    for (let i = 1; i <= contentItems.length; i++) {
+      const numberDiv = document.createElement('div');
+      numberDiv.className = 'layout485_number';
+      numberDiv.textContent = i;
+      numberWrapper.appendChild(numberDiv);
+      numberDivs.push(numberDiv);
+    }
+
+    const numbers = numberDivs;
+
+    if (numbers.length === 0) return;
 
     // Set initial state - show only first number
     gsap.set(numbers, { yPercent: 0 });
