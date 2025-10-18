@@ -60,8 +60,16 @@ export function initFlipCounter() {
 
     if (numbers.length === 0) return;
 
-    // Set initial state - show only first number
-    gsap.set(numbers, { yPercent: 0 });
+    // Set initial state - first number visible, rest positioned below
+    numbers.forEach((number, index) => {
+      if (index === 0) {
+        // First number visible at position 0
+        gsap.set(number, { yPercent: 0 });
+      } else {
+        // Other numbers stacked below, out of view
+        gsap.set(number, { yPercent: index * 100 });
+      }
+    });
 
     // Create ScrollTrigger for each content item
     contentItems.forEach((content, index) => {
