@@ -619,7 +619,7 @@
     padding: 1.5rem;
   }
 }
-.section-resource.is--dark {
+.is--dark {
   background-color: #000;
 }
 .button-arrow {
@@ -639,8 +639,7 @@
   width: 2ch;
 }
 .overlay-count-row {
-  grid-column-gap: 0.2em;
-  grid-row-gap: 0.2em;
+  grid-gap: 0.2em;
   flex-flow: row;
   font-size: 5.625em;
   font-weight: 700;
@@ -662,8 +661,7 @@
   z-index: 2;
 }
 .overlay-nav-row {
-  grid-column-gap: 2em;
-  grid-row-gap: 2em;
+  grid-gap: 2em;
   display: flex;
 }
 .button-overlay {
@@ -778,8 +776,7 @@
 }
 .slide-caption {
   z-index: 2;
-  grid-column-gap: 0.4em;
-  grid-row-gap: 0.4em;
+  grid-gap: 0.4em;
   background-color: #efeeec;
   border-radius: 0.25em;
   color: #131313;
