@@ -7,6 +7,7 @@ import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
 import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
+import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
 import './youtube-player.js';
 
 // Initialize all animations when DOM is ready
@@ -31,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize flip counter effect
   initFlipCounter();
+
+  // Initialize draggable infinite slider
+  initDraggableInfiniteSlider();
 });
 
 // Export all animation functions for potential external access
@@ -41,5 +45,6 @@ export {
   initAccordionCSS,
   initSwiperSlider,
   initFooterParallax,
-  initFlipCounter
+  initFlipCounter,
+  initDraggableInfiniteSlider
 };

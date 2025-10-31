@@ -6,6 +6,7 @@
 @import url('./youtube-player.css');
 @import url('./underline-links.css');
 @import url('./flip-counter.css');
+@import url('./draggable-infinite-slider.css');
 
 /* Global styles */
 :root {

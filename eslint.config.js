@@ -18,6 +18,7 @@ export default [
         SplitText: 'readonly',
         CustomEase: 'readonly',
         Draggable: 'readonly',
+        InertiaPlugin: 'readonly',
         Swiper: 'readonly',
         YT: 'readonly',
         getComputedStyle: 'readonly',
