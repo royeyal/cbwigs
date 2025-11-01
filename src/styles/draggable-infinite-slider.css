@@ -156,6 +156,7 @@
   padding-right: 1.25em;
   transition: opacity 0.4s;
   position: relative;
+  aspect-ratio: 3 / 4;
 }
 
 .main {
