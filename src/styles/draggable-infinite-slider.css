@@ -151,7 +151,8 @@
 .slider-slide {
   flex: none;
   width: 42.5em;
-  height: 28em;
+  height: 90vh;
+  max-height: 56.25em;
   padding-left: 1.25em;
   padding-right: 1.25em;
   transition: opacity 0.4s;
