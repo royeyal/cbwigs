@@ -748,8 +748,10 @@
   margin-top: 0;
 }
 .slider-slide {
+  aspect-ratio: 3/4;
   flex: none;
-  height: 28em;
+  height: 90vh;
+  max-height: 56.25em;
   padding-left: 1.25em;
   padding-right: 1.25em;
   position: relative;
