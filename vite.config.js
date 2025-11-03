@@ -10,15 +10,21 @@ export default defineConfig({
     cssCodeSplit: true,
     emptyOutDir: true,
     rollupOptions: {
-      input: resolve(
-        fileURLToPath(new URL('.', import.meta.url)),
-        'src/js/main.js'
-      ),
+      input: {
+        main: resolve(
+          fileURLToPath(new URL('.', import.meta.url)),
+          'src/js/main.js'
+        ),
+        'draggable-slider': resolve(
+          fileURLToPath(new URL('.', import.meta.url)),
+          'src/js/draggable-infinite-slider-standalone.js'
+        )
+      },
       output: {
         // Keep your subfolders AND add a content hash for cache-busting
         entryFileNames: (chunk) => {
           // For the main entry file, put it in js/ folder
-          if (chunk.name === 'main') {
+          if (chunk.name === 'main' || chunk.name === 'draggable-slider') {
             return 'js/[name].[hash].js';
           }
           return 'assets/[name].[hash].js';
