@@ -14,10 +14,10 @@
 <style>
 
 /* Previous and next Button*/ 
-.button, .button-overlay{ transition: transform 0.475s cubic-bezier(0.625, 0.05, 0, 1), opacity 0.475s cubic-bezier(0.625, 0.05, 0, 1)}
+.button, .slider__btn-overlay{ transition: transform 0.475s cubic-bezier(0.625, 0.05, 0, 1), opacity 0.475s cubic-bezier(0.625, 0.05, 0, 1)}
 
-.button:hover .button-overlay{ transform: scale(1.4); }
-.overlay-nav-row:hover:has(.button:hover) .button{ opacity: 0.4; }
+.button:hover .slider__btn-overlay{ transform: scale(1.4); }
+.slider__overlay-nav:hover:has(.button:hover) .button{ opacity: 0.4; }
 .button:hover{ transform: scale(0.85); opacity: 1 !important; }
 
 
@@ -41,34 +41,35 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide__caption{ transiti
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
 
 <section class="section-resource is--dark">
+    <div class="slider__section">
     <div class="slider__overlay">
       <div class="slider__overlay-inner">
-        <div class="overlay-count-row">
-          <div class="count-column">
-            <h2 data-slide-count="step" class="count-heading">01</h2>
+        <div class="slider__overlay-count">
+          <div class="slider__count-col">
+            <h2 data-slide-count="step" class="slider__count-heading">01</h2>
           </div>
-          <div class="count-row-divider"></div>
-          <div class="count-column">
-            <h2 data-slide-count="total" class="count-heading">04</h2>
+          <div class="slider__count-divider"></div>
+          <div class="slider__count-col">
+            <h2 data-slide-count="total" class="slider__count-heading">04</h2>
           </div>
         </div>
-        <div class="overlay-nav-row"><button aria-label="previous slide" data-slider="button-prev" class="button-slider"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 12" fill="none" class="button-arrow">
+        <div class="slider__overlay-nav"><button aria-label="previous slide" data-slider="button-prev" class="slider__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 12" fill="none" class="slider__btn-arrow">
               <path d="M6.28871 12L7.53907 10.9111L3.48697 6.77778H16.5V5.22222H3.48697L7.53907 1.08889L6.28871 0L0.5 6L6.28871 12Z" fill="currentColor"></path>
             </svg>
-            <div class="button-overlay">
-              <div class="overlay-corner"></div>
-              <div class="overlay-corner top-right"></div>
-              <div class="overlay-corner bottom-left"></div>
-              <div class="overlay-corner bottom-right"></div>
+            <div class="slider__btn-overlay">
+              <div class="slider__btn-overlay-corner"></div>
+              <div class="slider__btn-overlay-corner top-right"></div>
+              <div class="slider__btn-overlay-corner bottom-left"></div>
+              <div class="slider__btn-overlay-corner bottom-right"></div>
             </div>
-          </button><button aria-label="previous slide" data-slider="button-next" class="button-slider"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 12" fill="none" class="button-arrow next">
+          </button><button aria-label="previous slide" data-slider="button-next" class="slider__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 12" fill="none" class="slider__btn-arrow next">
               <path d="M6.28871 12L7.53907 10.9111L3.48697 6.77778H16.5V5.22222H3.48697L7.53907 1.08889L6.28871 0L0.5 6L6.28871 12Z" fill="currentColor"></path>
             </svg>
-            <div class="button-overlay">
-              <div class="overlay-corner"></div>
-              <div class="overlay-corner top-right"></div>
-              <div class="overlay-corner bottom-left"></div>
-              <div class="overlay-corner bottom-right"></div>
+            <div class="slider__btn-overlay">
+              <div class="slider__btn-overlay-corner"></div>
+              <div class="slider__btn-overlay-corner top-right"></div>
+              <div class="slider__btn-overlay-corner bottom-left"></div>
+              <div class="slider__btn-overlay-corner bottom-right"></div>
             </div>
           </button></div>
       </div>
@@ -153,6 +154,7 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide__caption{ transiti
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 

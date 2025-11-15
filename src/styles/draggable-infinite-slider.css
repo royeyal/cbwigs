@@ -4,17 +4,17 @@
   background-color: #000;
 }
 
-.button-arrow {
+.slider__btn-arrow {
   flex: none;
   width: 1em;
   height: 0.75em;
 }
 
-.button-arrow.next {
+.slider__btn-arrow.next {
   transform: rotate(180deg);
 }
 
-.count-heading {
+.slider__count-heading {
   width: 2ch;
   margin-top: 0;
   margin-bottom: 0;
@@ -23,7 +23,7 @@
   line-height: 1;
 }
 
-.overlay-count-row {
+.slider__overlay-count {
   grid-gap: 0.2em;
   flex-flow: row;
   justify-content: flex-start;
@@ -47,18 +47,18 @@
   inset: 0% auto 0% 0%;
 }
 
-.overlay-nav-row {
+.slider__overlay-nav {
   grid-gap: 2em;
   display: flex;
 }
 
-.button-overlay {
+.slider__btn-overlay {
   z-index: 2;
   position: absolute;
   inset: -1px;
 }
 
-.overlay-corner {
+.slider__btn-overlay-corner {
   border-top: 1px solid #efeeec;
   border-left: 1px solid #efeeec;
   border-top-left-radius: 0.4em;
@@ -66,32 +66,32 @@
   height: 1em;
 }
 
-.overlay-corner.top-right {
+.slider__btn-overlay-corner.top-right {
   position: absolute;
   inset: 0% 0% auto auto;
   transform: rotate(90deg);
 }
 
-.overlay-corner.bottom-right {
+.slider__btn-overlay-corner.bottom-right {
   position: absolute;
   inset: auto 0% 0% auto;
   transform: rotate(180deg);
 }
 
-.overlay-corner.bottom-left {
+.slider__btn-overlay-corner.bottom-left {
   position: absolute;
   inset: auto auto 0% 0%;
   transform: rotate(-90deg);
 }
 
-.count-row-divider {
+.slider__count-divider {
   background-color: #efeeec;
   width: 2px;
   height: 0.75em;
   transform: rotate(15deg);
 }
 
-.button-slider {
+.slider__btn {
   color: #fff;
   background-color: #0000;
   border: 1px solid #fff3;
@@ -113,7 +113,7 @@
   display: flex;
 }
 
-.count-column {
+.slider__count-col {
   height: 1em;
   overflow: hidden;
 }
