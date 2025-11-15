@@ -721,7 +721,7 @@
   height: 1em;
   overflow: hidden;
 }
-.slide-inner {
+.slider__slide-inner {
   border-radius: 0.5em;
   height: 100%;
   overflow: hidden;
