@@ -23,8 +23,8 @@ export default {
       const preferredKeys = wantCss
         ? ["src/styles/main.css", "src/css/main.css"]
         : wantSlider
-        ? ["src/js/draggable-infinite-slider-standalone.js"]
-        : ["src/js/main.js", "src/scripts/main.js"];
+        ? ["js/draggable-infinite-slider-standalone.js", "src/js/draggable-infinite-slider-standalone.js"]
+        : ["src/js/main.js", "src/scripts/main.js", "js/main.js"];
 
       // 1) Try explicit key
       for (const key of preferredKeys) {
