@@ -126,6 +126,14 @@
   overflow: hidden;
 }
 
+.slide-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .caption-dot {
   background-color: #131313;
   border-radius: 10em;

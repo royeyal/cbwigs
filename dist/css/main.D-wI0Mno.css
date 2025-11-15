@@ -728,6 +728,13 @@
   position: relative;
   width: 100%;
 }
+.slide-link {
+  color: inherit;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  width: 100%;
+}
 .caption-dot {
   background-color: #131313;
   border-radius: 10em;
