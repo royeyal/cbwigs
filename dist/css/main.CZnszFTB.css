@@ -735,20 +735,20 @@
   text-decoration: none;
   width: 100%;
 }
-.caption-dot {
+.slide__caption-dot {
   border-radius: 10em;
   flex: none;
   height: 0.5em;
   width: 0.5em;
 }
-.slider-list {
+.slider__list {
   align-items: stretch;
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
   position: relative;
 }
-.caption {
+.slide__caption-label {
   font-size: 0.75em;
   margin-bottom: 0;
   margin-top: 0;
@@ -772,17 +772,17 @@
   width: 100%;
   z-index: 0;
 }
-.slider-wrap {
+.slider__wrap {
   height: 100%;
   width: 100%;
 }
-.slide-caption,
-.slider-wrap {
+.slide__caption,
+.slider__wrap {
   align-items: center;
   display: flex;
   justify-content: flex-start;
 }
-.slide-caption {
+.slide__caption {
   z-index: 2;
   grid-gap: 0.4em;
   border-radius: 0.25em;

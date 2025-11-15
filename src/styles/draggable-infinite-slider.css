@@ -134,7 +134,7 @@
   color: inherit;
 }
 
-.caption-dot {
+.slide__caption-dot {
   /* background-color: #131313; */
   border-radius: 10em;
   flex: none;
@@ -142,7 +142,7 @@
   height: 0.5em;
 }
 
-.slider-list {
+.slider__list {
   flex-flow: row;
   justify-content: flex-start;
   align-items: stretch;
@@ -150,7 +150,7 @@
   position: relative;
 }
 
-.caption {
+.slide__caption-label {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 0.75em;
@@ -177,7 +177,7 @@
   overflow: hidden;
 }
 
-.slider-wrap {
+.slider__wrap {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -185,7 +185,7 @@
   display: flex;
 }
 
-.slide-caption {
+.slide__caption {
   z-index: 2;
   grid-gap: 0.4em;
   color: #131313;

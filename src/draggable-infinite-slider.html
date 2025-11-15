@@ -23,17 +23,17 @@
 
 
 /* Styling of active slide's caption */
-.slide-caption{ transition: transform 0.525s cubic-bezier(0.625, 0.05, 0, 1), opacity 0.525s cubic-bezier(0.625, 0.05, 0, 1); transition-delay:0s; }
+.slide__caption{ transition: transform 0.525s cubic-bezier(0.625, 0.05, 0, 1), opacity 0.525s cubic-bezier(0.625, 0.05, 0, 1); transition-delay:0s; }
 
-html:not(.wf-design-mode) .slide-caption{ opacity: 0; transform:translate(-25%, 0px) }
-html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ opacity: 1; transform:translate(0%, 0px) }
+html:not(.wf-design-mode) .slide__caption{ opacity: 0; transform:translate(-25%, 0px) }
+html:not(.wf-design-mode) [data-slider="slide"].active .slide__caption{ opacity: 1; transform:translate(0%, 0px) }
 
 
 
 /* Styling of active slide */
 html:not(.wf-design-mode) [data-slider="slide"]{ opacity: 0.2; }
 html:not(.wf-design-mode) [data-slider="slide"].active { opacity: 1; } 
-html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transition-delay:0.3s;} 
+html:not(.wf-design-mode) [data-slider="slide"].active .slide__caption{ transition-delay:0.3s;} 
 
 </style></div>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -74,8 +74,8 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
       </div>
     </div>
     <div class="slider__main">
-      <div class="slider-wrap">
-        <div data-slider="list" class="slider-list">
+      <div class="slider__wrap">
+        <div data-slider="list" class="slider__list">
           <div data-slider="slide" class="slider__slide">
             <a href="#" class="slide-link">
               <div class="slider__slide-inner"><img src="https://cdn.prod.website-files.com/67696d1cd4b1d776a63f0f94/67697015cad44a99732d47ae_slide-1.avif" alt="Abstract layout By FAKURIANDESIGN through Unsplash"  loading="lazy" class="slider__slide-img">
@@ -84,9 +84,9 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
                     <path d="M8 5.14v13.72L19 12L8 5.14z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div class="slide-caption">
-                  <div class="caption-dot"></div>
-                  <p class="caption">Layout nº004</p>
+                <div class="slide__caption">
+                  <div class="slide__caption-dot"></div>
+                  <p class="slide__caption-label">Layout nº004</p>
                 </div>
               </div>
             </a>
@@ -99,9 +99,9 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
                     <path d="M8 5.14v13.72L19 12L8 5.14z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div class="slide-caption">
-                  <div class="caption-dot"></div>
-                  <p class="caption">Layout nº001</p>
+                <div class="slide__caption">
+                  <div class="slide__caption-dot"></div>
+                  <p class="slide__caption-label">Layout nº001</p>
                 </div>
               </div>
             </a>
@@ -114,9 +114,9 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
                     <path d="M8 5.14v13.72L19 12L8 5.14z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div class="slide-caption">
-                  <div class="caption-dot"></div>
-                  <p class="caption">Layout nº002</p>
+                <div class="slide__caption">
+                  <div class="slide__caption-dot"></div>
+                  <p class="slide__caption-label">Layout nº002</p>
                 </div>
               </div>
             </a>
@@ -129,9 +129,9 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
                     <path d="M8 5.14v13.72L19 12L8 5.14z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div class="slide-caption">
-                  <div class="caption-dot"></div>
-                  <p class="caption">Layout nº003</p>
+                <div class="slide__caption">
+                  <div class="slide__caption-dot"></div>
+                  <p class="slide__caption-label">Layout nº003</p>
                 </div>
               </div>
             </a>
@@ -144,9 +144,9 @@ html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ transitio
                     <path d="M8 5.14v13.72L19 12L8 5.14z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div class="slide-caption">
-                  <div class="caption-dot"></div>
-                  <p class="caption">Layout nº005</p>
+                <div class="slide__caption">
+                  <div class="slide__caption-dot"></div>
+                  <p class="slide__caption-label">Layout nº005</p>
                 </div>
               </div>
             </a>
