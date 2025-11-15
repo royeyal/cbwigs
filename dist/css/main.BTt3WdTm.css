@@ -800,6 +800,74 @@
   object-fit: cover;
   width: 100%;
 }
+.slide-play-button {
+  align-items: center;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background: color-mix(in srgb, #a39486 30%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 4px 6px color-mix(in srgb, #000 10%, transparent),
+    0 8px 16px color-mix(in srgb, #000 10%, transparent),
+    inset 0 1px color-mix(in srgb, #f4efe8 20%, transparent);
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 80px;
+  z-index: 3;
+}
+.slide-play-button:before {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #c8bfb3 15%, transparent),
+    color-mix(in srgb, #c8bfb3 5%, transparent)
+  );
+  border-radius: 50%;
+  content: '';
+  inset: -4px;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-link:focus-visible .slide-play-button:before,
+.slide-link:hover .slide-play-button:before {
+  opacity: 1;
+}
+.slide-link:focus-visible .slide-play-button,
+.slide-link:hover .slide-play-button {
+  background: color-mix(in srgb, #8c8176 40%, transparent);
+  box-shadow:
+    0 6px 12px color-mix(in srgb, #000 15%, transparent),
+    0 12px 24px color-mix(in srgb, #000 15%, transparent),
+    inset 0 1px color-mix(in srgb, #f4efe8 30%, transparent);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+.slide-link:active .slide-play-button {
+  background: color-mix(in srgb, #8c8176 50%, transparent);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.slide-play-icon {
+  color: #a39486;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
+  height: 48px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 48px;
+}
+.slide-link:focus-visible .slide-play-icon,
+.slide-link:hover .slide-play-icon {
+  color: #8c8176;
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, #000 30%, transparent));
+  transform: scale(1.05);
+}
+.slide-link:active .slide-play-icon {
+  transform: scale(1);
+}
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
