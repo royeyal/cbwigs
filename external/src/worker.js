@@ -12,15 +12,18 @@ export default {
     const redirectTo = (path) =>
       new Response(null, { status: 302, headers: { Location: path, "Cache-Control": "no-cache" } });
 
-    if (url.pathname === "/main.js" || url.pathname === "/main.css") {
+    if (url.pathname === "/main.js" || url.pathname === "/main.css" || url.pathname === "/draggable-slider.js") {
       const manifest = await getManifest();
       if (!manifest) return new Response("Manifest not found", { status: 500 });
 
       const wantCss = url.pathname.endsWith(".css");
+      const wantSlider = url.pathname === "/draggable-slider.js";
 
       // Preferred explicit keys
       const preferredKeys = wantCss
         ? ["src/styles/main.css", "src/css/main.css"]
+        : wantSlider
+        ? ["src/js/draggable-infinite-slider-standalone.js"]
         : ["src/js/main.js", "src/scripts/main.js"];
 
       // 1) Try explicit key

@@ -14,8 +14,10 @@ The draggable infinite slider creates a smooth, draggable carousel with infinite
 
 ### 2. Load the Slider Script (After GSAP)
 ```html
-<script src="https://cbwigs-assets.roy-eyal.workers.dev/draggable-slider.[hash].js"></script>
+<script src="https://cbwigs-assets.roy-eyal.workers.dev/draggable-slider.js"></script>
 ```
+
+**Note:** The worker automatically redirects to the latest hashed version.
 
 The script will auto-initialize when the page loads.
 
@@ -110,7 +112,7 @@ The slider requires CSS. Either:
 
 2. **Or load the CSS file**:
    ```html
-   <link rel="stylesheet" href="https://cbwigs-assets.roy-eyal.workers.dev/main.[hash].css">
+   <link rel="stylesheet" href="https://cbwigs-assets.roy-eyal.workers.dev/main.css">
    ```
 
 ## Example Webflow Setup
