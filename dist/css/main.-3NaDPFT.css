@@ -794,7 +794,7 @@
   top: 1.25em;
   white-space: nowrap;
 }
-.slide-img {
+.slider__slide-img {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
