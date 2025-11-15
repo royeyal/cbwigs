@@ -156,7 +156,7 @@
   font-size: 0.75em;
 }
 
-.slider-slide {
+.slider__slide {
   flex: none;
   width: 42.5em;
   height: 90vh;

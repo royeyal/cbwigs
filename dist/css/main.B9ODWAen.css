@@ -753,7 +753,7 @@
   margin-bottom: 0;
   margin-top: 0;
 }
-.slider-slide {
+.slider__slide {
   aspect-ratio: 3/4;
   flex: none;
   height: 90vh;
