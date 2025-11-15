@@ -736,7 +736,6 @@
   width: 100%;
 }
 .caption-dot {
-  background-color: #131313;
   border-radius: 10em;
   flex: none;
   height: 0.5em;
@@ -786,7 +785,6 @@
 .slide-caption {
   z-index: 2;
   grid-gap: 0.4em;
-  background-color: #efeeec;
   border-radius: 0.25em;
   color: #131313;
   left: 1.25em;

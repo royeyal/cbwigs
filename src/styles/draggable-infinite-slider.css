@@ -135,7 +135,7 @@
 }
 
 .caption-dot {
-  background-color: #131313;
+  /* background-color: #131313; */
   border-radius: 10em;
   flex: none;
   width: 0.5em;
@@ -190,7 +190,8 @@
   grid-gap: 0.4em;
   color: #131313;
   white-space: nowrap;
-  background-color: #efeeec;
+
+  /* background-color: #efeeec; */
   border-radius: 0.25em;
   justify-content: flex-start;
   align-items: center;
