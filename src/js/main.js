@@ -7,6 +7,7 @@ import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
 import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
+import { initImageTrail } from './image-trail-following-cursor.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -33,6 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize flip counter effect
   initFlipCounter();
 
+  // Initialize image trail following cursor (will only run if wrapper exists)
+  initImageTrail({
+    minWidth: 992,
+    moveDistance: 15,
+    stopDuration: 350,
+    trailLength: 8
+  });
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -45,6 +54,7 @@ export {
   initAccordionCSS,
   initSwiperSlider,
   initFooterParallax,
-  initFlipCounter
+  initFlipCounter,
+  initImageTrail
   // initDraggableInfiniteSlider - only for demo page
 };

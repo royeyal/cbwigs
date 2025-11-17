@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Trail Following Cursor Demo</title>
+  <link rel="stylesheet" href="./styles/image-trail-following-cursor.css">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+<div data-trail="wrapper" class="trail-section">
+  <h1 class="trail-heading">Cursor Image Trail</h1>
+  <div class="trail-wrap">
+    <div class="trail-list">
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f69cd4f5ebc0676bf_cursor-trail-1.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f5d1c4cf365a233ea_cursor-trail-2.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f41234aeca6122868_cursor-trail-3.avif" alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f26b40ce34b76bd14_cursor-trail-4.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9ff0e9944f7a772a8c_cursor-trail-5.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f0bd979d3d6280fc8_cursor-trail-6.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9ff0cb7ef9ce6d4b4a_cursor-trail-7.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f7bf12612bbb66235_cursor-trail-8.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9f916943fe31e14fe7_cursor-trail-9.avif"  alt="" class="trail-item__img"></div>
+      <div data-trail="item" class="trail-item"><img src="https://cdn.prod.website-files.com/679b7e7de9b9ad0339d5524e/679b8e9fcba222367b58fd97_cursor-trail-10.avif"  alt="" class="trail-item__img"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initImageTrail } from './js/image-trail-following-cursor.js';
+  
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    initImageTrail({
+      minWidth: 992,
+      moveDistance: 15,
+      stopDuration: 350,
+      trailLength: 8
+    });
+  });
+</script>
+</body>
+</html>
