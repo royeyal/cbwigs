@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pull Quote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pullquote-bg: #130f0f;
+        --pullquote-text: #ffffff;
+        --pullquote-accent: #b596ac;
+      }
+
+      /* Wrapper */
+      .pull-quote {
+        max-width: 1100px;
+        margin: 3rem auto;
+        padding: 3rem 2.5rem;
+        background-color: var(--pullquote-bg);
+        color: var(--pullquote-text);
+        border-radius: 4px;
+      }
+
+      /* Top & bottom rows */
+      .pull-quote__top-row,
+      .pull-quote__bottom-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Top row – line extends to the right */
+      .pull-quote__top-row {
+        justify-content: flex-start;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Bottom row – line extends to the left, content right-aligned */
+      .pull-quote__bottom-row {
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+      }
+
+      /* Lines */
+      .pull-quote__line {
+        flex: 1;
+        height: 2px;
+        background-color: var(--pullquote-accent);
+      }
+
+      /* Icons */
+      .pull-quote__icon {
+        width: 64px;
+        height: auto;
+      }
+
+      /* Quote text */
+      .pull-quote__text {
+        margin: 0;
+        font-family:
+          'Lobster Two',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        font-size: 2.4rem;
+        line-height: 1.3;
+      }
+
+      /* Author */
+      .pull-quote__author {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      /* ========================= */
+      /*      RESPONSIVE TWEAK     */
+      /* ========================= */
+
+      @media (max-width: 768px) {
+        .pull-quote {
+          padding: 2rem 1.5rem;
+          margin: 2rem 1rem;
+        }
+
+        .pull-quote__text {
+          font-size: 1.6rem;
+          text-align: center;
+        }
+
+        .pull-quote__top-row {
+          justify-content: center;
+          gap: 0.75rem;
+        }
+
+        .pull-quote__bottom-row {
+          /* Stack vertically: line → author → closing quote */
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+
+        .pull-quote__line {
+          flex: 0 0 auto;
+          width: 100%;
+        }
+
+        .pull-quote__icon {
+          width: 40px;
+        }
+
+        .pull-quote__author {
+          font-size: 0.9rem;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <blockquote class="pull-quote">
+      <div class="pull-quote__top-row">
+        <div
+          class="pull-quote__icon pull-quote__icon--start"
+          aria-hidden="true"
+        ></div>
+        <div class="pull-quote__line pull-quote__line--top"></div>
+      </div>
+
+      <p class="pull-quote__text">
+        Patty Meltt’s powerful ballads and toe-tapping anthems had the audience
+        singing along all night.
+      </p>
+
+      <div class="pull-quote__bottom-row">
+        <div class="pull-quote__line pull-quote__line--bottom"></div>
+        <span class="pull-quote__author">Waylon Bootscuffer</span>
+        <div
+          class="pull-quote__icon pull-quote__icon--end"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </blockquote>
+  </body>
+</html>
