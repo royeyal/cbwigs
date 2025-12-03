@@ -116,6 +116,20 @@
   transition: transform 0.6s ease-in-out;
 }
 
+.testimonial-text strong,
+.testimonial-text b {
+  color: var(--_primitives---colors--neutral-darker);
+  font-weight: 900;
+}
+
+.gsap-slider__item strong {
+  transition: background-color 0.5s ease-in-out;
+}
+
+.gsap-slider__item:hover strong {
+  background-color: #131313;
+}
+
 .gsap-slider__item:hover .image {
   transform: scale(1.1);
 }
@@ -170,10 +184,4 @@
 .gsap-slider--breakout .gsap-slider__collection {
   width: 100%;
   max-width: none;
-}
-
-.testimonial-text strong,
-.testimonial-text b {
-  color: var(--_primitives---colors--neutral-darker);
-  font-weight: 900;
 }
