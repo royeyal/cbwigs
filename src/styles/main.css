@@ -20,4 +20,5 @@ html {
 .hero_lightbox:hover .hero_lightbox-thumbnail {
   height: 105%;
   width: 105%;
+  max-width: 105%;
 }
