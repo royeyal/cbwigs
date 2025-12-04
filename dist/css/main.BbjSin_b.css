@@ -883,7 +883,7 @@ html {
   pointer-events: none;
 }
 .hero_lightbox .hero_lightbox-thumbnail {
-  transition: scale 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 .hero_lightbox:hover .hero_lightbox-thumbnail {
   transform: scale(1.15);
