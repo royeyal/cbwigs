@@ -17,6 +17,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.hero_content {
+  pointer-events: none;
+}
+
 .hero_lightbox .hero_lightbox-thumbnail {
   transition: scale 0.5s ease-in-out;
 }
