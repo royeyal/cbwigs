@@ -16,3 +16,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+.section_hero_lightbox:hover .hero_lightbox-thumbnail {
+  width: 120%;
+}
