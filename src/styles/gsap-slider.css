@@ -65,7 +65,7 @@
           var(--slider-spv, 3)
       )
   );
-  max-width: 350px; /* Limit maximum slide width */
+  max-width: 340px; /* Limit maximum slide width */
   min-width: 200px; /* Minimum width fallback */
 
   /* Ensure items don't block dragging */
