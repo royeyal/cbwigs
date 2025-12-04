@@ -70,7 +70,6 @@
 
 /* Play Button */
 .youtube-play-button {
-  position: relative;
   z-index: 2;
   width: 80px;
   height: 80px;
