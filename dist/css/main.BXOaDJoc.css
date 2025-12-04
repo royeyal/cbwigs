@@ -582,6 +582,8 @@
   color: #6b625a;
   font-size: 1.125rem;
   line-height: 1.6;
+  max-width: 40ch;
+  text-wrap: pretty;
 }
 .layout485_content .layout485_number {
   display: none;

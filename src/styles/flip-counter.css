@@ -74,6 +74,8 @@
   font-size: 1.125rem;
   line-height: 1.6;
   color: #6b625a;
+  max-width: 40ch;
+  text-wrap: pretty;
 }
 
 /* Hide mobile number by default */
