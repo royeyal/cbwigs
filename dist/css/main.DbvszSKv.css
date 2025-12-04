@@ -882,6 +882,10 @@ html {
 .hero_lightbox .hero_lightbox-thumbnail {
   height: auto;
   max-width: 100%;
+  transition:
+    height 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+    max-width 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+    width 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   width: 100%;
 }
 .hero_lightbox:hover .hero_lightbox-thumbnail {
