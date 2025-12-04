@@ -17,8 +17,14 @@ html {
   scroll-behavior: smooth;
 }
 
+.hero_lightbox .hero_lightbox-thumbnail {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 .hero_lightbox:hover .hero_lightbox-thumbnail {
-  height: 105%;
-  width: 105%;
-  max-width: 105%;
+  height: 115%;
+  max-width: 130%;
+  width: 130%;
 }

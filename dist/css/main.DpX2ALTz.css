@@ -879,10 +879,15 @@
 html {
   scroll-behavior: smooth;
 }
+.hero_lightbox .hero_lightbox-thumbnail {
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
 .hero_lightbox:hover .hero_lightbox-thumbnail {
-  height: 105%;
-  max-width: 105%;
-  width: 105%;
+  height: 115%;
+  max-width: 130%;
+  width: 130%;
 }
 :root {
   --swiper-theme-color: #007aff;
