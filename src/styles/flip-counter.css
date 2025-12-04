@@ -52,13 +52,13 @@
 .layout485_content-right {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 0;
 }
 
 /* Individual content items */
 .layout485_content {
-  min-height: 30vh;
-  padding: 2rem;
+  min-height: 27vh;
+  padding: 1.5rem;
 }
 
 /* Content typography */
