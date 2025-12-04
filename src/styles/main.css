@@ -22,9 +22,9 @@ html {
 }
 
 .hero_lightbox .hero_lightbox-thumbnail {
-  transition: transform 0.5s ease-in-out;
+  transition: transform 1s ease-in-out;
 }
 
 .hero_lightbox:hover .hero_lightbox-thumbnail {
-  transform: scale(1.15);
+  transform: scale(1.05);
 }
