@@ -8,6 +8,7 @@ import { initSwiperSlider } from './swipeslider.js';
 import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
+import { initDisplayCount } from './display-count.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -42,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     trailLength: 8
   });
 
+  // Initialize display count (will only run if count groups exist)
+  initDisplayCount();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -55,6 +59,7 @@ export {
   initSwiperSlider,
   initFooterParallax,
   initFlipCounter,
-  initImageTrail
+  initImageTrail,
+  initDisplayCount
   // initDraggableInfiniteSlider - only for demo page
 };
