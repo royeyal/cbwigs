@@ -112,17 +112,19 @@
 }
 
 /* Animation for play icon in hero (optional enhancement) */
-.lightbox-play-icon {
-  transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
-}
+.section-hero-lightbox {
+  .lightbox-play-icon {
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
 
-.lightbox-play-icon:hover {
-  transform: scale(1.1);
-  opacity: 0.9;
-}
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
 
-.lightbox-play-icon:active {
-  transform: scale(0.95);
+    &:active {
+      transform: scale(0.95);
+    }
+  }
 }

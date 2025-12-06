@@ -594,16 +594,16 @@
     top: 8px;
   }
 }
-.lightbox-play-icon {
+.section-hero-lightbox .lightbox-play-icon {
   transition:
     transform 0.3s ease,
     opacity 0.3s ease;
 }
-.lightbox-play-icon:hover {
+.section-hero-lightbox .lightbox-play-icon:hover {
   opacity: 0.9;
   transform: scale(1.1);
 }
-.lightbox-play-icon:active {
+.section-hero-lightbox .lightbox-play-icon:active {
   transform: scale(0.95);
 }
 [data-underline-link] {
