@@ -9,6 +9,7 @@ import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
 import { initDisplayCount } from './display-count.js';
+import { initYouTubeLightbox } from './youtube-lightbox.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -46,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize display count (will only run if count groups exist)
   initDisplayCount();
 
+  // Initialize YouTube lightbox modal (will only run if hero lightbox exists)
+  initYouTubeLightbox();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -60,6 +64,7 @@ export {
   initFooterParallax,
   initFlipCounter,
   initImageTrail,
-  initDisplayCount
+  initDisplayCount,
+  initYouTubeLightbox
   // initDraggableInfiniteSlider - only for demo page
 };
