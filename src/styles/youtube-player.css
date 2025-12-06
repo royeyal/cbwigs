@@ -4,7 +4,7 @@
  */
 
 /* Base YouTube Player Container */
-.youtube-player {
+[data-youtube-short].youtube-player {
   width: 100%;
   background-color: #000;
   border-radius: 12px;
@@ -75,6 +75,7 @@
     #a39486 30%,
     transparent
   ); /* Brand neutral-dark */
+
   backdrop-filter: blur(20px);
   cursor: pointer;
   display: flex;
@@ -218,6 +219,7 @@
         #a39486 40%,
         transparent
       ); /* neutral-dark */
+
       padding: 12px 24px;
       border-radius: 8px;
       backdrop-filter: blur(10px);
@@ -310,6 +312,7 @@
       #a39486 50%,
       transparent
     ); /* Brand neutral-dark */
+
     border: 2px solid #a39486;
   }
 
@@ -322,6 +325,7 @@
           #8c8176 70%,
           transparent
         ); /* Brand neutral-darker */
+
         border-color: #8c8176;
       }
 

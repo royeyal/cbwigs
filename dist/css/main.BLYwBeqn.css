@@ -234,33 +234,33 @@
 [data-accordion-status='active'] .accordion-css__item-icon {
   transform: rotate(0.001deg);
 }
-.youtube-player {
+[data-youtube-short].youtube-player {
   background-color: #000;
   border-radius: 12px;
   overflow: hidden;
   transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
 }
-.youtube-player.youtube-video {
+[data-youtube-short].youtube-player.youtube-video {
   aspect-ratio: 16/9;
 }
-.youtube-player.youtube-short {
+[data-youtube-short].youtube-player.youtube-short {
   aspect-ratio: 9/16;
   margin-left: auto;
   margin-right: auto;
   max-width: 25rem;
 }
-.youtube-player.youtube-active {
+[data-youtube-short].youtube-player.youtube-active {
   box-shadow: 0 8px 32px #0000004d;
 }
-.youtube-player.youtube-error {
+[data-youtube-short].youtube-player.youtube-error {
   background: linear-gradient(
     135deg,
     color-mix(in srgb, #1a1a1ae0 100%, transparent),
     color-mix(in srgb, #070707 100%, transparent)
   );
 }
-.youtube-player.youtube-error:after {
+[data-youtube-short].youtube-player.youtube-error:after {
   color: color-mix(in srgb, #f4efe8 60%, transparent);
   content: 'Video unavailable';
   font-size: 14px;
