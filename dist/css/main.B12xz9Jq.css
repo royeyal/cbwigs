@@ -981,9 +981,6 @@
 html {
   scroll-behavior: smooth;
 }
-.hero_content {
-  pointer-events: none;
-}
 .hero_lightbox .hero_lightbox-thumbnail {
   transition: transform 1s ease-in-out;
 }
