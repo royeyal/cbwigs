@@ -19,7 +19,7 @@
 
 .youtube-player.youtube-short {
   aspect-ratio: 9 / 16;
-  max-width: 400px;
+  max-width: 25rem; /* 400px */
   margin-left: auto;
   margin-right: auto;
 }
