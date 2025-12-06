@@ -5,33 +5,58 @@
  */
 
 export function initYouTubeLightbox() {
+  console.log('[YouTube Lightbox] Initializing...');
+
   let activeModal = null;
   let activePlayer = null;
   let apiReady = false;
 
   /**
-   * Load YouTube IFrame API
+   * Load YouTube IFrame API (compatible with youtube-player.js)
    */
   function loadYouTubeAPI() {
+    console.log('[YouTube Lightbox] Loading YouTube API...');
+
     // Check if API is already loaded
     if (window.YT && window.YT.Player) {
+      console.log('[YouTube Lightbox] YouTube API already loaded');
       apiReady = true;
       return Promise.resolve();
     }
 
     return new Promise(resolve => {
-      // Create callback for when API is ready
+      // Store existing callback if present (from youtube-player.js)
+      const existingCallback = window.onYouTubeIframeAPIReady;
+
+      // Create combined callback
       window.onYouTubeIframeAPIReady = () => {
+        console.log('[YouTube Lightbox] YouTube API ready');
         apiReady = true;
+
+        // Call existing callback if it exists
+        if (existingCallback && typeof existingCallback === 'function') {
+          existingCallback();
+        }
+
         resolve();
       };
 
       // Load the API script if not already present
       if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+        console.log('[YouTube Lightbox] Loading YouTube IFrame API script');
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      } else {
+        console.log(
+          '[YouTube Lightbox] YouTube IFrame API script already exists'
+        );
+        // API script exists but might not be ready yet, wait for it
+        if (window.YT && window.YT.Player) {
+          apiReady = true;
+          resolve();
+        }
       }
     });
   }
@@ -91,18 +116,22 @@ export function initYouTubeLightbox() {
    * Open lightbox and play video
    */
   async function openLightbox(videoId) {
+    console.log('[YouTube Lightbox] Opening lightbox with video ID:', videoId);
+
     if (!videoId) {
-      console.error('No video ID provided');
+      console.error('[YouTube Lightbox] No video ID provided');
       return;
     }
 
     // Ensure API is loaded
     if (!apiReady) {
+      console.log('[YouTube Lightbox] API not ready, loading...');
       await loadYouTubeAPI();
     }
 
     // Create modal if it doesn't exist
     if (!activeModal) {
+      console.log('[YouTube Lightbox] Creating modal');
       activeModal = createModal();
 
       // Close button handler
@@ -123,13 +152,17 @@ export function initYouTubeLightbox() {
     }
 
     // Show modal
+    console.log('[YouTube Lightbox] Showing modal');
     document.body.style.overflow = 'hidden';
     activeModal.classList.add('active');
 
     // Small delay to ensure modal is rendered before creating player
     setTimeout(() => {
+      console.log('[YouTube Lightbox] Creating YouTube player');
+
       // Destroy existing player if any
       if (activePlayer) {
+        console.log('[YouTube Lightbox] Destroying existing player');
         activePlayer.destroy();
       }
 
@@ -144,8 +177,14 @@ export function initYouTubeLightbox() {
           origin: window.location.origin
         },
         events: {
+          onReady: () => {
+            console.log('[YouTube Lightbox] Player ready');
+          },
+          onStateChange: event => {
+            console.log('[YouTube Lightbox] Player state changed:', event.data);
+          },
           onError: event => {
-            console.error('YouTube player error:', event.data);
+            console.error('[YouTube Lightbox] Player error:', event.data);
           }
         }
       });
@@ -156,10 +195,13 @@ export function initYouTubeLightbox() {
    * Close lightbox and stop video
    */
   function closeLightbox() {
+    console.log('[YouTube Lightbox] Closing lightbox');
+
     if (!activeModal) return;
 
     // Stop and destroy player
     if (activePlayer) {
+      console.log('[YouTube Lightbox] Destroying player');
       activePlayer.destroy();
       activePlayer = null;
     }
@@ -179,32 +221,75 @@ export function initYouTubeLightbox() {
    * Initialize lightbox triggers
    */
   function initTriggers() {
+    console.log('[YouTube Lightbox] Initializing triggers...');
+
     // Find all hero sections with lightbox functionality
     const heroSections = document.querySelectorAll('.section-hero-lightbox');
+    console.log(
+      '[YouTube Lightbox] Found',
+      heroSections.length,
+      'hero sections'
+    );
 
-    heroSections.forEach(section => {
+    heroSections.forEach((section, index) => {
+      console.log(
+        `[YouTube Lightbox] Processing section ${index + 1}:`,
+        section
+      );
+
       // Get the hero lightbox component
       const heroLightbox = section.querySelector('.hero_lightbox');
-      if (!heroLightbox) return;
+      if (!heroLightbox) {
+        console.warn(
+          `[YouTube Lightbox] Section ${index + 1}: No .hero_lightbox found`
+        );
+        return;
+      }
+      console.log(
+        `[YouTube Lightbox] Section ${index + 1}: Found hero_lightbox`,
+        heroLightbox
+      );
 
       // Get the play icon trigger
       const playIcon = heroLightbox.querySelector('.lightbox-play-icon');
-      if (!playIcon) return;
+      if (!playIcon) {
+        console.warn(
+          `[YouTube Lightbox] Section ${index + 1}: No .lightbox-play-icon found`
+        );
+        return;
+      }
+      console.log(
+        `[YouTube Lightbox] Section ${index + 1}: Found play icon`,
+        playIcon
+      );
 
       // Get video ID from data attribute
-      const videoId = extractVideoId(
+      const rawVideoId =
         section.dataset.youtubeId ||
-          heroLightbox.dataset.youtubeId ||
-          playIcon.dataset.youtubeId
+        heroLightbox.dataset.youtubeId ||
+        playIcon.dataset.youtubeId;
+
+      console.log(
+        `[YouTube Lightbox] Section ${index + 1}: Raw video ID:`,
+        rawVideoId
+      );
+
+      const videoId = extractVideoId(rawVideoId);
+      console.log(
+        `[YouTube Lightbox] Section ${index + 1}: Extracted video ID:`,
+        videoId
       );
 
       if (!videoId) {
-        console.warn('No YouTube ID found for hero lightbox:', section);
+        console.warn(
+          `[YouTube Lightbox] Section ${index + 1}: No YouTube ID found`
+        );
         return;
       }
 
       // Add click handler
       const handleClick = e => {
+        console.log('[YouTube Lightbox] Play icon clicked for video:', videoId);
         e.preventDefault();
         openLightbox(videoId);
       };
@@ -219,21 +304,37 @@ export function initYouTubeLightbox() {
 
       playIcon.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
+          console.log(
+            '[YouTube Lightbox] Play icon keyboard activated for video:',
+            videoId
+          );
           e.preventDefault();
           handleClick(e);
         }
       });
+
+      console.log(`[YouTube Lightbox] Section ${index + 1}: Setup complete`);
     });
   }
 
   // Initialize on load
-  loadYouTubeAPI().then(() => {
-    initTriggers();
-  });
+  console.log('[YouTube Lightbox] Starting initialization sequence');
+  loadYouTubeAPI()
+    .then(() => {
+      console.log('[YouTube Lightbox] API loaded, initializing triggers');
+      initTriggers();
+    })
+    .catch(error => {
+      console.error('[YouTube Lightbox] Error during initialization:', error);
+    });
 
   // Re-initialize on Webflow interactions (if Webflow is present)
   if (window.Webflow) {
+    console.log(
+      '[YouTube Lightbox] Webflow detected, setting up page transition handler'
+    );
     window.Webflow.push(() => {
+      console.log('[YouTube Lightbox] Webflow page transition, reinitializing');
       initTriggers();
     });
   }
