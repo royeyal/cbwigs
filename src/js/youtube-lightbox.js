@@ -167,6 +167,7 @@ export function initYouTubeLightbox() {
       }
 
       // Create new YouTube player
+      // Note: origin parameter removed to prevent CORS issues
       activePlayer = new window.YT.Player('youtube-lightbox-player', {
         videoId,
         playerVars: {
@@ -174,7 +175,7 @@ export function initYouTubeLightbox() {
           modestbranding: 1,
           rel: 0,
           playsinline: 1,
-          origin: window.location.origin
+          enablejsapi: 1
         },
         events: {
           onReady: () => {
@@ -185,6 +186,9 @@ export function initYouTubeLightbox() {
           },
           onError: event => {
             console.error('[YouTube Lightbox] Player error:', event.data);
+            console.error(
+              '[YouTube Lightbox] Error codes: 2=Invalid ID, 5=HTML5 error, 100=Not found, 101/150=Embed disabled'
+            );
           }
         }
       });
