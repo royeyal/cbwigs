@@ -283,7 +283,7 @@
     filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
 }
-.youtube-play-button {
+.youtube-player .youtube-play-button {
   align-items: center;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -303,7 +303,7 @@
   width: 80px;
   z-index: 2;
 }
-.youtube-play-button:before {
+.youtube-player .youtube-play-button:before {
   background: linear-gradient(
     135deg,
     color-mix(in srgb, #c8bfb3 15%, transparent),
