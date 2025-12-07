@@ -167,7 +167,7 @@
 .gsap-slider__item:hover .testimonial-name-wrapper .testimonial-name {
   font-size: 1rem;
 }
-.gsap-slider__item .image {
+.gsap-slider__item .slider-Image {
   transition: transform 0.6s ease-in-out;
 }
 .testimonial-text b,
@@ -182,7 +182,7 @@
 .gsap-slider__item:hover p {
   color: transparent;
 }
-.gsap-slider__item:hover .image {
+.gsap-slider__item:hover .slider-Image {
   transform: scale(1.1);
 }
 .gsap-slider__list {
