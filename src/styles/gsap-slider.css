@@ -112,7 +112,7 @@
   font-size: 1rem;
 }
 
-.gsap-slider__item .slider-Image {
+.gsap-slider__item .slider-image {
   transition: transform 0.6s ease-in-out;
 }
 
@@ -150,7 +150,7 @@
   background-size: cover;
 } */
 
-.gsap-slider__item:hover .slider-Image {
+.gsap-slider__item:hover .slider-image {
   transform: scale(1.1);
 }
 
