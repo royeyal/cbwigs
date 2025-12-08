@@ -8,6 +8,7 @@
 @import url('./underline-links.css');
 @import url('./flip-counter.css');
 @import url('./draggable-infinite-slider.css');
+@import url('./layout-grid-flip.css');
 
 /* Global styles */
 :root {

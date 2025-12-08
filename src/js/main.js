@@ -10,6 +10,7 @@ import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
 import { initDisplayCount } from './display-count.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
+import { initLayoutGridFlip } from './layout-grid-flip.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -50,6 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize YouTube lightbox modal (will only run if hero lightbox exists)
   initYouTubeLightbox();
 
+  // Initialize layout grid flip (will only run if layout groups exist)
+  initLayoutGridFlip();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -65,6 +69,7 @@ export {
   initFlipCounter,
   initImageTrail,
   initDisplayCount,
-  initYouTubeLightbox
+  initYouTubeLightbox,
+  initLayoutGridFlip
   // initDraggableInfiniteSlider - only for demo page
 };
