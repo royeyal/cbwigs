@@ -7,28 +7,13 @@
  * Supports "large" (3 columns) and "small" (5 columns) layouts with responsive breakpoints
  */
 export function initLayoutGridFlip() {
-  // Check for GSAP dependencies
-  if (typeof window.gsap === 'undefined' || !window.gsap.registerPlugin) {
-    console.warn(
-      '[Layout Grid Flip] GSAP library not found. Skipping initialization.'
-    );
-    return;
-  }
-
-  // Register Flip plugin if not already registered
-  if (typeof window.Flip !== 'undefined' && window.gsap.registerPlugin) {
+  // Register Flip plugin if available (Webflow loads GSAP globally)
+  if (typeof window.Flip !== 'undefined' && window.gsap?.registerPlugin) {
     try {
       window.gsap.registerPlugin(window.Flip);
     } catch (_e) {
-      // Plugin already registered or other error, continue
+      // Plugin already registered, continue
     }
-  }
-
-  if (typeof window.gsap.Flip === 'undefined') {
-    console.warn(
-      '[Layout Grid Flip] GSAP Flip plugin not found. Skipping initialization.'
-    );
-    return;
   }
 
   const groups = document.querySelectorAll('[data-layout-group]');
