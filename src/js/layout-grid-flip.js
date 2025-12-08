@@ -16,8 +16,9 @@ export function initLayoutGridFlip() {
     }
   }
 
-  // Check if Flip is available after registration attempt
-  if (!window.gsap?.Flip) {
+  // Check if Flip is available (try both gsap.Flip and gsap.plugins.Flip)
+  const Flip = window.gsap?.Flip || window.gsap?.plugins?.Flip;
+  if (!Flip) {
     console.warn(
       '[Layout Grid Flip] GSAP Flip plugin not available. Make sure Flip plugin is loaded in Webflow.'
     );
@@ -80,7 +81,7 @@ export function initLayoutGridFlip() {
 
         // Record state of items
         const items = grid.querySelectorAll('[data-layout-grid-item]');
-        const state = window.gsap.Flip.getState(items, { simple: true });
+        const state = Flip.getState(items, { simple: true });
 
         // Measure current height on the collection (force layout first)
         collection.getBoundingClientRect();
@@ -120,7 +121,7 @@ export function initLayoutGridFlip() {
         });
 
         tl.add(
-          window.gsap.Flip.from(state, {
+          Flip.from(state, {
             duration: 0.65,
             ease: 'power4.inOut',
             absolute: true,
