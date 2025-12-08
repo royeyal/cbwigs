@@ -15,7 +15,7 @@ export function initLayoutGridFlip() {
     return;
   }
 
-  if (typeof window.Flip === 'undefined') {
+  if (typeof window.gsap.Flip === 'undefined') {
     console.warn(
       '[Layout Grid Flip] GSAP Flip plugin not found. Skipping initialization.'
     );
