@@ -7,23 +7,35 @@
  * Supports "large" (3 columns) and "small" (5 columns) layouts with responsive breakpoints
  */
 export function initLayoutGridFlip() {
+  // Debug: Check what's available
+  console.log('[Layout Grid Flip] Checking for Flip plugin...');
+  console.log('[Layout Grid Flip] window.gsap:', typeof window.gsap);
+  console.log('[Layout Grid Flip] window.gsap.Flip:', typeof window.gsap?.Flip);
+  console.log('[Layout Grid Flip] window.gsap.plugins:', window.gsap?.plugins);
+  console.log('[Layout Grid Flip] window.Flip:', typeof window.Flip);
+
   // Register Flip plugin if available (Webflow loads GSAP globally)
   if (typeof window.Flip !== 'undefined' && window.gsap?.registerPlugin) {
     try {
       window.gsap.registerPlugin(window.Flip);
+      console.log('[Layout Grid Flip] Registered window.Flip with GSAP');
     } catch (_e) {
-      // Plugin already registered, continue
+      console.log('[Layout Grid Flip] Plugin already registered or error:', _e);
     }
   }
 
-  // Check if Flip is available (try both gsap.Flip and gsap.plugins.Flip)
-  const Flip = window.gsap?.Flip || window.gsap?.plugins?.Flip;
+  // Check if Flip is available (try multiple locations)
+  const Flip = window.gsap?.Flip || window.gsap?.plugins?.Flip || window.Flip;
+  console.log('[Layout Grid Flip] Flip resolved to:', Flip);
+
   if (!Flip) {
     console.warn(
       '[Layout Grid Flip] GSAP Flip plugin not available. Make sure Flip plugin is loaded in Webflow.'
     );
     return;
   }
+
+  console.log('[Layout Grid Flip] Flip plugin found, initializing...');
 
   const groups = document.querySelectorAll('[data-layout-group]');
 
