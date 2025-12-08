@@ -16,6 +16,14 @@ export function initLayoutGridFlip() {
     }
   }
 
+  // Check if Flip is available after registration attempt
+  if (!window.gsap?.Flip) {
+    console.warn(
+      '[Layout Grid Flip] GSAP Flip plugin not available. Make sure Flip plugin is loaded in Webflow.'
+    );
+    return;
+  }
+
   const groups = document.querySelectorAll('[data-layout-group]');
 
   if (groups.length === 0) {
