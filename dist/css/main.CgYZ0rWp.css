@@ -638,7 +638,7 @@
   font-size: 4rem;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
-  gap: 0.5rem;
+  gap: 0;
   height: -moz-fit-content;
   height: fit-content;
   line-height: 1;
