@@ -75,8 +75,8 @@ export function initFlipCounter() {
     contentItems.forEach((content, index) => {
       ScrollTrigger.create({
         trigger: content,
-        start: 'top center',
-        end: 'bottom center',
+        start: 'center center',
+        end: 'center+=50% center',
         onEnter: () => updateCounter(numbers, index),
         onEnterBack: () => updateCounter(numbers, index),
         markers: true // Uncomment for debugging
