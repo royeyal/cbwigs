@@ -75,11 +75,11 @@ export function initFlipCounter() {
     contentItems.forEach((content, index) => {
       ScrollTrigger.create({
         trigger: content,
-        start: 'top 80%',
-        end: 'bottom top',
+        start: 'top center',
+        end: 'bottom center',
         onEnter: () => updateCounter(numbers, index),
-        onEnterBack: () => updateCounter(numbers, index)
-        // markers: true // Uncomment for debugging
+        onEnterBack: () => updateCounter(numbers, index),
+        markers: true // Uncomment for debugging
       });
     });
   });
