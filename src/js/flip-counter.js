@@ -132,3 +132,10 @@ export function destroyFlipCounter() {
     }
   });
 }
+
+// Refresh ScrollTrigger on page load to handle reloads mid-scroll
+window.addEventListener('load', () => {
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
+  }
+});
