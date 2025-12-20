@@ -90,7 +90,7 @@ function initMaskTextScrollReveal() {
             }
 
             try {
-              gsap.set(targetElement, { visibility: 'visible' });
+              gsap.set(targetElement, { autoAlpha: 1 });
             } catch (error) {
               console.error('❌ Failed to set visibility:', error);
             }
