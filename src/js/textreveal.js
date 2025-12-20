@@ -32,7 +32,16 @@ function initMaskTextScrollReveal() {
       return;
     }
 
-    const headings = document.querySelectorAll('[data-split="heading"]');
+    // Configuration for different split types
+    const splitConfig = {
+      lines: { duration: 0.8, stagger: 0.08 },
+      words: { duration: 0.6, stagger: 0.06 },
+      chars: { duration: 0.4, stagger: 0.01 }
+    };
+
+    const headings = document.querySelectorAll(
+      '[data-split="heading"], [data-split-reveal]'
+    );
 
     if (!headings.length) {
       return;
@@ -46,12 +55,25 @@ function initMaskTextScrollReveal() {
       }
 
       try {
+        // Find the split type, the default is 'lines'
+        const type = heading.dataset.splitReveal || 'lines';
+        const typesToSplit =
+          type === 'lines'
+            ? ['lines']
+            : type === 'words'
+              ? ['lines', 'words']
+              : ['lines', 'words', 'chars'];
+
+        const config = splitConfig[type] || splitConfig.lines;
+
         // Use GSAP 3.13.0+ autoSplit with onRevert functionality
         SplitText.create(heading, {
-          type: 'lines,words',
+          type: typesToSplit.join(','),
+          mask: 'lines', // wrap each line in an overflow:hidden div
+          autoSplit: true,
           linesClass: 'line',
           wordsClass: 'word',
-          autoSplit: true,
+          charsClass: 'char',
           onSplit(self) {
             // Use the heading element from the outer scope instead of self.original
             const targetElement =
@@ -78,10 +100,18 @@ function initMaskTextScrollReveal() {
               heading.classList.add('split-ready');
             }
 
+            // Determine which elements to animate based on type
+            const elementsToAnimate =
+              type === 'lines'
+                ? self.lines
+                : type === 'words'
+                  ? self.words
+                  : self.chars;
+
             // Return animation - it will be cleaned up and time-synced on each onSplit() call
-            if (self.words && self.words.length > 0) {
+            if (elementsToAnimate && elementsToAnimate.length > 0) {
               // Set initial state
-              gsap.set(self.words, {
+              gsap.set(elementsToAnimate, {
                 yPercent: 100,
                 opacity: 0
               });
@@ -91,11 +121,11 @@ function initMaskTextScrollReveal() {
                 trigger: heading,
                 start: 'top 80%',
                 onEnter: () => {
-                  gsap.to(self.words, {
+                  gsap.to(elementsToAnimate, {
                     yPercent: 0,
                     opacity: 1,
-                    duration: 0.8,
-                    stagger: 0.08,
+                    duration: config.duration,
+                    stagger: config.stagger,
                     ease: 'power2.out',
                     onComplete: () => {
                       // Revert the element to its original (unsplit) state after animation
