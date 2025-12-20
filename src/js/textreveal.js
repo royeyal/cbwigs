@@ -119,14 +119,14 @@ function initMaskTextScrollReveal() {
               // Create and return scroll-triggered animation
               return ScrollTrigger.create({
                 trigger: heading,
-                start: 'top 80%',
+                start: 'clamp(top 80%)',
                 onEnter: () => {
                   gsap.to(elementsToAnimate, {
                     yPercent: 0,
                     opacity: 1,
                     duration: config.duration,
                     stagger: config.stagger,
-                    ease: 'power2.out',
+                    ease: 'expo.out',
                     onComplete: () => {
                       // Revert the element to its original (unsplit) state after animation
                       // This helps with performance and accessibility
