@@ -116,25 +116,44 @@ function initMaskTextScrollReveal() {
                 opacity: 0
               });
 
-              // Create and return scroll-triggered animation
-              return ScrollTrigger.create({
-                trigger: heading,
-                start: 'clamp(top 80%)',
-                onEnter: () => {
-                  gsap.to(elementsToAnimate, {
-                    yPercent: 0,
-                    opacity: 1,
-                    duration: config.duration,
-                    stagger: config.stagger,
-                    ease: 'expo.out',
-                    onComplete: () => {
-                      // Revert the element to its original (unsplit) state after animation
-                      // This helps with performance and accessibility
-                      self.revert();
-                    }
-                  });
-                }
-              });
+              // Check if heading is an H1 tag
+              const isH1 = heading.tagName.toLowerCase() === 'h1';
+
+              if (isH1) {
+                // For H1 tags, animate immediately without ScrollTrigger
+                return gsap.to(elementsToAnimate, {
+                  yPercent: 0,
+                  opacity: 1,
+                  duration: config.duration,
+                  stagger: config.stagger,
+                  ease: 'expo.out',
+                  onComplete: () => {
+                    // Revert the element to its original (unsplit) state after animation
+                    // This helps with performance and accessibility
+                    self.revert();
+                  }
+                });
+              } else {
+                // For other headings, use ScrollTrigger
+                return ScrollTrigger.create({
+                  trigger: heading,
+                  start: 'clamp(top 80%)',
+                  onEnter: () => {
+                    gsap.to(elementsToAnimate, {
+                      yPercent: 0,
+                      opacity: 1,
+                      duration: config.duration,
+                      stagger: config.stagger,
+                      ease: 'expo.out',
+                      onComplete: () => {
+                        // Revert the element to its original (unsplit) state after animation
+                        // This helps with performance and accessibility
+                        self.revert();
+                      }
+                    });
+                  }
+                });
+              }
             }
           }
         });
