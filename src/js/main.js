@@ -5,7 +5,6 @@ import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
-import { initFooterParallax } from './footer-parallax.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
 import { initDisplayCount } from './display-count.js';
@@ -30,9 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
   initSwiperSlider();
-
-  // Initialize footer parallax effect
-  initFooterParallax();
 
   // Initialize flip counter effect
   initFlipCounter();
@@ -65,7 +61,6 @@ export {
   initBasicGSAPSlider,
   initAccordionCSS,
   initSwiperSlider,
-  initFooterParallax,
   initFlipCounter,
   initImageTrail,
   initDisplayCount,
