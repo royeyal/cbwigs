@@ -115,6 +115,8 @@ a.nav-link:focus-visible .nav-link__label::after {
   transform-origin: left center;
 }
 
+/* ———— Sticky nav ———— */
+[data-menu-status='open'] .nav-logo,
 [data-dropdown-toggle='open'] .nav-logo,
 .is-scrolled .nav-logo {
   filter: invert(0);

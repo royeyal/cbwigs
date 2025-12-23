@@ -1147,7 +1147,8 @@ a.nav-link:hover .nav-link__label:after {
   transform-origin: left center;
 }
 .is-scrolled .nav-logo,
-[data-dropdown-toggle='open'] .nav-logo {
+[data-dropdown-toggle='open'] .nav-logo,
+[data-menu-status='open'] .nav-logo {
   filter: invert(0);
 }
 .is-scrolled {
