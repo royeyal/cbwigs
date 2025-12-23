@@ -1070,6 +1070,18 @@ a:focus-visible,
 button:focus-visible {
   outline: 1px solid var(--color-dark);
 }
+.nav-bg {
+  transition: height var(--duration-normal) var(--cubic-default);
+}
+.page-bg {
+  transition: opacity var(--duration-fast) var(--cubic-default);
+}
+.nav {
+  transition: color var(--duration-fast) var(--cubic-default);
+}
+.nav-button {
+  transition: all var(--duration-fast) var(--cubic-default);
+}
 .nav-dropdown {
   transition:
     all var(--duration-fast) ease,
@@ -1092,203 +1104,112 @@ button:focus-visible {
   pointer-events: auto;
   visibility: visible;
 }
-.nav-bg {
-  transition: height var(--duration-normal) var(--cubic-default);
-}
-.page-bg {
-  transition: opacity var(--duration-fast) var(--cubic-default);
-}
-.nav {
-  transition: color var(--duration-fast) var(--cubic-default);
-}
-.nav-button,
-.nav-button.is--primary {
-  transition: all var(--duration-fast) var(--cubic-default);
-}
+.wf-design-mode body:has([data-dropdown-toggle='open']) .nav-bg,
 :is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
+    body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-visible
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:hover
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:focus-within
     )
   )
   .nav-bg {
   height: var(--nav-bg-height);
 }
+.wf-design-mode body:has([data-dropdown-toggle='open']) .page-bg,
 :is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
+    body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-visible
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:hover
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:focus-within
     )
   )
   .page-bg {
   opacity: 1;
 }
+.wf-design-mode body:has([data-dropdown-toggle='open']) .nav,
 :is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
+    body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-visible
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:hover
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:focus-within
     )
   )
-  .nav,
+  .nav {
+  color: var(--color-dark);
+}
+.wf-design-mode body:has([data-dropdown-toggle='open']) .nav-button,
 :is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
+    body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-visible
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:hover
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:focus-within
     )
   )
   .nav-button {
+  border-color: var(--color-dark);
   color: var(--color-dark);
 }
+.wf-design-mode body:has([data-dropdown-toggle='open']) .nav-button.is--primary,
 :is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
-    )
-  )
-  .nav-button,
-:is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
-    )
-  )
-  .nav-button.is--primary {
-  border-color: var(--color-dark);
-}
-:is(
-    .wf-design-mode body:has([data-dropdown-toggle='open']),
-    :is(
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not(
-            [data-dropdown-toggle='closed']
-          ):focus-visible
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:hover
-      ),
-      body:has(
-        [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
-          + .nav-dropdown:focus-within
-      )
+    body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-visible
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed']):focus-within
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:hover
+    ),
+    body:has(
+      [data-dropdown-toggle]:not([data-dropdown-toggle='closed'])
+        + .nav-dropdown:focus-within
     )
   )
   .nav-button.is--primary {
   background-color: var(--color-dark);
+  border-color: var(--color-dark);
   color: #fff;
 }
 .nav-link__dropdown-icon {
@@ -1387,7 +1308,7 @@ body:has([data-dropdown-toggle]:not([data-dropdown-toggle='closed']):hover)
   background: #d7d1cd;
 }
 a.nav-link .nav-link__label:after {
-  background: currentColor;
+  background: currentcolor;
   bottom: -1px;
   content: '';
   height: 1px;
@@ -1456,6 +1377,10 @@ a.nav-link:hover .nav-link__label:after {
   [data-dropdown-toggle='open'] .nav-link__dropdown-icon {
     transform: rotate(180deg);
   }
+}
+[dir='rtl'] .nav-dropdown__link-bubble svg,
+html[dir='rtl'] .nav-dropdown__link-bubble svg {
+  transform: scaleX(-1);
 }
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
