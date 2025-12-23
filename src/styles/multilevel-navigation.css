@@ -184,9 +184,3 @@ a.nav-link:focus-visible .nav-link__label::after {
     transform: rotate(180deg);
   }
 }
-
-/* ———— RTL SUPPORT ———— */
-[dir='rtl'] .nav-dropdown__link-bubble svg,
-html[dir='rtl'] .nav-dropdown__link-bubble svg {
-  transform: scaleX(-1);
-}
