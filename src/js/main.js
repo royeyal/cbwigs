@@ -11,6 +11,7 @@ import { initDisplayCount } from './display-count.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
 import { initLayoutGridFlip } from './layout-grid-flip.js';
 import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
+import { initNavigation } from './multilevel-navigation.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -54,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize copy email to clipboard button (will only run if buttons exist)
   initCopyEmailClipboard();
 
+  // Initialize multilevel navigation (will only run if navigation exists)
+  initNavigation();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -70,6 +74,7 @@ export {
   initDisplayCount,
   initYouTubeLightbox,
   initLayoutGridFlip,
-  initCopyEmailClipboard
+  initCopyEmailClipboard,
+  initNavigation
   // initDraggableInfiniteSlider - only for demo page
 };
