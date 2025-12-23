@@ -14,6 +14,12 @@ function initNavigation() {
     initDesktopDropdowns();
     initNavigation._lastMode = 'desktop';
   }
+
+  // Initialize sticky nav scroll effect (runs on both mobile and desktop)
+  if (!initNavigation._stickyNavInitialized) {
+    initStickyNavScroll();
+    initNavigation._stickyNavInitialized = true;
+  }
 }
 
 function debounce(fn, delay) {
@@ -223,6 +229,30 @@ function initDesktopDropdowns() {
         if (dd) dd.setAttribute('aria-hidden', 'true');
       });
     }
+  });
+}
+
+function initStickyNavScroll() {
+  // Check if GSAP and ScrollTrigger are available
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.warn(
+      '⚠️ GSAP or ScrollTrigger not found for sticky nav scroll effect'
+    );
+    return;
+  }
+
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Create ScrollTrigger to add/remove class based on scroll position
+  ScrollTrigger.create({
+    start: 'top -50', // Trigger after scrolling 50px down
+    end: 99999,
+    toggleClass: { className: 'is-scrolled', targets: '.nav' }
+    // markers: true, // Uncomment for debugging
   });
 }
 
