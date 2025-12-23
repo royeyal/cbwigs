@@ -609,7 +609,7 @@
 [data-underline-link='alt']:after,
 [data-underline-link='alt']:before,
 [data-underline-link]:before {
-  background-color: currentColor;
+  background-color: currentcolor;
   bottom: -0.0625em;
   content: '';
   height: 0.0625em;
@@ -1034,6 +1034,26 @@
     --columns: 2;
     --column-gap: 1em;
   }
+}
+@media (hover: hover) {
+  .copy-email-button:hover .copy-email-icon__wrap {
+    background: #22502ee6;
+  }
+  .copy-email-button:hover .copy-email-text__el {
+    transform: translateY(-100%);
+  }
+}
+.copy-email-button:focus .copy-email-icon__wrap {
+  background: #22502ee6;
+}
+.copy-email-button:focus .copy-email-text__el {
+  transform: translateY(-100%);
+}
+[data-copy-button='copied'] .copy-email-icon__wrap {
+  background: #0f8e2e !important;
+}
+[data-copy-button='copied'] .copy-email-text__el {
+  transform: translateY(-200%) !important;
 }
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);

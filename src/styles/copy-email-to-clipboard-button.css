@@ -1,0 +1,29 @@
+/* Copy Email to Clipboard Button */
+
+/* Hover styling */
+@media (hover: hover) {
+  .copy-email-button:hover .copy-email-icon__wrap {
+    background: rgb(34 80 46 / 90%);
+  }
+
+  .copy-email-button:hover .copy-email-text__el {
+    transform: translate(0, -100%);
+  }
+}
+
+/* 'Copied' state, when a user has clicked the button */
+[data-copy-button='copied'] .copy-email-icon__wrap {
+  background: #0f8e2e !important;
+}
+[data-copy-button='copied'] .copy-email-text__el {
+  transform: translate(0, -200%) !important;
+}
+
+/* Keyboard focus styling */
+.copy-email-button:focus .copy-email-icon__wrap {
+  background: rgb(34 80 46 / 90%);
+}
+
+.copy-email-button:focus .copy-email-text__el {
+  transform: translate(0, -100%);
+}

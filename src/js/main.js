@@ -10,6 +10,7 @@ import { initImageTrail } from './image-trail-following-cursor.js';
 import { initDisplayCount } from './display-count.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
 import { initLayoutGridFlip } from './layout-grid-flip.js';
+import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -50,6 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize layout grid flip (will only run if layout groups exist)
   initLayoutGridFlip();
 
+  // Initialize copy email to clipboard button (will only run if buttons exist)
+  initCopyEmailClipboard();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -65,6 +69,7 @@ export {
   initImageTrail,
   initDisplayCount,
   initYouTubeLightbox,
-  initLayoutGridFlip
+  initLayoutGridFlip,
+  initCopyEmailClipboard
   // initDraggableInfiniteSlider - only for demo page
 };
