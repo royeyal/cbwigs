@@ -1178,9 +1178,6 @@ a.nav-link:hover .nav-link__label:after {
   :is([data-menu-status='open']) .page-bg {
     opacity: 1;
   }
-  :is([data-menu-status='open']) .nav-logo {
-    filter: invert(0);
-  }
   :is([data-menu-status='open']) .nav-button.is--primary {
     background-color: var(--brand--text, #1a1a1ae0);
     border-color: var(--brand--text, #1a1a1ae0);
@@ -1201,6 +1198,10 @@ a.nav-link:hover .nav-link__label:after {
   }
   [data-dropdown-toggle='open'] .nav-link__dropdown-icon {
     transform: rotate(180deg);
+  }
+  .is-scrolled .nav-logo,
+  [data-dropdown-toggle='open'] .nav-logo {
+    filter: invert(0);
   }
 }
 :root {

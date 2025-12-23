@@ -157,10 +157,6 @@ a.nav-link:focus-visible .nav-link__label::after {
       opacity: 1;
     }
 
-    .nav-logo {
-      filter: invert(0);
-    }
-
     .nav-button.is--primary {
       background-color: var(--brand--text, #1a1a1ae0);
       border-color: var(--brand--text, #1a1a1ae0);
@@ -186,5 +182,10 @@ a.nav-link:focus-visible .nav-link__label::after {
 
   [data-dropdown-toggle='open'] .nav-link__dropdown-icon {
     transform: rotate(180deg);
+  }
+
+  [data-dropdown-toggle='open'] .nav-logo,
+  .is-scrolled .nav-logo {
+    filter: invert(0);
   }
 }
