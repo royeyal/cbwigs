@@ -157,6 +157,10 @@ a.nav-link:focus-visible .nav-link__label::after {
       opacity: 1;
     }
 
+    .nav-logo {
+      filter: invert(0);
+    }
+
     .nav-button.is--primary {
       background-color: var(--brand--text, #1a1a1ae0);
       border-color: var(--brand--text, #1a1a1ae0);
