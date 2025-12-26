@@ -4,6 +4,7 @@ import { initMaskTextScrollReveal } from './textreveal.js';
 import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
+import { initLeadingZero } from './leading-zero.js';
 import { initSwiperSlider } from './swipeslider.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize accordion functionality
   initAccordionCSS();
+
+  // Initialize leading zero formatter for accordion counts (will only run if count elements exist)
+  initLeadingZero();
 
   // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
   initSwiperSlider();
@@ -64,6 +68,7 @@ export {
   initContentRevealScroll,
   initBasicGSAPSlider,
   initAccordionCSS,
+  initLeadingZero,
   initSwiperSlider,
   initFlipCounter,
   initImageTrail,
