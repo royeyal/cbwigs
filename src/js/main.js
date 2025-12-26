@@ -7,7 +7,6 @@ import { initAccordionCSS } from './accordion.js';
 import { initSwiperSlider } from './swipeslider.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
-import { initDisplayCount } from './display-count.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
 import { initLayoutGridFlip } from './layout-grid-flip.js';
 import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
@@ -43,9 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     trailLength: 8
   });
 
-  // Initialize display count (will only run if count groups exist)
-  initDisplayCount();
-
   // Initialize YouTube lightbox modal (will only run if hero lightbox exists)
   initYouTubeLightbox();
 
@@ -71,7 +67,6 @@ export {
   initSwiperSlider,
   initFlipCounter,
   initImageTrail,
-  initDisplayCount,
   initYouTubeLightbox,
   initLayoutGridFlip,
   initCopyEmailClipboard,
