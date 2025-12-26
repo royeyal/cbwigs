@@ -235,10 +235,12 @@
   transform: rotate(0.001deg);
 }
 [data-youtube-short].youtube-player {
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #000;
   border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  transition: box-shadow 0.4s var(--easing);
   width: 100%;
 }
 [data-youtube-short].youtube-player.youtube-video {
@@ -279,8 +281,8 @@
   position: absolute;
   top: 0;
   transition:
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.5s var(--easing),
+    filter 0.5s var(--easing);
   width: 100%;
 }
 .youtube-player .youtube-play-button {
@@ -299,7 +301,7 @@
   height: 80px;
   justify-content: center;
   pointer-events: none;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s var(--easing);
   width: 80px;
   z-index: 2;
 }
@@ -314,13 +316,13 @@
   inset: -4px;
   opacity: 0;
   position: absolute;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.5s var(--easing);
 }
 .youtube-play-icon {
   color: #a39486;
   filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
   height: 48px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s var(--easing);
   width: 48px;
 }
 .youtube-placeholder {
@@ -331,8 +333,8 @@
   justify-content: center;
   left: 0;
   position: absolute;
-  top: 0;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  top: 10%;
+  transition: opacity 0.4s var(--easing);
   width: 100%;
 }
 .youtube-placeholder:focus-visible {
@@ -474,7 +476,7 @@
   }
   :is(.youtube-placeholder:focus-visible, .youtube-placeholder:hover)
     .youtube-play-button {
-    background: color-mix(in srgb, #8c8176 70%, transparent);
+    background-color: color-mix(in srgb, #8c8176 70%, transparent);
     border-color: #8c8176;
   }
   :is(.youtube-placeholder:focus-visible, .youtube-placeholder:hover)
