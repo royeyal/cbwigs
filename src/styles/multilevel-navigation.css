@@ -54,7 +54,7 @@ button:focus-visible {
 }
 
 .nav-button {
-  transition: all var(--duration-fast) var(--cubic-default);
+  transition: all var(--duration-slow) var(--cubic-default);
 }
 
 @media screen and (width <= 1024px) {
@@ -66,7 +66,7 @@ button:focus-visible {
 @media screen and (hover: hover) and (pointer: fine) {
   .nav-button:hover {
     transform: scale(1.05);
-    box-shadow: var(--shadow-elevation-low);
+    box-shadow: var(--shadow-elevation-medium);
   }
 
   .nav-button:active {

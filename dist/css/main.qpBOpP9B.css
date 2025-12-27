@@ -1105,7 +1105,7 @@ button:focus-visible {
     box-shadow var(--duration-normal) var(--cubic-default);
 }
 .nav-button {
-  transition: all var(--duration-fast) var(--cubic-default);
+  transition: all var(--duration-slow) var(--cubic-default);
 }
 @media screen and (max-width: 1024px) {
   .nav-button.md--hide {
@@ -1114,7 +1114,7 @@ button:focus-visible {
 }
 @media screen and (hover: hover) and (pointer: fine) {
   .nav-button:hover {
-    box-shadow: var(--shadow-elevation-low);
+    box-shadow: var(--shadow-elevation-medium);
     transform: scale(1.05);
   }
   .nav-button:active {
