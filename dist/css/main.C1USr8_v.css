@@ -1107,6 +1107,20 @@ button:focus-visible {
 .nav-button {
   transition: all var(--duration-fast) var(--cubic-default);
 }
+@media screen and (max-width: 1024px) {
+  .nav-button.md--hide {
+    display: none;
+  }
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .nav-button:hover {
+    box-shadow: var(--shadow-elevation-low);
+    transform: scale(1.05);
+  }
+  .nav-button:active {
+    transform: scale(0.95);
+  }
+}
 .nav-dropdown {
   transition:
     all var(--duration-fast) ease,
