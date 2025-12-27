@@ -233,6 +233,10 @@ function initDesktopDropdowns() {
 }
 
 function initStickyNavScroll() {
+  // Check if nav element exists first
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
   // Check if GSAP and ScrollTrigger are available
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn(
@@ -240,9 +244,6 @@ function initStickyNavScroll() {
     );
     return;
   }
-
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
