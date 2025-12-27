@@ -333,7 +333,7 @@
   justify-content: center;
   left: 0;
   position: absolute;
-  top: 10%;
+  top: 0;
   transition: opacity 0.4s var(--easing);
   width: 100%;
 }
