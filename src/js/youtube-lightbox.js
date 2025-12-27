@@ -5,7 +5,7 @@
  */
 
 export function initYouTubeLightbox() {
-  console.log('[YouTube Lightbox] Initializing...');
+  // console.log('[YouTube Lightbox] Initializing...');
 
   let activeModal = null;
   let activePlayer = null;
@@ -15,11 +15,11 @@ export function initYouTubeLightbox() {
    * Load YouTube IFrame API (compatible with youtube-player.js)
    */
   function loadYouTubeAPI() {
-    console.log('[YouTube Lightbox] Loading YouTube API...');
+    // console.log('[YouTube Lightbox] Loading YouTube API...');
 
     // Check if API is already loaded
     if (window.YT && window.YT.Player) {
-      console.log('[YouTube Lightbox] YouTube API already loaded');
+      // console.log('[YouTube Lightbox] YouTube API already loaded');
       apiReady = true;
       return Promise.resolve();
     }
@@ -30,7 +30,7 @@ export function initYouTubeLightbox() {
 
       // Create combined callback
       window.onYouTubeIframeAPIReady = () => {
-        console.log('[YouTube Lightbox] YouTube API ready');
+        // console.log('[YouTube Lightbox] YouTube API ready');
         apiReady = true;
 
         // Call existing callback if it exists
@@ -43,7 +43,7 @@ export function initYouTubeLightbox() {
 
       // Load the API script if not already present
       if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-        console.log('[YouTube Lightbox] Loading YouTube IFrame API script');
+        // console.log('[YouTube Lightbox] Loading YouTube IFrame API script');
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
         const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -125,7 +125,7 @@ export function initYouTubeLightbox() {
 
     // Ensure API is loaded
     if (!apiReady) {
-      console.log('[YouTube Lightbox] API not ready, loading...');
+      // console.log('[YouTube Lightbox] API not ready, loading...');
       await loadYouTubeAPI();
     }
 

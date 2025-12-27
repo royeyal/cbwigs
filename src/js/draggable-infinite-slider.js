@@ -24,6 +24,8 @@ export function initDraggableInfiniteSlider() {
     if (!wrapper) return;
 
     const slides = gsap.utils.toArray('[data-slider="slide"]');
+    if (slides.length === 0) return;
+
     const nextButton = document.querySelector('[data-slider="button-next"]');
     const prevButton = document.querySelector('[data-slider="button-prev"]');
 
