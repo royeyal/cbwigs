@@ -1278,6 +1278,22 @@ html {
 .hero_lightbox:hover .hero_lightbox-thumbnail {
   transform: scale(1.05);
 }
+.rich-text p {
+  margin-bottom: 1rem;
+}
+.rich-text p:last-child {
+  margin-bottom: 0;
+}
+.rich-text ol,
+.rich-text ul {
+  padding-left: 0;
+  padding-inline-start: 1.5rem;
+}
+.rich-text ol li,
+.rich-text ul li {
+  padding-left: 0;
+  padding-inline-start: 0.5rem;
+}
 :root {
   --swiper-theme-color: #007aff;
 }
