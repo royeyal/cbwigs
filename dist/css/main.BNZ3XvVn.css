@@ -1269,9 +1269,6 @@ a.nav-link:hover .nav-link__label:after {
     filter: invert(0);
   }
 }
-:root {
-  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-}
 ::-moz-selection {
   background-color: var(--brand--accent, #3b3630);
   color: var(--brand--background, #fff);
@@ -1279,6 +1276,14 @@ a.nav-link:hover .nav-link__label:after {
 ::selection {
   background-color: var(--brand--accent, #3b3630);
   color: var(--brand--background, #fff);
+}
+.hero_content h1::-moz-selection {
+  background-color: var(--brand--background, #fff);
+  color: var(--brand--accent, #3b3630);
+}
+.hero_content h1::selection {
+  background-color: var(--brand--background, #fff);
+  color: var(--brand--accent, #3b3630);
 }
 html {
   scroll-behavior: smooth;

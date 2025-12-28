@@ -23,6 +23,11 @@
   color: var(--brand--background, #fff);
 }
 
+.hero_content h1::selection {
+  background-color: var(--brand--background, #fff);
+  color: var(--brand--accent, #3b3630);
+}
+
 html {
   scroll-behavior: smooth;
 }
