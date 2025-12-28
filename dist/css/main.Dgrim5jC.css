@@ -1272,6 +1272,14 @@ a.nav-link:hover .nav-link__label:after {
 :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+::-moz-selection {
+  background-color: var(--brand--accent, #3b3630);
+  color: var(--brand--background, #fff);
+}
+::selection {
+  background-color: var(--brand--accent, #3b3630);
+  color: var(--brand--background, #fff);
+}
 html {
   scroll-behavior: smooth;
 }

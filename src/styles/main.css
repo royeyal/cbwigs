@@ -17,6 +17,11 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+::selection {
+  background-color: var(--brand--accent, #3b3630);
+  color: var(--brand--background, #fff);
+}
+
 html {
   scroll-behavior: smooth;
 }
