@@ -298,3 +298,168 @@
 .slide__link:active .slide-play-icon {
   transform: scale(1);
 }
+
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablets and below (< 992px) */
+@media (width <= 991px) {
+  /* Hide overlay on mobile */
+  .slider__overlay {
+    display: none;
+  }
+
+  /* Make slides take up most of viewport width (one slide visible) */
+  .slider__slide {
+    width: 85vw;
+    height: 70vh;
+    max-height: none;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+  }
+
+  /* Adjust slide caption for mobile */
+  .slide__caption {
+    top: 1em;
+    left: 1em;
+    font-size: 0.875em;
+  }
+
+  /* Smaller play button on tablets */
+  .slide-play-button {
+    width: 70px;
+    height: 70px;
+  }
+
+  .slide-play-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Mobile phones (< 768px) */
+@media (width <= 767px) {
+  /* Full-width slides on mobile with small gap */
+  .slider__slide {
+    width: 92vw;
+    height: 65vh;
+    max-height: 600px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  /* Smaller caption */
+  .slide__caption {
+    padding: 0.3em 0.6em 0.3em 0.4em;
+    grid-gap: 0.3em;
+    top: 0.75em;
+    left: 0.75em;
+  }
+
+  .slide__caption-label {
+    font-size: 0.7em;
+  }
+
+  .slide__caption-dot {
+    width: 0.4em;
+    height: 0.4em;
+  }
+
+  /* Smaller play button on mobile */
+  .slide-play-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .slide-play-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Touch-friendly active states */
+  .slide__link:active .slide-play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  /* Ensure active slide is clearly visible on mobile */
+  html:not(.wf-design-mode) [data-slider='slide'] {
+    opacity: 0.3;
+  }
+
+  html:not(.wf-design-mode) [data-slider='slide'].active {
+    opacity: 1;
+  }
+}
+
+/* Small mobile phones (< 480px) */
+@media (width <= 479px) {
+  /* Nearly full-width on very small screens */
+  .slider__slide {
+    width: 95vw;
+    height: 60vh;
+    max-height: 500px;
+    padding-left: 0.375em;
+    padding-right: 0.375em;
+  }
+
+  .slider__slide-inner {
+    border-radius: 0.375em;
+  }
+
+  /* Even smaller play button */
+  .slide-play-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .slide-play-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Compact caption */
+  .slide__caption {
+    padding: 0.25em 0.5em;
+    grid-gap: 0.25em;
+    top: 0.5em;
+    left: 0.5em;
+  }
+
+  .slide__caption-label {
+    font-size: 0.65em;
+  }
+}
+
+/* Touch device specific optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover states on touch devices */
+  .slide__link:hover .slide-play-button::before {
+    opacity: 0;
+  }
+
+  .slide__link:hover .slide-play-button {
+    transform: translate(-50%, -50%) scale(1);
+    background: color-mix(in srgb, #a39486 30%, transparent);
+    box-shadow:
+      0 4px 6px color-mix(in srgb, #000 10%, transparent),
+      0 8px 16px color-mix(in srgb, #000 10%, transparent),
+      inset 0 1px 0 color-mix(in srgb, #f4efe8 20%, transparent);
+  }
+
+  .slide__link:hover .slide-play-icon {
+    color: #a39486;
+    filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
+    transform: scale(1);
+  }
+
+  /* Enhanced touch feedback */
+  .slide__link:active .slide-play-button {
+    transform: translate(-50%, -50%) scale(0.95);
+    background: color-mix(in srgb, #8c8176 50%, transparent);
+  }
+
+  .slide__link:active .slide-play-icon {
+    transform: scale(0.9);
+  }
+}
