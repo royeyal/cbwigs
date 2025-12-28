@@ -13,9 +13,10 @@
 @import url('./multilevel-navigation.css');
 
 /* Global styles */
-:root {
+
+/* :root {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-}
+} */
 
 ::selection {
   background-color: var(--brand--accent, #3b3630);
