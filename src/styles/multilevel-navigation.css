@@ -146,13 +146,13 @@ a.nav-link .nav-link__label::after {
   background: currentcolor;
   transition: transform var(--duration-normal) var(--cubic-default);
   transform: scale(0, 1);
-  transform-origin: inline-end center;
+  transform-origin: 100% center;
 }
 
 a.nav-link:hover .nav-link__label::after,
 a.nav-link:focus-visible .nav-link__label::after {
   transform: scale(1, 1);
-  transform-origin: inline-start center;
+  transform-origin: 0% center;
 }
 
 /* ———— Sticky nav ———— */

@@ -1176,14 +1176,14 @@ a.nav-link .nav-link__label:after {
   inset-inline-start: 0;
   position: absolute;
   transform: scaleX(0);
-  transform-origin: inline-end center;
+  transform-origin: 100% center;
   transition: transform var(--duration-normal) var(--cubic-default);
   width: 100%;
 }
 a.nav-link:focus-visible .nav-link__label:after,
 a.nav-link:hover .nav-link__label:after {
   transform: scale(1);
-  transform-origin: inline-start center;
+  transform-origin: 0 center;
 }
 .nav-logo {
   transition: 0.3s var(--cubic-default) filter;
