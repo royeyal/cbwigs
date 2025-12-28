@@ -197,6 +197,10 @@ a.nav-link:focus-visible .nav-link__label::after {
     transition: all var(--duration-normal) var(--cubic-default);
   }
 
+  .is-scrolled .menu-button__line {
+    background-color: #fff;
+  }
+
   /* ———— STYLES WHEN MENU IS OPEN ———— */
   :is([data-menu-status='open']) {
     color: var(--brand--text, #1a1a1ae0);

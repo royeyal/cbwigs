@@ -1218,6 +1218,9 @@ a.nav-link:hover .nav-link__label:after {
   .menu-button__line {
     transition: all var(--duration-normal) var(--cubic-default);
   }
+  .is-scrolled .menu-button__line {
+    background-color: #fff;
+  }
   :is([data-menu-status='open']) {
     color: var(--brand--text, #1a1a1ae0);
   }
