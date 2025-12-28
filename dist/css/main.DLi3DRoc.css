@@ -1203,6 +1203,9 @@ a.nav-link:hover .nav-link__label:after {
   border-color: var(--brand--text, #1a1a1ae0);
   color: #fff;
 }
+.nav:not(.is-scrolled):has([data-dropdown-toggle='open']) .nav-logo {
+  filter: invert(0);
+}
 @media screen and (max-width: 767px) {
   :root {
     --nav-bg-height: 100dvh;

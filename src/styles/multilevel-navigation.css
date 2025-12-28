@@ -177,6 +177,13 @@ a.nav-link:focus-visible .nav-link__label::after {
   color: #fff;
 }
 
+/* ———— DROPDOWN OPEN STATE (when nav is not scrolled) ———— */
+
+/* Apply inverted logo filter when dropdown is open but nav hasn't been scrolled yet */
+.nav:not(.is-scrolled):has([data-dropdown-toggle='open']) .nav-logo {
+  filter: invert(0);
+}
+
 /* ———— MOBILE STATE WITH BURGER MENU ———— */
 @media screen and (width <= 767px) {
   :root {
