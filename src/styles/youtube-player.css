@@ -257,9 +257,9 @@
     height: 40px;
   }
 
-  .youtube-player {
+  /* .youtube-player {
     border-radius: 8px;
-  }
+  } */
 }
 
 @media (width <= 480px) {
