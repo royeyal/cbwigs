@@ -29,7 +29,7 @@ html {
   transform: scale(1.05);
 }
 
-.rich-text p {
+.w-richtext p {
   margin-bottom: 1rem;
 
   &:last-child {
@@ -37,14 +37,14 @@ html {
   }
 }
 
-.rich-text ol,
-.rich-text ul {
+.w-richtext ol,
+.w-richtext ul {
   padding-left: 0;
   padding-inline-start: 1.5rem;
 }
 
-.rich-text ol li,
-.rich-text ul li {
+.w-richtext ol li,
+.w-richtext ul li {
   padding-left: 0;
   padding-inline-start: 0.5rem;
 }
