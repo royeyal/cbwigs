@@ -12,18 +12,24 @@ export default {
     const redirectTo = (path) =>
       new Response(null, { status: 302, headers: { Location: path, "Cache-Control": "no-cache" } });
 
-    if (url.pathname === "/main.js" || url.pathname === "/main.css" || url.pathname === "/draggable-slider.js") {
+    if (url.pathname === "/main.js" || url.pathname === "/main.css" || url.pathname === "/draggable-slider.js" || url.pathname === "/parallax-image.js" || url.pathname === "/parallax-image.css") {
       const manifest = await getManifest();
       if (!manifest) return new Response("Manifest not found", { status: 500 });
 
       const wantCss = url.pathname.endsWith(".css");
       const wantSlider = url.pathname === "/draggable-slider.js";
+      const wantParallaxJs = url.pathname === "/parallax-image.js";
+      const wantParallaxCss = url.pathname === "/parallax-image.css";
 
       // Preferred explicit keys
       const preferredKeys = wantCss
         ? ["src/styles/main.css", "src/css/main.css"]
         : wantSlider
         ? ["js/draggable-infinite-slider-standalone.js", "src/js/draggable-infinite-slider-standalone.js"]
+        : wantParallaxJs
+        ? ["src/js/parallax-image.js", "js/parallax-image.js"]
+        : wantParallaxCss
+        ? ["src/styles/parallax-image.css", "styles/parallax-image.css"]
         : ["src/js/main.js", "src/scripts/main.js", "js/main.js"];
 
       // 1) Try explicit key
