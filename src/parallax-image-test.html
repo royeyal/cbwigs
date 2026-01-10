@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parallax Image Test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        line-height: 1.5;
+        background: #f5f5f5;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      h1 {
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 2.5rem;
+      }
+
+      .spacer {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #666;
+      }
+
+      .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+      }
+
+      .card__media {
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        position: relative;
+        background: #e0e0e0;
+      }
+
+      .card__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .card__content {
+        padding: 1.5rem;
+      }
+
+      .card__title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .card__description {
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      .card__label {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
+        color: #333;
+      }
+
+      .demo-info {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        border-left: 4px solid #007bff;
+      }
+
+      .demo-info code {
+        background: #f0f0f0;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+    </style>
+    <link rel="stylesheet" href="./styles/parallax-image.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎨 Parallax Image Effect Test</h1>
+
+      <div class="demo-info">
+        <strong>How to use:</strong>
+        <ul>
+          <li>Add <code>data-parallax-image</code> attribute to any card</li>
+          <li>
+            Control speed with <code>data-parallax-speed="30"</code> (default:
+            30)
+          </li>
+          <li>
+            Change direction with <code>data-parallax-direction="up"</code> or
+            <code>"down"</code>
+          </li>
+          <li>Images automatically scale to 1.2x to prevent edge reveal</li>
+        </ul>
+      </div>
+
+      <div class="spacer">👇 Scroll down to see the parallax effect 👇</div>
+
+      <h2 class="section-title">Basic Parallax (default settings)</h2>
+      <div class="collection-grid">
+        <div class="card" data-parallax-image>
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=1000&fit=crop"
+              alt="Mountain landscape"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Default Speed (30)</span>
+            <h3 class="card__title">Mountain Vista</h3>
+            <p class="card__description">
+              Standard parallax with default settings. Image moves down as you
+              scroll.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" data-parallax-image>
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=1000&fit=crop"
+              alt="Forest trail"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Default Speed (30)</span>
+            <h3 class="card__title">Forest Path</h3>
+            <p class="card__description">
+              Another card with default parallax settings.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" data-parallax-image>
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=800&h=1000&fit=crop"
+              alt="Desert dunes"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Default Speed (30)</span>
+            <h3 class="card__title">Desert Dunes</h3>
+            <p class="card__description">
+              Notice how the image moves at a different speed than the card.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer">Keep scrolling... 📜</div>
+
+      <h2 class="section-title">Custom Speed Variations</h2>
+      <div class="collection-grid">
+        <div class="card" data-parallax-image data-parallax-speed="15">
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=1000&fit=crop&sat=-100"
+              alt="Subtle effect"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Subtle (15)</span>
+            <h3 class="card__title">Subtle Movement</h3>
+            <p class="card__description">
+              Lower speed value = more subtle parallax effect.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" data-parallax-image data-parallax-speed="50">
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&h=1000&fit=crop"
+              alt="Dramatic effect"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Dramatic (50)</span>
+            <h3 class="card__title">Dramatic Movement</h3>
+            <p class="card__description">
+              Higher speed value = more dramatic parallax effect.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" data-parallax-image data-parallax-speed="70">
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=1000&fit=crop"
+              alt="Intense effect"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Intense (70)</span>
+            <h3 class="card__title">Intense Movement</h3>
+            <p class="card__description">
+              Very high speed for maximum parallax effect.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer">Almost there... 🎯</div>
+
+      <h2 class="section-title">Direction Variations</h2>
+      <div class="collection-grid">
+        <div
+          class="card"
+          data-parallax-image
+          data-parallax-direction="down"
+          data-parallax-speed="40"
+        >
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&h=1000&fit=crop"
+              alt="Down direction"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Direction: Down</span>
+            <h3 class="card__title">Moving Down</h3>
+            <p class="card__description">
+              Image moves downward as you scroll (default behavior).
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          data-parallax-image
+          data-parallax-direction="up"
+          data-parallax-speed="40"
+        >
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=1000&fit=crop"
+              alt="Up direction"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label">Direction: Up</span>
+            <h3 class="card__title">Moving Up</h3>
+            <p class="card__description">
+              Image moves upward as you scroll (inverted motion).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__media">
+            <img
+              class="card__img"
+              src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&h=1000&fit=crop"
+              alt="No parallax"
+            />
+          </div>
+          <div class="card__content">
+            <span class="card__label" style="background: #999"
+              >No Parallax</span
+            >
+            <h3 class="card__title">No Effect</h3>
+            <p class="card__description">
+              This card has no data-parallax-image attribute - notice the
+              difference!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer">🎉 End of Demo 🎉</div>
+    </div>
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Parallax Image Script -->
+    <script type="module" src="./js/parallax-image.js"></script>
+  </body>
+</html>
