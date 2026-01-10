@@ -1,0 +1,51 @@
+/**
+ * Parallax Image Styles
+ * Styles for parallax scrolling image effect
+ */
+
+/* Container for parallax effect */
+[data-parallax-image] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure the media container has proper dimensions */
+[data-parallax-image] .card__media {
+  position: relative;
+  overflow: hidden;
+
+  /* Add aspect ratio or fixed height as needed */
+}
+
+/* Image styles for parallax */
+[data-parallax-image] .card__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* Will be scaled to 1.2 by GSAP to prevent edge reveal */
+  will-change: transform;
+  backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Disable parallax on mobile if needed (optional) */
+@media (width <= 768px) {
+  [data-parallax-image].parallax-disable-mobile .card__img {
+    transform: none !important;
+    scale: 1 !important;
+  }
+}
+
+/* Loading state (optional) */
+[data-parallax-image].is-loading .card__img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[data-parallax-image].is-loaded .card__img {
+  opacity: 1;
+}
