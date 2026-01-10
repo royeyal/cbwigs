@@ -49,9 +49,9 @@ export function initYouTubeLightbox() {
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       } else {
-        console.log(
-          '[YouTube Lightbox] YouTube IFrame API script already exists'
-        );
+        // console.log(
+        //   '[YouTube Lightbox] YouTube IFrame API script already exists'
+        // );
         // API script exists but might not be ready yet, wait for it
         if (window.YT && window.YT.Player) {
           apiReady = true;

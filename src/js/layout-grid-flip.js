@@ -18,7 +18,7 @@ export function initLayoutGridFlip() {
   if (typeof window.Flip !== 'undefined' && window.gsap?.registerPlugin) {
     try {
       window.gsap.registerPlugin(window.Flip);
-      console.log('[Layout Grid Flip] Registered window.Flip with GSAP');
+      // console.log('[Layout Grid Flip] Registered window.Flip with GSAP');
     } catch (_e) {
       console.log('[Layout Grid Flip] Plugin already registered or error:', _e);
     }
@@ -26,7 +26,7 @@ export function initLayoutGridFlip() {
 
   // Check if Flip is available (try multiple locations)
   const Flip = window.gsap?.Flip || window.gsap?.plugins?.Flip || window.Flip;
-  console.log('[Layout Grid Flip] Flip resolved to:', Flip);
+  // console.log('[Layout Grid Flip] Flip resolved to:', Flip);
 
   if (!Flip) {
     console.warn(
