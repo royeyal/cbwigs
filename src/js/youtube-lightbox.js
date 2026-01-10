@@ -116,7 +116,7 @@ export function initYouTubeLightbox() {
    * Open lightbox and play video
    */
   async function openLightbox(videoId) {
-    console.log('[YouTube Lightbox] Opening lightbox with video ID:', videoId);
+    // console.log('[YouTube Lightbox] Opening lightbox with video ID:', videoId);
 
     if (!videoId) {
       console.error('[YouTube Lightbox] No video ID provided');
@@ -225,15 +225,15 @@ export function initYouTubeLightbox() {
    * Initialize lightbox triggers
    */
   function initTriggers() {
-    console.log('[YouTube Lightbox] Initializing triggers...');
+    // console.log('[YouTube Lightbox] Initializing triggers...');
 
     // Find all hero sections with lightbox functionality
     const heroSections = document.querySelectorAll('.section-hero-lightbox');
-    console.log(
-      '[YouTube Lightbox] Found',
-      heroSections.length,
-      'hero sections'
-    );
+    // console.log(
+    //   '[YouTube Lightbox] Found',
+    //   heroSections.length,
+    //   'hero sections'
+    // );
 
     heroSections.forEach((section, index) => {
       console.log(
@@ -325,7 +325,7 @@ export function initYouTubeLightbox() {
   console.log('[YouTube Lightbox] Starting initialization sequence');
   loadYouTubeAPI()
     .then(() => {
-      console.log('[YouTube Lightbox] API loaded, initializing triggers');
+      // console.log('[YouTube Lightbox] API loaded, initializing triggers');
       initTriggers();
     })
     .catch(error => {
@@ -334,11 +334,11 @@ export function initYouTubeLightbox() {
 
   // Re-initialize on Webflow interactions (if Webflow is present)
   if (window.Webflow) {
-    console.log(
-      '[YouTube Lightbox] Webflow detected, setting up page transition handler'
-    );
+    // console.log(
+    //   '[YouTube Lightbox] Webflow detected, setting up page transition handler'
+    // );
     window.Webflow.push(() => {
-      console.log('[YouTube Lightbox] Webflow page transition, reinitializing');
+      // console.log('[YouTube Lightbox] Webflow page transition, reinitializing');
       initTriggers();
     });
   }

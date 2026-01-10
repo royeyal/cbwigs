@@ -8,11 +8,11 @@
  */
 export function initLayoutGridFlip() {
   // Debug: Check what's available
-  console.log('[Layout Grid Flip] Checking for Flip plugin...');
-  console.log('[Layout Grid Flip] window.gsap:', typeof window.gsap);
-  console.log('[Layout Grid Flip] window.gsap.Flip:', typeof window.gsap?.Flip);
-  console.log('[Layout Grid Flip] window.gsap.plugins:', window.gsap?.plugins);
-  console.log('[Layout Grid Flip] window.Flip:', typeof window.Flip);
+  // console.log('[Layout Grid Flip] Checking for Flip plugin...');
+  // console.log('[Layout Grid Flip] window.gsap:', typeof window.gsap);
+  // console.log('[Layout Grid Flip] window.gsap.Flip:', typeof window.gsap?.Flip);
+  // console.log('[Layout Grid Flip] window.gsap.plugins:', window.gsap?.plugins);
+  // console.log('[Layout Grid Flip] window.Flip:', typeof window.Flip);
 
   // Register Flip plugin if available (Webflow loads GSAP globally)
   if (typeof window.Flip !== 'undefined' && window.gsap?.registerPlugin) {
@@ -35,7 +35,7 @@ export function initLayoutGridFlip() {
     return;
   }
 
-  console.log('[Layout Grid Flip] Flip plugin found, initializing...');
+  // console.log('[Layout Grid Flip] Flip plugin found, initializing...');
 
   const groups = document.querySelectorAll('[data-layout-group]');
 

@@ -357,7 +357,7 @@ function debounceOnWidthChange(fn, ms) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       if (innerWidth !== last) {
-        console.log('📏 Window resized, reinitializing sliders...');
+        // console.log('📏 Window resized, reinitializing sliders...');
         last = innerWidth;
         fn(...args);
       }
@@ -370,7 +370,7 @@ export { initBasicGSAPSlider };
 
 // Set up resize handler for slider responsiveness
 if (typeof window !== 'undefined') {
-  console.log('🔄 Setting up window resize handler for sliders...');
+  // console.log('🔄 Setting up window resize handler for sliders...');
   window.addEventListener(
     'resize',
     debounceOnWidthChange(initBasicGSAPSlider, 200)

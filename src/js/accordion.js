@@ -1,5 +1,5 @@
 function initAccordionCSS() {
-  console.log('🎵 Initializing accordion functionality...');
+  // console.log('🎵 Initializing accordion functionality...');
 
   document.querySelectorAll('[data-accordion-css-init]').forEach(accordion => {
     const closeSiblings =
