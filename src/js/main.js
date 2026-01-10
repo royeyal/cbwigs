@@ -12,6 +12,7 @@ import { initYouTubeLightbox } from './youtube-lightbox.js';
 import { initLayoutGridFlip } from './layout-grid-flip.js';
 import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
 import { initNavigation } from './multilevel-navigation.js';
+import { initParallaxImages } from './parallax-image.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 
@@ -58,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize multilevel navigation (will only run if navigation exists)
   initNavigation();
 
+  // Initialize parallax image effect (will only run if data-parallax-image exists)
+  initParallaxImages();
+
   // Initialize draggable infinite slider (only on demo page)
   // initDraggableInfiniteSlider();
 });
@@ -75,6 +79,7 @@ export {
   initYouTubeLightbox,
   initLayoutGridFlip,
   initCopyEmailClipboard,
-  initNavigation
+  initNavigation,
+  initParallaxImages
   // initDraggableInfiniteSlider - only for demo page
 };

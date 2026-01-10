@@ -4,15 +4,35 @@
  * Triggered by data-parallax-image attribute
  */
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 /**
  * Initialize parallax effect on all elements with data-parallax-image attribute
  */
 export function initParallaxImages() {
+  // Ensure GSAP and ScrollTrigger are available
+  if (typeof gsap === 'undefined') {
+    console.error(
+      '[Parallax Image] ❌ GSAP is required. Please include GSAP in your project.'
+    );
+    return;
+  }
+
+  if (typeof ScrollTrigger === 'undefined') {
+    console.error(
+      '[Parallax Image] ❌ GSAP ScrollTrigger plugin is required. Please include ScrollTrigger plugin.'
+    );
+    return;
+  }
+
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+  } catch (error) {
+    console.error(
+      '[Parallax Image] ❌ Failed to register ScrollTrigger:',
+      error
+    );
+    return;
+  }
+
   console.log('[Parallax Image] Initializing...');
 
   // Select all elements with the data-parallax-image attribute
