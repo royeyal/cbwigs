@@ -103,7 +103,7 @@ export function initParallaxImages() {
  * Call this after dynamic content loads
  */
 export function refreshParallaxImages() {
-  console.log('[Parallax Image] Refreshing ScrollTrigger instances...');
+  // console.log('[Parallax Image] Refreshing ScrollTrigger instances...');
   ScrollTrigger.refresh();
 }
 
@@ -111,15 +111,12 @@ export function refreshParallaxImages() {
  * Destroy all parallax ScrollTrigger instances
  */
 export function destroyParallaxImages() {
-  console.log('[Parallax Image] Destroying parallax instances...');
-  let count = 0;
+  // console.log('[Parallax Image] Destroying parallax instances...');
   ScrollTrigger.getAll().forEach(trigger => {
     if (trigger.vars.trigger?.hasAttribute('data-parallax-image')) {
       trigger.kill();
-      count++;
     }
   });
-  console.log(`[Parallax Image] ✓ Destroyed ${count} instance(s)`);
 }
 
 // Auto-initialize on DOM ready

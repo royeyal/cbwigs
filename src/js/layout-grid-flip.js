@@ -40,9 +40,9 @@ export function initLayoutGridFlip() {
   const groups = document.querySelectorAll('[data-layout-group]');
 
   if (groups.length === 0) {
-    console.warn(
-      '[Layout Grid Flip] No [data-layout-group] elements found. Skipping initialization.'
-    );
+    // console.warn(
+    //   '[Layout Grid Flip] No [data-layout-group] elements found. Skipping initialization.'
+    // );
     return;
   }
 
