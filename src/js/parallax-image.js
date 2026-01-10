@@ -13,12 +13,21 @@ gsap.registerPlugin(ScrollTrigger);
  * Initialize parallax effect on all elements with data-parallax-image attribute
  */
 export function initParallaxImages() {
+  console.log('[Parallax Image] Initializing...');
+
   // Select all elements with the data-parallax-image attribute
   const parallaxContainers = document.querySelectorAll('[data-parallax-image]');
 
   if (parallaxContainers.length === 0) {
+    console.log(
+      '[Parallax Image] No elements found with data-parallax-image attribute'
+    );
     return;
   }
+
+  console.log(
+    `[Parallax Image] Found ${parallaxContainers.length} element(s) with data-parallax-image`
+  );
 
   parallaxContainers.forEach(container => {
     // Find the image within the container
@@ -58,7 +67,15 @@ export function initParallaxImages() {
         }
       }
     );
+
+    console.log(
+      `[Parallax Image] ✓ Initialized parallax on image (speed: ${parallaxSpeed}, direction: ${direction})`
+    );
   });
+
+  console.log(
+    `[Parallax Image] ✓ All ${parallaxContainers.length} instance(s) created successfully`
+  );
 }
 
 /**
@@ -66,6 +83,7 @@ export function initParallaxImages() {
  * Call this after dynamic content loads
  */
 export function refreshParallaxImages() {
+  console.log('[Parallax Image] Refreshing ScrollTrigger instances...');
   ScrollTrigger.refresh();
 }
 
@@ -73,11 +91,15 @@ export function refreshParallaxImages() {
  * Destroy all parallax ScrollTrigger instances
  */
 export function destroyParallaxImages() {
+  console.log('[Parallax Image] Destroying parallax instances...');
+  let count = 0;
   ScrollTrigger.getAll().forEach(trigger => {
     if (trigger.vars.trigger?.hasAttribute('data-parallax-image')) {
       trigger.kill();
+      count++;
     }
   });
+  console.log(`[Parallax Image] ✓ Destroyed ${count} instance(s)`);
 }
 
 // Auto-initialize on DOM ready
