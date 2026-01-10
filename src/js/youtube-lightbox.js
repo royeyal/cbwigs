@@ -317,12 +317,12 @@ export function initYouTubeLightbox() {
         }
       });
 
-      console.log(`[YouTube Lightbox] Section ${index + 1}: Setup complete`);
+      // console.log(`[YouTube Lightbox] Section ${index + 1}: Setup complete`);
     });
   }
 
   // Initialize on load
-  console.log('[YouTube Lightbox] Starting initialization sequence');
+  // console.log('[YouTube Lightbox] Starting initialization sequence');
   loadYouTubeAPI()
     .then(() => {
       // console.log('[YouTube Lightbox] API loaded, initializing triggers');

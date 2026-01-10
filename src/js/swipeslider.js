@@ -11,7 +11,7 @@ function initSwiperSlider() {
   const swiperSliderGroups = document.querySelectorAll('[data-swiper-group]');
 
   if (swiperSliderGroups.length === 0) {
-    console.info('No swiper elements found on the page.');
+    // console.info('No swiper elements found on the page.');
     return;
   }
 

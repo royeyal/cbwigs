@@ -57,7 +57,7 @@ function initBasicGSAPSlider() {
     }
 
     // Inject aria attributes
-    console.log('♿ Setting up accessibility attributes...');
+    // console.log('♿ Setting up accessibility attributes...');
     root.setAttribute('role', 'region');
     root.setAttribute('aria-roledescription', 'carousel');
     root.setAttribute('aria-label', 'Slider');
@@ -95,7 +95,7 @@ function initBasicGSAPSlider() {
     });
 
     // Determine if slider runs
-    console.log('📏 Computing slider dimensions...');
+    // console.log('📏 Computing slider dimensions...');
     const styles = getComputedStyle(root);
     const statusVar = styles.getPropertyValue('--slider-status').trim();
     let spvVar = parseFloat(styles.getPropertyValue('--slider-spv'));

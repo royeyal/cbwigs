@@ -31,7 +31,7 @@ function initAccordionCSS() {
     });
   });
 
-  console.log('✅ Accordion initialization complete!');
+  // console.log('✅ Accordion initialization complete!');
 }
 
 // Export the function for use in main.js
