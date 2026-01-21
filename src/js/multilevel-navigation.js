@@ -197,11 +197,22 @@ function initDesktopDropdowns() {
         toggle.setAttribute('aria-expanded', 'false');
         dd.setAttribute('aria-hidden', 'true');
         toggle.focus();
-      } else if (e.key === 'Tab' && !dd.contains(e.relatedTarget)) {
-        toggle.dataset.dropdownToggle = 'closed';
-        toggle.setAttribute('aria-expanded', 'false');
-        dd.setAttribute('aria-hidden', 'true');
       }
+    });
+
+    // Close dropdown when focus leaves the entire dropdown area
+    dd.addEventListener('focusout', () => {
+      // Use setTimeout to allow the browser to update activeElement
+      setTimeout(() => {
+        if (
+          !dd.contains(document.activeElement) &&
+          document.activeElement !== toggle
+        ) {
+          toggle.dataset.dropdownToggle = 'closed';
+          toggle.setAttribute('aria-expanded', 'false');
+          dd.setAttribute('aria-hidden', 'true');
+        }
+      }, 0);
     });
   });
 
