@@ -12,8 +12,9 @@
   visibility: visible;
 }
 
-.lightbox-img__item.is-active .card__img.is-3-2 {
+.lightbox-img__item.is-active .card__img {
   aspect-ratio: unset;
+  border-radius: 0.5rem; /* 8px */
 }
 
 /* Force containment of image */
