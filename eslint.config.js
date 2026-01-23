@@ -19,6 +19,7 @@ export default [
         CustomEase: 'readonly',
         Draggable: 'readonly',
         InertiaPlugin: 'readonly',
+        Flip: 'readonly',
         Swiper: 'readonly',
         YT: 'readonly',
         getComputedStyle: 'readonly',
