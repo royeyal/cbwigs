@@ -17,7 +17,7 @@
   object-fit: contain !important;
   min-width: auto;
   width: auto;
-  max-height: 100%;
+  max-height: 80%;
 }
 
 /* Simple Hover on Lightbox Buttons */
