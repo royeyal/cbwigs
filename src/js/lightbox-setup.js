@@ -3,10 +3,27 @@ gsap.defaults({
   duration: 0.8
 });
 
+// Detect RTL direction
+function isRTL() {
+  const htmlDir = document.documentElement.dir || document.dir;
+  const bodyDir = document.body.dir;
+  const computedStyle = window.getComputedStyle(document.documentElement);
+  const cssDirection = computedStyle.direction;
+
+  if (htmlDir) return htmlDir.toLowerCase() === 'rtl';
+  if (bodyDir) return bodyDir.toLowerCase() === 'rtl';
+  if (cssDirection) return cssDirection.toLowerCase() === 'rtl';
+
+  return false;
+}
+
 function createLightbox(
   container,
   { onStart, onOpen, onClose, onCloseComplete } = {}
 ) {
+  // Detect RTL layout
+  const isRTLLayout = isRTL();
+
   const elements = {
     wrapper: container.querySelector('[data-lightbox="wrapper"]'),
     triggers: container.querySelectorAll('[data-lightbox="trigger"]'),
@@ -273,8 +290,16 @@ function createLightbox(
   });
 
   // ————————— NAV BUTTONS ————————— //
-  if (elements.buttons.next) {
-    elements.buttons.next.addEventListener('click', () => {
+  // In RTL, swap the button behavior to maintain intuitive navigation
+  const nextButton = isRTLLayout
+    ? elements.buttons.prev
+    : elements.buttons.next;
+  const prevButton = isRTLLayout
+    ? elements.buttons.next
+    : elements.buttons.prev;
+
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
       const currentIndex = Array.from(elements.items).findIndex(item =>
         item.classList.contains('is-active')
       );
@@ -283,8 +308,8 @@ function createLightbox(
     });
   }
 
-  if (elements.buttons.prev) {
-    elements.buttons.prev.addEventListener('click', () => {
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
       const currentIndex = Array.from(elements.items).findIndex(item =>
         item.classList.contains('is-active')
       );
@@ -306,10 +331,20 @@ function createLightbox(
         closeLightbox();
         break;
       case 'ArrowRight':
-        elements.buttons.next?.click();
+        // In RTL, right arrow goes to previous
+        if (isRTLLayout) {
+          prevButton?.click();
+        } else {
+          nextButton?.click();
+        }
         break;
       case 'ArrowLeft':
-        elements.buttons.prev?.click();
+        // In RTL, left arrow goes to next
+        if (isRTLLayout) {
+          nextButton?.click();
+        } else {
+          prevButton?.click();
+        }
         break;
     }
   });

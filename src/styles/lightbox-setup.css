@@ -23,3 +23,12 @@
 .lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
   transform: translate(100%, 0);
 }
+
+/* RTL Support - Flip button hover transforms */
+[dir='rtl'] .lightbox-nav__button:hover .lightbox-nav__dot {
+  transform: translate(100%, 0);
+}
+
+[dir='rtl'] .lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
+  transform: translate(-100%, 0);
+}
