@@ -19,7 +19,7 @@ function isRTL() {
 
 function createLightbox(
   container,
-  { onStart, onOpen, onClose, onCloseComplete } = {}
+  { onStart, onOpen, onClose, onCloseComplete, fadeGridOnOpen = true } = {}
 ) {
   // Detect RTL layout
   const isRTLLayout = isRTL();
@@ -123,7 +123,7 @@ function createLightbox(
 
     // Return animation
     tl.to(elements.triggerParents, {
-      autoAlpha: 1,
+      autoAlpha: fadeGridOnOpen ? 1 : 0,
       duration: 0.5,
       stagger: 0.03,
       overwrite: true
@@ -235,17 +235,19 @@ function createLightbox(
         lightboxImage.style.display = 'none';
       }
 
-      // Fade out other grid items
-      elements.triggerParents.forEach(otherTrigger => {
-        if (otherTrigger !== trigger) {
-          gsap.to(otherTrigger, {
-            autoAlpha: 0,
-            duration: 0.4,
-            stagger: 0.02,
-            overwrite: true
-          });
-        }
-      });
+      // Fade out other grid items (if enabled)
+      if (fadeGridOnOpen) {
+        elements.triggerParents.forEach(otherTrigger => {
+          if (otherTrigger !== trigger) {
+            gsap.to(otherTrigger, {
+              autoAlpha: 0,
+              duration: 0.4,
+              stagger: 0.02,
+              overwrite: true
+            });
+          }
+        });
+      }
 
       // Flip clicked image into lightbox
       if (!targetItem.contains(img)) {
@@ -356,12 +358,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // SIMPLE INIT
     createLightbox(wrapper);
 
-    //	SUPPORTED CALLBACKS:
-    //  createLightbox(wrapper, {
-    //    onStart: () => console.log("Starting"),
-    //    onOpen: () => console.log("Open"),
-    //    onClose: () => console.log("Closing"),
-    //    onCloseComplete: () => console.log("Done")
-    //  });
+    // SUPPORTED CALLBACKS:
+    // createLightbox(wrapper, {
+    //   onStart: () => console.log("Starting"),
+    //   onOpen: () => console.log("Open"),
+    //   onClose: () => console.log("Closing"),
+    //   onCloseComplete: () => console.log("Done"),
+    false; // Default: true (fades out grid items)
+    // });
   });
 });
