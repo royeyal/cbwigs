@@ -1,0 +1,25 @@
+/* Active Classes */
+.lightbox-wrap.is-active {
+  display: flex;
+}
+
+.lightbox-img__item.is-active {
+  visibility: visible;
+}
+
+/* Force containment of image */
+.lightbox-img__item img {
+  object-fit: contain !important;
+  min-width: auto;
+  width: auto;
+  max-height: 100%;
+}
+
+/* Simple Hover on Lightbox Buttons */
+.lightbox-nav__button:hover .lightbox-nav__dot {
+  transform: translate(-100%, 0);
+}
+
+.lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
+  transform: translate(100%, 0);
+}
