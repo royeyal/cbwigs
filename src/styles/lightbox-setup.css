@@ -1,6 +1,11 @@
 /* Active Classes */
+.lightbox-wrap {
+  transition: backdrop-filter 0.3s ease;
+}
+
 .lightbox-wrap.is-active {
   display: flex;
+  backdrop-filter: blur(3px);
 }
 
 .lightbox-img__item.is-active {
