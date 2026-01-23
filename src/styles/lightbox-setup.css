@@ -1,6 +1,6 @@
 /* Active Classes */
 .lightbox-wrap {
-  transition: backdrop-filter 0.3s ease;
+  transition: backdrop-filter 0.1s ease;
 }
 
 .lightbox-wrap.is-active {
