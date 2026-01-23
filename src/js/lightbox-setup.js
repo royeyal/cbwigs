@@ -122,22 +122,26 @@ function createLightbox(
     );
 
     // Return animation
-    tl.to(elements.triggerParents, {
-      autoAlpha: fadeGridOnOpen ? 1 : 0,
-      duration: 0.5,
-      stagger: 0.03,
-      overwrite: true
-    })
-      .to(
-        elements.nav,
-        {
-          autoAlpha: 0,
-          y: '1rem',
-          duration: 0.4,
-          stagger: 0
-        },
-        '<'
-      )
+    // Only animate grid items back if they were faded out
+    if (fadeGridOnOpen) {
+      tl.to(elements.triggerParents, {
+        autoAlpha: 1,
+        duration: 0.5,
+        stagger: 0.03,
+        overwrite: true
+      });
+    }
+
+    tl.to(
+      elements.nav,
+      {
+        autoAlpha: 0,
+        y: '1rem',
+        duration: 0.4,
+        stagger: 0
+      },
+      fadeGridOnOpen ? '<' : 0
+    )
       .to(
         elements.wrapper,
         {
@@ -155,7 +159,7 @@ function createLightbox(
         '<'
       )
       .set([elements.items, activeLightboxSlide, elements.triggerParents], {
-        clearProps: 'all'
+        clearProps: fadeGridOnOpen ? 'all' : 'opacity,visibility'
       });
 
     // Add this timeline to our main timeline
