@@ -359,12 +359,12 @@ document.addEventListener('DOMContentLoaded', () => {
     createLightbox(wrapper);
 
     // SUPPORTED CALLBACKS:
-    // createLightbox(wrapper, {
-    //   onStart: () => console.log("Starting"),
-    //   onOpen: () => console.log("Open"),
-    //   onClose: () => console.log("Closing"),
-    //   onCloseComplete: () => console.log("Done"),
-    false; // Default: true (fades out grid items)
-    // });
+    createLightbox(wrapper, {
+      //   onStart: () => console.log("Starting"),
+      //   onOpen: () => console.log("Open"),
+      //   onClose: () => console.log("Closing"),
+      //   onCloseComplete: () => console.log("Done"),
+      fadeGridOnOpen: true // Default: true (fades out grid items)
+    });
   });
 });
