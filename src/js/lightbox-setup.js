@@ -355,16 +355,13 @@ function createLightbox(
 document.addEventListener('DOMContentLoaded', () => {
   const wrappers = document.querySelectorAll('[data-gallery]');
   wrappers.forEach(wrapper => {
-    // SIMPLE INIT
-    createLightbox(wrapper);
-
     // SUPPORTED CALLBACKS:
     createLightbox(wrapper, {
       //   onStart: () => console.log("Starting"),
       //   onOpen: () => console.log("Open"),
       //   onClose: () => console.log("Closing"),
       //   onCloseComplete: () => console.log("Done"),
-      fadeGridOnOpen: true // Default: true (fades out grid items)
+      fadeGridOnOpen: false // Default: true (fades out grid items)
     });
   });
 });

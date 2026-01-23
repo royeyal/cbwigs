@@ -12,6 +12,10 @@
   visibility: visible;
 }
 
+.lightbox-img__item.is-active .card__img.is-3-2 {
+  aspect-ratio: unset;
+}
+
 /* Force containment of image */
 .lightbox-img__item img {
   object-fit: contain !important;
