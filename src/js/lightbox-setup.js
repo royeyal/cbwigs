@@ -19,7 +19,14 @@ function isRTL() {
 
 function createLightbox(
   container,
-  { onStart, onOpen, onClose, onCloseComplete, fadeGridOnOpen = true } = {}
+  {
+    onStart,
+    onOpen,
+    onClose,
+    onCloseComplete,
+    fadeGridOnOpen = true,
+    flipBackOnClose = false
+  } = {}
 ) {
   // Detect RTL layout
   const isRTLLayout = isRTL();
@@ -108,12 +115,35 @@ function createLightbox(
     );
 
     if (originalItem && originalParent) {
-      // Before moving the item back, clear its transforms
-      gsap.set(originalItem, { clearProps: 'all' });
-      // Move the item back to its original parent
-      originalParent.appendChild(originalItem);
-      originalParent.removeAttribute('data-lightbox');
-      originalItem.removeAttribute('data-lightbox');
+      if (flipBackOnClose) {
+        // Get the state before moving for Flip animation
+        const state = Flip.getState(originalItem);
+
+        // Move the item back to its original parent
+        originalParent.appendChild(originalItem);
+
+        // Animate the flip back
+        tl.add(
+          Flip.from(state, {
+            targets: originalItem,
+            absolute: true,
+            duration: 0.6,
+            ease: 'power2.inOut',
+            onComplete: () => {
+              originalParent.removeAttribute('data-lightbox');
+              originalItem.removeAttribute('data-lightbox');
+              gsap.set(originalItem, { clearProps: 'all' });
+            }
+          }),
+          0
+        );
+      } else {
+        // Just move it back without animation
+        gsap.set(originalItem, { clearProps: 'all' });
+        originalParent.appendChild(originalItem);
+        originalParent.removeAttribute('data-lightbox');
+        originalItem.removeAttribute('data-lightbox');
+      }
     }
 
     // Find active slide
@@ -365,7 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
       //   onOpen: () => console.log("Open"),
       //   onClose: () => console.log("Closing"),
       //   onCloseComplete: () => console.log("Done"),
-      fadeGridOnOpen: false // Default: true (fades out grid items)
+      fadeGridOnOpen: false, // Default: true (fades out grid items)
+      flipBackOnClose: true // Default: false (image fades out vs animates back)
     });
   });
 });
