@@ -69,13 +69,24 @@ class ElegantYouTubePlayer {
   }
 
   /**
-   * Detect if video is a YouTube Short based on aspect ratio preference
+   * Detect if video is a YouTube Short based on attribute value or class
+   * Defaults to true (Short format) if not specified
    */
   isShortFormat(container) {
-    return (
-      container.hasAttribute('data-youtube-short') ||
-      container.classList.contains('youtube-short')
-    );
+    // Check data-youtube-short attribute value
+    const shortAttr = container.getAttribute('data-youtube-short');
+    if (shortAttr !== null) {
+      // Convert string to boolean: "false" = false, anything else = true
+      return shortAttr.toLowerCase() !== 'false';
+    }
+
+    // Check class for backward compatibility
+    if (container.classList.contains('youtube-short')) {
+      return true;
+    }
+
+    // Default to true (Short format)
+    return true;
   }
 
   /**

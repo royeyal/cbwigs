@@ -1,11 +1,6 @@
 /* Active Classes */
-.lightbox-wrap {
-  transition: backdrop-filter 0.1s ease;
-}
-
 .lightbox-wrap.is-active {
   display: flex;
-  backdrop-filter: blur(3px);
 }
 
 .lightbox-img__item.is-active {
@@ -20,7 +15,7 @@
 /* Force containment of image */
 .lightbox-img__item img {
   object-fit: contain !important;
-  min-width: auto;
+  min-width: fit-content;
   width: auto;
   max-height: 80%;
 }
