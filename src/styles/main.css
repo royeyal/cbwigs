@@ -55,9 +55,11 @@ html {
   text-underline-offset: 0.125em;
   text-decoration-thickness: from-font;
   color: var(--_primitives---brand--accent--400);
+  transition: 0.3s color ease-in-out;
 
   &:hover {
     color: var(--_primitives---brand--accent--600);
+    text-decoration: none;
   }
 }
 
