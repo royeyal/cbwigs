@@ -50,6 +50,17 @@ html {
   }
 }
 
+.w-richtext a {
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+  text-decoration-thickness: from-font;
+  color: var(--_primitives---brand--accent--400);
+
+  &:hover {
+    color: var(--_primitives---brand--accent--600);
+  }
+}
+
 .w-richtext ol,
 .w-richtext ul {
   padding-left: 0;

@@ -1,34 +1,42 @@
 # Parallax Image Effect - Webflow Setup Guide
 
 ## Overview
+
 This script creates a smooth parallax scrolling effect on images within cards using GSAP ScrollTrigger. The effect is triggered by a custom data attribute, making it easy to apply selectively in Webflow.
 
 ## Visual Effect
+
 As the user scrolls, images move vertically at a different speed than the rest of the content, creating a depth and motion effect.
 
 ## Prerequisites
+
 - GSAP library (included in the project)
 - ScrollTrigger plugin (included in the project)
 
 ## Webflow Setup
 
 ### 1. Structure Requirements
+
 Your cards should follow this structure:
+
 ```
 .collection-grid
   └── .card
       └── .card__media
-          └── .card__img
+          └── .card__img (or any image element)
 ```
+
+**Note:** By default, the script looks for `.card__img`, but you can target any element using the `data-parallax-target` attribute (see Custom Target Selector below).
 
 ### 2. Add the Custom Attribute
 
 **On the `.card` element** (or `.card__media` if you prefer), add a custom attribute:
 
-**Attribute Name:** `data-parallax-image`  
+**Attribute Name:** `data-parallax-image`
 **Attribute Value:** (leave empty or set to `true`)
 
 #### In Webflow:
+
 1. Select the `.card` element (or `.card__media`)
 2. In the Settings panel (D key), scroll to "Custom Attributes"
 3. Click "+ Add Custom Attribute"
@@ -36,9 +44,11 @@ Your cards should follow this structure:
 5. Value: (leave blank or enter `true`)
 
 ### 3. Set Image Dimensions
+
 The `.card__media` element must have defined dimensions:
 
 **Option A - Fixed Height:**
+
 ```
 .card__media
   - Width: 100%
@@ -47,6 +57,7 @@ The `.card__media` element must have defined dimensions:
 ```
 
 **Option B - Aspect Ratio:**
+
 ```
 .card__media
   - Width: 100%
@@ -55,7 +66,9 @@ The `.card__media` element must have defined dimensions:
 ```
 
 ### 4. Image Settings
+
 Configure the `.card__img`:
+
 ```
 .card__img
   - Width: 100%
@@ -67,33 +80,70 @@ Configure the `.card__img`:
 ## Advanced Options
 
 ### Custom Speed
+
 Control the parallax intensity with `data-parallax-speed`:
 
-**Attribute Name:** `data-parallax-speed`  
+**Attribute Name:** `data-parallax-speed`
 **Attribute Value:** `30` (default) - higher values = more movement
 
 Examples:
+
 - `15` - subtle effect
 - `30` - medium effect (default)
 - `50` - dramatic effect
 
 ### Direction Control
+
 Change the parallax direction with `data-parallax-direction`:
 
-**Attribute Name:** `data-parallax-direction`  
+**Attribute Name:** `data-parallax-direction`
 **Attribute Value:** `down` (default) or `up`
 
 - `down` - image moves down as you scroll (default)
 - `up` - image moves up as you scroll (inverted)
 
-### Example with All Attributes:
+### Custom Target Selector
+
+Target a specific element within the container with `data-parallax-target`:
+
+**Attribute Name:** `data-parallax-target`
+**Attribute Value:** Any CSS selector (default: `.card__img`)
+
+This is useful when:
+
+- You're not using the `.card__img` class name
+- You have multiple images and want to target a specific one
+- You're using different naming conventions (e.g., `.hero__image`, `.gallery-item__img`)
+
+**Examples:**
+
+- `.hero__image` - Target hero images
+- `.gallery-item__img` - Target gallery images
+- `img` - Target any img tag within the container
+- `.custom-parallax-img` - Target custom class
+
+**Usage:**
+
 ```html
-<div class="card" 
-     data-parallax-image 
-     data-parallax-speed="40" 
-     data-parallax-direction="down">
+<div class="hero" data-parallax-image data-parallax-target=".hero__image">
+  <div class="hero__media">
+    <img class="hero__image" src="..." alt="..." />
+  </div>
+</div>
+```
+
+### Example with All Attributes:
+
+```html
+<div
+  class="card"
+  data-parallax-image
+  data-parallax-speed="40"
+  data-parallax-direction="down"
+  data-parallax-target=".card__img"
+>
   <div class="card__media">
-    <img class="card__img" src="..." alt="...">
+    <img class="card__img" src="..." alt="..." />
   </div>
 </div>
 ```
@@ -127,21 +177,25 @@ refreshParallaxImages();
 ## Troubleshooting
 
 ### Images aren't moving
+
 - Verify the `.card__media` has `overflow: hidden` set
 - Check that the element has the `data-parallax-image` attribute
 - Ensure `.card__img` exists inside the container
 - Check browser console for warnings
 
 ### Images show white edges while scrolling
+
 - The image is automatically scaled to 1.2x to prevent edge reveal
 - Ensure your images have sufficient resolution
 - Center the important part of the image using Object Position
 
 ### Effect is too subtle/intense
+
 - Adjust the `data-parallax-speed` attribute
 - Default is `30`, try values between `15` (subtle) and `60` (dramatic)
 
 ### Performance issues
+
 - Limit the number of parallax images on a single page
 - Use appropriately sized/compressed images
 - Consider disabling on mobile with `parallax-disable-mobile` class
@@ -155,6 +209,7 @@ The script auto-initializes on page load. Make sure it's included in your page:
 ```
 
 Or import it in your main.js:
+
 ```javascript
 import './parallax-image.js';
 ```
@@ -184,11 +239,12 @@ Include the parallax-image.css in your page or import it in your main CSS:
 ## Examples
 
 ### Basic Implementation
+
 ```html
 <div class="collection-grid">
   <div class="card" data-parallax-image>
     <div class="card__media">
-      <img class="card__img" src="image.jpg" alt="Description">
+      <img class="card__img" src="image.jpg" alt="Description" />
     </div>
     <div class="card__content">
       <!-- Card content -->
@@ -198,19 +254,29 @@ Include the parallax-image.css in your page or import it in your main CSS:
 ```
 
 ### With Custom Speed
+
 ```html
 <div class="card" data-parallax-image data-parallax-speed="50">
   <div class="card__media">
-    <img class="card__img" src="image.jpg" alt="Description">
+    <img class="card__img" src="image.jpg" alt="Description" />
   </div>
 </div>
 ```
 
 ### Upward Motion
+
 ```html
 <div class="card" data-parallax-image data-parallax-direction="up">
   <div class="card__media">
-    <img class="card__img" src="image.jpg" alt="Description">
+    <img class="card__img" src="image.jpg" alt="Description" />
   </div>
+</div>
+```
+
+### Custom Image Class
+
+```html
+<div class="hero" data-parallax-image data-parallax-target=".hero__bg-image">
+  <img class="hero__bg-image" src="image.jpg" alt="Description" />
 </div>
 ```

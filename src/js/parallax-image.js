@@ -50,11 +50,18 @@ export function initParallaxImages() {
   );
 
   parallaxContainers.forEach(container => {
+    // Get custom target selector from attribute (default: .card__img)
+    const targetSelector =
+      container.getAttribute('data-parallax-target') || '.card__img';
+
     // Find the image within the container
-    const image = container.querySelector('.card__img');
+    const image = container.querySelector(targetSelector);
 
     if (!image) {
-      console.warn('Parallax Image: No .card__img found within', container);
+      console.warn(
+        `Parallax Image: No element found with selector "${targetSelector}" within`,
+        container
+      );
       return;
     }
 
