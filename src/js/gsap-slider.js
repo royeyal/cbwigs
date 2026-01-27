@@ -61,9 +61,20 @@ function initBasicGSAPSlider() {
     root.setAttribute('role', 'region');
     root.setAttribute('aria-roledescription', 'carousel');
     root.setAttribute('aria-label', 'Slider');
+    root.setAttribute('tabindex', '0'); // Make slider focusable for keyboard navigation
     collection.setAttribute('role', 'group');
     collection.setAttribute('aria-roledescription', 'Slides List');
     collection.setAttribute('aria-label', 'Slides');
+
+    // Add live region for screen reader announcements
+    const liveRegion = document.createElement('div');
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.className = 'sr-only'; // Visually hidden
+    liveRegion.style.cssText =
+      'position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;';
+    root.appendChild(liveRegion);
+    root._liveRegion = liveRegion;
     items.forEach((slide, i) => {
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-roledescription', 'Slide');
@@ -92,6 +103,7 @@ function initBasicGSAPSlider() {
       );
       btn.disabled = true;
       btn.setAttribute('aria-disabled', 'true');
+      btn.setAttribute('tabindex', '0'); // Make buttons focusable
     });
 
     // Determine if slider runs
@@ -134,6 +146,14 @@ function initBasicGSAPSlider() {
       root.removeAttribute('role');
       root.removeAttribute('aria-roledescription');
       root.removeAttribute('aria-label');
+      root.removeAttribute('tabindex');
+
+      // Remove live region
+      if (root._liveRegion) {
+        root._liveRegion.remove();
+        root._liveRegion = null;
+      }
+
       collection.removeAttribute('role');
       collection.removeAttribute('aria-roledescription');
       collection.removeAttribute('aria-label');
@@ -225,6 +245,11 @@ function initBasicGSAPSlider() {
       });
       activeIndex = snapPoints.indexOf(closest);
 
+      // Announce to screen readers
+      if (root._liveRegion) {
+        root._liveRegion.textContent = `Slide ${activeIndex + 1} of ${snapPoints.length}`;
+      }
+
       // Update Slide Attributes
       items.forEach((slide, i) => {
         const isActive = i === activeIndex;
@@ -288,6 +313,38 @@ function initBasicGSAPSlider() {
           onUpdate: () => updateStatus(gsap.getProperty(track, 'x'))
         });
       });
+    });
+
+    // Arrow key navigation for keyboard accessibility
+    root.addEventListener('keydown', event => {
+      // Only handle arrow keys when focus is on slider or its controls
+      if (!root.contains(document.activeElement)) return;
+
+      let target;
+
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+
+        if (event.key === 'ArrowRight') {
+          // Next slide
+          if (activeIndex < snapPoints.length - 1) {
+            target = activeIndex + 1;
+          }
+        } else {
+          // Previous slide
+          if (activeIndex > 0) {
+            target = activeIndex - 1;
+          }
+        }
+
+        if (target !== undefined) {
+          gsap.to(track, {
+            duration: 0.4,
+            x: snapPoints[target],
+            onUpdate: () => updateStatus(gsap.getProperty(track, 'x'))
+          });
+        }
+      }
     });
 
     // Initialize Draggable
