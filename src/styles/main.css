@@ -74,3 +74,9 @@ html {
   padding-left: 0;
   padding-inline-start: 0.5rem;
 }
+
+/* Accordion Toggle Focus Styles */
+[data-accordion-toggle]:focus-visible {
+  outline: 2px solid var(--_primitives---brand--accent--600);
+  outline-offset: 2px;
+}
