@@ -43,3 +43,10 @@
   width: 100%;
   height: 100%;
 }
+
+/* Reduced Motion Support - Disable image trail effect */
+@media (prefers-reduced-motion: reduce) {
+  .trail-item {
+    display: none !important;
+  }
+}
