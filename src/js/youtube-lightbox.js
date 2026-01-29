@@ -269,9 +269,9 @@ export function initYouTubeLightbox() {
 
       // Get video ID from data attribute
       const rawVideoId =
-        section.dataset.youtubeId ||
-        heroLightbox.dataset.youtubeId ||
-        playIcon.dataset.youtubeId;
+        section.dataset.youtubeLightboxId ||
+        heroLightbox.dataset.youtubeLightboxId ||
+        playIcon.dataset.youtubeLightboxId;
 
       console.log(
         `[YouTube Lightbox] Section ${index + 1}: Raw video ID:`,
