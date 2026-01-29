@@ -37,3 +37,10 @@
 [dir='rtl'] .lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
   transform: translate(-100%, 0);
 }
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-nav__button .lightbox-nav__dot {
+    transform: none !important;
+  }
+}

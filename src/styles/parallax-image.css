@@ -27,8 +27,6 @@
   /* Will be scaled to 1.2 by GSAP to prevent edge reveal */
   will-change: transform;
   backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
   transform: translateZ(0);
 }
 
@@ -48,4 +46,13 @@
 
 [data-parallax-image].is-loaded .card__img {
   opacity: 1;
+}
+
+/* Reduced Motion Support - Disable parallax effect */
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax-image] .card__img {
+    transform: none !important;
+    scale: 1 !important;
+    will-change: auto;
+  }
 }
