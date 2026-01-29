@@ -201,6 +201,66 @@
   }
 }
 
+/* Stop/Close Button - Appears when video is playing */
+.youtube-stop-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, #1a1a1a 80%, transparent);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--easing);
+  box-shadow: 0 2px 8px color-mix(in srgb, #000 20%, transparent);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #f4efe8; /* text-on-dark */
+    transition: transform 0.3s var(--easing);
+  }
+
+  /* Focus state for accessibility */
+  &:focus-visible {
+    outline: 3px solid color-mix(in srgb, #6b625a 80%, transparent); /* Brand focus-ring */
+    outline-offset: 2px;
+  }
+
+  /* Hover state */
+  &:hover {
+    background: color-mix(
+      in srgb,
+      #a39486 60%,
+      transparent
+    ); /* Brand neutral-dark */
+
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px color-mix(in srgb, #000 30%, transparent);
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Active state */
+  &:active {
+    transform: scale(0.95);
+    background: color-mix(
+      in srgb,
+      #8c8176 70%,
+      transparent
+    ); /* Brand neutral-darker */
+  }
+}
+
 /* Webflow Designer Placeholder */
 .wf-design-mode,
 .w-editor {
@@ -257,6 +317,18 @@
     height: 40px;
   }
 
+  .youtube-stop-button {
+    width: 40px;
+    height: 40px;
+    top: 12px;
+    right: 12px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   /* .youtube-player {
     border-radius: 8px;
   } */
@@ -273,6 +345,18 @@
     height: 36px;
   }
 
+  .youtube-stop-button {
+    width: 36px;
+    height: 36px;
+    top: 8px;
+    right: 8px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
   .youtube-player {
     &.youtube-short {
       max-width: 100%;
@@ -287,6 +371,8 @@
   .youtube-play-button,
   .youtube-play-button::before,
   .youtube-play-icon,
+  .youtube-stop-button,
+  .youtube-stop-button svg,
   .youtube-player {
     transition: none;
   }
@@ -299,6 +385,15 @@
   .youtube-placeholder:hover .youtube-play-button,
   .youtube-placeholder:focus-visible .youtube-play-button,
   .youtube-placeholder:active .youtube-play-button {
+    transform: none;
+  }
+
+  .youtube-stop-button:hover,
+  .youtube-stop-button:active {
+    transform: none;
+  }
+
+  .youtube-stop-button:hover svg {
     transform: none;
   }
 }

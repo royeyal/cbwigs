@@ -10,6 +10,47 @@ export function initYouTubeLightbox() {
   let activeModal = null;
   let activePlayer = null;
   let apiReady = false;
+  let lastFocusedElement = null; // Store element that opened the modal
+
+  /**
+   * Focus trap for modal - keeps focus within the modal
+   */
+  function handleFocusTrap(e) {
+    if (!activeModal) return;
+
+    const focusableElements = activeModal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const focusableArray = Array.from(focusableElements);
+    const firstFocusable = focusableArray[0];
+    const lastFocusable = focusableArray[focusableArray.length - 1];
+
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        // Shift+Tab on first element -> go to last
+        e.preventDefault();
+        lastFocusable.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        // Tab on last element -> go to first
+        e.preventDefault();
+        firstFocusable.focus();
+      }
+    }
+  }
+
+  /**
+   * Global keyboard event handler for modal
+   */
+  function handleKeydown(e) {
+    if (!activeModal || !activeModal.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeLightbox();
+    }
+
+    handleFocusTrap(e);
+  }
 
   /**
    * Load YouTube IFrame API (compatible with youtube-player.js)
@@ -142,19 +183,20 @@ export function initYouTubeLightbox() {
       const backdrop = activeModal.querySelector('.youtube-lightbox-backdrop');
       backdrop.addEventListener('click', closeLightbox);
 
-      // ESC key handler
-      const handleEscape = e => {
-        if (e.key === 'Escape') {
-          closeLightbox();
-        }
-      };
-      activeModal.addEventListener('keydown', handleEscape);
+      // Add global keyboard event listener (handles ESC and focus trap)
+      document.addEventListener('keydown', handleKeydown);
     }
 
     // Show modal
     console.log('[YouTube Lightbox] Showing modal');
     document.body.style.overflow = 'hidden';
     activeModal.classList.add('active');
+
+    // Move focus to close button for accessibility
+    const closeBtn = activeModal.querySelector('.youtube-lightbox-close');
+    setTimeout(() => {
+      closeBtn.focus();
+    }, 100);
 
     // Small delay to ensure modal is rendered before creating player
     setTimeout(() => {
@@ -213,6 +255,12 @@ export function initYouTubeLightbox() {
     // Hide modal
     activeModal.classList.remove('active');
     document.body.style.overflow = '';
+
+    // Restore focus to the element that opened the modal
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+      lastFocusedElement = null;
+    }
 
     // Clean up player container
     const playerContainer = document.getElementById('youtube-lightbox-player');
@@ -295,6 +343,7 @@ export function initYouTubeLightbox() {
       const handleClick = e => {
         console.log('[YouTube Lightbox] Play icon clicked for video:', videoId);
         e.preventDefault();
+        lastFocusedElement = playIcon; // Store for focus restoration
         openLightbox(videoId);
       };
 

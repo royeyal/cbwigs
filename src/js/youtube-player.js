@@ -163,6 +163,63 @@ class ElegantYouTubePlayer {
   }
 
   /**
+   * Create stop/close button for active video
+   */
+  createStopButton(container, videoId) {
+    const stopButton = document.createElement('button');
+    stopButton.className = 'youtube-stop-button';
+    stopButton.setAttribute('aria-label', 'Stop video and return to thumbnail');
+    stopButton.setAttribute('title', 'Stop video (Esc)');
+    stopButton.innerHTML = `
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+
+    // Click handler
+    stopButton.addEventListener('click', e => {
+      e.preventDefault();
+      this.stopVideo(container, videoId);
+    });
+
+    // Keyboard handler (Enter, Space, or Escape)
+    stopButton.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+        e.preventDefault();
+        this.stopVideo(container, videoId);
+      }
+    });
+
+    return stopButton;
+  }
+
+  /**
+   * Stop video and return to thumbnail view
+   */
+  stopVideo(container, videoId) {
+    // Destroy the player
+    this.destroyPlayer(container);
+
+    // Remove iframe container and stop button
+    const iframeContainer = container.querySelector(
+      '.youtube-iframe-container'
+    );
+    const stopButton = container.querySelector('.youtube-stop-button');
+    if (iframeContainer) iframeContainer.remove();
+    if (stopButton) stopButton.remove();
+
+    // Remove active state
+    container.classList.remove('youtube-active');
+
+    // Recreate and add placeholder
+    const placeholder = this.createPlaceholder(container, videoId);
+    container.appendChild(placeholder);
+
+    // Focus the placeholder for keyboard navigation continuity
+    setTimeout(() => placeholder.focus(), 100);
+  }
+
+  /**
    * Load and play the video
    */
   loadVideo(container, videoId) {
@@ -175,6 +232,8 @@ class ElegantYouTubePlayer {
     const iframeContainer = document.createElement('div');
     iframeContainer.className = 'youtube-iframe-container';
     iframeContainer.id = `youtube-player-${videoId}-${Date.now()}`;
+    iframeContainer.setAttribute('role', 'region');
+    iframeContainer.setAttribute('aria-label', 'YouTube video player');
 
     container.appendChild(iframeContainer);
 
@@ -195,6 +254,26 @@ class ElegantYouTubePlayer {
             placeholder.remove();
           }
           container.classList.add('youtube-active');
+
+          // Add stop button for accessibility
+          const stopButton = this.createStopButton(container, videoId);
+          container.appendChild(stopButton);
+
+          // Add ESC key handler to stop video
+          const handleEscape = e => {
+            if (
+              e.key === 'Escape' &&
+              container.classList.contains('youtube-active')
+            ) {
+              this.stopVideo(container, videoId);
+            }
+          };
+          container._escapeHandler = handleEscape;
+          document.addEventListener('keydown', handleEscape);
+
+          // Focus stop button for immediate keyboard access
+          setTimeout(() => stopButton.focus(), 100);
+
           event.target.playVideo();
         },
         onError: event => {
@@ -257,6 +336,12 @@ class ElegantYouTubePlayer {
     if (player && typeof player.destroy === 'function') {
       player.destroy();
       this.players.delete(container);
+    }
+
+    // Remove ESC key handler if it exists
+    if (container._escapeHandler) {
+      document.removeEventListener('keydown', container._escapeHandler);
+      delete container._escapeHandler;
     }
   }
 
