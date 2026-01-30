@@ -1,4 +1,5 @@
-[data-underline-link] {
+[data-underline-link],
+.w-richtext a {
   text-decoration: none;
   position: relative;
 }
