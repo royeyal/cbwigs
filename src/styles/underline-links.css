@@ -1,5 +1,5 @@
 [data-underline-link],
-.w-richtext a {
+.section-rich-text .w-richtext a {
   text-decoration: none;
   position: relative;
 }
