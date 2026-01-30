@@ -114,12 +114,23 @@
 /* Animation for play icon in hero (optional enhancement) */
 .section-hero-lightbox {
   .lightbox-play-icon {
+    position: absolute;
+    backdrop-filter: blur(20px);
+    background: color-mix(in srgb, #a39486 30%, transparent);
+    border-radius: 50%;
+    box-shadow:
+      0 4px 6px color-mix(in srgb, #000 10%, transparent),
+      0 8px 16px color-mix(in srgb, #000 10%, transparent),
+      inset 0 1px color-mix(in srgb, #f4efe8 20%, transparent);
+    height: 5rem;
+    width: 5rem;
+    z-index: 2;
     transition:
-      transform 0.3s ease,
-      opacity 0.3s ease;
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       opacity: 0.9;
     }
 
