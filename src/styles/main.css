@@ -34,13 +34,13 @@ html {
   scroll-behavior: smooth;
 }
 
-.hero_lightbox .hero_lightbox-thumbnail {
+/* .hero_lightbox .hero_lightbox-thumbnail {
   transition: transform 1s ease-in-out;
 }
 
 .hero_lightbox:hover .hero_lightbox-thumbnail {
   transform: scale(1.05);
-}
+} */
 
 .w-richtext p {
   margin-bottom: 1rem;
