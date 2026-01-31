@@ -81,7 +81,6 @@ function initBasicGSAPSlider() {
       slide.setAttribute('aria-label', `Slide ${i + 1} of ${items.length}`);
       slide.setAttribute('aria-hidden', 'true');
       slide.setAttribute('aria-selected', 'false');
-      slide.setAttribute('tabindex', '-1');
 
       // Initially disable all focusable elements in slides
       const focusableElements = slide.querySelectorAll(
@@ -163,7 +162,6 @@ function initBasicGSAPSlider() {
         slide.removeAttribute('aria-label');
         slide.removeAttribute('aria-hidden');
         slide.removeAttribute('aria-selected');
-        slide.removeAttribute('tabindex');
 
         // Restore focusable elements
         const focusableElements = slide.querySelectorAll(
@@ -255,18 +253,11 @@ function initBasicGSAPSlider() {
         const isActive = i === activeIndex;
 
         // IMPORTANT: Blur focused elements BEFORE setting aria-hidden
-        if (!isActive) {
-          // If the slide itself or any of its descendants have focus, blur first
-          if (
-            slide === document.activeElement ||
-            slide.contains(document.activeElement)
-          ) {
-            document.activeElement.blur();
-          }
+        if (!isActive && slide.contains(document.activeElement)) {
+          document.activeElement.blur();
         }
 
         slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        slide.setAttribute('tabindex', isActive ? '0' : '-1');
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
 
         // Manage focusable elements within slides to prevent focus conflicts
