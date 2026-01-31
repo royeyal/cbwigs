@@ -254,14 +254,20 @@ function initBasicGSAPSlider() {
       items.forEach((slide, i) => {
         const isActive = i === activeIndex;
 
-        slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-        slide.setAttribute('tabindex', isActive ? '0' : '-1');
-
-        // If hiding a slide that currently has focus, blur it
-        if (!isActive && slide.contains(document.activeElement)) {
-          document.activeElement.blur();
+        // IMPORTANT: Blur focused elements BEFORE setting aria-hidden
+        if (!isActive) {
+          // If the slide itself or any of its descendants have focus, blur first
+          if (
+            slide === document.activeElement ||
+            slide.contains(document.activeElement)
+          ) {
+            document.activeElement.blur();
+          }
         }
+
+        slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        slide.setAttribute('tabindex', isActive ? '0' : '-1');
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
 
         // Manage focusable elements within slides to prevent focus conflicts
         const focusableElements = slide.querySelectorAll(
@@ -284,11 +290,6 @@ function initBasicGSAPSlider() {
             }
             element.removeAttribute('aria-hidden');
           } else {
-            // If hiding an element that currently has focus, blur it
-            if (element === document.activeElement) {
-              element.blur();
-            }
-
             // Store original tabindex and disable focus
             if (!element.hasAttribute('data-original-tabindex')) {
               const currentTabindex = element.getAttribute('tabindex');
