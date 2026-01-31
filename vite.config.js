@@ -15,10 +15,6 @@ export default defineConfig({
         main: resolve(
           fileURLToPath(new URL('.', import.meta.url)),
           'src/js/main.js'
-        ),
-        'draggable-slider': resolve(
-          fileURLToPath(new URL('.', import.meta.url)),
-          'src/js/draggable-infinite-slider-standalone.js'
         )
       },
       output: {
