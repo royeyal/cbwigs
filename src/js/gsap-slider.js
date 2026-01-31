@@ -260,24 +260,33 @@ function initBasicGSAPSlider() {
 
         // Manage focusable elements within slides to prevent focus conflicts
         const focusableElements = slide.querySelectorAll(
-          'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+          'a, button, input, textarea, select, [tabindex]'
         );
 
         focusableElements.forEach(element => {
           if (isActive) {
-            // Restore original tabindex or set to 0 if it was disabled
+            // Restore original tabindex
             const originalTabindex = element.getAttribute(
               'data-original-tabindex'
             );
             if (originalTabindex !== null) {
-              element.setAttribute('tabindex', originalTabindex);
+              if (originalTabindex === '0' || originalTabindex === '') {
+                element.removeAttribute('tabindex');
+              } else {
+                element.setAttribute('tabindex', originalTabindex);
+              }
               element.removeAttribute('data-original-tabindex');
             }
             element.removeAttribute('aria-hidden');
           } else {
             // Store original tabindex and disable focus
-            const currentTabindex = element.getAttribute('tabindex') || '0';
-            element.setAttribute('data-original-tabindex', currentTabindex);
+            if (!element.hasAttribute('data-original-tabindex')) {
+              const currentTabindex = element.getAttribute('tabindex');
+              element.setAttribute(
+                'data-original-tabindex',
+                currentTabindex || '0'
+              );
+            }
             element.setAttribute('tabindex', '-1');
             element.setAttribute('aria-hidden', 'true');
           }
