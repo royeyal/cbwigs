@@ -59,7 +59,7 @@
     if (other && other.href) {
       link.setAttribute('href', other.href);
 
-      // Set label based on target hreflang
+      // Set label based on target hreflang (show where we're GOING)
       if (labelEl) {
         const isTargetEnglish = other.hreflang.startsWith('en');
         labelEl.textContent = isTargetEnglish ? LABEL_EN : LABEL_HE;
