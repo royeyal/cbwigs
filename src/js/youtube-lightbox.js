@@ -172,7 +172,7 @@ export function initYouTubeLightbox() {
 
     // Create modal if it doesn't exist
     if (!activeModal) {
-      console.log('[YouTube Lightbox] Creating modal');
+      // console.log('[YouTube Lightbox] Creating modal');
       activeModal = createModal();
 
       // Close button handler

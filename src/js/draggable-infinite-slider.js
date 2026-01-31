@@ -5,8 +5,6 @@
  * @returns {void}
  */
 export function initDraggableInfiniteSlider() {
-  console.log('[Slider] Initializing draggable infinite slider');
-
   // Check if GSAP is available globally
   if (
     typeof gsap === 'undefined' ||
@@ -16,39 +14,17 @@ export function initDraggableInfiniteSlider() {
     console.warn(
       '⚠️ GSAP, Draggable, or InertiaPlugin not found. Make sure they are loaded.'
     );
-    console.log(
-      '[Slider] GSAP:',
-      typeof gsap,
-      'Draggable:',
-      typeof Draggable,
-      'InertiaPlugin:',
-      typeof InertiaPlugin
-    );
     return;
   }
 
-  console.log('[Slider] GSAP plugins found, registering...');
   gsap.registerPlugin(Draggable, InertiaPlugin);
 
   function initSlider() {
-    console.log('[Slider] Starting initSlider');
     const wrapper = document.querySelector('[data-slider="list"]');
-    if (!wrapper) {
-      console.warn(
-        '[Slider] No wrapper found with selector [data-slider="list"]'
-      );
-      return;
-    }
-    console.log('[Slider] Wrapper found:', wrapper);
+    if (!wrapper) return;
 
     const slides = gsap.utils.toArray('[data-slider="slide"]');
-    console.log('[Slider] Found slides:', slides.length);
-    if (slides.length === 0) {
-      console.warn(
-        '[Slider] No slides found with selector [data-slider="slide"]'
-      );
-      return;
-    }
+    if (slides.length === 0) return;
 
     const nextButton = document.querySelector('[data-slider="button-next"]');
     const prevButton = document.querySelector('[data-slider="button-prev"]');
