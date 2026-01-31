@@ -5,6 +5,8 @@
  * @returns {void}
  */
 export function initDraggableInfiniteSlider() {
+  console.log('[Slider] Initializing draggable infinite slider');
+
   // Check if GSAP is available globally
   if (
     typeof gsap === 'undefined' ||
@@ -14,20 +16,40 @@ export function initDraggableInfiniteSlider() {
     console.warn(
       '⚠️ GSAP, Draggable, or InertiaPlugin not found. Make sure they are loaded.'
     );
+    console.log('[Slider] Plugin status:', {
+      gsap: typeof gsap,
+      Draggable: typeof Draggable,
+      InertiaPlugin: typeof InertiaPlugin
+    });
     return;
   }
 
+  console.log('[Slider] All GSAP plugins found, registering...');
   gsap.registerPlugin(Draggable, InertiaPlugin);
 
   function initSlider() {
+    console.log('[Slider] Starting initSlider()');
+
     const wrapper = document.querySelector('[data-slider="list"]');
-    if (!wrapper) return;
+    if (!wrapper) {
+      console.warn('[Slider] No wrapper found with [data-slider="list"]');
+      return;
+    }
+    console.log('[Slider] Wrapper found:', wrapper);
 
     const slides = gsap.utils.toArray('[data-slider="slide"]');
-    if (slides.length === 0) return;
+    console.log('[Slider] Found', slides.length, 'slides');
+    if (slides.length === 0) {
+      console.warn('[Slider] No slides found with [data-slider="slide"]');
+      return;
+    }
 
     const nextButton = document.querySelector('[data-slider="button-next"]');
     const prevButton = document.querySelector('[data-slider="button-prev"]');
+    console.log('[Slider] Buttons:', {
+      next: !!nextButton,
+      prev: !!prevButton
+    });
 
     const totalElement = document.querySelector('[data-slide-count="total"]');
     const stepElement = document.querySelector('[data-slide-count="step"]');
@@ -94,11 +116,13 @@ export function initDraggableInfiniteSlider() {
       }
     }
 
+    console.log('[Slider] Creating horizontal loop...');
     const loop = horizontalLoop(slides, {
       paused: true,
       draggable: true,
       center: false,
       onChange: (element, index) => {
+        console.log('[Slider] onChange:', { index, element });
         // remember latest
         currentEl = element;
         currentIndex = index;
@@ -106,6 +130,7 @@ export function initDraggableInfiniteSlider() {
         applyActive(element, index, true);
       }
     });
+    console.log('[Slider] Horizontal loop created:', loop);
 
     // Click -> go to index (offset only on desktop offset design)
     function mapClickIndex(i) {
@@ -126,10 +151,13 @@ export function initDraggableInfiniteSlider() {
     );
 
     if (!currentEl && slides[0]) {
+      console.log('[Slider] Setting initial active state');
       currentEl = slides[0];
       currentIndex = 0;
       applyActive(currentEl, currentIndex, false);
     }
+
+    console.log('[Slider] ✓ Initialization complete');
   }
 
   function horizontalLoop(items, config) {
