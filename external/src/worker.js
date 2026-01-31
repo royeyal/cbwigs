@@ -25,6 +25,19 @@ export default {
       return res.json();
     };
 
+    const serveFile = async path => {
+      const fileResponse = await env.ASSETS.fetch(new URL(path, url.origin));
+      const response = new Response(fileResponse.body, {
+        status: fileResponse.status,
+        statusText: fileResponse.statusText,
+        headers: new Headers(fileResponse.headers)
+      });
+      Object.entries(corsHeaders).forEach(([key, value]) => {
+        response.headers.set(key, value);
+      });
+      return response;
+    };
+
     const redirectTo = path =>
       new Response(null, {
         status: 302,
@@ -75,12 +88,12 @@ export default {
         if (wantCss) {
           // CSS can be its own entry OR referenced by a JS entry's css array
           if (entry.file && entry.file.endsWith('.css'))
-            return redirectTo('/' + entry.file);
+            return serveFile('/' + entry.file);
           if (Array.isArray(entry.css) && entry.css.length)
-            return redirectTo('/' + entry.css[0]);
+            return serveFile('/' + entry.css[0]);
         } else {
           if (entry.file && entry.file.endsWith('.js'))
-            return redirectTo('/' + entry.file);
+            return serveFile('/' + entry.file);
         }
       }
 
@@ -91,7 +104,7 @@ export default {
             // Prefer a "main" css if present
             const mainish =
               entry.css.find(p => /main/i.test(p)) || entry.css[0];
-            return redirectTo('/' + mainish);
+            return serveFile('/' + mainish);
           }
         }
       }
@@ -111,7 +124,7 @@ export default {
         }
       }
 
-      if (chosen) return redirectTo('/' + chosen);
+      if (chosen) return serveFile('/' + chosen);
 
       return new Response('Entry not found in manifest', { status: 404 });
     }
