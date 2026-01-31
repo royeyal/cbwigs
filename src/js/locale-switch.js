@@ -29,19 +29,21 @@ function getAlternateLinks() {
 function pickOtherLocale(alts, currentLang) {
   if (!alts.length) return null;
 
+  // Filter out x-default (it's not a real language)
+  const realLangs = alts.filter(a => a.hreflang !== 'x-default');
+  if (!realLangs.length) return null;
+
   // Normalize current language to primary subtag: "en-us" -> "en"
   const currentPrimary = currentLang ? currentLang.split('-')[0] : null;
 
-  // Prefer the link that doesn't match the current primary language
-  let other = null;
+  // Find the link that doesn't match the current primary language
   if (currentPrimary) {
-    other = alts.find(a => !a.hreflang.startsWith(currentPrimary));
+    const other = realLangs.find(a => !a.hreflang.startsWith(currentPrimary));
+    if (other) return other;
   }
 
-  // Fallback: if we couldn't infer, just pick the first non-x-default
-  if (!other) other = alts.find(a => a.hreflang !== 'x-default') || alts[0];
-
-  return other;
+  // Fallback: just pick the first real language
+  return realLangs[0];
 }
 
 export function initLocaleSwitch() {
