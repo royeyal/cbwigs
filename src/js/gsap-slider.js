@@ -258,6 +258,11 @@ function initBasicGSAPSlider() {
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         slide.setAttribute('tabindex', isActive ? '0' : '-1');
 
+        // If hiding a slide that currently has focus, blur it
+        if (!isActive && slide.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+
         // Manage focusable elements within slides to prevent focus conflicts
         const focusableElements = slide.querySelectorAll(
           'a, button, input, textarea, select, [tabindex]'
@@ -279,6 +284,11 @@ function initBasicGSAPSlider() {
             }
             element.removeAttribute('aria-hidden');
           } else {
+            // If hiding an element that currently has focus, blur it
+            if (element === document.activeElement) {
+              element.blur();
+            }
+
             // Store original tabindex and disable focus
             if (!element.hasAttribute('data-original-tabindex')) {
               const currentTabindex = element.getAttribute('tabindex');
