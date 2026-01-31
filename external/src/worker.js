@@ -119,8 +119,14 @@ export default {
     // Default: serve built assets via static binding
     const resp = await env.ASSETS.fetch(request);
 
-    // Add CORS headers to response
-    const response = new Response(resp.body, resp);
+    // Clone the response and add CORS headers
+    const response = new Response(resp.body, {
+      status: resp.status,
+      statusText: resp.statusText,
+      headers: new Headers(resp.headers)
+    });
+
+    // Add CORS headers
     Object.entries(corsHeaders).forEach(([key, value]) => {
       response.headers.set(key, value);
     });
