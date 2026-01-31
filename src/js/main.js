@@ -16,6 +16,7 @@ import { initParallaxImages } from './parallax-image.js';
 // import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
 import './youtube-player.js';
 import './lightbox-setup.js';
+import './locale-switch.js';
 
 // Initialize all animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
