@@ -292,16 +292,16 @@ export function initYouTubeLightbox() {
         heroLightbox.dataset.youtubeLightboxId ||
         playIcon.dataset.youtubeLightboxId;
 
-      console.log(
-        `[YouTube Lightbox] Section ${index + 1}: Raw video ID:`,
-        rawVideoId
-      );
+      // console.log(
+      //   `[YouTube Lightbox] Section ${index + 1}: Raw video ID:`,
+      //   rawVideoId
+      // );
 
       const videoId = extractVideoId(rawVideoId);
-      console.log(
-        `[YouTube Lightbox] Section ${index + 1}: Extracted video ID:`,
-        videoId
-      );
+      // console.log(
+      //   `[YouTube Lightbox] Section ${index + 1}: Extracted video ID:`,
+      //   videoId
+      // );
 
       if (!videoId) {
         console.warn(
@@ -312,7 +312,7 @@ export function initYouTubeLightbox() {
 
       // Add click handler
       const handleClick = e => {
-        console.log('[YouTube Lightbox] Play icon clicked for video:', videoId);
+        // console.log('[YouTube Lightbox] Play icon clicked for video:', videoId);
         e.preventDefault();
         lastFocusedElement = playIcon; // Store for focus restoration
         openLightbox(videoId);
