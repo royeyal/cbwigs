@@ -10,44 +10,25 @@
 export function initParallaxImages() {
   // Ensure GSAP and ScrollTrigger are available
   if (typeof gsap === 'undefined') {
-    console.error(
-      '[Parallax Image] ❌ GSAP is required. Please include GSAP in your project.'
-    );
     return;
   }
 
   if (typeof ScrollTrigger === 'undefined') {
-    console.error(
-      '[Parallax Image] ❌ GSAP ScrollTrigger plugin is required. Please include ScrollTrigger plugin.'
-    );
     return;
   }
 
   try {
     gsap.registerPlugin(ScrollTrigger);
-  } catch (error) {
-    console.error(
-      '[Parallax Image] ❌ Failed to register ScrollTrigger:',
-      error
-    );
+  } catch {
     return;
   }
-
-  console.log('[Parallax Image] Initializing...');
 
   // Select all elements with the data-parallax-image attribute
   const parallaxContainers = document.querySelectorAll('[data-parallax-image]');
 
   if (parallaxContainers.length === 0) {
-    console.log(
-      '[Parallax Image] No elements found with data-parallax-image attribute'
-    );
     return;
   }
-
-  console.log(
-    `[Parallax Image] Found ${parallaxContainers.length} element(s) with data-parallax-image`
-  );
 
   parallaxContainers.forEach(container => {
     // Get custom target selector from attribute (default: .card__img)
@@ -58,10 +39,6 @@ export function initParallaxImages() {
     const image = container.querySelector(targetSelector);
 
     if (!image) {
-      console.warn(
-        `Parallax Image: No element found with selector "${targetSelector}" within`,
-        container
-      );
       return;
     }
 
@@ -94,15 +71,7 @@ export function initParallaxImages() {
         }
       }
     );
-
-    console.log(
-      `[Parallax Image] ✓ Initialized parallax on image (speed: ${parallaxSpeed}, direction: ${direction})`
-    );
   });
-
-  console.log(
-    `[Parallax Image] ✓ All ${parallaxContainers.length} instance(s) created successfully`
-  );
 }
 
 /**
