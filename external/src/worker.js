@@ -37,8 +37,11 @@ export default {
 
     if (
       url.pathname === '/main.js' ||
+      url.pathname === '/js/main.js' ||
       url.pathname === '/main.css' ||
+      url.pathname === '/css/main.css' ||
       url.pathname === '/draggable-slider.js' ||
+      url.pathname === '/js/draggable-slider.js' ||
       url.pathname === '/parallax-image.js' ||
       url.pathname === '/parallax-image.css'
     ) {
