@@ -13,7 +13,7 @@ import { initLayoutGridFlip } from './layout-grid-flip.js';
 import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
 import { initNavigation } from './multilevel-navigation.js';
 import { initParallaxImages } from './parallax-image.js';
-// import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js'; // Only loaded in demo HTML
+import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
 import './youtube-player.js';
 import './lightbox-setup.js';
 import './locale-switch.js';
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize parallax image effect (will only run if data-parallax-image exists)
   initParallaxImages();
 
-  // Initialize draggable infinite slider (only on demo page)
-  // initDraggableInfiniteSlider();
+  // Initialize draggable infinite slider (will only run if slider elements exist)
+  initDraggableInfiniteSlider();
 });
 
 // Export all animation functions for potential external access
@@ -82,6 +82,6 @@ export {
   initLayoutGridFlip,
   initCopyEmailClipboard,
   initNavigation,
-  initParallaxImages
-  // initDraggableInfiniteSlider - only for demo page
+  initParallaxImages,
+  initDraggableInfiniteSlider
 };

@@ -1,0 +1,1 @@
+import{i as e}from"../assets/draggable-infinite-slider.CdeMVPCT.js";"undefined"!=typeof window&&("loading"===document.readyState?document.addEventListener("DOMContentLoaded",e):e(),window.initDraggableInfiniteSlider=e);
