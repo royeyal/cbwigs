@@ -188,7 +188,6 @@ export function initYouTubeLightbox() {
     }
 
     // Show modal
-    console.log('[YouTube Lightbox] Showing modal');
     document.body.style.overflow = 'hidden';
     activeModal.classList.add('active');
 
@@ -200,11 +199,8 @@ export function initYouTubeLightbox() {
 
     // Small delay to ensure modal is rendered before creating player
     setTimeout(() => {
-      console.log('[YouTube Lightbox] Creating YouTube player');
-
       // Destroy existing player if any
       if (activePlayer) {
-        console.log('[YouTube Lightbox] Destroying existing player');
         activePlayer.destroy();
       }
 
@@ -221,16 +217,13 @@ export function initYouTubeLightbox() {
         },
         events: {
           onReady: () => {
-            console.log('[YouTube Lightbox] Player ready');
+            // Player ready
           },
-          onStateChange: event => {
-            console.log('[YouTube Lightbox] Player state changed:', event.data);
+          onStateChange: _event => {
+            // Player state changed
           },
           onError: event => {
             console.error('[YouTube Lightbox] Player error:', event.data);
-            console.error(
-              '[YouTube Lightbox] Error codes: 2=Invalid ID, 5=HTML5 error, 100=Not found, 101/150=Embed disabled'
-            );
           }
         }
       });
@@ -241,13 +234,10 @@ export function initYouTubeLightbox() {
    * Close lightbox and stop video
    */
   function closeLightbox() {
-    console.log('[YouTube Lightbox] Closing lightbox');
-
     if (!activeModal) return;
 
     // Stop and destroy player
     if (activePlayer) {
-      console.log('[YouTube Lightbox] Destroying player');
       activePlayer.destroy();
       activePlayer = null;
     }
@@ -284,36 +274,17 @@ export function initYouTubeLightbox() {
     // );
 
     heroSections.forEach((section, index) => {
-      console.log(
-        `[YouTube Lightbox] Processing section ${index + 1}:`,
-        section
-      );
-
       // Get the hero lightbox component
       const heroLightbox = section.querySelector('.hero_lightbox');
       if (!heroLightbox) {
-        console.warn(
-          `[YouTube Lightbox] Section ${index + 1}: No .hero_lightbox found`
-        );
         return;
       }
-      console.log(
-        `[YouTube Lightbox] Section ${index + 1}: Found hero_lightbox`,
-        heroLightbox
-      );
 
       // Get the play icon trigger
       const playIcon = heroLightbox.querySelector('.lightbox-play-icon');
       if (!playIcon) {
-        console.warn(
-          `[YouTube Lightbox] Section ${index + 1}: No .lightbox-play-icon found`
-        );
         return;
       }
-      console.log(
-        `[YouTube Lightbox] Section ${index + 1}: Found play icon`,
-        playIcon
-      );
 
       // Get video ID from data attribute
       const rawVideoId =
