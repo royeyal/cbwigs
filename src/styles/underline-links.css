@@ -1,126 +1,237 @@
-[data-underline-link],
-.section-rich-text .w-richtext a {
+[data-underline-link] {
   text-decoration: none;
   position: relative;
-}
 
-[data-underline-link]::before,
-[data-underline-link='alt']::before,
-[data-underline-link='alt']::after,
-.w-richtext a::before,
-.w-richtext a::after {
-  content: '';
-  position: absolute;
-  bottom: -0.0625em;
-  inset-inline-start: 0;
-  width: 100%;
-  height: 0.0625em;
-  background-color: currentcolor;
-  transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
-  transform-origin: 100% center;
-  transform: scaleX(0) rotate(0.001deg);
-}
-
-[data-underline-link='alt']::before,
-.w-richtext a::before {
-  transform-origin: 0% center;
-  transform: scaleX(1) rotate(0.001deg);
-  transition-delay: 0.3s;
-}
-
-[data-underline-link='alt']::after,
-.w-richtext a::after {
-  transform-origin: 100% center;
-  transform: scaleX(0) rotate(0.001deg);
-  transition-delay: 0s;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  [data-underline-link]:hover::before {
-    transform-origin: 0% center;
-    transform: scaleX(1) rotate(0.001deg);
-  }
-
-  [data-hover]:hover [data-underline-link]::before {
-    transform-origin: 0% center;
-    transform: scaleX(1) rotate(0.001deg);
-  }
-
-  [data-underline-link='alt']:hover::before,
-  .w-richtext a:hover::before {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -0.0625em;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 0.0625em;
+    background-color: currentcolor;
+    transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
     transform-origin: 100% center;
     transform: scaleX(0) rotate(0.001deg);
-    transition-delay: 0s;
   }
 
-  [data-hover]:hover [data-underline-link='alt']::before {
-    transform-origin: 100% center;
-    transform: scaleX(0) rotate(0.001deg);
-    transition-delay: 0s;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+    }
+
+    [data-hover]:hover &::before {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+    }
   }
 
-  [data-underline-link='alt']:hover::after,
-  .w-richtext a:hover::after {
+  /* RTL Support */
+  [dir='rtl'] & {
+    &::before {
+      transform-origin: 0% center;
+      transform: scaleX(0) rotate(0.001deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::before {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+
+      [data-hover]:hover &::before {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+    }
+  }
+}
+
+[data-underline-link='alt'] {
+  &::before {
     transform-origin: 0% center;
     transform: scaleX(1) rotate(0.001deg);
     transition-delay: 0.3s;
   }
 
-  [data-hover]:hover [data-underline-link='alt']::after {
+  &::after {
+    transform-origin: 100% center;
+    transform: scaleX(0) rotate(0.001deg);
+    transition-delay: 0s;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      transform-origin: 100% center;
+      transform: scaleX(0) rotate(0.001deg);
+      transition-delay: 0s;
+    }
+
+    &:hover::after {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+      transition-delay: 0.3s;
+    }
+
+    [data-hover]:hover &::before {
+      transform-origin: 100% center;
+      transform: scaleX(0) rotate(0.001deg);
+      transition-delay: 0s;
+    }
+
+    [data-hover]:hover &::after {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+      transition-delay: 0.3s;
+    }
+  }
+
+  /* RTL Support */
+  [dir='rtl'] & {
+    &::before {
+      transform-origin: 100% center;
+      transform: scaleX(1) rotate(0.001deg);
+    }
+
+    &::after {
+      transform-origin: 0% center;
+      transform: scaleX(0) rotate(0.001deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::before {
+        transform-origin: 0% center;
+        transform: scaleX(0) rotate(0.001deg);
+      }
+
+      &:hover::after {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+
+      [data-hover]:hover &::before {
+        transform-origin: 0% center;
+        transform: scaleX(0) rotate(0.001deg);
+      }
+
+      [data-hover]:hover &::after {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+    }
+  }
+}
+
+.w-richtext a {
+  text-decoration: none;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -0.0625em;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 0.0625em;
+    background-color: currentcolor;
+    transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
+  }
+
+  &::before {
     transform-origin: 0% center;
     transform: scaleX(1) rotate(0.001deg);
     transition-delay: 0.3s;
   }
-}
 
-/* RTL Support */
-[dir='rtl'] [data-underline-link]::before {
-  transform-origin: 0% center;
-  transform: scaleX(0) rotate(0.001deg);
-}
-
-[dir='rtl'] [data-underline-link='alt']::before,
-[dir='rtl'] .w-richtext a::before {
-  transform-origin: 100% center;
-  transform: scaleX(1) rotate(0.001deg);
-}
-
-[dir='rtl'] [data-underline-link='alt']::after,
-[dir='rtl'] .w-richtext a::after {
-  transform-origin: 0% center;
-  transform: scaleX(0) rotate(0.001deg);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  [dir='rtl'] [data-underline-link]:hover::before {
+  &::after {
     transform-origin: 100% center;
-    transform: scaleX(1) rotate(0.001deg);
+    transform: scaleX(0) rotate(0.001deg);
+    transition-delay: 0s;
   }
 
-  [dir='rtl'] [data-hover]:hover [data-underline-link]::before {
-    transform-origin: 100% center;
-    transform: scaleX(1) rotate(0.001deg);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      transform-origin: 100% center;
+      transform: scaleX(0) rotate(0.001deg);
+      transition-delay: 0s;
+    }
+
+    &:hover::after {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+      transition-delay: 0.3s;
+    }
   }
 
-  [dir='rtl'] [data-underline-link='alt']:hover::before,
-  [dir='rtl'] .w-richtext a:hover::before {
-    transform-origin: 0% center;
+  /* RTL Support */
+  [dir='rtl'] & {
+    &::before {
+      transform-origin: 100% center;
+      transform: scaleX(1) rotate(0.001deg);
+    }
+
+    &::after {
+      transform-origin: 0% center;
+      transform: scaleX(0) rotate(0.001deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::before {
+        transform-origin: 0% center;
+        transform: scaleX(0) rotate(0.001deg);
+      }
+
+      &:hover::after {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+    }
+  }
+}
+
+.section-rich-text .w-richtext a {
+  &::before,
+  &::after {
+    transform-origin: 100% center;
     transform: scaleX(0) rotate(0.001deg);
   }
 
-  [dir='rtl'] [data-hover]:hover [data-underline-link='alt']::before {
-    transform-origin: 0% center;
-    transform: scaleX(0) rotate(0.001deg);
+  &::before {
+    transition-delay: 0s;
   }
 
-  [dir='rtl'] [data-underline-link='alt']:hover::after,
-  [dir='rtl'] .w-richtext a:hover::after {
-    transform-origin: 100% center;
-    transform: scaleX(1) rotate(0.001deg);
+  &::after {
+    transition-delay: 0s;
   }
 
-  [dir='rtl'] [data-hover]:hover [data-underline-link='alt']::after {
-    transform-origin: 100% center;
-    transform: scaleX(1) rotate(0.001deg);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+    }
+
+    &:hover::after {
+      transform-origin: 100% center;
+      transform: scaleX(0) rotate(0.001deg);
+    }
+  }
+
+  /* RTL Support */
+  [dir='rtl'] & {
+    &::before,
+    &::after {
+      transform-origin: 0% center;
+      transform: scaleX(0) rotate(0.001deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::before {
+        transform-origin: 100% center;
+        transform: scaleX(1) rotate(0.001deg);
+      }
+    }
   }
 }
