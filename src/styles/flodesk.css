@@ -33,5 +33,6 @@
 }
 
 [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
+  padding-left: 0 !important;
   padding-inline-start: 1.625rem !important;
 }
