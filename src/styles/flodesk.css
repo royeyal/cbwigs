@@ -18,21 +18,23 @@
 }
 
 /* RTL/LTR support for privacy policy checkbox */
-[data-ff-el='root'] .fd-form-check__checkmark,
-[data-ff-el='root'] .fd-form-check__input {
+[dir='rtl'] [data-ff-el='root'] .fd-form-check__checkmark,
+[dir='rtl'] [data-ff-el='root'] .fd-form-check__input {
+  left: auto !important;
+  top: auto;
   inset-block-start: 0 !important;
   inset-inline-start: 0 !important;
 }
 
-[data-ff-el='root'] .fd-form-check__label {
+[dir='rtl'] [data-ff-el='root'] .fd-form-check__label {
   text-align: start !important;
 }
 
-[data-ff-el='root'] [class$='__accepts-gdpr-block'] {
+[dir='rtl'] [data-ff-el='root'] [class$='__accepts-gdpr-block'] {
   align-items: flex-start !important;
 }
 
-[data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
+[dir='rtl'] [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
   padding-left: 0 !important;
   padding-inline-start: 1.625rem !important;
 }
