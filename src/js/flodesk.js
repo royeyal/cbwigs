@@ -20,10 +20,8 @@
 
   const t = strings[lang.startsWith('he') ? 'he' : 'en'];
 
-  // Scope to this form by using the known privacy link class in your snippet:
-  const link = document.querySelector(
-    'a.ff-698722f5f07d75b18aee61f4__privacy-policy-link'
-  );
+  // Target any privacy policy link using attribute selector
+  const link = document.querySelector('a[class$="__privacy-policy-link"]');
   if (!link) return;
 
   // Replace link text + href
