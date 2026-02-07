@@ -16,3 +16,9 @@
 [class$='__form'] {
   padding: 0 !important;
 }
+
+/* RTL/LTR support for privacy policy checkbox */
+[data-ff-el='root'] .fd-form-check__checkmark {
+  inset-block-start: 0 !important;
+  inset-inline-start: 0 !important;
+}
