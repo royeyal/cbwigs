@@ -28,6 +28,10 @@
   text-align: start !important;
 }
 
+[data-ff-el='root'] [class$='__accepts-gdpr-block'] {
+  align-items: flex-start !important;
+}
+
 [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
   padding-inline-start: 1.625rem !important;
 }
