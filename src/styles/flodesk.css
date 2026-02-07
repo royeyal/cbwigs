@@ -37,7 +37,10 @@
 [dir='rtl'] [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'],
 [dir='rtl']
   [data-ff-el='root']
-  .ff-698722f5f07d75b18aee61f4__accepts-gdpr-checkbox {
+  .ff-698722f5f07d75b18aee61f4__accepts-gdpr-checkbox,
+[dir='rtl']
+  [data-ff-el='root'].ff-69876c2c344140de226f0076
+  .ff-69876c2c344140de226f0076__accepts-gdpr-checkbox {
   padding-left: 0 !important;
   padding-inline-start: 1.625rem !important;
 }
