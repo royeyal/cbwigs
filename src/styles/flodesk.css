@@ -18,7 +18,16 @@
 }
 
 /* RTL/LTR support for privacy policy checkbox */
-[data-ff-el='root'] .fd-form-check__checkmark {
+[data-ff-el='root'] .fd-form-check__checkmark,
+[data-ff-el='root'] .fd-form-check__input {
   inset-block-start: 0 !important;
   inset-inline-start: 0 !important;
+}
+
+[data-ff-el='root'] .fd-form-check__label {
+  text-align: start !important;
+}
+
+[data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
+  padding-inline-start: 1.625rem !important;
 }
