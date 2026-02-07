@@ -20,7 +20,10 @@ import './locale-switch.js';
 
 // Initialize Flodesk privacy policy text customization
 function initFlodeskPrivacyText() {
+  console.log('Flodesk privacy text script running...');
+
   const lang = (document.documentElement.lang || '').toLowerCase();
+  console.log('Detected language:', lang);
 
   const strings = {
     he: {
@@ -41,15 +44,32 @@ function initFlodeskPrivacyText() {
 
   // Target any privacy policy link using attribute selector
   const link = document.querySelector('a[class$="__privacy-policy-link"]');
-  if (!link) return;
+  console.log('Privacy policy link element:', link);
+
+  if (!link) {
+    console.warn(
+      'Privacy policy link not found - selector: a[class$="__privacy-policy-link"]'
+    );
+    return;
+  }
+
+  console.log('Found link, updating text and href...');
 
   // Replace link text + href
   link.textContent = t.privacyText;
   link.href = t.privacyHref;
+  console.log('Link updated successfully');
 
   // Replace the text node around the link
   const label = link.closest('.fd-form-check__label');
-  if (!label) return;
+  console.log('Label element:', label);
+
+  if (!label) {
+    console.warn('Label not found - selector: .fd-form-check__label');
+    return;
+  }
+
+  console.log('Found label, replacing consent text...');
 
   // Remove text nodes in label, keep the link
   [...label.childNodes].forEach(n => {
@@ -58,6 +78,8 @@ function initFlodeskPrivacyText() {
 
   // Insert localized consent text before the link
   label.insertBefore(document.createTextNode(`${t.consentText} `), link);
+
+  console.log('✓ Flodesk privacy text customization complete!');
 }
 
 // Initialize all animations when DOM is ready
