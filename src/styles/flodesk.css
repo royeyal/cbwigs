@@ -1,4 +1,10 @@
 /* Flodesk Styles */
+[class$='__button'],
+[class$='__label'],
+[class$='__title'] {
+  font-family: var(--_typography---font-styles--body) !important;
+}
+
 [data-ff-el='root'] {
   font-family: var(--_typography---font-styles--body) !important;
 }
@@ -7,54 +13,6 @@
   font-family: var(--_typography---font-styles--heading) !important;
 }
 
-[data-ff-el='root'] .ff-698722f5f07d75b18aee61f4__title,
-[data-ff-el='root'] .ff-698722f5f07d75b18aee61f4__form,
-[data-ff-el='root'] .ff-698722f5f07d75b18aee61f4__label,
-[data-ff-el='root'] .ff-698722f5f07d75b18aee61f4__button,
-[data-ff-el='root'] .fd-form-check__label {
-  font-family: var(--_typography---font-styles--body) !important;
-}
-
-[data-ff-el='root'].ff-698722f5f07d75b18aee61f4
-  .ff-698722f5f07d75b18aee61f4__form,
-[data-ff-el='root'] [class$='__form'] {
+[class$='__form'] {
   padding: 0 !important;
 }
-
-/* [data-ff-el='root'] [class$='__input'] {
-  border: 1px solid var(--_color---border) !important;
-  background-color: var(--_color---background) !important;
-  color: var(--_color---text) !important;
-}
-
-[data-ff-el='root'] [class$='__input']::placeholder {
-  color: var(--_color---text) !important;
-  opacity: 0.6 !important;
-}
-
-[data-ff-el='root'] [class$='__button'] {
-  background-color: var(--_color---primary) !important;
-  color: var(--_color---background) !important;
-  border: none !important;
-}
-
-[data-ff-el='root'] [class$='__button']:hover {
-  background-color: var(--_color---primary-hover) !important;
-}
-
-[data-ff-el='root'] [class$='__button']:active {
-  background-color: var(--_color---primary-active) !important;
-}
-
-[data-ff-el='root'] [class$='__button']:disabled {
-  background-color: var(--_color---primary-disabled) !important;
-  cursor: not-allowed !important;
-}
-
-[data-ff-el='root'] [class$='__error'] {
-  color: var(--_color---error) !important;
-}
-
-[data-ff-el='root'] [class$='__success'] {
-  color: var(--_color---success) !important;
-} */
