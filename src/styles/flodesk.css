@@ -21,7 +21,7 @@
 [dir='rtl'] [data-ff-el='root'] .fd-form-check__checkmark,
 [dir='rtl'] [data-ff-el='root'] .fd-form-check__input {
   left: auto !important;
-  top: auto;
+  top: auto !important;
   inset-block-start: 0 !important;
   inset-inline-start: 0 !important;
 }
@@ -34,7 +34,10 @@
   align-items: flex-start !important;
 }
 
-[dir='rtl'] [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'] {
+[dir='rtl'] [data-ff-el='root'] [class$='__accepts-gdpr-checkbox'],
+[dir='rtl']
+  [data-ff-el='root']
+  .ff-698722f5f07d75b18aee61f4__accepts-gdpr-checkbox {
   padding-left: 0 !important;
   padding-inline-start: 1.625rem !important;
 }
