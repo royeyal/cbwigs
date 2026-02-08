@@ -4,6 +4,7 @@
 [data-ff-el='root'] [class$='__label'],
 [data-ff-el='root'] [class$='__title'],
 [data-ff-el='root'] [class$='__control'],
+[data-ff-el='root'] [class$='__subtitle'] *,
 [data-ff-el='root'] .fd-form-feedback {
   font-family: var(--_typography---font-styles--body) !important;
 }
