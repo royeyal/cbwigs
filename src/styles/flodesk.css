@@ -1,11 +1,10 @@
 /* Flodesk Styles */
-[class$='__button'],
-[class$='__label'],
-[class$='__title'] {
-  font-family: var(--_typography---font-styles--body) !important;
-}
-
-[data-ff-el='root'] {
+[data-ff-el='root'] *,
+[data-ff-el='root'] [class$='__button'],
+[data-ff-el='root'] [class$='__label'],
+[data-ff-el='root'] [class$='__title'],
+[data-ff-el='root'] [class$='__control'],
+[data-ff-el='root'] .fd-form-feedback {
   font-family: var(--_typography---font-styles--body) !important;
 }
 
@@ -15,6 +14,10 @@
 
 [class$='__form'] {
   padding: 0 !important;
+}
+
+[data-ff-el='root'] .fd-form-feedback {
+  font-size: 1rem !important;
 }
 
 /* RTL/LTR support for privacy policy checkbox */
