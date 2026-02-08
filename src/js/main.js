@@ -31,14 +31,16 @@ function initFlodeskPrivacyText() {
         'בהרשמה אתן מסכימות לקבל את מדיניות הפרטיות שלנו ונותנות את הסכמתכן לקבל עדכונים מהחברה שלנו.',
       privacyText: 'מדיניות פרטיות',
       privacyHref: 'https://cbwigs.co.il/privacy-policy',
-      requiredField: 'זהו שדה חובה'
+      requiredField: 'זהו שדה חובה',
+      marketingConsent: 'עלייך לסמן שאת מאשרת לקבל מאיתנו חומרי שיווק'
     },
     en: {
       consentText:
         'By signing up, you agree to our Privacy Policy and consent to receive updates from our company.',
       privacyText: 'Privacy policy',
       privacyHref: 'https://cbwigs.co.il/en/privacy-policy',
-      requiredField: 'This field is required'
+      requiredField: 'This field is required',
+      marketingConsent: 'You must agree to receive marketing emails'
     }
   };
 
@@ -100,9 +102,13 @@ function initFlodeskPrivacyText() {
     const feedbackElements = document.querySelectorAll('.fd-form-feedback');
 
     feedbackElements.forEach(el => {
-      if (el.textContent.trim() === 'This field is required') {
+      const text = el.textContent.trim();
+      if (text === 'This field is required') {
         el.textContent = t.requiredField;
         console.log('Translated error message:', el.textContent);
+      } else if (text === 'You must agree to receive marketing emails') {
+        el.textContent = t.marketingConsent;
+        console.log('Translated marketing consent error:', el.textContent);
       }
     });
   }
