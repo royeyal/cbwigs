@@ -14,6 +14,7 @@ import { initCopyEmailClipboard } from './copy-email-to-clipboard-button.js';
 import { initNavigation } from './multilevel-navigation.js';
 import { initParallaxImages } from './parallax-image.js';
 import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
+import { initDynamicCurrentYear } from './dynamic-current-year.js';
 import './youtube-player.js';
 import './lightbox-setup.js';
 import './locale-switch.js';
@@ -181,6 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize draggable infinite slider (will only run if slider elements exist)
   initDraggableInfiniteSlider();
 
+  // Initialize dynamic current year (will only run if data-current-year elements exist)
+  initDynamicCurrentYear();
+
   // Initialize Flodesk privacy policy text customization
   initFlodeskPrivacyText();
 });
@@ -201,5 +205,6 @@ export {
   initNavigation,
   initParallaxImages,
   initDraggableInfiniteSlider,
+  initDynamicCurrentYear,
   initFlodeskPrivacyText
 };
