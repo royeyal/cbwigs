@@ -69,6 +69,7 @@ Add the `data-youtube-short` attribute or `youtube-short` class:
 ### Step 1: Create and Style the Base Class in Webflow
 
 #### 1.1 Create the Div Block
+
 1. **Add a Div Block** to your Webflow canvas
 2. **Add a class**: `youtube-player`
 
@@ -77,27 +78,33 @@ Add the `data-youtube-short` attribute or `youtube-short` class:
 To make the player presentable in the Webflow Designer, add these styles:
 
 **Layout Settings:**
+
 - Position: `Relative`
 - Display: `Block`
 - Width: `100%` (or set a specific width like `800px` for testing)
 
 **Size Settings:**
+
 - Height: Auto (will be controlled by aspect-ratio)
 - Min Height: `300px` (prevents it from collapsing in the Designer)
 
 **Spacing:**
+
 - Padding: `0px` all sides
 - Margin: `0px` (or add margin as needed for your layout)
 
 **Style Settings:**
+
 - Background Color: `#000000` (black)
 - Border Radius: `12px`
 - Overflow: `Hidden`
 
 **Advanced Settings (Optional):**
+
 - Box Shadow: `0px 8px 32px rgba(0, 0, 0, 0.3)` (for elevation)
 
 #### 1.3 Add the Custom Attribute
+
 3. **Add a custom attribute** (in Element Settings):
    - Name: `data-youtube-id`
    - Value: `dQw4w9WgXcQ` (or any YouTube video ID for testing)
@@ -109,6 +116,7 @@ To make the player presentable in the Webflow Designer, add these styles:
 This is the default behavior. No additional configuration needed.
 
 **DIV Structure:**
+
 ```
 Div Block
   └─ Class: youtube-player
@@ -118,16 +126,19 @@ Div Block
 ### Step 3: Configure for YouTube Shorts (9:16)
 
 Add one of these:
+
 - **Option A**: Add attribute `data-youtube-short` (no value needed)
 - **Option B**: Add combo class `youtube-short`
 
 **For YouTube Shorts, add these additional Webflow styles to the `youtube-short` combo class:**
 
 **Size Settings:**
+
 - Max Width: `400px`
 - Margin: `0px auto` (centers the player)
 
 **DIV Structure:**
+
 ```
 Div Block
   └─ Class: youtube-player
@@ -159,13 +170,13 @@ Now you can reuse this component and simply change the `videoId` property!
 
 The script accepts multiple formats:
 
-| Format | Example |
-|--------|---------|
-| Video ID only | `dQw4w9WgXcQ` |
-| Full URL | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
-| Short URL | `https://youtu.be/dQw4w9WgXcQ` |
-| Shorts URL | `https://www.youtube.com/shorts/dQw4w9WgXcQ` |
-| Embed URL | `https://www.youtube.com/embed/dQw4w9WgXcQ` |
+| Format        | Example                                       |
+| ------------- | --------------------------------------------- |
+| Video ID only | `dQw4w9WgXcQ`                                 |
+| Full URL      | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| Short URL     | `https://youtu.be/dQw4w9WgXcQ`                |
+| Shorts URL    | `https://www.youtube.com/shorts/dQw4w9WgXcQ`  |
+| Embed URL     | `https://www.youtube.com/embed/dQw4w9WgXcQ`   |
 
 **Best Practice**: Use just the **Video ID** (11 characters) for cleaner code.
 
@@ -187,12 +198,16 @@ You can customize the player appearance by overriding CSS variables or targeting
 
 /* Custom play button color using color-mix() */
 .youtube-play-button {
-  background: color-mix(in srgb, #a39486 30%, transparent); /* neutral-dark */
+  background: color-mix(in oklch, #a39486 30%, transparent); /* neutral-dark */
 }
 
 /* Custom hover effect using color-mix() */
 .youtube-placeholder:hover .youtube-play-button {
-  background: color-mix(in srgb, #8c8176 40%, transparent); /* neutral-darker */
+  background: color-mix(
+    in oklch,
+    #8c8176 40%,
+    transparent
+  ); /* neutral-darker */
   transform: scale(1.2);
 }
 
@@ -209,12 +224,14 @@ You can customize the player appearance by overriding CSS variables or targeting
 ### Webflow Designer Placeholder
 
 The player shows an elegant placeholder in the Webflow Designer/Editor:
+
 - **Regular Videos**: "YouTube Video (16:9)"
 - **Shorts**: "YouTube Short (9:16)"
 
 This helps you visualize and design around the player without loading videos in the editor.
 
 **What you'll see in Webflow Designer:**
+
 - A black background box with rounded corners
 - The minimum height you set (e.g., 300px)
 - An elegant centered label overlay showing the player type
@@ -225,16 +242,19 @@ This helps you visualize and design around the player without loading videos in 
 ## 📱 Responsive Behavior
 
 ### Regular Videos (16:9)
+
 - Full width by default
 - Maintains 16:9 aspect ratio
 - Scales down on mobile
 
 ### YouTube Shorts (9:16)
+
 - Max-width: 400px on desktop/tablet
 - Centered with `margin: auto`
 - Full width on mobile (< 480px)
 
 ### Play Button Sizes
+
 - Desktop: 80×80px
 - Tablet: 64×64px
 - Mobile: 56×56px
@@ -276,10 +296,12 @@ window.youtubePlayer().destroyAllPlayers();
 ## 📋 Complete Webflow Setup Checklist
 
 ### Initial Setup
+
 - [ ] Copy CSS to Project Settings → Custom Code → Head Code (wrapped in `<style>` tags)
 - [ ] Copy JS to Project Settings → Custom Code → Footer Code (wrapped in `<script>` tags)
 
 ### Creating the Player
+
 - [ ] Add a Div Block to your canvas
 - [ ] Add class `youtube-player`
 - [ ] Style the class in Webflow Designer:
@@ -294,6 +316,7 @@ window.youtubePlayer().destroyAllPlayers();
   - [ ] If using Shorts, set Max Width: 400px and Margin: 0 auto
 
 ### Component Creation (Optional but Recommended)
+
 - [ ] Select the styled `youtube-player` div
 - [ ] Right-click → Create Component
 - [ ] Name it "YouTube Player" or "YouTube Short"
@@ -303,6 +326,7 @@ window.youtubePlayer().destroyAllPlayers();
   - [ ] Bind to: `data-youtube-id` attribute
 
 ### Testing
+
 - [ ] Verify placeholder appears in Webflow Designer
 - [ ] Test in Preview mode (videos won't play in Designer, only in Preview/Published)
 - [ ] Publish and test on live site
@@ -338,6 +362,7 @@ window.youtubePlayer().destroyAllPlayers();
 ```
 
 Add custom CSS:
+
 ```css
 .video-grid {
   display: grid;
@@ -400,6 +425,7 @@ Add custom CSS:
 ## 🎨 Design Considerations
 
 ### Play Button
+
 - **Glassy Effect**: Uses `backdrop-filter` for modern blur effect
 - **Subtle Shadow**: Multiple box-shadows for depth
 - **Smooth Transitions**: 0.5s cubic-bezier(0.4, 0, 0.2, 1) for elegant feel
@@ -408,25 +434,28 @@ Add custom CSS:
 - **Accessible Contrast**: WCAG AAA compliant (7.8:1 contrast ratio)
 
 ### Thumbnail
+
 - **High Quality**: Fetches `maxresdefault` with `hqdefault` fallback
 - **Subtle Zoom**: 1.05x scale on hover
 - **Brightness Overlay**: Darkening to 85% brightness on hover for button contrast
 
 ### Colors & Accessibility
+
 - **Primary Play Icon**: #a39486 - Brand neutral-dark
 - **Hover Play Icon**: #8c8176 - Brand neutral-darker
 - **Active Play Icon**: #6b625a - Brand focus-ring (darkest state)
-- **Button Background**: `color-mix(in srgb, #a39486 30%, transparent)` - Semi-transparent neutral-dark
-- **Button Hover**: `color-mix(in srgb, #8c8176 40%, transparent)` - Semi-transparent neutral-darker
-- **Button Active**: `color-mix(in srgb, #8c8176 50%, transparent)` - More opaque neutral-darker
-- **Ring Effect**: `color-mix(in srgb, #c8bfb3 15%, transparent)` - Brand neutral
+- **Button Background**: `color-mix(in oklch, #a39486 30%, transparent)` - Semi-transparent neutral-dark
+- **Button Hover**: `color-mix(in oklch, #8c8176 40%, transparent)` - Semi-transparent neutral-darker
+- **Button Active**: `color-mix(in oklch, #8c8176 50%, transparent)` - More opaque neutral-darker
+- **Ring Effect**: `color-mix(in oklch, #c8bfb3 15%, transparent)` - Brand neutral
 - **Dark Background**: Black (#000) for maximum contrast
-- **Focus Indicator**: `color-mix(in srgb, #6b625a 80%, transparent)` - Brand focus-ring with opacity
+- **Focus Indicator**: `color-mix(in oklch, #6b625a 80%, transparent)` - Brand focus-ring with opacity
 - **High Contrast Mode**: Light text (#f4efe8) on darker button background
 - **Modern CSS**: Uses `color-mix()` function for better color management
 - **WCAG AAA Compliant**: All color combinations meet accessibility standards
 
 ### User Experience
+
 - **Entire Player Clickable**: Users can click anywhere on the thumbnail or button
 - **Keyboard Support**: Press Enter or Space to activate
 - **Visual Feedback**: Smooth transitions and hover states for clear interaction
@@ -434,7 +463,9 @@ Add custom CSS:
 - **Brand Consistency**: Colors match the warm, earthy brand palette
 
 ### Brand Palette
+
 The player uses your brand's warm, neutral, earthy color scheme with modern `color-mix()` CSS:
+
 - **Warm Neutrals**: Professional, sophisticated accent colors (#a39486, #8c8176)
 - **Subtle Gradations**: Smooth transitions between states using color-mix()
 - **High Contrast**: Ensures readability and accessibility

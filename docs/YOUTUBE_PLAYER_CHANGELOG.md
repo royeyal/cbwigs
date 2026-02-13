@@ -6,7 +6,7 @@
 The YouTube player now uses the CSS `color-mix()` function for better color management and browser-native transparency handling.
 
 **What Changed:**
-- Replaced `rgb()` with opacity to `color-mix(in srgb, COLOR XX%, transparent)`
+- Replaced `rgb()` with opacity to `color-mix(in oklch, COLOR XX%, transparent)`
 - More maintainable and semantic color definitions
 - Better browser optimization for color blending
 - Easier to understand and customize

@@ -35,8 +35,8 @@
   &.youtube-error {
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, #1a1a1ae0 100%, transparent) 0%,
-      color-mix(in srgb, #070707 100%, transparent) 100%
+      color-mix(in oklch, #1a1a1ae0 100%, transparent) 0%,
+      color-mix(in oklch, #070707 100%, transparent) 100%
     );
 
     &::after {
@@ -45,7 +45,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: color-mix(in srgb, #f4efe8 60%, transparent); /* text-on-dark */
+      color: color-mix(in oklch, #f4efe8 60%, transparent); /* text-on-dark */
       font-size: 14px;
       font-weight: 500;
       text-align: center;
@@ -74,7 +74,7 @@
   border: none;
   border-radius: 50%;
   background: color-mix(
-    in srgb,
+    in oklch,
     var(--_primitives---colors--neutral-dark, #a39486) 30%,
     transparent
   ); /* Brand neutral-dark */
@@ -86,9 +86,9 @@
   justify-content: center;
   transition: all 0.5s var(--easing);
   box-shadow:
-    0 4px 6px color-mix(in srgb, #000 10%, transparent),
-    0 8px 16px color-mix(in srgb, #000 10%, transparent),
-    inset 0 1px 0 color-mix(in srgb, #f4efe8 20%, transparent); /* text-on-dark for highlight */
+    0 4px 6px color-mix(in oklch, #000 10%, transparent),
+    0 8px 16px color-mix(in oklch, #000 10%, transparent),
+    inset 0 1px 0 color-mix(in oklch, #f4efe8 20%, transparent); /* text-on-dark for highlight */
 
   pointer-events: none;
 
@@ -100,8 +100,8 @@
     border-radius: 50%;
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, #c8bfb3 15%, transparent),
-      color-mix(in srgb, #c8bfb3 5%, transparent)
+      color-mix(in oklch, #c8bfb3 15%, transparent),
+      color-mix(in oklch, #c8bfb3 5%, transparent)
     );
     opacity: 0;
     transition: opacity 0.5s var(--easing);
@@ -113,7 +113,7 @@
   width: 48px;
   height: 48px;
   color: #a39486; /* Brand neutral-dark */
-  filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
+  filter: drop-shadow(0 2px 4px color-mix(in oklch, #000 20%, transparent));
   transition: all 0.5s var(--easing);
 }
 
@@ -132,7 +132,7 @@
 
   /* Focus state for accessibility */
   &:focus-visible {
-    outline: 3px solid color-mix(in srgb, #6b625a 80%, transparent); /* Brand focus-ring */
+    outline: 3px solid color-mix(in oklch, #6b625a 80%, transparent); /* Brand focus-ring */
     outline-offset: 2px;
   }
 
@@ -156,14 +156,14 @@
     .youtube-play-button {
       transform: scale(1.15);
       background: color-mix(
-        in srgb,
+        in oklch,
         var(--_primitives---colors--neutral-darker, #8c8176) 40%,
         transparent
       );
       box-shadow:
-        0 6px 12px color-mix(in srgb, #000 15%, transparent),
-        0 12px 24px color-mix(in srgb, #000 15%, transparent),
-        inset 0 1px 0 color-mix(in srgb, #f4efe8 30%, transparent);
+        0 6px 12px color-mix(in oklch, #000 15%, transparent),
+        0 12px 24px color-mix(in oklch, #000 15%, transparent),
+        inset 0 1px 0 color-mix(in oklch, #f4efe8 30%, transparent);
 
       &::before {
         opacity: 1;
@@ -176,7 +176,7 @@
         #8c8176
       ); /* Brand neutral-darker */
 
-      filter: drop-shadow(0 4px 8px color-mix(in srgb, #000 30%, transparent));
+      filter: drop-shadow(0 4px 8px color-mix(in oklch, #000 30%, transparent));
       transform: scale(1.05);
     }
   }
@@ -186,7 +186,7 @@
     .youtube-play-button {
       transform: scale(1.08);
       background: color-mix(
-        in srgb,
+        in oklch,
         var(--_primitives---colors--neutral-darker, #8c8176) 50%,
         transparent
       );
@@ -224,14 +224,14 @@
   padding: 12px;
   border: none;
   border-radius: 50%;
-  background: color-mix(in srgb, #1a1a1a 80%, transparent);
+  background: color-mix(in oklch, #1a1a1a 80%, transparent);
   backdrop-filter: blur(10px);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s var(--easing);
-  box-shadow: 0 2px 8px color-mix(in srgb, #000 20%, transparent);
+  box-shadow: 0 2px 8px color-mix(in oklch, #000 20%, transparent);
 
   svg {
     width: 24px;
@@ -242,20 +242,20 @@
 
   /* Focus state for accessibility */
   &:focus-visible {
-    outline: 3px solid color-mix(in srgb, #6b625a 80%, transparent); /* Brand focus-ring */
+    outline: 3px solid color-mix(in oklch, #6b625a 80%, transparent); /* Brand focus-ring */
     outline-offset: 2px;
   }
 
   /* Hover state */
   &:hover {
     background: color-mix(
-      in srgb,
+      in oklch,
       var(--_primitives---colors--neutral-dark, #a39486) 60%,
       transparent
     ); /* Brand neutral-dark */
 
     transform: scale(1.1);
-    box-shadow: 0 4px 12px color-mix(in srgb, #000 30%, transparent);
+    box-shadow: 0 4px 12px color-mix(in oklch, #000 30%, transparent);
 
     svg {
       transform: rotate(90deg);
@@ -266,7 +266,7 @@
   &:active {
     transform: scale(0.95);
     background: color-mix(
-      in srgb,
+      in oklch,
       #8c8176 70%,
       transparent
     ); /* Brand neutral-darker */
@@ -283,14 +283,14 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: color-mix(in srgb, #f4efe8 80%, transparent); /* text-on-dark */
+      color: color-mix(in oklch, #f4efe8 80%, transparent); /* text-on-dark */
       font-size: 18px;
       font-weight: 600;
       text-align: center;
       pointer-events: none;
       z-index: 10;
       background: color-mix(
-        in srgb,
+        in oklch,
         #a39486 40%,
         transparent
       ); /* neutral-dark */
@@ -421,7 +421,7 @@
 
   .youtube-play-button {
     background: color-mix(
-      in srgb,
+      in oklch,
       var(--_primitives---colors--neutral-dark, #a39486) 50%,
       transparent
     ); /* Brand neutral-dark */
@@ -434,7 +434,7 @@
     &:focus-visible {
       .youtube-play-button {
         background-color: color-mix(
-          in srgb,
+          in oklch,
           var(--_primitives---colors--neutral-darker, #8c8176) 70%,
           transparent
         ); /* Brand neutral-darker */

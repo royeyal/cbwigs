@@ -220,7 +220,7 @@
   height: 80px;
   border-radius: 50%;
   background: color-mix(
-    in srgb,
+    in oklch,
     var(--_primitives---colors--neutral-dark, #a39486) 30%,
     transparent
   ); /* Brand neutral-dark */
@@ -231,9 +231,9 @@
   justify-content: center;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
-    0 4px 6px color-mix(in srgb, #000 10%, transparent),
-    0 8px 16px color-mix(in srgb, #000 10%, transparent),
-    inset 0 1px 0 color-mix(in srgb, #f4efe8 20%, transparent);
+    0 4px 6px color-mix(in oklch, #000 10%, transparent),
+    0 8px 16px color-mix(in oklch, #000 10%, transparent),
+    inset 0 1px 0 color-mix(in oklch, #f4efe8 20%, transparent);
   pointer-events: none;
 }
 
@@ -245,8 +245,8 @@
   border-radius: 50%;
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, #c8bfb3 15%, transparent),
-    color-mix(in srgb, #c8bfb3 5%, transparent)
+    color-mix(in oklch, #c8bfb3 15%, transparent),
+    color-mix(in oklch, #c8bfb3 5%, transparent)
   );
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -262,21 +262,21 @@
 .slide__link:focus-visible .slide-play-button {
   transform: translate(-50%, -50%) scale(1.15);
   background: color-mix(
-    in srgb,
+    in oklch,
     #8c8176 40%,
     transparent
   ); /* Brand neutral-darker */
 
   box-shadow:
-    0 6px 12px color-mix(in srgb, #000 15%, transparent),
-    0 12px 24px color-mix(in srgb, #000 15%, transparent),
-    inset 0 1px 0 color-mix(in srgb, #f4efe8 30%, transparent);
+    0 6px 12px color-mix(in oklch, #000 15%, transparent),
+    0 12px 24px color-mix(in oklch, #000 15%, transparent),
+    inset 0 1px 0 color-mix(in oklch, #f4efe8 30%, transparent);
 }
 
 /* Play button active state */
 .slide__link:active .slide-play-button {
   transform: translate(-50%, -50%) scale(1.08);
-  background: color-mix(in srgb, #8c8176 50%, transparent);
+  background: color-mix(in oklch, #8c8176 50%, transparent);
 }
 
 /* Play Icon */
@@ -284,24 +284,24 @@
   width: 48px;
   height: 48px;
   color: color-mix(
-    in srgb,
+    in oklch,
     var(--_primitives---colors--neutral-dark, #a39486) 66%,
     white 34%
   ); /* Brand neutral-dark */
 
-  filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
+  filter: drop-shadow(0 2px 4px color-mix(in oklch, #000 20%, transparent));
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide__link:hover .slide-play-icon,
 .slide__link:focus-visible .slide-play-icon {
   color: color-mix(
-    in srgb,
+    in oklch,
     var(--_primitives---colors--neutral-darker, #8c8176) 66%,
     white 34%
   ); /* Brand neutral-darker */
 
-  filter: drop-shadow(0 4px 8px color-mix(in srgb, #000 30%, transparent));
+  filter: drop-shadow(0 4px 8px color-mix(in oklch, #000 30%, transparent));
   transform: scale(1.05);
 }
 
@@ -517,23 +517,23 @@
 
   .slide__link:hover .slide-play-button {
     transform: translate(-50%, -50%) scale(1);
-    background: color-mix(in srgb, #a39486 30%, transparent);
+    background: color-mix(in oklch, #a39486 30%, transparent);
     box-shadow:
-      0 4px 6px color-mix(in srgb, #000 10%, transparent),
-      0 8px 16px color-mix(in srgb, #000 10%, transparent),
-      inset 0 1px 0 color-mix(in srgb, #f4efe8 20%, transparent);
+      0 4px 6px color-mix(in oklch, #000 10%, transparent),
+      0 8px 16px color-mix(in oklch, #000 10%, transparent),
+      inset 0 1px 0 color-mix(in oklch, #f4efe8 20%, transparent);
   }
 
   .slide__link:hover .slide-play-icon {
     color: #a39486;
-    filter: drop-shadow(0 2px 4px color-mix(in srgb, #000 20%, transparent));
+    filter: drop-shadow(0 2px 4px color-mix(in oklch, #000 20%, transparent));
     transform: scale(1);
   }
 
   /* Enhanced touch feedback */
   .slide__link:active .slide-play-button {
     transform: translate(-50%, -50%) scale(0.95);
-    background: color-mix(in srgb, #8c8176 50%, transparent);
+    background: color-mix(in oklch, #8c8176 50%, transparent);
   }
 
   .slide__link:active .slide-play-icon {
