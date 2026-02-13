@@ -75,7 +75,7 @@
   border-radius: 50%;
   background: color-mix(
     in srgb,
-    #a39486 30%,
+    var(--_primitives---colors--neutral-dark, #a39486) 30%,
     transparent
   ); /* Brand neutral-dark */
 
@@ -155,7 +155,11 @@
 
     .youtube-play-button {
       transform: scale(1.15);
-      background: color-mix(in srgb, #8c8176 40%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--_primitives---colors--neutral-darker, #8c8176) 40%,
+        transparent
+      );
       box-shadow:
         0 6px 12px color-mix(in srgb, #000 15%, transparent),
         0 12px 24px color-mix(in srgb, #000 15%, transparent),
@@ -167,7 +171,11 @@
     }
 
     .youtube-play-icon {
-      color: #8c8176; /* Brand neutral-darker */
+      color: var(
+        --_primitives---colors--neutral-darker,
+        #8c8176
+      ); /* Brand neutral-darker */
+
       filter: drop-shadow(0 4px 8px color-mix(in srgb, #000 30%, transparent));
       transform: scale(1.05);
     }
@@ -177,7 +185,11 @@
   &:active {
     .youtube-play-button {
       transform: scale(1.08);
-      background: color-mix(in srgb, #8c8176 50%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--_primitives---colors--neutral-darker, #8c8176) 50%,
+        transparent
+      );
     }
 
     .youtube-play-icon {
@@ -238,7 +250,7 @@
   &:hover {
     background: color-mix(
       in srgb,
-      #a39486 60%,
+      var(--_primitives---colors--neutral-dark, #a39486) 60%,
       transparent
     ); /* Brand neutral-dark */
 
@@ -401,17 +413,20 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .youtube-play-icon {
-    color: #f4efe8; /* text-on-dark for better contrast */
+    color: var(
+      --_primitives---colors--text-on-dark,
+      #f4efe8
+    ); /* text-on-dark for better contrast */
   }
 
   .youtube-play-button {
     background: color-mix(
       in srgb,
-      #a39486 50%,
+      var(--_primitives---colors--neutral-dark, #a39486) 50%,
       transparent
     ); /* Brand neutral-dark */
 
-    border: 2px solid #a39486;
+    border: 2px solid var(--_primitives---colors--neutral-dark, #a39486);
   }
 
   .youtube-placeholder {
@@ -420,11 +435,11 @@
       .youtube-play-button {
         background-color: color-mix(
           in srgb,
-          #8c8176 70%,
+          var(--_primitives---colors--neutral-darker, #8c8176) 70%,
           transparent
         ); /* Brand neutral-darker */
 
-        border-color: #8c8176;
+        border-color: var(--_primitives---colors--neutral-darker, #8c8176);
       }
 
       .youtube-play-icon {
@@ -433,7 +448,7 @@
     }
 
     &:focus-visible {
-      outline: 3px solid #6b625a; /* Brand focus-ring, full opacity */
+      outline: 3px solid var(--_primitives---colors--neutral-dark, #6b625a); /* Brand focus-ring, full opacity */
       outline-offset: 3px;
     }
   }

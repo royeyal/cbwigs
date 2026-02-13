@@ -101,7 +101,10 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #a39486;
+    color: var(
+      --_primitives---colors--neutral-dark,
+      #a39486
+    ); /* Brand neutral-dark */
   }
 
   .layout485_content {
