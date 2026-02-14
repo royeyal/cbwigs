@@ -18,9 +18,20 @@ The following libraries are **already loaded globally** on the Webflow site:
 
 - **GSAP** (GreenSock Animation Platform) - available as `gsap` global
 - **GSAP Flip Plugin** - already registered, available as `Flip` global
-- **GSAP ScrollTrigger Plugin** - already registered
+- **GSAP ScrollTrigger Plugin** - already registered, available as `ScrollTrigger` global
+- **GSAP Draggable Plugin** - already registered, available as `Draggable` global
+- **GSAP InertiaPlugin** - already registered, available as `InertiaPlugin` global
+- **GSAP SplitText Plugin** - already registered, available as `SplitText` global
 
 **Important**: Do NOT import GSAP or its plugins in JavaScript files. They are accessed as global variables from the window object.
+
+### Bundled Dependencies
+
+The following libraries are **bundled** with the build (imported in JavaScript modules):
+
+- **Swiper** (v12.0.2) - Modern slider library, imported in `swipeslider.js`
+
+**Note**: Unlike GSAP, Swiper is imported and bundled into the final JavaScript build using ES modules.
 
 ### Deployment
 
@@ -57,6 +68,7 @@ npm run dev
 
 - Must work in a Webflow environment
 - Should not import GSAP or its plugins (use globals)
+- Other libraries like Swiper can be imported and bundled normally
 - Use data attributes for DOM selection (Webflow convention)
 - Should be defensive (check for element existence before initializing)
 
