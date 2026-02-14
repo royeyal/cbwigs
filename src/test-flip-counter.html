@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flip Counter - Layout485 Test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        padding: 4rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Flip Counter Layout485 Styles */
+      .layout485_component {
+        position: relative;
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 2rem;
+        min-height: 100vh;
+      }
+
+      .layout485_content-left {
+        position: sticky;
+        top: 20%;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        height: fit-content;
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        color: #a39486;
+      }
+
+      .layout485_content-left > .layout485_number {
+        flex-shrink: 0;
+      }
+
+      .layout485_number-wrapper {
+        position: relative;
+        width: 1em;
+        height: 1em;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .layout485_number-wrapper .layout485_number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .layout485_content-right {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .layout485_content {
+        min-height: 50vh;
+        padding: 2rem;
+        background: #fafafa;
+        border-radius: 8px;
+        border-left: 4px solid #a39486;
+      }
+
+      .layout485_content h3 {
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 1.2;
+        color: #2c2c2c;
+      }
+
+      .layout485_content p {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: #6b625a;
+      }
+
+      .layout485_content .layout485_number {
+        display: none;
+      }
+
+      @media (width <= 768px) {
+        .layout485_component {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .layout485_content-left {
+          display: none;
+        }
+
+        .layout485_content .layout485_number {
+          display: block;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: #a39486;
+        }
+
+        .layout485_content {
+          min-height: auto;
+          padding: 1.5rem;
+        }
+
+        .layout485_content h3 {
+          font-size: 1.5rem;
+        }
+
+        .layout485_content p {
+          font-size: 1rem;
+        }
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #2c2c2c;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        color: #6b625a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Flip Counter Effect</h1>
+        <p>Scroll down to see the counter flip as content changes</p>
+      </header>
+
+      <div class="layout485_component">
+        <!-- Left side - Sticky counter -->
+        <div class="layout485_content-left">
+          <div class="layout485_number">0</div>
+          <div class="layout485_number-wrapper">
+            <div class="layout485_number">1</div>
+            <div class="layout485_number">2</div>
+            <div class="layout485_number">3</div>
+            <div class="layout485_number">4</div>
+            <div class="layout485_number">5</div>
+          </div>
+        </div>
+
+        <!-- Right side - Content -->
+        <div class="layout485_content-right">
+          <div class="layout485_content">
+            <div class="layout485_number">01</div>
+            <h3>Introduction to Our Services</h3>
+            <p>
+              We provide comprehensive solutions tailored to your business
+              needs. Our team of experts works closely with clients to
+              understand their unique challenges and deliver results that exceed
+              expectations. With over a decade of experience, we've helped
+              hundreds of companies transform their operations.
+            </p>
+          </div>
+
+          <div class="layout485_content">
+            <div class="layout485_number">02</div>
+            <h3>Strategic Planning</h3>
+            <p>
+              Our strategic planning process involves deep market analysis and
+              competitive research. We help you identify opportunities, mitigate
+              risks, and create actionable roadmaps. Every strategy is
+              data-driven and aligned with your long-term business objectives to
+              ensure sustainable growth.
+            </p>
+          </div>
+
+          <div class="layout485_content">
+            <div class="layout485_number">03</div>
+            <h3>Implementation & Execution</h3>
+            <p>
+              We don't just plan - we execute. Our implementation methodology
+              ensures smooth transitions and minimal disruption to your
+              operations. With dedicated project managers and clear milestones,
+              we keep projects on track and stakeholders informed throughout the
+              entire process.
+            </p>
+          </div>
+
+          <div class="layout485_content">
+            <div class="layout485_number">04</div>
+            <h3>Continuous Optimization</h3>
+            <p>
+              The work doesn't stop at launch. We continuously monitor
+              performance metrics and user feedback to identify areas for
+              improvement. Our iterative approach ensures your solutions evolve
+              with changing market conditions and emerging opportunities.
+            </p>
+          </div>
+
+          <div class="layout485_content">
+            <div class="layout485_number">05</div>
+            <h3>Long-term Partnership</h3>
+            <p>
+              We believe in building lasting relationships with our clients. Our
+              support extends beyond project completion, offering ongoing
+              consultation, training, and assistance. Your success is our
+              success, and we're committed to being there every step of the way
+              as your business grows and evolves.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      function initFlipCounter() {
+        const components = document.querySelectorAll('.layout485_component');
+
+        if (components.length === 0) return;
+
+        components.forEach(component => {
+          const contentItems = component.querySelectorAll('.layout485_content');
+          const numbers = component.querySelectorAll(
+            '.layout485_content-left .layout485_number-wrapper .layout485_number'
+          );
+
+          if (contentItems.length === 0 || numbers.length === 0) return;
+
+          // Set initial state - show only first number
+          gsap.set(numbers, { yPercent: 0 });
+
+          // Create ScrollTrigger for each content item
+          contentItems.forEach((content, index) => {
+            ScrollTrigger.create({
+              trigger: content,
+              start: 'top center',
+              end: 'bottom center',
+              onEnter: () => updateCounter(numbers, index),
+              onEnterBack: () => updateCounter(numbers, index)
+              // markers: true, // Uncomment for debugging
+            });
+          });
+        });
+      }
+
+      function updateCounter(numbers, activeIndex) {
+        const numberHeight = numbers[0]?.offsetHeight || 0;
+
+        numbers.forEach((number, index) => {
+          if (index === activeIndex) {
+            // Active number - position at 0
+            gsap.to(number, {
+              yPercent: 0,
+              duration: 0.6,
+              ease: 'power2.inOut'
+            });
+          } else if (index < activeIndex) {
+            // Numbers before active - move up and out of view
+            gsap.to(number, {
+              yPercent: -100,
+              duration: 0.6,
+              ease: 'power2.inOut'
+            });
+          } else {
+            // Numbers after active - keep below, out of view
+            gsap.to(number, {
+              yPercent: (index - activeIndex) * 100,
+              duration: 0.6,
+              ease: 'power2.inOut'
+            });
+          }
+        });
+      }
+
+      // Initialize on page load
+      window.addEventListener('DOMContentLoaded', initFlipCounter);
+    </script>
+  </body>
+</html>
