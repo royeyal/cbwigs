@@ -14,6 +14,7 @@
 @import url('./parallax-image.css');
 @import url('./lightbox-setup.css');
 @import url('./flodesk.css');
+@import url('./webflow.css');
 
 /* Global styles */
 
@@ -33,47 +34,6 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-/* .hero_lightbox .hero_lightbox-thumbnail {
-  transition: transform 1s ease-in-out;
-}
-
-.hero_lightbox:hover .hero_lightbox-thumbnail {
-  transform: scale(1.05);
-} */
-
-.w-richtext p {
-  margin-bottom: 0.5rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.w-richtext a {
-  text-decoration: underline;
-  text-underline-offset: 0.125em;
-  text-decoration-thickness: from-font;
-  color: var(--_primitives---brand--accent--400);
-  transition: 0.3s color ease-in-out;
-
-  &:hover {
-    color: var(--_primitives---brand--accent--600);
-    text-decoration: none;
-  }
-}
-
-.w-richtext ol,
-.w-richtext ul {
-  padding-left: 0;
-  padding-inline-start: 1.5rem;
-}
-
-.w-richtext ol li,
-.w-richtext ul li {
-  padding-left: 0;
-  padding-inline-start: 0.5rem;
 }
 
 /* Accordion Toggle Focus Styles */
