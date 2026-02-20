@@ -130,10 +130,11 @@ button:focus-visible {
 }
 
 /* ————  DROPDOWN LINKS + IMAGES ———— */
-.nav-dropdown__link:hover .nav-dropdown__img-overlay,
+
+/* .nav-dropdown__link:hover .nav-dropdown__img-overlay,
 .nav-dropdown__link:focus-visible .nav-dropdown__img-overlay {
   opacity: 0;
-}
+} */
 
 .nav-dropdown__link:hover .nav-dropdown__img,
 .nav-dropdown__link:focus-visible .nav-dropdown__img {
