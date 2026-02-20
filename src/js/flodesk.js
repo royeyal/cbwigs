@@ -1,10 +1,10 @@
 (() => {
-  console.log('Flodesk privacy text script running...');
+  // console.log('Flodesk privacy text script running...');
 
   // Adjust if you have a locale attribute / class. Examples:
   // Webflow Localization often sets <html lang="he"> or similar.
   const lang = (document.documentElement.lang || '').toLowerCase();
-  console.log('Detected language:', lang);
+  // console.log('Detected language:', lang);
 
   const strings = {
     he: {
@@ -48,24 +48,24 @@
       return;
     }
 
-    console.log('Privacy policy link element:', link);
-    console.log('Found link, updating text and href...');
+    // console.log('Privacy policy link element:', link);
+    // console.log('Found link, updating text and href...');
 
     // Replace link text + href
     link.textContent = t.privacyText;
     link.href = t.privacyHref;
-    console.log('Link updated successfully');
+    // console.log('Link updated successfully');
 
     // Replace the text node around the link (the "I agree..." part)
     const label = link.closest('.fd-form-check__label');
-    console.log('Label element:', label);
+    // console.log('Label element:', label);
 
     if (!label) {
       console.warn('Label not found - selector: .fd-form-check__label');
       return;
     }
 
-    console.log('Found label, replacing consent text...');
+    // console.log('Found label, replacing consent text...');
 
     // Remove text nodes in label, keep the link
     [...label.childNodes].forEach(n => {
