@@ -35,7 +35,18 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 1px solid var(--brand--text, #1a1a1ae0);
+  outline: 2px solid var(--brand--text, #1a1a1ae0);
+  outline-offset: 3px;
+}
+
+.nav a:focus-visible,
+.nav button:focus-visible {
+  outline-color: #fff;
+}
+
+.nav.is-scrolled a:focus-visible,
+.nav.is-scrolled button:focus-visible {
+  outline-color: var(--brand--text, #1a1a1ae0);
 }
 
 .nav-bg {
