@@ -1,0 +1,34 @@
+/* GSAP Gallery Slider */
+
+[data-gallery-slider] {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+}
+
+[data-gallery-slider]:active {
+  cursor: grabbing;
+}
+
+[data-gallery-slider-track] {
+  display: flex;
+  will-change: transform;
+  user-select: none;
+  user-select: none;
+}
+
+[data-gallery-slider-slide] {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+[data-gallery-slider-slide] img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
