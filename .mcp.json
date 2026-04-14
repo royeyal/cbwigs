@@ -1,13 +1,5 @@
 {
-  "inputs": [
-    {
-      "id": "webflow-token-cbwigs",
-      "type": "promptString",
-      "description": "Webflow API token — cbwigs",
-      "password": true
-    }
-  ],
-  "servers": {
+  "mcpServers": {
     "webflow-cbwigs": {
       "command": "npx",
       "args": ["-y", "webflow-mcp-server@latest"],
@@ -15,5 +7,13 @@
         "WEBFLOW_TOKEN": "${input:webflow-token-cbwigs}"
       }
     }
-  }
+  },
+  "inputs": [
+    {
+      "id": "webflow-token-cbwigs",
+      "type": "promptString",
+      "description": "Webflow API token — cbwigs",
+      "password": true
+    }
+  ]
 }
