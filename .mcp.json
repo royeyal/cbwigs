@@ -1,0 +1,19 @@
+{
+  "inputs": [
+    {
+      "id": "webflow-token-cbwigs",
+      "type": "promptString",
+      "description": "Webflow API token — cbwigs",
+      "password": true
+    }
+  ],
+  "servers": {
+    "webflow-cbwigs": {
+      "command": "npx",
+      "args": ["-y", "webflow-mcp-server@latest"],
+      "env": {
+        "WEBFLOW_TOKEN": "${input:webflow-token-cbwigs}"
+      }
+    }
+  }
+}
