@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "webflow-mcp-server@latest"],
       "env": {
-        "WEBFLOW_TOKEN": "${env:WEBFLOW_TOKEN}"
+        "WEBFLOW_TOKEN": "0bb1f863cabe3bf9adec011377c3b9b4dc92bb7ecc6da0fb997d92249a5b3bec"
       }
     }
   }
