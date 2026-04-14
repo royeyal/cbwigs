@@ -4,16 +4,8 @@
       "command": "npx",
       "args": ["-y", "webflow-mcp-server@latest"],
       "env": {
-        "WEBFLOW_TOKEN": "${input:webflow-token-cbwigs}"
+        "WEBFLOW_TOKEN": "${env:WEBFLOW_TOKEN}"
       }
     }
-  },
-  "inputs": [
-    {
-      "id": "webflow-token-cbwigs",
-      "type": "promptString",
-      "description": "Webflow API token — cbwigs",
-      "password": true
-    }
-  ]
+  }
 }
