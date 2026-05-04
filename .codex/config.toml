@@ -1,0 +1,9 @@
+[mcp_servers.webflow-cbwigs]
+args = [
+    "-y",
+    "webflow-mcp-server@latest",
+]
+command = "npx"
+
+[mcp_servers.webflow-cbwigs.env]
+WEBFLOW_TOKEN = "0bb1f863cabe3bf9adec011377c3b9b4dc92bb7ecc6da0fb997d92249a5b3bec"
