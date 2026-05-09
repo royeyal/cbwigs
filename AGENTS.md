@@ -85,8 +85,10 @@ Stored in `.env` (gitignored — never commit this file):
 
 | Variable | Purpose |
 |---|---|
-| `WEBFLOW_TOKEN` | Webflow Data API token (used by Webflow MCP tools) |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token (used by `wrangler deploy`) |
+| `WEBFLOW_TOKEN` | Webflow Data API token — authenticates calls to the Webflow Data API (used by Webflow MCP tools to read/write CMS content, pages, etc.) |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token — authenticates calls to the Cloudflare API (used by `wrangler` when running `npm run deploy` to publish the Worker) |
+
+These are independent credentials for two separate services — neither talks to the other.
 
 Copy the `.env` template and fill in your tokens before deploying.
 
