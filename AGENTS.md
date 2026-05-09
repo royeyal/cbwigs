@@ -77,7 +77,18 @@ npm run clean    # rm -rf dist
 ```bash
 npm run deploy   # npm run build && npx wrangler deploy
 ```
-No secrets or env vars are required — the Worker uses only the `ASSETS` static binding.
+Requires `CLOUDFLARE_API_TOKEN` to be set (see **Environment Variables** below).
+
+## Environment Variables
+
+Stored in `.env` (gitignored — never commit this file):
+
+| Variable | Purpose |
+|---|---|
+| `WEBFLOW_TOKEN` | Webflow Data API token (used by Webflow MCP tools) |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token (used by `wrangler deploy`) |
+
+Copy the `.env` template and fill in your tokens before deploying.
 
 ### Test / Lint
 ```bash
