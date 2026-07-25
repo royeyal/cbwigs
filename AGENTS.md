@@ -8,7 +8,7 @@ This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/E
 
 - **Runtime**: Browser (vanilla ES modules); no Node.js runtime code
 - **Build tool**: Vite ^8.0.3 (ESM, single entry point, manifest mode)
-- **Bundled dependency**: Swiper ^12.1.2 (imported as ES module)
+- **Bundled dependency**: Swiper ^14.0.1 (imported as ES module)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
 - **Worker runtime**: `wrangler` ^4.71.0, compatibility date `2025-09-06`
 - **CSS processing**: PostCSS with postcss-nesting, autoprefixer, cssnano
@@ -24,9 +24,12 @@ cbwigs/
 │   │   ├── main.js               # Single entry point — imports all modules + CSS
 │   │   ├── accordion.js
 │   │   ├── contentrevealscroll.js
+│   │   ├── copy-email-to-clipboard-button.js
 │   │   ├── draggable-infinite-slider.js
 │   │   ├── draggable-infinite-slider-standalone.js  # Standalone build (no main.js)
+│   │   ├── dynamic-current-year.js
 │   │   ├── flip-counter.js
+│   │   ├── flodesk.js
 │   │   ├── gsap-gallery-slider.js
 │   │   ├── gsap-slider.js
 │   │   ├── image-trail-following-cursor.js
@@ -56,6 +59,8 @@ cbwigs/
 ├── wrangler.toml
 ├── eslint.config.js
 ├── postcss.config.js
+├── check-parallax.js             # Standalone Node script (not part of Vite build)
+├── webflow-swiper.js             # Standalone Swiper reference/init script
 └── PROJECT_CONTEXT.md            # Plain-English architecture summary
 ```
 
