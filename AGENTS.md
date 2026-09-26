@@ -8,7 +8,7 @@ This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/E
 
 - **Runtime**: Browser (vanilla ES modules); no Node.js runtime code
 - **Build Node.js**: 24, pinned in `.node-version` (Cloudflare Workers Builds reads it; cssnano 9 fails on Node 20)
-- **Build tool**: Vite (ESM, single entry point, manifest mode)
+- **Build tool**: Vite (ESM, manifest mode) — two passes: the main bundle, then standalone files (`--mode standalone`)
 - **Bundled dependency**: Swiper (imported as ES module)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
 - **Worker runtime**: `wrangler`, compatibility date `2025-09-06`
@@ -39,7 +39,7 @@ cbwigs/
 ├── dist/                         # Vite build output (committed; manifest is gitignored)
 │   ├── js/main.[hash].js
 │   ├── css/style.[hash].css
-│   └── .vite/manifest.json       # Read by the Worker at request time
+│   └── .vite/manifest*.json      # manifest.json + manifest.standalone.json, read by the Worker
 ├── vite.config.js
 ├── wrangler.toml
 ├── eslint.config.js
@@ -59,7 +59,7 @@ Open any `src/*.html` demo file to test a feature locally.
 
 ### Build
 ```bash
-npm run build    # Outputs to ./dist (JS → dist/js/, CSS → dist/css/, manifest → dist/.vite/)
+npm run build    # vite build && vite build --mode standalone → ./dist (JS → dist/js/, CSS → dist/css/, manifests → dist/.vite/)
 npm run clean    # rm -rf dist
 ```
 
@@ -97,7 +97,7 @@ npm run preview     # Vite preview server for the built dist/
 - **Compatibility date**: `2025-09-06`
 - **No KV namespaces, D1, or custom routes configured**
 
-The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/js/main.js`, `/main.css`, `/css/main.css`, `/draggable-slider.js`, `/js/draggable-slider.js`, `/parallax-image.js`, `/parallax-image.css`) serve the matching hashed file's contents directly (no redirect). All responses include `Access-Control-Allow-Origin: *`.
+The Worker reads and merges `dist/.vite/manifest.json` and `dist/.vite/manifest.standalone.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/js/main.js`, `/main.css`, `/css/main.css`, `/draggable-slider.js`, `/js/draggable-slider.js`, `/parallax-image.js`, `/parallax-image.css`) serve the matching hashed file's contents directly (no redirect). All responses include `Access-Control-Allow-Origin: *`.
 
 ## Webflow Specifics
 
@@ -123,9 +123,9 @@ The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed fi
 
 - The Worker is purely a static asset router — it never caches responses for non-hashed paths (`no-cache`). Do not add server-side logic that assumes persistent state.
 - Vite manifest mode is critical: `build.manifest: true` in vite.config.js is what enables the Worker's manifest lookup. Do not disable it.
-- CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/style.[hash].css` file.
+- In the main build, CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/style.[hash].css` file.
 - Module preload is disabled (`modulePreload: false`) — the site loads one flat JS bundle, not a module graph.
-- The `draggable-infinite-slider-standalone.js` module is intended to be served separately (via the `/draggable-slider.js` alias) for pages that only need the slider without the full `main.js` bundle. It is **not** imported by `main.js`.
+- Standalone files for pages that don't load `main.js` are built in a second pass (`--mode standalone`): `draggable-infinite-slider-standalone.js` → `/draggable-slider.js`, `parallax-image.js` → `/parallax-image.js`, `styles/parallax-image.css` → `/parallax-image.css`. They share modules with `main.js`, so they must stay out of the main build's `input` — adding them there would split the shared code into chunks and `main.js` would no longer be one flat file.
 - Flodesk form text customization in `main.js` uses a retry loop (up to 10 × 500ms attempts) because the Flodesk embed loads asynchronously after `DOMContentLoaded`.
 
 ## What Not to Do
@@ -133,7 +133,7 @@ The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed fi
 - **Do not import GSAP or any GSAP plugin.** They are globals registered by Webflow. Importing them will create a second GSAP instance and break animations.
 - **Do not run `npm run deploy` without first verifying the build output** — this deploys directly to production.
 - **Do not add CSS that targets Webflow class names like `.w-*` or `.wf-*`** — these are internal Webflow classes and may change.
-- **Do not split the CSS output** — `cssCodeSplit: false` is intentional; the Worker alias `/main.css` expects a single CSS file.
+- **Do not split the main build's CSS output** — `cssCodeSplit: false` is intentional; the Worker alias `/main.css` expects a single CSS file.
 - **Do not disable the Vite manifest** (`build.manifest: true`) — the Worker depends on it to resolve hashed filenames.
 - **Do not commit source changes without the matching `dist/`** — `dist/` is tracked in git (served via jsDelivr), so run `npm run build` and commit the rebuilt `dist/js` and `dist/css` with the source change. Cloudflare Workers Builds rebuilds on its own, so the committed copy only matters for the CDN.
 - **Do not add new npm runtime dependencies without considering bundle size** — the final JS bundle is served to every page visitor.

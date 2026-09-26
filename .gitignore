@@ -55,3 +55,6 @@ temp/
 
 # Husky
 .husky/_.env
+
+# Wrangler local dev state
+.wrangler/
