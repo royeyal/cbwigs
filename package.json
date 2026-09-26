@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "GSAP animations for Webflow project",
   "type": "module",
+  "engines": {
+    "node": "^22.22.3 || >=24.15.0"
+  },
   "scripts": {
     "start": "vite",
     "dev": "vite",
