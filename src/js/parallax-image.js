@@ -94,10 +94,3 @@ export function destroyParallaxImages() {
     }
   });
 }
-
-// Auto-initialize on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initParallaxImages);
-} else {
-  initParallaxImages();
-}

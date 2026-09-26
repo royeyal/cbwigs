@@ -85,7 +85,10 @@ export default {
                 'src/js/draggable-infinite-slider-standalone.js'
               ]
             : wantParallaxJs
-              ? ['src/js/parallax-image.js', 'js/parallax-image.js']
+              ? [
+                  'js/parallax-image-standalone.js',
+                  'src/js/parallax-image-standalone.js'
+                ]
               : ['src/js/main.js', 'src/scripts/main.js', 'js/main.js'];
 
       // 1) Try explicit key

@@ -12,6 +12,11 @@ const assetFileNames = asset => {
   return 'assets/[name].[hash][extname]';
 };
 
+// Webflow embeds these files as classic <script> tags, so each bundle must be wrapped in
+// its own scope (IIFE). Unwrapped ES output leaks its minified top-level names onto window,
+// which overwrote jQuery's `$` on the live site.
+const format = 'iife';
+
 // Main bundle: one flat JS file + one CSS file, served via /main.js and /main.css.
 const mainBuild = {
   outDir: '../dist',
@@ -23,6 +28,7 @@ const mainBuild = {
       main: src('js/main.js')
     },
     output: {
+      format,
       // Keep your subfolders AND add a content hash for cache-busting
       entryFileNames: chunk =>
         chunk.name === 'main'
@@ -47,10 +53,15 @@ const standaloneBuild = {
   rollupOptions: {
     input: {
       'draggable-slider': src('js/draggable-infinite-slider-standalone.js'),
-      'parallax-image': src('js/parallax-image.js'),
+      'parallax-image': src('js/parallax-image-standalone.js'),
       'parallax-image-css': src('styles/parallax-image.css')
     },
     output: {
+      // Rolldown only allows format 'iife' for a single input, so wrap each file in a
+      // function scope instead. These entries have no imports/exports; if one ever did,
+      // the wrapped code would not parse and terser would fail the build.
+      banner: '(function(){',
+      footer: '})();',
       entryFileNames: 'js/[name].[hash].js',
       chunkFileNames: 'assets/[name].[hash].js',
       assetFileNames
@@ -66,9 +77,9 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false, // Temporarily keep console logs
+        // Strip debug logging from production bundles; keep console.warn/error
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
         drop_debugger: true
-        // pure_funcs: ['console.log', 'console.info', 'console.debug'] // Commented out
       },
       format: {
         comments: false
