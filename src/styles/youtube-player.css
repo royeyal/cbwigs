@@ -274,6 +274,7 @@
 }
 
 /* Webflow Designer Placeholder */
+/* stylelint-disable no-descending-specificity -- styles .youtube-player::before, a different element from the .youtube-play-button::before rules above */
 .wf-design-mode,
 .w-editor {
   .youtube-player {
@@ -316,6 +317,7 @@
     pointer-events: none;
   }
 }
+/* stylelint-enable no-descending-specificity */
 
 /* Responsive adjustments */
 @media (width <= 768px) {
@@ -411,7 +413,7 @@
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .youtube-play-icon {
     color: var(
       --_primitives---colors--text-on-dark,

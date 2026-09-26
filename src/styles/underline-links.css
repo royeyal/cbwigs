@@ -124,6 +124,7 @@
   }
 }
 
+/* stylelint-disable no-descending-specificity -- rich-text links and [data-underline-link] elements never overlap, so order between them doesn't matter */
 .w-richtext a {
   text-decoration: none;
   position: relative;
@@ -191,6 +192,7 @@
     }
   }
 }
+/* stylelint-enable no-descending-specificity */
 
 .section-rich-text .w-richtext a {
   &::before,

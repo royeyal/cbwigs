@@ -74,20 +74,12 @@ body {
     black var(--swiper-fade-fade-out),
     transparent var(--swiper-fade-end)
   );
-  mask-image: linear-gradient(
-    90deg,
-    transparent var(--swiper-fade-start),
-    black var(--swiper-fade-fade-in),
-    black var(--swiper-fade-fade-out),
-    transparent var(--swiper-fade-end)
-  );
 
   /* Remove width: 100% to allow container control */
 }
 
 /* Fade Effect Variations */
 .swiper-group--no-fade {
-  mask-image: none;
   mask-image: none;
 }
 
@@ -104,13 +96,6 @@ body {
 /* RTL Support for Fade Effect */
 [dir='rtl'] .swiper-group,
 .swiper-rtl .swiper-group {
-  mask-image: linear-gradient(
-    270deg,
-    /* Reversed direction for RTL */ transparent var(--swiper-fade-start),
-    black var(--swiper-fade-fade-in),
-    black var(--swiper-fade-fade-out),
-    transparent var(--swiper-fade-end)
-  );
   mask-image: linear-gradient(
     270deg,
     transparent var(--swiper-fade-start),

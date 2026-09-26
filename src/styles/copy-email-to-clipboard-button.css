@@ -15,6 +15,7 @@
 [data-copy-button='copied'] .copy-email-icon__wrap {
   background: #0f8e2e !important;
 }
+
 [data-copy-button='copied'] .copy-email-text__el {
   transform: translate(0, -200%) !important;
 }

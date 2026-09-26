@@ -1,12 +1,9 @@
 // Flodesk form: localize the privacy/consent text and validation messages.
-// The embed loads after DOMContentLoaded, so the link lookup retries (10 x 500ms).
+// The embed loads after DOMContentLoaded, so the link lookup retries (10 x 500ms);
+// pages without a Flodesk form stop there and never create an observer.
 export function initFlodeskPrivacyText() {
-  // console.log('Flodesk privacy text script running...');
-
-  // Adjust if you have a locale attribute / class. Examples:
-  // Webflow Localization often sets <html lang="he"> or similar.
+  // Webflow Localization sets <html lang="he"> / <html lang="en">
   const lang = (document.documentElement.lang || '').toLowerCase();
-  // console.log('Detected language:', lang);
 
   const strings = {
     he: {
@@ -29,88 +26,65 @@ export function initFlodeskPrivacyText() {
 
   const t = strings[lang.startsWith('he') ? 'he' : 'en'];
 
-  // Retry function to wait for Flodesk form to load
-  function tryUpdatePrivacyText(attempt = 1, maxAttempts = 10) {
-    // Target any privacy policy link using attribute selector
-    const link = document.querySelector('a[class$="__privacy-policy-link"]');
+  const errorTranslations = {
+    'This field is required': t.requiredField,
+    'You must agree to receive marketing emails': t.marketingConsent
+  };
 
-    if (!link) {
-      if (attempt < maxAttempts) {
-        console.log(
-          `Attempt ${attempt}: Waiting for Flodesk form... retrying in 500ms`
-        );
-        setTimeout(() => tryUpdatePrivacyText(attempt + 1, maxAttempts), 500);
-      } else {
-        console.warn(
-          'Privacy policy link not found after',
-          maxAttempts,
-          'attempts - selector: a[class$="__privacy-policy-link"]'
-        );
+  // Validation messages appear inside the form after the user submits.
+  function translateErrorMessages(form) {
+    form.querySelectorAll('.fd-form-feedback').forEach(el => {
+      const translated = errorTranslations[el.textContent.trim()];
+      if (translated && el.textContent !== translated) {
+        el.textContent = translated;
       }
-      return;
-    }
+    });
+  }
 
-    // console.log('Privacy policy link element:', link);
-    // console.log('Found link, updating text and href...');
-
-    // Replace link text + href
+  function localizeConsent(link) {
     link.textContent = t.privacyText;
     link.href = t.privacyHref;
-    // console.log('Link updated successfully');
 
-    // Replace the text node around the link (the "I agree..." part)
+    // Replace the "I agree..." text around the link
     const label = link.closest('.fd-form-check__label');
-    // console.log('Label element:', label);
-
     if (!label) {
       console.warn('Label not found - selector: .fd-form-check__label');
       return;
     }
-
-    // console.log('Found label, replacing consent text...');
-
-    // Remove text nodes in label, keep the link
     [...label.childNodes].forEach(n => {
       if (n.nodeType === 3) n.remove();
     });
-
-    // Insert localized consent text before the link
     label.insertBefore(document.createTextNode(`${t.consentText} `), link);
-
-    console.log('✓ Flodesk privacy text customization complete!');
   }
 
-  // Function to translate error messages
-  function translateErrorMessages() {
-    const feedbackElements = document.querySelectorAll('.fd-form-feedback');
+  // The Flodesk embed renders after DOMContentLoaded, so poll for its privacy link.
+  function tryLocalizeForms(attempt = 1, maxAttempts = 10) {
+    const links = document.querySelectorAll(
+      'a[class$="__privacy-policy-link"]'
+    );
 
-    feedbackElements.forEach(el => {
-      const text = el.textContent.trim();
-      if (text === 'This field is required') {
-        el.textContent = t.requiredField;
-        console.log('Translated error message:', el.textContent);
-      } else if (text === 'You must agree to receive marketing emails') {
-        el.textContent = t.marketingConsent;
-        console.log('Translated marketing consent error:', el.textContent);
+    if (!links.length) {
+      if (attempt < maxAttempts) {
+        setTimeout(() => tryLocalizeForms(attempt + 1, maxAttempts), 500);
       }
+      // No Flodesk form on this page: nothing to localize or watch
+      return;
+    }
+
+    links.forEach(link => {
+      localizeConsent(link);
+
+      // Watch only this form (not the whole page) for validation messages
+      const form = link.closest('form') || link.closest('[data-ff-el="root"]');
+      if (!form) return;
+      translateErrorMessages(form);
+      new MutationObserver(() => translateErrorMessages(form)).observe(form, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
     });
   }
 
-  // Start the retry process
-  tryUpdatePrivacyText();
-
-  // Translate any existing error messages
-  translateErrorMessages();
-
-  // Watch for new error messages (they appear on validation)
-  // eslint-disable-next-line no-undef
-  const observer = new MutationObserver(() => {
-    translateErrorMessages();
-  });
-
-  // Observe the entire document for changes
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  tryLocalizeForms();
 }

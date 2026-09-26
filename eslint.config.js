@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
   js.configs.recommended,
@@ -27,7 +28,8 @@ export default [
         clearTimeout: 'readonly',
         setTimeout: 'readonly',
         setInterval: 'readonly',
-        clearInterval: 'readonly'
+        clearInterval: 'readonly',
+        MutationObserver: 'readonly'
       }
     },
     rules: {
@@ -44,18 +46,13 @@ export default [
       'object-shorthand': 'error',
       'prefer-arrow-callback': 'error',
       'prefer-template': 'error',
-      'template-curly-spacing': 'error',
-      'arrow-spacing': 'error',
-      'comma-dangle': ['error', 'never'],
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
-      indent: ['error', 2],
-      'no-trailing-spaces': 'error',
-      'eol-last': 'error',
       'no-empty': ['error', { allowEmptyCatch: true }]
     }
   },
   {
     ignores: ['dist/**', 'node_modules/**', '.husky/**']
-  }
+  },
+  // Formatting (quotes, semicolons, indentation, commas) is Prettier's job (.prettierrc);
+  // this turns off every ESLint rule that would fight it. Keep it last.
+  eslintConfigPrettier
 ];
