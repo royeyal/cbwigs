@@ -26,7 +26,6 @@ cbwigs/
 │   ├── js/                       # One module per feature, plus:
 │   │   ├── main.js               # Single entry point — imports all modules + CSS
 │   │   ├── draggable-infinite-slider-standalone.js  # Standalone build (no main.js)
-│   │   ├── flodesk.js            # Not imported; main.js has its own inline copy of this logic
 │   │   └── swipeslider.js        # Uses bundled Swiper
 │   ├── styles/                   # CSS modules
 │   │   ├── main.css              # Imported by main.js; aggregates all CSS
@@ -115,7 +114,7 @@ The Worker reads and merges `dist/.vite/manifest.json` and `dist/.vite/manifest.
 - **Swiper**: Imported as an ES module from the `swiper` package — the only bundled runtime dependency
 - **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention
 - **Defensive init**: Every `init*()` function must check for element existence before running (e.g. `if (!elements.length) return;`)
-- **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
+- **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener, and do not also initialize themselves. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
 - **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by ESLint)
 - **CSS**: PostCSS nesting syntax is supported; avoid conflicting with Webflow-generated class names; prefer specific selectors
 
@@ -125,7 +124,9 @@ The Worker reads and merges `dist/.vite/manifest.json` and `dist/.vite/manifest.
 - Vite manifest mode is critical: `build.manifest: true` in vite.config.js is what enables the Worker's manifest lookup. Do not disable it.
 - In the main build, CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/style.[hash].css` file.
 - Module preload is disabled (`modulePreload: false`) — the site loads one flat JS bundle, not a module graph.
-- Standalone files for pages that don't load `main.js` are built in a second pass (`--mode standalone`): `draggable-infinite-slider-standalone.js` → `/draggable-slider.js`, `parallax-image.js` → `/parallax-image.js`, `styles/parallax-image.css` → `/parallax-image.css`. They share modules with `main.js`, so they must stay out of the main build's `input` — adding them there would split the shared code into chunks and `main.js` would no longer be one flat file.
+- Webflow embeds the bundles as classic `<script>` tags (not `type="module"`), so every bundle is wrapped in its own function scope (`format: 'iife'` for `main.js`, a `banner`/`footer` wrapper for the standalone pass). Unwrapped output leaks minified top-level names onto `window` and once overwrote jQuery's `$`. Standalone entries must therefore have no `import`/`export` left after bundling.
+- Production builds strip `console.log`/`info`/`debug` (terser `pure_funcs`); use `console.warn`/`console.error` for anything that should reach the browser console.
+- Standalone files for pages that don't load `main.js` are built in a second pass (`--mode standalone`): `draggable-infinite-slider-standalone.js` → `/draggable-slider.js`, `parallax-image-standalone.js` → `/parallax-image.js`, `styles/parallax-image.css` → `/parallax-image.css`. Each `*-standalone.js` entry does the auto-init and exposes `window.*` helpers; the feature module it wraps must not auto-init, or pages with `main.js` would initialize it twice. They share modules with `main.js`, so they must stay out of the main build's `input` — adding them there would split the shared code into chunks and `main.js` would no longer be one flat file.
 - Flodesk form text customization in `main.js` uses a retry loop (up to 10 × 500ms attempts) because the Flodesk embed loads asynchronously after `DOMContentLoaded`.
 
 ## What Not to Do

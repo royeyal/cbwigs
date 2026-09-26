@@ -1,4 +1,6 @@
-(() => {
+// Flodesk form: localize the privacy/consent text and validation messages.
+// The embed loads after DOMContentLoaded, so the link lookup retries (10 x 500ms).
+export function initFlodeskPrivacyText() {
   // console.log('Flodesk privacy text script running...');
 
   // Adjust if you have a locale attribute / class. Examples:
@@ -111,4 +113,4 @@
     childList: true,
     subtree: true
   });
-})();
+}

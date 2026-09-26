@@ -168,10 +168,12 @@ When using with CMS Collection Lists:
 If you're loading content dynamically (e.g., with filters or infinite scroll), refresh the parallax instances:
 
 ```javascript
-import { refreshParallaxImages } from './js/parallax-image.js';
-
-// After loading new content
+// Inside this repo's modules
+import { refreshParallaxImages } from './parallax-image.js';
 refreshParallaxImages();
+
+// On a Webflow page that loads the standalone /parallax-image.js
+window.refreshParallaxImages();
 ```
 
 ## Troubleshooting
@@ -202,17 +204,16 @@ refreshParallaxImages();
 
 ## Script Loading
 
-The script auto-initializes on page load. Make sure it's included in your page:
+Pages that load `main.js` need nothing extra: `main.js` calls `initParallaxImages()` on `DOMContentLoaded`. The module itself does not auto-initialize, so importing it never runs the effect twice.
+
+Pages that don't load `main.js` can use the standalone file, which initializes itself and exposes `window.initParallaxImages`, `window.refreshParallaxImages` and `window.destroyParallaxImages`:
 
 ```html
-<script type="module" src="/src/js/parallax-image.js"></script>
+<link rel="stylesheet" href="https://cbwigs-assets.roy-eyal.workers.dev/parallax-image.css" />
+<script src="https://cbwigs-assets.roy-eyal.workers.dev/parallax-image.js"></script>
 ```
 
-Or import it in your main.js:
-
-```javascript
-import './parallax-image.js';
-```
+Don't load the standalone file on a page that also loads `main.js` — the effect would be set up twice.
 
 ## CSS Loading
 

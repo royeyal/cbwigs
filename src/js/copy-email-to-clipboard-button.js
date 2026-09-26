@@ -46,10 +46,5 @@ function initCopyEmailClipboard() {
   });
 }
 
-// Initialize Copy Email to Clipboard Button
-document.addEventListener('DOMContentLoaded', () => {
-  initCopyEmailClipboard();
-});
-
 // Export function for use in main module
 export { initCopyEmailClipboard };
