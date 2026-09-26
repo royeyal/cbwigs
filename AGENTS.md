@@ -36,7 +36,7 @@ cbwigs/
 │   └── src/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
 ├── docs/                         # Feature documentation (Markdown)
-├── dist/                         # Vite build output
+├── dist/                         # Vite build output (committed; manifest is gitignored)
 │   ├── js/main.[hash].js
 │   ├── css/style.[hash].css
 │   └── .vite/manifest.json       # Read by the Worker at request time
@@ -138,5 +138,5 @@ The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed fi
 - **Do not add CSS that targets Webflow class names like `.w-*` or `.wf-*`** — these are internal Webflow classes and may change.
 - **Do not split the CSS output** — `cssCodeSplit: false` is intentional; the Worker alias `/main.css` expects a single CSS file.
 - **Do not disable the Vite manifest** (`build.manifest: true`) — the Worker depends on it to resolve hashed filenames.
-- **Do not commit `dist/`** — it is build output and should be regenerated before each deploy.
+- **Do not commit source changes without the matching `dist/`** — `dist/` is tracked in git (served via jsDelivr), so run `npm run build` and commit the rebuilt `dist/js` and `dist/css` with the source change. Cloudflare Workers Builds rebuilds on its own, so the committed copy only matters for the CDN.
 - **Do not add new npm runtime dependencies without considering bundle size** — the final JS bundle is served to every page visitor.
