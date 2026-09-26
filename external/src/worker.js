@@ -16,13 +16,21 @@ export default {
       });
     }
 
+    const fetchManifest = async path => {
+      const res = await env.ASSETS.fetch(new URL(path, url.origin));
+      return res.ok ? res.json() : null;
+    };
+
+    // manifest.json comes from the main build, manifest.standalone.json from
+    // `vite build --mode standalone` (see vite.config.js). Main entries come
+    // first so the fallback scans below still prefer the main bundle.
     const getManifest = async () => {
-      // If your manifest ended up at /manifest.json instead, change the path here.
-      const res = await env.ASSETS.fetch(
-        new URL('/.vite/manifest.json', url.origin)
-      );
-      if (!res.ok) return null;
-      return res.json();
+      const [main, standalone] = await Promise.all([
+        fetchManifest('/.vite/manifest.json'),
+        fetchManifest('/.vite/manifest.standalone.json')
+      ]);
+      if (!main && !standalone) return null;
+      return { ...main, ...standalone };
     };
 
     const serveFile = async path => {
@@ -62,22 +70,22 @@ export default {
       if (!manifest) return new Response('Manifest not found', { status: 500 });
 
       const wantCss = url.pathname.endsWith('.css');
-      const wantSlider = url.pathname === '/draggable-slider.js';
+      const wantSlider = url.pathname.endsWith('/draggable-slider.js');
       const wantParallaxJs = url.pathname === '/parallax-image.js';
       const wantParallaxCss = url.pathname === '/parallax-image.css';
 
-      // Preferred explicit keys
-      const preferredKeys = wantCss
-        ? ['src/styles/main.css', 'src/css/main.css']
-        : wantSlider
-          ? [
-              'js/draggable-infinite-slider-standalone.js',
-              'src/js/draggable-infinite-slider-standalone.js'
-            ]
-          : wantParallaxJs
-            ? ['src/js/parallax-image.js', 'js/parallax-image.js']
-            : wantParallaxCss
-              ? ['src/styles/parallax-image.css', 'styles/parallax-image.css']
+      // Preferred explicit keys (specific aliases before the generic CSS check)
+      const preferredKeys = wantParallaxCss
+        ? ['src/styles/parallax-image.css', 'styles/parallax-image.css']
+        : wantCss
+          ? ['style.css', 'src/styles/main.css', 'src/css/main.css']
+          : wantSlider
+            ? [
+                'js/draggable-infinite-slider-standalone.js',
+                'src/js/draggable-infinite-slider-standalone.js'
+              ]
+            : wantParallaxJs
+              ? ['src/js/parallax-image.js', 'js/parallax-image.js']
               : ['src/js/main.js', 'src/scripts/main.js', 'js/main.js'];
 
       // 1) Try explicit key

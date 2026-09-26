@@ -2,40 +2,67 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { fileURLToPath, URL } from 'node:url';
 
-export default defineConfig({
+const root = fileURLToPath(new URL('.', import.meta.url));
+const src = path => resolve(root, 'src', path);
+
+const assetFileNames = asset => {
+  if (asset.name && asset.name.endsWith('.css')) {
+    return 'css/[name].[hash][extname]';
+  }
+  return 'assets/[name].[hash][extname]';
+};
+
+// Main bundle: one flat JS file + one CSS file, served via /main.js and /main.css.
+const mainBuild = {
+  outDir: '../dist',
+  manifest: true, // <-- critical for the Worker redirect
+  cssCodeSplit: false, // Don't split CSS
+  emptyOutDir: true,
+  rollupOptions: {
+    input: {
+      main: src('js/main.js')
+    },
+    output: {
+      // Keep your subfolders AND add a content hash for cache-busting
+      entryFileNames: chunk =>
+        chunk.name === 'main'
+          ? 'js/[name].[hash].js'
+          : 'assets/[name].[hash].js',
+      chunkFileNames: 'assets/[name].[hash].js',
+      assetFileNames,
+      manualChunks: undefined // Disable code-splitting
+    }
+  }
+};
+
+// Standalone files for pages that don't load main.js, served via /draggable-slider.js,
+// /parallax-image.js and /parallax-image.css. Built in a second pass (`--mode standalone`)
+// because they share modules with main.js; a single multi-entry build would split that
+// shared code into chunks and main.js would stop being one flat file.
+const standaloneBuild = {
+  outDir: '../dist',
+  manifest: '.vite/manifest.standalone.json', // Read by the Worker alongside manifest.json
+  cssCodeSplit: true, // parallax-image.css gets its own file
+  emptyOutDir: false, // Keep the main build's output
+  rollupOptions: {
+    input: {
+      'draggable-slider': src('js/draggable-infinite-slider-standalone.js'),
+      'parallax-image': src('js/parallax-image.js'),
+      'parallax-image-css': src('styles/parallax-image.css')
+    },
+    output: {
+      entryFileNames: 'js/[name].[hash].js',
+      chunkFileNames: 'assets/[name].[hash].js',
+      assetFileNames
+    }
+  }
+};
+
+export default defineConfig(({ mode }) => ({
   root: 'src',
   build: {
-    outDir: '../dist',
-    manifest: true, // <-- critical for the Worker redirect
-    cssCodeSplit: false, // Don't split CSS
-    emptyOutDir: true,
+    ...(mode === 'standalone' ? standaloneBuild : mainBuild),
     modulePreload: false, // Disable module preload
-    rollupOptions: {
-      input: {
-        main: resolve(
-          fileURLToPath(new URL('.', import.meta.url)),
-          'src/js/main.js'
-        )
-      },
-      output: {
-        // Keep your subfolders AND add a content hash for cache-busting
-        entryFileNames: chunk => {
-          // For the main entry file, put it in js/ folder
-          if (chunk.name === 'main' || chunk.name === 'draggable-slider') {
-            return 'js/[name].[hash].js';
-          }
-          return 'assets/[name].[hash].js';
-        },
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: asset => {
-          if (asset.name && asset.name.endsWith('.css')) {
-            return 'css/[name].[hash][extname]';
-          }
-          return 'assets/[name].[hash][extname]';
-        },
-        manualChunks: undefined // Disable code-splitting
-      }
-    },
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -56,4 +83,4 @@ export default defineConfig({
     port: 3000,
     open: true
   }
-});
+}));
