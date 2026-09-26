@@ -29,7 +29,7 @@ The following libraries are **already loaded globally** on the Webflow site:
 
 The following libraries are **bundled** with the build (imported in JavaScript modules):
 
-- **Swiper** (v12.0.2) - Modern slider library, imported in `swipeslider.js`
+- **Swiper** - Modern slider library, imported in `swipeslider.js` (version in `package.json`)
 
 **Note**: Unlike GSAP, Swiper is imported and bundled into the final JavaScript build using ES modules.
 
@@ -89,21 +89,19 @@ npm run dev
 ### Module Structure
 
 ```javascript
-// No GSAP imports needed - use global
-function initMyFeature() {
+// src/js/my-feature.js — no GSAP imports needed, use the global
+export function initMyFeature() {
   const elements = document.querySelectorAll('[data-my-feature]');
   if (!elements.length) return;
 
-  // Your code here
   gsap.to(elements, {
     /* animation */
   });
 }
 
-// Auto-initialize or export for main.js
-document.addEventListener('DOMContentLoaded', () => {
-  initMyFeature();
-});
+// src/js/main.js — import it and call it inside the existing DOMContentLoaded listener
+// import { initMyFeature } from './my-feature.js';
+// initMyFeature();
 ```
 
 ### Data Attributes

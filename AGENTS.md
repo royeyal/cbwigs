@@ -7,42 +7,26 @@ This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/E
 ## Stack
 
 - **Runtime**: Browser (vanilla ES modules); no Node.js runtime code
-- **Build tool**: Vite ^8.0.3 (ESM, single entry point, manifest mode)
-- **Bundled dependency**: Swiper ^14.0.1 (imported as ES module)
+- **Build tool**: Vite (ESM, single entry point, manifest mode)
+- **Bundled dependency**: Swiper (imported as ES module)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
-- **Worker runtime**: `wrangler` ^4.71.0, compatibility date `2025-09-06`
+- **Worker runtime**: `wrangler`, compatibility date `2025-09-06`
 - **CSS processing**: PostCSS with postcss-nesting, autoprefixer, cssnano
-- **Linting**: ESLint ^10.0.3 (flat config), Stylelint ^17.4.0, Prettier ^3.8.1
+- **Linting**: ESLint (flat config), Stylelint, Prettier
 - **Pre-commit hooks**: Husky + lint-staged
+
+Dependency versions live in `package.json`.
 
 ## Project Structure
 
 ```
 cbwigs/
 ├── src/                          # All source code (Vite root)
-│   ├── js/                       # JavaScript modules
+│   ├── js/                       # One module per feature, plus:
 │   │   ├── main.js               # Single entry point — imports all modules + CSS
-│   │   ├── accordion.js
-│   │   ├── contentrevealscroll.js
-│   │   ├── copy-email-to-clipboard-button.js
-│   │   ├── draggable-infinite-slider.js
 │   │   ├── draggable-infinite-slider-standalone.js  # Standalone build (no main.js)
-│   │   ├── dynamic-current-year.js
-│   │   ├── flip-counter.js
-│   │   ├── flodesk.js
-│   │   ├── gsap-gallery-slider.js
-│   │   ├── gsap-slider.js
-│   │   ├── image-trail-following-cursor.js
-│   │   ├── layout-grid-flip.js
-│   │   ├── leading-zero.js
-│   │   ├── lightbox-setup.js
-│   │   ├── locale-switch.js
-│   │   ├── multilevel-navigation.js
-│   │   ├── parallax-image.js
-│   │   ├── swipeslider.js        # Uses bundled Swiper
-│   │   ├── textreveal.js
-│   │   ├── youtube-lightbox.js
-│   │   └── youtube-player.js
+│   │   ├── flodesk.js            # Not imported; main.js has its own inline copy of this logic
+│   │   └── swipeslider.js        # Uses bundled Swiper
 │   ├── styles/                   # CSS modules
 │   │   ├── main.css              # Imported by main.js; aggregates all CSS
 │   │   └── *.css                 # Per-feature stylesheets
@@ -51,9 +35,9 @@ cbwigs/
 │   └── src/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
 ├── docs/                         # Feature documentation (Markdown)
-├── dist/                         # Vite build output (gitignored)
+├── dist/                         # Vite build output
 │   ├── js/main.[hash].js
-│   ├── css/main.[hash].css
+│   ├── css/style.[hash].css
 │   └── .vite/manifest.json       # Read by the Worker at request time
 ├── vite.config.js
 ├── wrangler.toml
@@ -95,7 +79,7 @@ Stored in `.env` (gitignored — never commit this file):
 
 These are independent credentials for two separate services — neither talks to the other.
 
-Copy the `.env` template and fill in your tokens before deploying.
+Create `.env` in the repo root with these variables before deploying (there is no template file).
 
 ### Test / Lint
 ```bash
@@ -113,7 +97,7 @@ npm run preview     # Vite preview server for the built dist/
 - **Compatibility date**: `2025-09-06`
 - **No KV namespaces, D1, or custom routes configured**
 
-The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/main.css`, `/draggable-slider.js`, `/parallax-image.js`, `/parallax-image.css`) redirect to the correct hashed file. All responses include `Access-Control-Allow-Origin: *`.
+The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/js/main.js`, `/main.css`, `/css/main.css`, `/draggable-slider.js`, `/js/draggable-slider.js`, `/parallax-image.js`, `/parallax-image.css`) serve the matching hashed file's contents directly (no redirect). All responses include `Access-Control-Allow-Origin: *`.
 
 ## Webflow Specifics
 
@@ -131,7 +115,7 @@ The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed fi
 - **Swiper**: Imported as an ES module from the `swiper` package — the only bundled runtime dependency
 - **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention
 - **Defensive init**: Every `init*()` function must check for element existence before running (e.g. `if (!elements.length) return;`)
-- **Entry pattern**: Each feature file exports a named `init*()` function; `main.js` imports and calls all of them inside a `DOMContentLoaded` listener
+- **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
 - **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by ESLint)
 - **CSS**: PostCSS nesting syntax is supported; avoid conflicting with Webflow-generated class names; prefer specific selectors
 
@@ -139,7 +123,7 @@ The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed fi
 
 - The Worker is purely a static asset router — it never caches responses for non-hashed paths (`no-cache`). Do not add server-side logic that assumes persistent state.
 - Vite manifest mode is critical: `build.manifest: true` in vite.config.js is what enables the Worker's manifest lookup. Do not disable it.
-- CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/main.[hash].css` file.
+- CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/style.[hash].css` file.
 - Module preload is disabled (`modulePreload: false`) — the site loads one flat JS bundle, not a module graph.
 - The `draggable-infinite-slider-standalone.js` module is intended to be served separately (via the `/draggable-slider.js` alias) for pages that only need the slider without the full `main.js` bundle. It is **not** imported by `main.js`.
 - Flodesk form text customization in `main.js` uses a retry loop (up to 10 × 500ms attempts) because the Flodesk embed loads asynchronously after `DOMContentLoaded`.
