@@ -82,6 +82,8 @@ These are independent credentials for two separate services — neither talks to
 
 Create `.env` in the repo root with these variables before deploying (there is no template file).
 
+Never put token values in tracked files. `.codex/config.toml` forwards `WEBFLOW_TOKEN` from the environment (`env_vars`), so it must be exported in the shell that launches Codex.
+
 ### Test / Lint
 ```bash
 npm run lint        # ESLint src/ --fix
