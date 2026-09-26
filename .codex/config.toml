@@ -1,8 +1,0 @@
-[mcp_servers.webflow-cbwigs]
-args = [
-    "-y",
-    "webflow-mcp-server@latest",
-]
-command = "npx"
-# Forwarded from the shell that launches Codex; never hardcode the token here.
-env_vars = ["WEBFLOW_TOKEN"]
