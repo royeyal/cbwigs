@@ -81,7 +81,7 @@ npm run dev
 ### Testing
 
 - Test locally using demo HTML files in `src/`
-- Test in actual Webflow environment before deploying to Cloudflare
+- Test against the real Webflow page before merging: `cbwigs.webflow.io` loads the production Worker, so check changes on the PR's preview Worker first (see **Verifying a Change** in `AGENTS.md`)
 - Consider different breakpoints (Webflow uses responsive design)
 
 ## Common Patterns
