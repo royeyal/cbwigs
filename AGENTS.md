@@ -75,14 +75,11 @@ Stored in `.env` (gitignored — never commit this file):
 
 | Variable | Purpose |
 |---|---|
-| `WEBFLOW_TOKEN` | Webflow Data API token — authenticates calls to the Webflow Data API (used by Webflow MCP tools to read/write CMS content, pages, etc.) |
 | `CLOUDFLARE_API_TOKEN` | Cloudflare API token — authenticates calls to the Cloudflare API (used by `wrangler` when running `npm run deploy` to publish the Worker) |
 
-These are independent credentials for two separate services — neither talks to the other.
+Create `.env` in the repo root with this variable before deploying (there is no template file). Never put token values in tracked files.
 
-Create `.env` in the repo root with these variables before deploying (there is no template file).
-
-Never put token values in tracked files. `.codex/config.toml` forwards `WEBFLOW_TOKEN` from the environment (`env_vars`), so it must be exported in the shell that launches Codex.
+Webflow access for AI tools goes through the hosted Webflow connector (OAuth); there is no local Webflow MCP server or Webflow API token in this repo.
 
 ### Test / Lint
 ```bash
