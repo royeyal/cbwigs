@@ -43,6 +43,13 @@ export default {
       Object.entries(corsHeaders).forEach(([key, value]) => {
         response.headers.set(key, value);
       });
+      // Aliases keep a stable URL across deploys, so browsers must revalidate them on every
+      // load. Set this explicitly: the hashed file behind the alias is cached for a year
+      // (dist/_headers), and those headers must not leak onto the alias.
+      response.headers.set(
+        'Cache-Control',
+        'public, max-age=0, must-revalidate'
+      );
       return response;
     };
 
@@ -155,10 +162,9 @@ export default {
       response.headers.set(key, value);
     });
 
-    // Make non-hashed top-level paths revalidate (dev-friendly)
-    if (!/\.[a-f0-9]{8,}\./i.test(url.pathname)) {
-      response.headers.set('Cache-Control', 'no-cache');
-    }
+    // Files that exist in dist/ never reach the Worker (the assets layer serves them), so
+    // this path only handles misses: don't let them be cached.
+    response.headers.set('Cache-Control', 'no-cache');
 
     return response;
   }
