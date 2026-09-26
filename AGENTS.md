@@ -4,7 +4,7 @@
 
 This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/English bilingual Webflow e-commerce site selling wigs. The code is authored locally, bundled with Vite, and served via a Cloudflare Worker that resolves hashed asset filenames from Vite's manifest. Webflow pages reference the Cloudflare-hosted URLs directly via custom code embeds — the HTML structure is entirely managed inside Webflow, not in this repo.
 
-The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `cbwigs.co.il` itself still serves the old WordPress site, so test on `cbwigs.webflow.io`. It loads the **production** Worker, so anything deployed to production is live there immediately.
+The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `cbwigs.co.il` itself still serves the old WordPress site, so test on `cbwigs.webflow.io`. It loads the production Worker, so anything deployed to production is live there immediately.
 
 ## Stack
 
@@ -13,7 +13,7 @@ The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `
 - **Build tool**: Vite (ESM, manifest mode) — two passes: the main bundle, then standalone files (`--mode standalone`)
 - **Bundled dependency**: Swiper (imported as ES module)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
-- **Worker runtime**: `wrangler`, compatibility date `2025-09-06`
+- **Worker tooling**: `wrangler` CLI; compatibility date `2025-09-06`
 - **CSS processing**: PostCSS with postcss-nesting, autoprefixer, cssnano
 - **Linting**: ESLint (flat config, code-quality rules only), Stylelint, Prettier (owns all formatting; `eslint-config-prettier` turns off ESLint's formatting rules)
 - **Pre-commit hooks**: Husky + lint-staged
@@ -66,6 +66,15 @@ npm run build    # vite build && vite build --mode standalone → ./dist (JS →
 npm run clean    # rm -rf dist
 ```
 
+### Test / Lint
+```bash
+npm run lint        # ESLint src/ --fix
+npm run lint:css    # Stylelint src/**/*.css --fix
+npm run format      # Prettier on src/**/*.{js,css}
+npm run preview     # Vite preview server for the built dist/
+```
+ESLint, Stylelint and `prettier --check` all pass with zero errors on `main`; keep it that way. When a Stylelint rule is a genuine false positive (e.g. `no-descending-specificity` between selectors that target different elements), use a scoped `stylelint-disable … -- <reason>` / `stylelint-enable` pair, not a config change.
+
 ### Deploy
 Deploys run automatically through Cloudflare Workers Builds (Git integration), so **merging to `main` is a production deploy**:
 
@@ -94,15 +103,6 @@ Create `.env` in the repo root with this variable before deploying (there is no 
 
 Webflow access for AI tools goes through the hosted Webflow connector (OAuth); there is no local Webflow MCP server or Webflow API token in this repo.
 
-### Test / Lint
-```bash
-npm run lint        # ESLint src/ --fix
-npm run lint:css    # Stylelint src/**/*.css --fix
-npm run format      # Prettier on src/**/*.{js,css}
-npm run preview     # Vite preview server for the built dist/
-```
-ESLint, Stylelint and `prettier --check` all pass with zero errors on `main`; keep it that way. When a Stylelint rule is a genuine false positive (e.g. `no-descending-specificity` between selectors that target different elements), use a scoped `stylelint-disable … -- <reason>` / `stylelint-enable` pair, not a config change.
-
 ## Verifying a Change
 1. `npm run build`, then confirm `dist/` matches the source (the pre-commit hook reformats staged files, so rebuild after committing and check `git status` is clean).
 2. Push a branch and open a PR; wait for the Workers Builds check and take the preview URL from its log.
@@ -130,8 +130,8 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - **Site ID**: `68b19e69d4dbfaf52f92045b`
 - **Workspace ID**: `69637b73ed5f53706ed27832`
 - Webflow manages all HTML structure and base styles; this repo only provides JS/CSS loaded via custom code embeds
-- **How pages load this repo's files**: `<link rel="stylesheet" href="…workers.dev/main.css">` in the head, and `<script src="…workers.dev/js/main.js">` at the end of the body — a **classic** script (no `type="module"`), after jQuery, `webflow.js` and GSAP with Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin and CustomEase (Webflow controls these versions).
-- **Where those embeds are configured**: Site settings → Custom code (site-level freeform code, not registered scripts). Head: the `main.css` link plus the Flodesk loader script; footer: the `main.js` script. Deploying new JS/CSS needs **no** Webflow publish — the aliases always serve the latest build — but changing the embed code itself only goes live after the site is published.
+- **How pages load this repo's files**: `<link rel="stylesheet" href="…workers.dev/main.css">` in the head, and `<script src="…workers.dev/js/main.js">` at the end of the body — a classic script (no `type="module"`), after jQuery, `webflow.js` and GSAP with Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin and CustomEase (Webflow controls these versions).
+- **Where those embeds are configured**: Site settings → Custom code (site-level freeform code, not registered scripts). Head: the `main.css` link plus the Flodesk loader script; footer: the `main.js` script. Deploying new JS/CSS needs no Webflow publish — the aliases always serve the latest build — but changing the embed code itself only goes live after the site is published.
 - A Flodesk signup form is embedded in the site footer, so it is on every page.
 - **Webflow MCP access**: through the hosted claude.ai Webflow connector (OAuth), authorized for the cbwigs workspace (site `CBWigs`, short name `cbwigs`). The connector only sees workspaces chosen at authorization; if the site ID returns 404, the connector needs re-authorizing, not a different ID. Reading site custom code (`data_scripts_tool` → `get_site_freeform_code`) is safe; writing it or publishing changes the live site, so confirm with the user first.
 - The site is bilingual: Hebrew is the primary locale (`lang="he"`, no path prefix) and English is secondary (`lang="en-US"`, under `/en`). Code reads `document.documentElement.lang` at runtime — match with `startsWith('he')` / `startsWith('en')`, never equality with `'en'`
