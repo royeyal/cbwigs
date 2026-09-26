@@ -7,6 +7,7 @@ This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/E
 ## Stack
 
 - **Runtime**: Browser (vanilla ES modules); no Node.js runtime code
+- **Build Node.js**: 24, pinned in `.node-version` (Cloudflare Workers Builds reads it; cssnano 9 fails on Node 20)
 - **Build tool**: Vite (ESM, single entry point, manifest mode)
 - **Bundled dependency**: Swiper (imported as ES module)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
