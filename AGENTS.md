@@ -13,7 +13,7 @@ This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/E
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
 - **Worker runtime**: `wrangler`, compatibility date `2025-09-06`
 - **CSS processing**: PostCSS with postcss-nesting, autoprefixer, cssnano
-- **Linting**: ESLint (flat config), Stylelint, Prettier
+- **Linting**: ESLint (flat config, code-quality rules only), Stylelint, Prettier (owns all formatting; `eslint-config-prettier` turns off ESLint's formatting rules)
 - **Pre-commit hooks**: Husky + lint-staged
 
 Dependency versions live in `package.json`.
@@ -115,7 +115,7 @@ The Worker reads and merges `dist/.vite/manifest.json` and `dist/.vite/manifest.
 - **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention
 - **Defensive init**: Every `init*()` function must check for element existence before running (e.g. `if (!elements.length) return;`)
 - **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener, and do not also initialize themselves. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
-- **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by ESLint)
+- **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by Prettier via `.prettierrc`; don't add formatting rules to ESLint — they fight Prettier in the pre-commit hook)
 - **CSS**: PostCSS nesting syntax is supported; avoid conflicting with Webflow-generated class names; prefer specific selectors
 
 ## Architecture Notes
