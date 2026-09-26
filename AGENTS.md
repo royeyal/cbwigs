@@ -107,7 +107,7 @@ ESLint, Stylelint and `prettier --check` all pass with zero errors on `main`; ke
 1. `npm run build`, then confirm `dist/` matches the source (the pre-commit hook reformats staged files, so rebuild after committing and check `git status` is clean).
 2. Push a branch and open a PR; wait for the Workers Builds check and take the preview URL from its log.
 3. Test the preview against the real staging page, not just the demo HTML: fetch `https://cbwigs.webflow.io/` HTML, replace `https://cbwigs-assets.roy-eyal.workers.dev` with the preview host, and load it in a same-origin `<iframe srcdoc>` (add `<base href="https://cbwigs.webflow.io/">`). Every Webflow script (jQuery, `webflow.js`, GSAP) runs first, exactly as in production, in a fresh `window`. Don't use `document.write` for this — it keeps the previous page's globals and listeners.
-4. After merging, confirm the production build succeeded and that each alias's bytes match the committed `dist/` file.
+4. After merging, confirm the production build succeeded, that each alias's bytes match the committed `dist/` file, and — when touching the Worker or `_headers` — that `curl -D -` shows the expected `Cache-Control` and `Access-Control-Allow-Origin` on both an alias and a hashed file.
 
 Build logs: `GET https://api.cloudflare.com/client/v4/accounts/c84d1e6f99329d834a7cb284c20292dd/builds/builds/<build_uuid>/logs` with `Authorization: Bearer $CLOUDFLARE_API_TOKEN`. List recent builds with `…/builds/workers/190b662d178641b5b047b293b312d17f/builds`.
 
@@ -131,9 +131,10 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - **Workspace ID**: `69637b73ed5f53706ed27832`
 - Webflow manages all HTML structure and base styles; this repo only provides JS/CSS loaded via custom code embeds
 - **How pages load this repo's files**: `<link rel="stylesheet" href="…workers.dev/main.css">` in the head, and `<script src="…workers.dev/js/main.js">` at the end of the body — a **classic** script (no `type="module"`), after jQuery, `webflow.js` and GSAP with Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin and CustomEase (Webflow controls these versions).
+- **Where those embeds are configured**: Site settings → Custom code (site-level freeform code, not registered scripts). Head: the `main.css` link plus the Flodesk loader script; footer: the `main.js` script. Deploying new JS/CSS needs **no** Webflow publish — the aliases always serve the latest build — but changing the embed code itself only goes live after the site is published.
 - A Flodesk signup form is embedded in the site footer, so it is on every page.
-- **Webflow MCP access**: through the hosted claude.ai Webflow connector (OAuth). The connector only sees the workspaces chosen when it was authorized; as of 2026-09-26 it was not authorized for the cbwigs workspace (the site ID returns 404), so re-authorize it to include cbwigs before relying on Webflow tools.
-- The site is bilingual (Hebrew `he` / English `en`) — `document.documentElement.lang` is used to detect locale at runtime
+- **Webflow MCP access**: through the hosted claude.ai Webflow connector (OAuth), authorized for the cbwigs workspace (site `CBWigs`, short name `cbwigs`). The connector only sees workspaces chosen at authorization; if the site ID returns 404, the connector needs re-authorizing, not a different ID. Reading site custom code (`data_scripts_tool` → `get_site_freeform_code`) is safe; writing it or publishing changes the live site, so confirm with the user first.
+- The site is bilingual: Hebrew is the primary locale (`lang="he"`, no path prefix) and English is secondary (`lang="en-US"`, under `/en`). Code reads `document.documentElement.lang` at runtime — match with `startsWith('he')` / `startsWith('en')`, never equality with `'en'`
 - Hebrew is RTL; CSS and JS must account for both LTR and RTL layouts
 
 ## Code Conventions
