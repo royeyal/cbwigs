@@ -1,0 +1,13 @@
+# Cloudflare Workers static-assets headers (Vite copies src/public/ to the root of dist/).
+# Applies only to files served straight from dist/ by the assets layer; the Worker's alias
+# responses (/main.js, /main.css, ...) set their own headers in external/src/worker.js.
+
+# Content-hashed build output: the filename changes whenever the content does, so these can be
+# cached for a year. CORS lets pages on other origins load them with crossorigin/fetch.
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
