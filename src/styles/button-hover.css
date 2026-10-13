@@ -41,7 +41,7 @@
     transform: translateX(0.25rem);
   }
 
-  .button.is-icon:hover > .icon-embed-xsmall:dir(rtl) {
+  [dir='rtl'] .button.is-icon:hover > .icon-embed-xsmall {
     transform: translateX(-0.25rem);
   }
 }
@@ -71,7 +71,7 @@
   transform: translateX(0.25rem);
 }
 
-.button.is-icon:focus-visible > .icon-embed-xsmall:dir(rtl) {
+[dir='rtl'] .button.is-icon:focus-visible > .icon-embed-xsmall {
   transform: translateX(-0.25rem);
 }
 
