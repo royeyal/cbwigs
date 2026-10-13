@@ -20,17 +20,9 @@ export function initDraggableInfiniteSlider() {
   gsap.registerPlugin(Draggable, InertiaPlugin);
 
   function initSlider() {
-    // const wrapper = document.querySelector('[data-slider="list"]');
-    // if (!wrapper) {
-    //   console.warn('[Slider] No wrapper found with [data-slider="list"]');
-    //   return;
-    // }
-
+    // Most pages have no slider; exit silently
     const slides = gsap.utils.toArray('[data-slider="slide"]');
-    if (slides.length === 0) {
-      console.warn('[Slider] No slides found with [data-slider="slide"]');
-      return;
-    }
+    if (slides.length === 0) return;
 
     const nextButton = document.querySelector('[data-slider="button-next"]');
     const prevButton = document.querySelector('[data-slider="button-prev"]');
