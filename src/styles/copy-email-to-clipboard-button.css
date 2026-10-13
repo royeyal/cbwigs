@@ -1,30 +1,8 @@
-/* Copy Email to Clipboard Button */
-
-/* Hover styling */
-@media (hover: hover) {
-  .copy-email-button:hover .copy-email-icon__wrap {
-    background: rgb(34 80 46 / 90%);
-  }
-
-  .copy-email-button:hover .copy-email-text__el {
-    transform: translate(0, -100%);
-  }
-}
-
-/* 'Copied' state, when a user has clicked the button */
-[data-copy-button='copied'] .copy-email-icon__wrap {
-  background: #0f8e2e !important;
-}
+/* Copy Email to Clipboard Button
+ * Hover and focus use the shared button fill (button-hover.css).
+ * After a successful copy the label stack moves to its third line
+ * ("Copied!") and the button stays filled until mouse-leave or blur. */
 
 [data-copy-button='copied'] .copy-email-text__el {
-  transform: translate(0, -200%) !important;
-}
-
-/* Keyboard focus styling */
-.copy-email-button:focus .copy-email-icon__wrap {
-  background: rgb(34 80 46 / 90%);
-}
-
-.copy-email-button:focus .copy-email-text__el {
-  transform: translate(0, -100%);
+  transform: translate(0, -200%);
 }
