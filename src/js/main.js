@@ -5,7 +5,7 @@ import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initLeadingZero } from './leading-zero.js';
-import { initSwiperSlider } from './swipeslider.js';
+import { initSnapSlider } from './snap-slider.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize leading zero formatter for accordion counts (will only run if count elements exist)
   initLeadingZero();
 
-  // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
-  initSwiperSlider();
+  // Initialize scroll-snap slider (will only run if data-swiper-group elements exist)
+  initSnapSlider();
 
   // Initialize flip counter effect
   initFlipCounter();
@@ -87,7 +87,7 @@ export {
   initBasicGSAPSlider,
   initAccordionCSS,
   initLeadingZero,
-  initSwiperSlider,
+  initSnapSlider,
   initFlipCounter,
   initImageTrail,
   initYouTubeLightbox,

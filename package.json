@@ -37,9 +37,6 @@
     "vite": "^8.3.4",
     "wrangler": "^4.150.0"
   },
-  "dependencies": {
-    "swiper": "^14.3.0"
-  },
   "lint-staged": {
     "src/**/*.js": [
       "eslint --fix",

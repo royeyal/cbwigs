@@ -1,0 +1,168 @@
+/* Native scroll-snap slider (see js/snap-slider.js).
+ * Hooks are the data-swiper-* attributes already in the Webflow markup;
+ * data-snap-track is added by the script to the scrolling list. */
+
+body {
+  /* Edge fade that hints more slides are available */
+  --swiper-fade-start: 0%;
+  --swiper-fade-fade-in: 8%;
+  --swiper-fade-fade-out: 92%;
+  --swiper-fade-end: 100%;
+}
+
+.swiper-section {
+  position: relative;
+}
+
+[data-swiper-group] {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+}
+
+.swiper-group--no-fade {
+  mask-image: none;
+}
+
+.swiper-group--subtle-fade {
+  --swiper-fade-fade-in: 5%;
+  --swiper-fade-fade-out: 95%;
+}
+
+.swiper-group--strong-fade {
+  --swiper-fade-fade-in: 12%;
+  --swiper-fade-fade-out: 88%;
+}
+
+[data-snap-track] {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+[data-snap-track]::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slide width includes Webflow's 1.25em end padding on .swiper-slide.
+ * Never narrower than the card's 275px min-width plus that padding. */
+[data-snap-track] > * {
+  flex: none;
+  width: max(min(20em, 80%), calc(275px + 1.25em));
+  max-width: none;
+  scroll-snap-align: start;
+}
+
+/* Arrows */
+.swiper-navigation {
+  z-index: 2;
+  pointer-events: none;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 0 1rem;
+}
+
+.swiper-navigation__button {
+  z-index: 1;
+  aspect-ratio: 1;
+  pointer-events: auto;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  display: flex;
+  position: relative;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.swiper-navigation__button:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .swiper-navigation__button:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+  }
+}
+
+.swiper-navigation__button:active {
+  transform: scale(0.95);
+}
+
+.swiper-navigation__button[data-swiper-prev] {
+  order: 1;
+}
+
+.swiper-navigation__button[data-swiper-next] {
+  order: 3;
+}
+
+.swiper-pagination {
+  order: 2;
+  flex: 1;
+}
+
+.swiper-navigation__button-arorw {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.swiper-navigation__button-arorw.is--prev {
+  transform: rotate(180deg);
+}
+
+/* RTL: prev/next swap sides, so mirror the arrows to keep them pointing outward */
+[dir='rtl'] [data-swiper-group] {
+  mask-image: linear-gradient(
+    270deg,
+    transparent var(--swiper-fade-start),
+    black var(--swiper-fade-fade-in),
+    black var(--swiper-fade-fade-out),
+    transparent var(--swiper-fade-end)
+  );
+}
+
+[dir='rtl'] .swiper-navigation__button-arorw {
+  transform: scaleX(-1);
+}
+
+[dir='rtl'] .swiper-navigation__button-arorw.is--prev {
+  transform: scaleX(-1) rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swiper-navigation__button {
+    transition: none;
+  }
+}
