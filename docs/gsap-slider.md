@@ -35,10 +35,9 @@ Set `--slider-status: off` at a breakpoint to show a static row instead. The sli
 
 - Drag or throw the track; it snaps to slide positions. Arrows and Arrow Left/Right (while focus is in the slider) move one slide.
 - State attributes for styling: `data-gsap-slider-status="active|not-active"` on the root, `data-gsap-slider-control-status` on each control, `data-gsap-slider-list-status="grab|grabbing"` on the track.
-- Accessibility: the root becomes a labelled carousel region with a polite live region ("Slide 2 of 5"). Every slide except the active one gets `aria-hidden` and loses its links from the tab order.
+- Accessibility: the root becomes a labelled carousel region with a polite live region ("Slide 2 of 5"). Every slide that is at least half in view at the snapped position stays exposed (3 at `--slider-spv: 3`); the others get `aria-hidden` and lose their links from the tab order. Visibility is measured from the real slide positions, so gap and `max-width` are accounted for. `aria-selected="true"` stays on the current snap position's slide only.
 
 ## Known issues
 
 - No RTL-specific code: positions and arrow keys work in physical (left/right) terms on Hebrew pages too.
 - ARIA labels ("Slider", "Previous Slide", "Slide 1 of 5") are English on both locales.
-- With 3 slides per view, the two visible non-active slides are still `aria-hidden`, so screen-reader and keyboard users only reach one card at a time.

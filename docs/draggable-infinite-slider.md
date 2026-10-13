@@ -39,11 +39,8 @@ button[data-slider="button-next"]
 - Built on the GSAP `horizontalLoop` helper: slides are positioned with transforms and wrap around seamlessly.
 - Slides align to the start (`center: false`). At `min-width: 992px`, `.active` goes to the slide *after* the loop's current one (the second visible slide); below that it's the current one. A `matchMedia` listener moves it when the breakpoint changes.
 - Throws use InertiaPlugin and snap to the nearest slide.
+- Pages without `[data-slider="slide"]` exit silently (no console output).
 
 ## Styling
 
 `.slide-play-button` is an 80px circle (70px at ≤ 991px) with the same glass style as the YouTube player's play button; it reacts to `.slide__link:hover` and `:focus-visible`. Everything else (slide width, gap, caption) is in `draggable-infinite-slider.css`.
-
-## Known issues
-
-- On every page without slides the script logs `[Slider] No slides found with [data-slider="slide"]` as a `console.warn`, which production keeps. It should return silently like the other modules.
