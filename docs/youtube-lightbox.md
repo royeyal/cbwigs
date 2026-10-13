@@ -7,7 +7,7 @@ Click the play icon in a hero section to open a YouTube video in a full-screen m
 | Source | `src/js/youtube-lightbox.js`, `src/styles/youtube-lightbox.css` |
 | Loaded by | `main.js` → `initYouTubeLightbox()` |
 | Used on | `/`, `/about`, `/hairbun`, `/my-original` (and `/en` versions) |
-| Depends on | YouTube IFrame API (loaded by the script) |
+| Depends on | YouTube IFrame API (loaded by the script, only on pages with a hero video) |
 
 ## Webflow setup
 
@@ -34,5 +34,4 @@ section.section-hero-lightbox [data-youtube-lightbox-id="VIDEO_ID"]
 
 ## Known issues
 
-- The API script loads on every page, even ones without a hero video (the inline player does the same).
-- `Webflow.push` re-runs the trigger setup, and nothing stops it running twice, so each play icon probably gets two click handlers. Each click then creates the player twice (the second replaces the first). It works, but it's wasteful.
+- None currently. Fixed: the API script used to load on every page; it now loads only after a play icon with a valid video ID has been set up (and is preloaded then, so the first click doesn't wait for it). Fixed: `Webflow.push` re-ran the trigger setup and added a second set of click/keydown handlers to each play icon; set-up icons are now marked `data-youtube-lightbox-initialized` and skipped.

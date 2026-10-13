@@ -7,7 +7,7 @@ Turns a `div` into a click-to-play YouTube embed: thumbnail and a glass play but
 | Source | `src/js/youtube-player.js`, `src/styles/youtube-player.css` |
 | Loaded by | `main.js` imports it for side effects; it initializes itself on `DOMContentLoaded` and again via `Webflow.push` |
 | Used on | `/hairbun`, `/my-original`, the six `/events/*` pages (and `/en` versions) |
-| Depends on | YouTube IFrame API (loaded by the script) |
+| Depends on | YouTube IFrame API (loaded by the script, only on pages with a non-empty `data-youtube-id`) |
 | Demo | `src/youtube-player-demo.html` |
 
 ## Webflow setup
@@ -44,8 +44,8 @@ window.youtubePlayer().destroyAllPlayers();
 
 ## Using it next to the lightbox
 
-Both modules can be on one page (`/hairbun`, `/my-original`). They share one copy of the YouTube API: the lightbox chains its ready-callback onto the player's. Keep their attributes apart: `data-youtube-id` here, `data-youtube-lightbox-id` on hero sections.
+Both modules can be on one page (`/hairbun`, `/my-original`). They share one copy of the YouTube API: whichever module requests it second chains its ready-callback onto the existing `window.onYouTubeIframeAPIReady` instead of replacing it, and only one `iframe_api` script tag is added. Keep their attributes apart: `data-youtube-id` here, `data-youtube-lightbox-id` on hero sections.
 
 ## Known issues
 
-- The YouTube API script (`iframe_api` plus `www-widgetapi.js`) loads on every page, including the ~26 pages with no video, because the constructor loads it before checking for players.
+- None currently. The YouTube API script (`iframe_api` plus `www-widgetapi.js`) used to load on every page; it now loads only when the page has a `[data-youtube-id]` element with a non-empty value. An empty attribute (an unset CMS field, as on `/events/tour` and `/events/birthday-30`) counts as "no video": it is skipped silently and doesn't load the API.

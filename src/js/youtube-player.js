@@ -9,13 +9,39 @@ class ElegantYouTubePlayer {
     this.players = new Map();
     this.apiReady = false;
     this.apiLoadCallbacks = [];
-    this.loadYouTubeAPI();
+    this.apiRequested = false;
+
+    // Only fetch the YouTube API on pages that actually have a player
+    if (this.hasPendingPlayers()) {
+      this.loadYouTubeAPI();
+    }
   }
 
   /**
-   * Load YouTube IFrame API
+   * Containers with a non-empty data-youtube-id that are not initialized yet.
+   * An empty attribute (unset CMS field) means "no video" and is ignored.
+   */
+  getPendingContainers() {
+    return Array.from(document.querySelectorAll('[data-youtube-id]')).filter(
+      container =>
+        !container.hasAttribute('data-youtube-initialized') &&
+        container.getAttribute('data-youtube-id').trim() !== ''
+    );
+  }
+
+  hasPendingPlayers() {
+    return this.getPendingContainers().length > 0;
+  }
+
+  /**
+   * Load YouTube IFrame API (once). Shares the API with youtube-lightbox.js:
+   * an existing onYouTubeIframeAPIReady callback is chained, not replaced,
+   * and the script tag is only added if no other module added it.
    */
   loadYouTubeAPI() {
+    if (this.apiRequested) return;
+    this.apiRequested = true;
+
     // Check if API is already loaded
     if (window.YT && window.YT.Player) {
       this.apiReady = true;
@@ -23,17 +49,23 @@ class ElegantYouTubePlayer {
       return;
     }
 
-    // Create callback for when API is ready
+    // Create callback for when API is ready, keeping any existing one
+    const existingCallback = window.onYouTubeIframeAPIReady;
     window.onYouTubeIframeAPIReady = () => {
+      if (typeof existingCallback === 'function') {
+        existingCallback();
+      }
       this.apiReady = true;
       this.onYouTubeAPIReady();
     };
 
-    // Load the API script
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // Load the API script if no other module has added it
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
   }
 
   /**
@@ -293,14 +325,10 @@ class ElegantYouTubePlayer {
    * Initialize all YouTube players on the page
    */
   initializePlayers() {
-    const containers = document.querySelectorAll('[data-youtube-id]');
+    // Skips initialized containers and empty data-youtube-id attributes
+    const containers = this.getPendingContainers();
 
     containers.forEach(container => {
-      // Skip if already initialized
-      if (container.hasAttribute('data-youtube-initialized')) {
-        return;
-      }
-
       const videoInput = container.getAttribute('data-youtube-id');
       const videoId = this.extractVideoId(videoInput);
 
@@ -363,9 +391,13 @@ class ElegantYouTubePlayer {
   reinitialize() {
     if (this.apiReady) {
       this.initializePlayers();
-    } else {
-      this.apiLoadCallbacks.push(() => this.initializePlayers());
+      return;
     }
+
+    if (!this.hasPendingPlayers()) return;
+
+    this.apiLoadCallbacks.push(() => this.initializePlayers());
+    this.loadYouTubeAPI();
   }
 }
 

@@ -10,6 +10,7 @@ export function initYouTubeLightbox() {
   let activeModal = null;
   let activePlayer = null;
   let apiReady = false;
+  let apiPromise = null; // Shared promise so the API script is requested once
   let lastFocusedElement = null; // Store element that opened the modal
 
   /**
@@ -53,7 +54,9 @@ export function initYouTubeLightbox() {
   }
 
   /**
-   * Load YouTube IFrame API (compatible with youtube-player.js)
+   * Load YouTube IFrame API (compatible with youtube-player.js).
+   * Only called once a play icon has been set up, so pages without a hero
+   * video never request the API. Memoized: repeat calls share one promise.
    */
   function loadYouTubeAPI() {
     // console.log('[YouTube Lightbox] Loading YouTube API...');
@@ -65,7 +68,9 @@ export function initYouTubeLightbox() {
       return Promise.resolve();
     }
 
-    return new Promise(resolve => {
+    if (apiPromise) return apiPromise;
+
+    apiPromise = new Promise(resolve => {
       // Store existing callback if present (from youtube-player.js)
       const existingCallback = window.onYouTubeIframeAPIReady;
 
@@ -100,6 +105,8 @@ export function initYouTubeLightbox() {
         }
       }
     });
+
+    return apiPromise;
   }
 
   /**
@@ -260,9 +267,14 @@ export function initYouTubeLightbox() {
   }
 
   /**
-   * Initialize lightbox triggers
+   * Initialize lightbox triggers. Safe to call repeatedly (initial load,
+   * Webflow.push, reinitialize): each play icon is marked with
+   * data-youtube-lightbox-initialized and skipped on later runs.
+   * Returns the number of play icons set up by this call.
    */
   function initTriggers() {
+    let newTriggers = 0;
+
     // console.log('[YouTube Lightbox] Initializing triggers...');
 
     // Find all hero sections with lightbox functionality
@@ -283,6 +295,11 @@ export function initYouTubeLightbox() {
       // Get the play icon trigger
       const playIcon = heroLightbox.querySelector('.lightbox-play-icon');
       if (!playIcon) {
+        return;
+      }
+
+      // Skip if already initialized (prevents duplicate handlers)
+      if (playIcon.hasAttribute('data-youtube-lightbox-initialized')) {
         return;
       }
 
@@ -337,20 +354,24 @@ export function initYouTubeLightbox() {
         }
       });
 
+      playIcon.setAttribute('data-youtube-lightbox-initialized', 'true');
+      newTriggers++;
+
       // console.log(`[YouTube Lightbox] Section ${index + 1}: Setup complete`);
     });
+
+    // Preload the API only when the page has a lightbox video, so the first
+    // click doesn't wait for it (openLightbox also awaits it if needed)
+    if (newTriggers > 0) {
+      loadYouTubeAPI();
+    }
+
+    return newTriggers;
   }
 
   // Initialize on load
   // console.log('[YouTube Lightbox] Starting initialization sequence');
-  loadYouTubeAPI()
-    .then(() => {
-      // console.log('[YouTube Lightbox] API loaded, initializing triggers');
-      initTriggers();
-    })
-    .catch(error => {
-      console.error('[YouTube Lightbox] Error during initialization:', error);
-    });
+  initTriggers();
 
   // Re-initialize on Webflow interactions (if Webflow is present)
   if (window.Webflow) {
