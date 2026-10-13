@@ -11,7 +11,7 @@ The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `
 - **Runtime**: Browser; source is vanilla ES modules, shipped as classic-script IIFE bundles (see **Architecture Notes**); no Node.js runtime code
 - **Build Node.js**: 24, pinned in `.node-version` (Cloudflare Workers Builds reads it; cssnano 9 fails on Node 20)
 - **Build tool**: Vite (ESM, manifest mode) — two passes: the main bundle, then standalone files (`--mode standalone`)
-- **Bundled dependency**: Swiper (imported as ES module)
+- **Runtime dependencies**: none; every bundled module is this repo's own code (GSAP comes from Webflow as globals)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
 - **Worker tooling**: `wrangler` CLI; compatibility date `2025-09-06`
 - **CSS processing**: PostCSS with postcss-nesting, autoprefixer, cssnano
@@ -29,7 +29,7 @@ cbwigs/
 │   │   ├── main.js               # Single entry point — imports all modules + CSS
 │   │   ├── draggable-infinite-slider-standalone.js  # Standalone entry → /draggable-slider.js
 │   │   ├── parallax-image-standalone.js             # Standalone entry → /parallax-image.js
-│   │   └── swipeslider.js        # Uses bundled Swiper
+│   │   └── snap-slider.js        # Native scroll-snap slider (/hairbun); replaced Swiper
 │   ├── styles/                   # CSS modules
 │   │   ├── main.css              # Imported by main.js; aggregates all CSS
 │   │   └── *.css                 # Per-feature stylesheets
@@ -38,7 +38,7 @@ cbwigs/
 ├── external/
 │   └── src/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
-├── docs/                         # Feature documentation (Markdown)
+├── docs/                         # One <component>.md per source module; docs/README.md is the index (and GitHub front page)
 ├── dist/                         # Vite build output (committed; manifest is gitignored)
 │   ├── js/main.[hash].js         # + draggable-slider.[hash].js, parallax-image.[hash].js
 │   ├── css/style.[hash].css      # + parallax-image-css.[hash].css
@@ -48,7 +48,6 @@ cbwigs/
 ├── eslint.config.js
 ├── postcss.config.js
 ├── check-parallax.js             # Standalone Node script (not part of Vite build)
-├── webflow-swiper.js             # Standalone Swiper reference/init script
 └── PROJECT_CONTEXT.md            # Plain-English architecture summary
 ```
 
@@ -142,12 +141,12 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - **Module format**: ESM (`"type": "module"` in package.json); use `import`/`export` throughout
 - **No TypeScript** — plain `.js` files only
 - **GSAP globals**: `gsap`, `ScrollTrigger`, `SplitText`, `Draggable`, `InertiaPlugin`, `Flip`, `CustomEase` are loaded globally by Webflow. **Never import them.** Declared as `readonly` globals in ESLint config.
-- **Swiper**: Imported as an ES module from the `swiper` package — the only bundled runtime dependency
 - **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention
 - **Defensive init**: Every `init*()` function must check for element existence before running (e.g. `if (!elements.length) return;`)
 - **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener, and do not also initialize themselves. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
 - **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by Prettier via `.prettierrc`; don't add formatting rules to ESLint — they fight Prettier in the pre-commit hook)
 - **CSS**: PostCSS nesting syntax is supported; avoid conflicting with Webflow-generated class names; prefer specific selectors
+- **Docs**: every module in `src/js/` and every CSS-only feature in `src/styles/` is covered by a doc in `docs/` (header table: source, loaded by, pages, dependencies), and `docs/README.md` maps components to docs. Update the doc in the same change as the code
 
 ## Architecture Notes
 

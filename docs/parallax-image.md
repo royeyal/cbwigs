@@ -1,17 +1,14 @@
-# Parallax Image Effect - Webflow Setup Guide
+# Parallax Image
 
-## Overview
+Images inside cards drift vertically while the page scrolls (GSAP ScrollTrigger, scrubbed).
 
-This script creates a smooth parallax scrolling effect on images within cards using GSAP ScrollTrigger. The effect is triggered by a custom data attribute, making it easy to apply selectively in Webflow.
-
-## Visual Effect
-
-As the user scrolls, images move vertically at a different speed than the rest of the content, creating a depth and motion effect.
-
-## Prerequisites
-
-- GSAP library (included in the project)
-- ScrollTrigger plugin (included in the project)
+| | |
+|---|---|
+| Source | `src/js/parallax-image.js`, `src/styles/parallax-image.css` |
+| Loaded by | `main.js` → `initParallaxImages()` |
+| Standalone build | `/parallax-image.js` + `/parallax-image.css`; no cbwigs page uses them today |
+| Used on | `/`, `/events`, `/collection-2026`, `/hair-extensions`, `/hairbun`, `/my-original` (and `/en` versions) |
+| Depends on | GSAP + ScrollTrigger (Webflow globals); exits silently without them |
 
 ## Webflow Setup
 
@@ -217,11 +214,7 @@ Don't load the standalone file on a page that also loads `main.js` — the effec
 
 ## CSS Loading
 
-Include the parallax-image.css in your page or import it in your main CSS:
-
-```css
-@import './parallax-image.css';
-```
+`main.css` already imports `parallax-image.css`. Only standalone pages need the `/parallax-image.css` link shown above.
 
 ## Best Practices
 

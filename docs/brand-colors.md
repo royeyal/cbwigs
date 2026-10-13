@@ -29,9 +29,9 @@ This document contains all the brand colors extracted from Webflow variables for
 ### Accent Palette (Brown/Warm Grays)
 ```css
 --_primitives---brand--accent--600: #3a3530;          /* Primary accent */
---_primitives---brand--accent--500-hover: #4a4540;    /* Hover state */
+--_primitives---brand--accent--500: #4a4540;    /* Hover state */
 --_primitives---brand--accent--700-active: #2e2925;   /* Active/pressed state */
---_primitives---brand--accent--focus-ring: #6b625a;   /* Focus indicator */
+--_primitives---brand--accent--400: #6b625a;   /* Focus indicator */
 ```
 
 ## 📝 Text Colors
@@ -66,7 +66,7 @@ This document contains all the brand colors extracted from Webflow variables for
 
 ```css
 --_primitives---button--bg: var(--_primitives---brand--accent--600);           /* #3a3530 */
---_primitives---button--bg-hover: var(--_primitives---brand--accent--500-hover); /* #4a4540 */
+--_primitives---button--bg-hover: var(--_primitives---brand--accent--500); /* #4a4540 */
 --_primitives---button--bg-active: var(--_primitives---brand--accent--700-active); /* #2e2925 */
 --_primitives---button--text: var(--_primitives---text--text-on-dark);         /* #f4efe8 */
 --_primitives---button--border: var(--_primitives---button--bg);

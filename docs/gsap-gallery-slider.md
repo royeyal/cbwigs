@@ -1,37 +1,13 @@
-# GSAP Gallery Slider Guide
+# GSAP Gallery Slider
 
-## Overview
+A full-width, one-slide-at-a-time gallery with arrows, drag/swipe and a seamless loop (a cloned slide at each end). Built entirely on GSAP, so it adds no library weight.
 
-A lightweight, infinite-looping image gallery slider powered entirely by GSAP — no third-party slider library needed. One full-width slide at a time, arrow navigation + drag/swipe support, and seamless looping via cloned boundary slides.
-
-**Why use this instead of Swiper for a gallery?**
-- Zero extra bundle weight — GSAP is already loaded globally on the site
-- Smooth `power3.inOut` easing out of the box
-- Seamless infinite loop using clone-based approach
-- Works with any element as the prev/next button
-
-> **Note:** The Swiper slider (`data-swiper-group`) remains active for other components. This is a separate, independent slider for full-width gallery use cases.
-
----
-
-## Prerequisites
-
-GSAP and the Draggable plugin must be loaded globally **before** your main bundle. These are typically already in your Webflow **Project Settings > Custom Code > `<head>` tag**:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Draggable.min.js"></script>
-```
-
-Your main bundle script and CSS must also be present (usually already configured):
-
-```html
-<!-- In Project Settings > Custom Code > Before </body> tag -->
-<script src="https://YOUR-WORKER-URL.workers.dev/main.js"></script>
-<link rel="stylesheet" href="https://YOUR-WORKER-URL.workers.dev/main.css" />
-```
-
----
+| | |
+|---|---|
+| Source | `src/js/gsap-gallery-slider.js`, `src/styles/gsap-gallery-slider.css` |
+| Loaded by | `main.js` → `initGSAPGallerySlider()` |
+| Used on | **No page as of October 2026.** It still ships in the bundle, ready for a gallery section; delete it if you don't plan to use it |
+| Depends on | GSAP + Draggable (Webflow globals) |
 
 ## HTML Structure
 

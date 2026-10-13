@@ -1,8 +1,13 @@
-# Lightbox Setup Documentation
+# Gallery Lightbox
 
-## Overview
+Click a gallery thumbnail to open it full-size with a GSAP Flip transition, then browse with arrows, keyboard or the counter. Supports RTL.
 
-The lightbox component provides an elegant image gallery viewer with smooth GSAP animations, FLIP transitions, and full RTL support. It allows users to click gallery thumbnails to view full-size images in a modal overlay with navigation controls.
+| | |
+|---|---|
+| Source | `src/js/lightbox-setup.js`, `src/styles/lightbox-setup.css` |
+| Loaded by | `main.js` imports it for side effects; it runs `createLightbox()` on every `[data-gallery]` at `DOMContentLoaded` |
+| Used on | The six `/events/*` pages (and `/en` versions) |
+| Depends on | GSAP + Flip (Webflow globals) |
 
 ## Features
 
@@ -81,72 +86,15 @@ The lightbox requires specific data attributes on your gallery elements:
 | `data-lightbox="counter-current"` | Span               | Displays current image number                          |
 | `data-lightbox="counter-total"`   | Span               | Displays total image count                             |
 
-## Configuration Options
+## Configuration
 
-### Basic Initialization
+`createLightbox()` is not exposed to page code; options are set in the `DOMContentLoaded` block at the bottom of `lightbox-setup.js` and apply to every gallery. Current values:
 
-```javascript
-// Automatic initialization (default behavior)
-// This runs on DOMContentLoaded for all [data-gallery] elements
-```
-
-### Advanced Configuration
-
-```javascript
-const galleryElement = document.querySelector('[data-gallery]');
-
-createLightbox(galleryElement, {
-  // Callbacks
-  onStart: () => {
-    console.log('Lightbox opening animation started');
-  },
-  onOpen: () => {
-    console.log('Lightbox fully opened');
-  },
-  onClose: () => {
-    console.log('Lightbox closing animation started');
-  },
-  onCloseComplete: () => {
-    console.log('Lightbox fully closed');
-  },
-
-  // Grid fade behavior
-  fadeGridOnOpen: true // Default: true
-});
-```
-
-### Configuration Parameters
-
-#### `fadeGridOnOpen` (boolean, default: `true`)
-
-Controls whether gallery grid items fade out when the lightbox opens.
-
-**When `true` (default):**
-
-- Gallery grid items fade to `opacity: 0` and `visibility: hidden`
-- Creates focus on the opened lightbox image
-- Background grid is hidden during lightbox viewing
-- Grid items fade back in when lightbox closes
-
-**When `false`:**
-
-- Gallery grid items remain visible behind the lightbox
-- Useful if you want to show the grid context
-- Grid items do not animate on open/close
-
-**Example:**
-
-```javascript
-// Keep grid visible
-createLightbox(gallery, {
-  fadeGridOnOpen: false
-});
-
-// Fade grid (default behavior)
-createLightbox(gallery, {
-  fadeGridOnOpen: true
-});
-```
+| Option | Function default | Set on the site | Effect |
+|---|---|---|---|
+| `fadeGridOnOpen` | `true` | `false` | `true` fades the grid items out while the lightbox is open |
+| `flipBackOnClose` | `false` | `true` | `true` animates the image back into its thumbnail on close; `false` fades it out |
+| `onStart`, `onOpen`, `onClose`, `onCloseComplete` | none | not set | Lifecycle callbacks |
 
 ## RTL Support
 
@@ -259,7 +207,7 @@ Works in all modern browsers that support:
 
 - **JavaScript:** `src/js/lightbox-setup.js`
 - **CSS:** `src/styles/lightbox-setup.css`
-- **Built Output:** Included in `dist/js/main.[hash].js` and `dist/css/main.[hash].css`
+- **Built output:** part of `dist/js/main.[hash].js` and `dist/css/style.[hash].css`
 
 ## Notes
 
@@ -286,7 +234,7 @@ Works in all modern browsers that support:
 **Grid doesn't fade out:**
 
 - Verify `data-lightbox="trigger-parent"` is on grid items
-- Check if `fadeGridOnOpen: false` was set
+- Expected on this site: `fadeGridOnOpen` is set to `false` (see Configuration)
 - Inspect CSS for conflicting `!important` rules
 
 **RTL not working:**

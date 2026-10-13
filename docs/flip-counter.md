@@ -1,37 +1,15 @@
-# Flip Counter Effect - Layout485
+# Flip Counter (Layout485)
 
-A ScrollTrigger-based flip-clock style counter that changes as users scroll through content sections. Features a sticky two-digit counter (0 + 1-9) that updates based on visible content.
+A sticky two-digit counter (`0` + 1–9) that flips to the number of the content block currently in view, flip-clock style.
 
-## Features
-
-- **Sticky Counter**: Two-digit display (always "0" + dynamic number)
-- **Smooth Transitions**: Flip-clock style animations with GSAP
-- **Responsive Design**: Hides counter on mobile, shows inline numbers instead
-- **Dynamic Content**: Supports 3-9 content items from CMS
-- **Accessibility**: Uses tabular numbers and proper semantic structure
-
-## Installation
-
-### 1. Import the Module
-
-Add to your `main.js`:
-
-```javascript
-import { initFlipCounter } from './flip-counter.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-  initFlipCounter();
-  // ... other initializations
-});
-```
-
-### 2. Import the Styles
-
-Add to your `main.css`:
-
-```css
-@import url('./flip-counter.css');
-```
+| | |
+|---|---|
+| Source | `src/js/flip-counter.js`, `src/styles/flip-counter.css` |
+| Loaded by | `main.js` → `initFlipCounter()` |
+| Used on | `/hairbun`, `/my-original` (and `/en` versions) |
+| Depends on | GSAP + ScrollTrigger (Webflow globals) |
+| Hooks | Relume `layout485_*` **classes**, not data attributes; renaming those classes in Webflow breaks it |
+| Demo | `src/test-flip-counter.html` |
 
 ## Webflow Setup
 
@@ -278,13 +256,3 @@ Open `test-flip-counter.html` in a browser to see the effect in action with samp
 - Verify media query breakpoint matches your design
 - Check that mobile number has correct class structure
 - Ensure display rules are properly set
-
-## Credits
-
-- **Animation**: GSAP 3.x + ScrollTrigger
-- **Technique**: Flip-clock inspired counter
-- **Design Pattern**: Sticky side navigation with dynamic content
-
-## Version History
-
-- **v1.0.0** (2025-10-17): Initial release with flip counter effect
