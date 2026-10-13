@@ -64,24 +64,9 @@ button:focus-visible {
     box-shadow var(--duration-normal) var(--cubic-default);
 }
 
-.nav-button {
-  transition: all var(--duration-slow) var(--cubic-default);
-}
-
 @media screen and (width <= 1024px) {
   .nav-button.md--hide {
     display: none;
-  }
-}
-
-@media screen and (hover: hover) and (pointer: fine) {
-  .nav-button:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-elevation-medium);
-  }
-
-  .nav-button:active {
-    transform: scale(0.95);
   }
 }
 
@@ -293,11 +278,6 @@ a.nav-link:focus-visible .nav-link__label::after {
     transition-delay: 0ms !important;
     opacity: 1;
     transform: none;
-  }
-
-  .nav-button:hover,
-  .nav-button:active {
-    transform: none !important;
   }
 
   .nav-dropdown__link:hover .nav-dropdown__img,
