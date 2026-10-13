@@ -6,7 +6,6 @@ A looping, draggable carousel with momentum, snapping, prev/next buttons and a `
 |---|---|
 | Source | `src/js/draggable-infinite-slider.js`, `src/styles/draggable-infinite-slider.css` |
 | Loaded by | `main.js` → `initDraggableInfiniteSlider()` |
-| Standalone build | `/draggable-slider.js` (from `draggable-infinite-slider-standalone.js`); no cbwigs page uses it today |
 | Used on | `/`, `/collection-2025`, `/collection-2026`, `/hair-extensions` (and `/en` versions) |
 | Depends on | GSAP, Draggable, InertiaPlugin (Webflow globals; the slider exits if any is missing) |
 | Demo | `src/draggable-infinite-slider.html` |

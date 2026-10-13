@@ -15,7 +15,6 @@ import { initNavigation } from './multilevel-navigation.js';
 import { initParallaxImages } from './parallax-image.js';
 import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
 import { initDynamicCurrentYear } from './dynamic-current-year.js';
-import { initGSAPGallerySlider } from './gsap-gallery-slider.js';
 import { initFlodeskPrivacyText } from './flodesk.js';
 import './youtube-player.js';
 import './lightbox-setup.js';
@@ -73,9 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize dynamic current year (will only run if data-current-year elements exist)
   initDynamicCurrentYear();
 
-  // Initialize GSAP gallery slider (will only run if data-gallery-slider elements exist)
-  initGSAPGallerySlider();
-
   // Initialize Flodesk privacy policy text customization
   initFlodeskPrivacyText();
 });
@@ -97,6 +93,5 @@ export {
   initParallaxImages,
   initDraggableInfiniteSlider,
   initDynamicCurrentYear,
-  initGSAPGallerySlider,
   initFlodeskPrivacyText
 };

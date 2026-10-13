@@ -9,7 +9,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build && vite build --mode standalone",
+    "build": "vite build",
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler deploy",
     "lint": "eslint src --fix",

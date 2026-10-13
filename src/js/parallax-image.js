@@ -73,24 +73,3 @@ export function initParallaxImages() {
     );
   });
 }
-
-/**
- * Refresh ScrollTrigger instances
- * Call this after dynamic content loads
- */
-export function refreshParallaxImages() {
-  // console.log('[Parallax Image] Refreshing ScrollTrigger instances...');
-  ScrollTrigger.refresh();
-}
-
-/**
- * Destroy all parallax ScrollTrigger instances
- */
-export function destroyParallaxImages() {
-  // console.log('[Parallax Image] Destroying parallax instances...');
-  ScrollTrigger.getAll().forEach(trigger => {
-    if (trigger.vars.trigger?.hasAttribute('data-parallax-image')) {
-      trigger.kill();
-    }
-  });
-}

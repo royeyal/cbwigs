@@ -6,7 +6,6 @@ Images inside cards drift vertically while the page scrolls (GSAP ScrollTrigger,
 |---|---|
 | Source | `src/js/parallax-image.js`, `src/styles/parallax-image.css` |
 | Loaded by | `main.js` → `initParallaxImages()` |
-| Standalone build | `/parallax-image.js` + `/parallax-image.css`; no cbwigs page uses them today |
 | Used on | `/`, `/events`, `/collection-2026`, `/hair-extensions`, `/hairbun`, `/my-original` (and `/en` versions) |
 | Depends on | GSAP + ScrollTrigger (Webflow globals); exits silently without them |
 
@@ -162,16 +161,7 @@ When using with CMS Collection Lists:
 
 ## Dynamic Content
 
-If you're loading content dynamically (e.g., with filters or infinite scroll), refresh the parallax instances:
-
-```javascript
-// Inside this repo's modules
-import { refreshParallaxImages } from './parallax-image.js';
-refreshParallaxImages();
-
-// On a Webflow page that loads the standalone /parallax-image.js
-window.refreshParallaxImages();
-```
+If content is added after load (filters, infinite scroll), call `ScrollTrigger.refresh()` so new cards get measured. Cards added after `DOMContentLoaded` aren't picked up automatically; `initParallaxImages()` would need to run again.
 
 ## Troubleshooting
 
@@ -199,22 +189,9 @@ window.refreshParallaxImages();
 - Use appropriately sized/compressed images
 - Consider disabling on mobile with `parallax-disable-mobile` class
 
-## Script Loading
+## Script and CSS Loading
 
-Pages that load `main.js` need nothing extra: `main.js` calls `initParallaxImages()` on `DOMContentLoaded`. The module itself does not auto-initialize, so importing it never runs the effect twice.
-
-Pages that don't load `main.js` can use the standalone file, which initializes itself and exposes `window.initParallaxImages`, `window.refreshParallaxImages` and `window.destroyParallaxImages`:
-
-```html
-<link rel="stylesheet" href="https://cbwigs-assets.roy-eyal.workers.dev/parallax-image.css" />
-<script src="https://cbwigs-assets.roy-eyal.workers.dev/parallax-image.js"></script>
-```
-
-Don't load the standalone file on a page that also loads `main.js` — the effect would be set up twice.
-
-## CSS Loading
-
-`main.css` already imports `parallax-image.css`. Only standalone pages need the `/parallax-image.css` link shown above.
+`main.js` calls `initParallaxImages()` on `DOMContentLoaded`, and `main.css` imports `parallax-image.css`. Nothing else to add in Webflow.
 
 ## Best Practices
 

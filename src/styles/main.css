@@ -1,6 +1,5 @@
 /* Import other CSS modules - must be at the top */
 @import url('./textreveal.css');
-@import url('./animations.css');
 @import url('./gsap-slider.css');
 @import url('./accordion.css');
 @import url('./youtube-player.css');
@@ -14,7 +13,6 @@
 @import url('./multilevel-navigation.css');
 @import url('./parallax-image.css');
 @import url('./lightbox-setup.css');
-@import url('./gsap-gallery-slider.css');
 @import url('./flodesk.css');
 @import url('./webflow.css');
 @import url('./relume-container.css');

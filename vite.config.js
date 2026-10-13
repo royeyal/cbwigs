@@ -20,7 +20,7 @@ const format = 'iife';
 // Main bundle: one flat JS file + one CSS file, served via /main.js and /main.css.
 const mainBuild = {
   outDir: '../dist',
-  manifest: true, // <-- critical for the Worker redirect
+  manifest: true, // Read by the Worker to resolve the hashed filenames behind /main.js and /main.css
   cssCodeSplit: false, // Don't split CSS
   emptyOutDir: true,
   rollupOptions: {
@@ -41,38 +41,10 @@ const mainBuild = {
   }
 };
 
-// Standalone files for pages that don't load main.js, served via /draggable-slider.js,
-// /parallax-image.js and /parallax-image.css. Built in a second pass (`--mode standalone`)
-// because they share modules with main.js; a single multi-entry build would split that
-// shared code into chunks and main.js would stop being one flat file.
-const standaloneBuild = {
-  outDir: '../dist',
-  manifest: '.vite/manifest.standalone.json', // Read by the Worker alongside manifest.json
-  cssCodeSplit: true, // parallax-image.css gets its own file
-  emptyOutDir: false, // Keep the main build's output
-  rollupOptions: {
-    input: {
-      'draggable-slider': src('js/draggable-infinite-slider-standalone.js'),
-      'parallax-image': src('js/parallax-image-standalone.js'),
-      'parallax-image-css': src('styles/parallax-image.css')
-    },
-    output: {
-      // Rolldown only allows format 'iife' for a single input, so wrap each file in a
-      // function scope instead. These entries have no imports/exports; if one ever did,
-      // the wrapped code would not parse and terser would fail the build.
-      banner: '(function(){',
-      footer: '})();',
-      entryFileNames: 'js/[name].[hash].js',
-      chunkFileNames: 'assets/[name].[hash].js',
-      assetFileNames
-    }
-  }
-};
-
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   root: 'src',
   build: {
-    ...(mode === 'standalone' ? standaloneBuild : mainBuild),
+    ...mainBuild,
     modulePreload: false, // Disable module preload
     minify: 'terser',
     terserOptions: {
@@ -94,4 +66,4 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     open: true
   }
-}));
+});

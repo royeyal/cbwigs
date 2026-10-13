@@ -50,14 +50,6 @@ One doc per component. Each one lists its source files, which pages use it, and 
 | [image-trail-following-cursor](image-trail-following-cursor.md) | Images trailing the cursor (desktop) | my-original |
 | [copy-email-to-clipboard-button](copy-email-to-clipboard-button.md) | Copy-email button | contact-us |
 
-### Not used on any page
-
-| Component | Notes |
-|---|---|
-| [gsap-gallery-slider](gsap-gallery-slider.md) | Full-width one-at-a-time gallery; in the bundle, unused |
-| `src/styles/animations.css` | Utility classes (`.gsap-fade-in`, `.scroll-trigger`, `.gsap-element`, …); none appear on the site |
-| Standalone builds `/draggable-slider.js`, `/parallax-image.js` | For pages without `main.js`; every page loads `main.js` today |
-
 Reference: [brand-colors](brand-colors.md) lists the Webflow color variables.
 
 ## Adding a component

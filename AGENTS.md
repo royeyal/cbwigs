@@ -10,7 +10,7 @@ The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `
 
 - **Runtime**: Browser; source is vanilla ES modules, shipped as classic-script IIFE bundles (see **Architecture Notes**); no Node.js runtime code
 - **Build Node.js**: 24, pinned in `.node-version` (Cloudflare Workers Builds reads it; cssnano 9 fails on Node 20)
-- **Build tool**: Vite (ESM, manifest mode) — two passes: the main bundle, then standalone files (`--mode standalone`)
+- **Build tool**: Vite (ESM, manifest mode)
 - **Runtime dependencies**: none; every bundled module is this repo's own code (GSAP comes from Webflow as globals)
 - **Deployment target**: Cloudflare Workers (static assets via `ASSETS` binding)
 - **Worker tooling**: `wrangler` CLI; compatibility date `2025-09-06`
@@ -27,8 +27,6 @@ cbwigs/
 ├── src/                          # All source code (Vite root)
 │   ├── js/                       # One module per feature, plus:
 │   │   ├── main.js               # Single entry point — imports all modules + CSS
-│   │   ├── draggable-infinite-slider-standalone.js  # Standalone entry → /draggable-slider.js
-│   │   ├── parallax-image-standalone.js             # Standalone entry → /parallax-image.js
 │   │   └── snap-slider.js        # Native scroll-snap slider (/hairbun); replaced Swiper
 │   ├── styles/                   # CSS modules
 │   │   ├── main.css              # Imported by main.js; aggregates all CSS
@@ -40,9 +38,9 @@ cbwigs/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
 ├── docs/                         # One <component>.md per source module; docs/README.md is the index (and GitHub front page)
 ├── dist/                         # Vite build output (committed; manifest is gitignored)
-│   ├── js/main.[hash].js         # + draggable-slider.[hash].js, parallax-image.[hash].js
-│   ├── css/style.[hash].css      # + parallax-image-css.[hash].css
-│   └── .vite/manifest*.json      # manifest.json + manifest.standalone.json, read by the Worker
+│   ├── js/main.[hash].js
+│   ├── css/style.[hash].css
+│   └── .vite/manifest.json       # Read by the Worker
 ├── vite.config.js
 ├── wrangler.toml
 ├── eslint.config.js
@@ -61,7 +59,7 @@ Open any `src/*.html` demo file to test a feature locally.
 
 ### Build
 ```bash
-npm run build    # vite build && vite build --mode standalone → ./dist (JS → dist/js/, CSS → dist/css/, manifests → dist/.vite/)
+npm run build    # vite build → ./dist (JS → dist/js/, CSS → dist/css/, manifest → dist/.vite/)
 npm run clean    # rm -rf dist
 ```
 
@@ -120,7 +118,7 @@ Build logs: `GET https://api.cloudflare.com/client/v4/accounts/c84d1e6f99329d834
 - **No KV namespaces, D1, or custom routes configured**
 - **Build Node version**: comes only from `.node-version`. Don't add a `NODE_VERSION` build variable to either Workers Builds trigger — it overrides `.node-version`.
 
-The Worker reads and merges `dist/.vite/manifest.json` and `dist/.vite/manifest.standalone.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/js/main.js`, `/main.css`, `/css/main.css`, `/draggable-slider.js`, `/js/draggable-slider.js`, `/parallax-image.js`, `/parallax-image.css`) serve the matching hashed file's contents directly (no redirect), with `Access-Control-Allow-Origin: *`.
+The Worker reads `dist/.vite/manifest.json` at request time to resolve hashed filenames. Stable URL aliases (`/main.js`, `/js/main.js`, `/main.css`, `/css/main.css`) serve the matching hashed file's contents directly (no redirect), with `Access-Control-Allow-Origin: *`.
 
 Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are served by Cloudflare's static-assets layer **without running the Worker**; their headers come from `src/public/_headers` (copied to `dist/_headers`): hashed `/js/*` and `/css/*` files are cached for a year (`immutable`) with CORS. `_headers` is not applied to the Worker's responses, so the Worker sets the alias headers itself. The Worker only handles the aliases above and paths that don't match a file (`no-cache` 404s). Webflow pages must reference the aliases, not hashed paths — a hashed URL would keep serving that exact build for a year.
 
@@ -154,9 +152,8 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - Vite manifest mode is critical: `build.manifest: true` in vite.config.js is what enables the Worker's manifest lookup. Do not disable it.
 - In the main build, CSS code-splitting is disabled (`cssCodeSplit: false`) — all styles land in a single `dist/css/style.[hash].css` file.
 - Module preload is disabled (`modulePreload: false`) — the site loads one flat JS bundle, not a module graph.
-- Webflow embeds the bundles as classic `<script>` tags (not `type="module"`), so every bundle is wrapped in its own function scope (`format: 'iife'` for `main.js`, a `banner`/`footer` wrapper for the standalone pass). Unwrapped output puts its minified top-level names on `window`, where they overwrite page globals such as jQuery's `$`. Standalone entries must therefore have no `import`/`export` left after bundling.
+- Webflow embeds the bundles as classic `<script>` tags (not `type="module"`), so the bundle is wrapped in its own function scope (`format: 'iife'`). Unwrapped output puts its minified top-level names on `window`, where they overwrite page globals such as jQuery's `$`.
 - Production builds strip `console.log`/`info`/`debug` (terser `pure_funcs`); use `console.warn`/`console.error` for anything that should reach the browser console.
-- Standalone files for pages that don't load `main.js` are built in a second pass (`--mode standalone`): `draggable-infinite-slider-standalone.js` → `/draggable-slider.js`, `parallax-image-standalone.js` → `/parallax-image.js`, `styles/parallax-image.css` → `/parallax-image.css`. Each `*-standalone.js` entry does the auto-init and exposes `window.*` helpers; the feature module it wraps must not auto-init, or pages with `main.js` would initialize it twice. They share modules with `main.js`, so they must stay out of the main build's `input` — adding them there would split the shared code into chunks and `main.js` would no longer be one flat file.
 - Flodesk form localization lives in `flodesk.js` (`initFlodeskPrivacyText`, called from `main.js`). It retries up to 10 × 500ms because the embed renders after `DOMContentLoaded`, then observes only the Flodesk `<form>` for validation messages. Don't observe `document.body`: sliders, SplitText and GSAP mutate the DOM constantly, so a page-wide observer runs its callback all the time.
 
 ## What Not to Do
@@ -168,4 +165,4 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - **Do not disable the Vite manifest** (`build.manifest: true`) — the Worker depends on it to resolve hashed filenames.
 - **Do not commit source changes without the matching `dist/`** — `dist/` is tracked in git, so run `npm run build` and commit the rebuilt `dist/` with the source change — everything except the gitignored `.vite/` manifests, including `dist/_headers` when `src/public/` changes. Keeping `dist/` in git is an owner decision: the site itself loads from the Worker, which Workers Builds rebuilds on every deploy, and nothing on the staging pages or in `docs/` loads `dist/` from the repo.
 - **Do not add new npm runtime dependencies without considering bundle size** — the final JS bundle is served to every page visitor.
-- **Do not rely on top-level declarations to make something global** — the bundles are minified and wrapped in a function scope, so top-level names never reach `window`. Expose anything page code must call as an explicit `window.name = …` inside the bundle, as the standalone entries do.
+- **Do not rely on top-level declarations to make something global** — the bundles are minified and wrapped in a function scope, so top-level names never reach `window`. Expose anything page code must call as an explicit `window.name = …` inside the bundle, as `youtube-player.js` does.
