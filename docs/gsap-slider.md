@@ -33,9 +33,11 @@ Set `--slider-status: off` at a breakpoint to show a static row instead. The sli
 
 ## Behavior
 
-- Drag or throw the track; it snaps to slide positions. Arrows and Arrow Left/Right (while focus is in the slider) move one slide.
+- Drag or throw the track; it snaps to slide positions. Snap points are measured from where the slides actually sit (so `gap` and margins count), and the last one is capped at the drag bound so the final slides are reachable. Arrows and Arrow Left/Right (while focus is in the slider) move one slide.
 - State attributes for styling: `data-gsap-slider-status="active|not-active"` on the root, `data-gsap-slider-control-status` on each control, `data-gsap-slider-list-status="grab|grabbing"` on the track.
-- Accessibility: the root becomes a labelled carousel region with a polite live region ("Slide 2 of 5"). Every slide that is at least half in view at the snapped position stays exposed (3 at `--slider-spv: 3`); the others get `aria-hidden` and lose their links from the tab order. Visibility is measured from the real slide positions, so gap and `max-width` are accounted for. `aria-selected="true"` stays on the current snap position's slide only.
+- Accessibility: the root becomes a labelled carousel region with a polite live region that announces the visible range ("Slides 2–4 of 6"). Every slide that is at least half in view at the snapped position stays exposed (3 at `--slider-spv: 3`); the others get `aria-hidden` and lose their links from the tab order. Visibility is measured from the real slide positions, so gap and `max-width` are accounted for. `aria-selected="true"` stays on the current snap position's slide only.
+
+- When the window width changes (debounced 200ms) the slider re-measures and resets to the first slide. Listeners and the live region are created once and reused.
 
 ## Known issues
 

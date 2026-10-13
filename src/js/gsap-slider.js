@@ -29,8 +29,11 @@ function initBasicGSAPSlider() {
   }
 
   sliderElements.forEach((root, _index) => {
+    // Re-init on width change: drop the old Draggable and any running tween.
+    // Listeners and the live region are created once (below) and reused.
     if (root._sliderDraggable) {
       root._sliderDraggable.kill();
+      root._sliderDraggable = null;
     }
 
     const collection = root.querySelector('[data-gsap-slider-collection]');
@@ -66,15 +69,17 @@ function initBasicGSAPSlider() {
     collection.setAttribute('aria-roledescription', 'Slides List');
     collection.setAttribute('aria-label', 'Slides');
 
-    // Add live region for screen reader announcements
-    const liveRegion = document.createElement('div');
-    liveRegion.setAttribute('aria-live', 'polite');
-    liveRegion.setAttribute('aria-atomic', 'true');
-    liveRegion.className = 'sr-only'; // Visually hidden
-    liveRegion.style.cssText =
-      'position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;';
-    root.appendChild(liveRegion);
-    root._liveRegion = liveRegion;
+    // Add live region for screen reader announcements (once per slider)
+    if (!root._liveRegion) {
+      const liveRegion = document.createElement('div');
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'true');
+      liveRegion.className = 'sr-only'; // Visually hidden
+      liveRegion.style.cssText =
+        'position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;';
+      root.appendChild(liveRegion);
+      root._liveRegion = liveRegion;
+    }
     items.forEach((slide, i) => {
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-roledescription', 'Slide');
@@ -104,6 +109,28 @@ function initBasicGSAPSlider() {
       btn.setAttribute('aria-disabled', 'true');
       btn.setAttribute('tabindex', '0'); // Make buttons focusable
     });
+
+    // Controls and arrow keys are bound once; each init swaps in its own
+    // root._sliderGoTo (null while the slider is off).
+    if (!root._sliderListenersBound) {
+      root._sliderListenersBound = true;
+      controls.forEach(btn => {
+        const dir = btn.getAttribute('data-gsap-slider-control');
+        btn.addEventListener('click', () => {
+          if (btn.disabled) return;
+          root._sliderGoTo?.(dir === 'next' ? 1 : -1);
+        });
+      });
+      root.addEventListener('keydown', event => {
+        if (!root.contains(document.activeElement)) return;
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        if (!root._sliderGoTo) return;
+        event.preventDefault();
+        root._sliderGoTo(event.key === 'ArrowRight' ? 1 : -1);
+      });
+    }
+    root._sliderGoTo = null;
+    gsap.killTweensOf(track);
 
     // Determine if slider runs
     // console.log('📏 Computing slider dimensions...');
@@ -136,8 +163,8 @@ function initBasicGSAPSlider() {
     );
 
     if (!sliderEnabled) {
-      console.log('⏹️ Slider disabled - tearing down...');
       // Teardown when disabled
+      gsap.set(track, { clearProps: 'transform' });
       track.removeAttribute('style');
       track.onmouseenter = null;
       track.onmouseleave = null;
@@ -196,51 +223,37 @@ function initBasicGSAPSlider() {
       track.removeAttribute('data-gsap-slider-list-status');
     };
 
-    //Calculate bounds and snap points
+    // Bounds and snap points. Snap points come from the measured slide
+    // positions (so flex gap and margins are included), capped at the drag
+    // bound so the last stop is reachable.
+    const setX = gsap.quickSetter(track, 'x', 'px');
+    setX(0);
+
     const vw = collection.clientWidth;
     const tw = track.scrollWidth;
     const maxScroll = Math.max(tw - vw, 0);
     const minX = -maxScroll;
     const maxX = 0;
-    const maxIndex = maxScroll / slideW;
-    const full = Math.floor(maxIndex);
-    const snapPoints = [];
-
-    // Generate snap points for each slide position
-    for (let i = 0; i <= full; i++) {
-      snapPoints.push(-i * slideW);
-    }
-
-    // Add final snap point if there's a partial slide
-    if (full < maxIndex) {
-      snapPoints.push(-maxScroll); // Use actual maxScroll instead of calculated position
-    }
-
-    // Ensure we can access the last slide by adding extra snap point if needed
-    const lastSlidePosition = -(items.length - spv) * slideW;
-    if (
-      lastSlidePosition < -maxScroll &&
-      !snapPoints.includes(lastSlidePosition)
-    ) {
-      snapPoints.push(lastSlidePosition);
-    }
-
-    let activeIndex = 0;
-    const setX = gsap.quickSetter(track, 'x', 'px');
 
     // Each slide's horizontal span relative to the collection's left edge
-    // with the track at x = 0. Measured from the real layout, so gap,
-    // max-width and text direction are all accounted for.
-    let slideSpans = [];
-    function measureSlides() {
-      const offsetX = gsap.getProperty(track, 'x') || 0;
-      const collectionLeft = collection.getBoundingClientRect().left;
-      slideSpans = items.map(slide => {
-        const r = slide.getBoundingClientRect();
-        const left = r.left - collectionLeft - offsetX;
-        return { left, right: left + r.width, width: r.width };
-      });
-    }
+    // with the track at x = 0.
+    const collectionLeft = collection.getBoundingClientRect().left;
+    const slideSpans = items.map(slide => {
+      const r = slide.getBoundingClientRect();
+      const left = r.left - collectionLeft;
+      return { left, right: left + r.width, width: r.width };
+    });
+
+    const firstLeft = slideSpans[0].left;
+    const snapPoints = [];
+    slideSpans.forEach(span => {
+      const point = Math.max(-(span.left - firstLeft), minX);
+      if (!snapPoints.some(p => Math.abs(p - point) < 1)) {
+        snapPoints.push(point);
+      }
+    });
+
+    let activeIndex = 0;
 
     // True when at least half of slide i is inside the collection at track x
     function isSlideInView(i, x) {
@@ -251,11 +264,7 @@ function initBasicGSAPSlider() {
     }
 
     function updateStatus(x) {
-      if (x > maxX || x < minX) {
-        return;
-      }
-
-      // Clamp and find closest snap
+      // Clamp (edge resistance lets a drag overshoot) and find closest snap
       const calcX = x > maxX ? maxX : x < minX ? minX : x;
       let closest = snapPoints[0];
       snapPoints.forEach(pt => {
@@ -265,9 +274,19 @@ function initBasicGSAPSlider() {
       });
       activeIndex = snapPoints.indexOf(closest);
 
-      // Announce to screen readers
+      // Announce the visible range to screen readers ("Slides 2–4 of 6")
       if (root._liveRegion) {
-        root._liveRegion.textContent = `Slide ${activeIndex + 1} of ${snapPoints.length}`;
+        const visible = items
+          .map((_, i) => i)
+          .filter(i => i === activeIndex || isSlideInView(i, closest));
+        const first = visible[0] + 1;
+        const last = visible[visible.length - 1] + 1;
+        const range =
+          first === last ? `Slide ${first}` : `Slides ${first}–${last}`;
+        const text = `${range} of ${items.length}`;
+        if (root._liveRegion.textContent !== text) {
+          root._liveRegion.textContent = text;
+        }
       }
 
       // Update Slide Attributes. Every slide in view at the snapped position
@@ -337,51 +356,16 @@ function initBasicGSAPSlider() {
       });
     }
 
-    controls.forEach(btn => {
-      const dir = btn.getAttribute('data-gsap-slider-control');
-      btn.addEventListener('click', () => {
-        if (btn.disabled) return;
-        const delta = dir === 'next' ? 1 : -1;
-        const target = activeIndex + delta;
-        gsap.to(track, {
-          duration: 0.4,
-          x: snapPoints[target],
-          onUpdate: () => updateStatus(gsap.getProperty(track, 'x'))
-        });
+    root._sliderGoTo = delta => {
+      const target = activeIndex + delta;
+      if (target < 0 || target >= snapPoints.length) return;
+      gsap.to(track, {
+        duration: 0.4,
+        x: snapPoints[target],
+        overwrite: true,
+        onUpdate: () => updateStatus(gsap.getProperty(track, 'x'))
       });
-    });
-
-    // Arrow key navigation for keyboard accessibility
-    root.addEventListener('keydown', event => {
-      // Only handle arrow keys when focus is on slider or its controls
-      if (!root.contains(document.activeElement)) return;
-
-      let target;
-
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.preventDefault();
-
-        if (event.key === 'ArrowRight') {
-          // Next slide
-          if (activeIndex < snapPoints.length - 1) {
-            target = activeIndex + 1;
-          }
-        } else {
-          // Previous slide
-          if (activeIndex > 0) {
-            target = activeIndex - 1;
-          }
-        }
-
-        if (target !== undefined) {
-          gsap.to(track, {
-            duration: 0.4,
-            x: snapPoints[target],
-            onUpdate: () => updateStatus(gsap.getProperty(track, 'x'))
-          });
-        }
-      }
-    });
+    };
 
     // Initialize Draggable
     // console.log('🎮 Creating Draggable instance...');
@@ -436,8 +420,6 @@ function initBasicGSAPSlider() {
 
     // Initial state
     // console.log('🎬 Setting initial slider state...');
-    setX(0);
-    measureSlides();
     updateStatus(0);
     // console.log('✅ Slider initialization complete!');
   });
