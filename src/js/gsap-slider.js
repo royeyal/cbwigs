@@ -228,6 +228,28 @@ function initBasicGSAPSlider() {
     let activeIndex = 0;
     const setX = gsap.quickSetter(track, 'x', 'px');
 
+    // Each slide's horizontal span relative to the collection's left edge
+    // with the track at x = 0. Measured from the real layout, so gap,
+    // max-width and text direction are all accounted for.
+    let slideSpans = [];
+    function measureSlides() {
+      const offsetX = gsap.getProperty(track, 'x') || 0;
+      const collectionLeft = collection.getBoundingClientRect().left;
+      slideSpans = items.map(slide => {
+        const r = slide.getBoundingClientRect();
+        const left = r.left - collectionLeft - offsetX;
+        return { left, right: left + r.width, width: r.width };
+      });
+    }
+
+    // True when at least half of slide i is inside the collection at track x
+    function isSlideInView(i, x) {
+      const span = slideSpans[i];
+      if (!span || span.width <= 0) return false;
+      const overlap = Math.min(span.right + x, vw) - Math.max(span.left + x, 0);
+      return overlap >= span.width / 2 - 1;
+    }
+
     function updateStatus(x) {
       if (x > maxX || x < minX) {
         return;
@@ -248,16 +270,19 @@ function initBasicGSAPSlider() {
         root._liveRegion.textContent = `Slide ${activeIndex + 1} of ${snapPoints.length}`;
       }
 
-      // Update Slide Attributes
+      // Update Slide Attributes. Every slide in view at the snapped position
+      // stays exposed (all 3 cards at --slider-spv: 3), not only the current
+      // one; a slide counts as in view when at least half of it is visible.
       items.forEach((slide, i) => {
-        const isActive = i === activeIndex;
+        const isCurrent = i === activeIndex;
+        const isActive = isCurrent || isSlideInView(i, closest);
 
         // IMPORTANT: Blur focused elements BEFORE setting aria-hidden
         if (!isActive && slide.contains(document.activeElement)) {
           document.activeElement.blur();
         }
 
-        slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        slide.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
 
         // Manage focusable elements within slides to prevent focus conflicts
@@ -412,6 +437,7 @@ function initBasicGSAPSlider() {
     // Initial state
     // console.log('🎬 Setting initial slider state...');
     setX(0);
+    measureSlides();
     updateStatus(0);
     // console.log('✅ Slider initialization complete!');
   });
