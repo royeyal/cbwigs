@@ -1,0 +1,96 @@
+/* Button hover: color shift per variant + icon nudge toward the label.
+ * Base .button styles live in Webflow; this only adds the interactive states.
+ * Colors use the Webflow variables that define hover/active but were never wired up. */
+
+.button {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.button.is-icon > .icon-embed-xsmall {
+  transition: transform 0.35s cubic-bezier(0.625, 0.05, 0, 1);
+}
+
+/* Hover only on devices that really hover (avoids sticky hover after a tap);
+ * keyboard focus gets the same treatment. */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: var(--_primitives---button--bg-hover, #4a4540);
+  }
+
+  .button.is-alternate:hover {
+    background-color: var(--_primitives---colors--neutral-lighter, #e5d8c6);
+  }
+
+  .button.is-secondary:hover {
+    background-color: transparent;
+    border-color: var(--_primitives---brand--accent--400, #6b625a);
+  }
+
+  .button.is-secondary.is-alternate:hover {
+    border-color: var(--_primitives---colors--neutral-lighter, #e5d8c6);
+  }
+
+  .button.is-link:hover {
+    background-color: transparent;
+  }
+
+  .button.is-icon:hover > .icon-embed-xsmall {
+    transform: translateX(0.25rem);
+  }
+
+  .button.is-icon:hover > .icon-embed-xsmall:dir(rtl) {
+    transform: translateX(-0.25rem);
+  }
+}
+
+.button:focus-visible {
+  background-color: var(--_primitives---button--bg-hover, #4a4540);
+}
+
+.button.is-alternate:focus-visible {
+  background-color: var(--_primitives---colors--neutral-lighter, #e5d8c6);
+}
+
+.button.is-secondary:focus-visible {
+  background-color: transparent;
+  border-color: var(--_primitives---brand--accent--400, #6b625a);
+}
+
+.button.is-secondary.is-alternate:focus-visible {
+  border-color: var(--_primitives---colors--neutral-lighter, #e5d8c6);
+}
+
+.button.is-link:focus-visible {
+  background-color: transparent;
+}
+
+.button.is-icon:focus-visible > .icon-embed-xsmall {
+  transform: translateX(0.25rem);
+}
+
+.button.is-icon:focus-visible > .icon-embed-xsmall:dir(rtl) {
+  transform: translateX(-0.25rem);
+}
+
+.button:active {
+  background-color: var(--_primitives---button--bg-active, #2e2925);
+}
+
+.button.is-alternate:active {
+  background-color: var(--_primitives---colors--neutral, #c8bfb3);
+}
+
+.button.is-secondary:active,
+.button.is-link:active {
+  background-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button.is-icon > .icon-embed-xsmall {
+    transition: none;
+  }
+}
