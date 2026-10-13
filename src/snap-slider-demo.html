@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snap Slider Demo - CBWIGS</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    .swiper-card { aspect-ratio: 1; min-width: 275px; display: flex; align-items: center; justify-content: center; background: #a39486; color: #fff; border-radius: 0.5rem; font-size: 2rem; }
+    .swiper-slide { padding-right: 1.25em; }
+  </style>
+</head>
+<body>
+  <!-- Mirrors the /hairbun Collection List markup. Toggle <html dir/lang> to test LTR. -->
+  <main style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+    <h1>Snap Slider Demo</h1>
+    <button type="button" onclick="const h=document.documentElement; const rtl=h.dir==='rtl'; h.dir=rtl?'ltr':'rtl'; h.lang=rtl?'en-US':'he';">Toggle RTL / LTR</button>
+
+    <div data-swiper-group class="swiper-group" style="margin: 2rem 0;">
+      <div data-swiper-wrap class="swiper w-dyn-list">
+        <div role="list" class="swiper-wrapper w-dyn-items">
+          <div role="listitem" class="swiper-slide w-dyn-item"><div class="swiper-card">1</div></div>
+          <div role="listitem" class="swiper-slide w-dyn-item"><div class="swiper-card">2</div></div>
+          <div role="listitem" class="swiper-slide w-dyn-item"><div class="swiper-card">3</div></div>
+          <div role="listitem" class="swiper-slide w-dyn-item"><div class="swiper-card">4</div></div>
+          <div role="listitem" class="swiper-slide w-dyn-item"><div class="swiper-card">5</div></div>
+        </div>
+      </div>
+      <div class="swiper-navigation">
+        <button data-swiper-prev class="swiper-navigation__button">
+          <svg width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw is--prev"><path d="M14 19L21 12L14 5" stroke="currentColor" stroke-width="1.5"></path><path d="M21 12H2" stroke="currentColor" stroke-width="1.5"></path></svg>
+        </button>
+        <div class="swiper-pagination"></div>
+        <button data-swiper-next class="swiper-navigation__button">
+          <svg width="100%" viewBox="0 0 24 24" fill="none" class="swiper-navigation__button-arorw"><path d="M14 19L21 12L14 5" stroke="currentColor" stroke-width="1.5"></path><path d="M21 12H2" stroke="currentColor" stroke-width="1.5"></path></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

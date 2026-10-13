@@ -21,7 +21,6 @@ export default [
         Draggable: 'readonly',
         InertiaPlugin: 'readonly',
         Flip: 'readonly',
-        Swiper: 'readonly',
         YT: 'readonly',
         getComputedStyle: 'readonly',
         innerWidth: 'readonly',

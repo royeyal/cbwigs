@@ -1,11 +1,11 @@
 /* Import other CSS modules - must be at the top */
 @import url('./textreveal.css');
-@import url('./animations.css');
 @import url('./gsap-slider.css');
 @import url('./accordion.css');
 @import url('./youtube-player.css');
 @import url('./youtube-lightbox.css');
 @import url('./underline-links.css');
+@import url('./button-hover.css');
 @import url('./flip-counter.css');
 @import url('./draggable-infinite-slider.css');
 @import url('./layout-grid-flip.css');
@@ -13,9 +13,10 @@
 @import url('./multilevel-navigation.css');
 @import url('./parallax-image.css');
 @import url('./lightbox-setup.css');
-@import url('./gsap-gallery-slider.css');
 @import url('./flodesk.css');
 @import url('./webflow.css');
+@import url('./relume-container.css');
+@import url('./snap-slider.css');
 
 /* Global styles */
 

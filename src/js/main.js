@@ -5,7 +5,7 @@ import { initContentRevealScroll } from './contentrevealscroll.js';
 import { initBasicGSAPSlider } from './gsap-slider.js';
 import { initAccordionCSS } from './accordion.js';
 import { initLeadingZero } from './leading-zero.js';
-import { initSwiperSlider } from './swipeslider.js';
+import { initSnapSlider } from './snap-slider.js';
 import { initFlipCounter } from './flip-counter.js';
 import { initImageTrail } from './image-trail-following-cursor.js';
 import { initYouTubeLightbox } from './youtube-lightbox.js';
@@ -15,7 +15,6 @@ import { initNavigation } from './multilevel-navigation.js';
 import { initParallaxImages } from './parallax-image.js';
 import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
 import { initDynamicCurrentYear } from './dynamic-current-year.js';
-import { initGSAPGallerySlider } from './gsap-gallery-slider.js';
 import { initFlodeskPrivacyText } from './flodesk.js';
 import './youtube-player.js';
 import './lightbox-setup.js';
@@ -38,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize leading zero formatter for accordion counts (will only run if count elements exist)
   initLeadingZero();
 
-  // Initialize swiper slider (will only run if swiper elements exist and library is loaded)
-  initSwiperSlider();
+  // Initialize scroll-snap slider (will only run if data-swiper-group elements exist)
+  initSnapSlider();
 
   // Initialize flip counter effect
   initFlipCounter();
@@ -73,9 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize dynamic current year (will only run if data-current-year elements exist)
   initDynamicCurrentYear();
 
-  // Initialize GSAP gallery slider (will only run if data-gallery-slider elements exist)
-  initGSAPGallerySlider();
-
   // Initialize Flodesk privacy policy text customization
   initFlodeskPrivacyText();
 });
@@ -87,7 +83,7 @@ export {
   initBasicGSAPSlider,
   initAccordionCSS,
   initLeadingZero,
-  initSwiperSlider,
+  initSnapSlider,
   initFlipCounter,
   initImageTrail,
   initYouTubeLightbox,
@@ -97,6 +93,5 @@ export {
   initParallaxImages,
   initDraggableInfiniteSlider,
   initDynamicCurrentYear,
-  initGSAPGallerySlider,
   initFlodeskPrivacyText
 };
