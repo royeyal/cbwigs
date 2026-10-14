@@ -55,8 +55,9 @@ export function initYouTubeLightbox() {
 
   /**
    * Load YouTube IFrame API (compatible with youtube-player.js).
-   * Only called once a play icon has been set up, so pages without a hero
-   * video never request the API. Memoized: repeat calls share one promise.
+   * Only called when a play icon is clicked, so nothing is requested from
+   * youtube.com (which sets cookies) before a visitor presses play.
+   * Memoized: repeat calls share one promise.
    */
   function loadYouTubeAPI() {
     // console.log('[YouTube Lightbox] Loading YouTube API...');
@@ -171,12 +172,6 @@ export function initYouTubeLightbox() {
       return;
     }
 
-    // Ensure API is loaded
-    if (!apiReady) {
-      // console.log('[YouTube Lightbox] API not ready, loading...');
-      await loadYouTubeAPI();
-    }
-
     // Create modal if it doesn't exist
     if (!activeModal) {
       // console.log('[YouTube Lightbox] Creating modal');
@@ -204,8 +199,16 @@ export function initYouTubeLightbox() {
       closeBtn.focus();
     }, 100);
 
+    // The first play loads the API; the modal is already open meanwhile
+    if (!apiReady) {
+      await loadYouTubeAPI();
+    }
+
     // Small delay to ensure modal is rendered before creating player
     setTimeout(() => {
+      // Closed while the API was loading
+      if (!activeModal.classList.contains('active')) return;
+
       // Destroy existing player if any
       if (activePlayer) {
         activePlayer.destroy();
@@ -214,6 +217,8 @@ export function initYouTubeLightbox() {
       // Create new YouTube player
       // Note: origin parameter removed to prevent CORS issues
       activePlayer = new window.YT.Player('youtube-lightbox-player', {
+        // No cookies until the visitor interacts with the player
+        host: 'https://www.youtube-nocookie.com',
         videoId,
         playerVars: {
           autoplay: 1,
@@ -360,11 +365,8 @@ export function initYouTubeLightbox() {
       // console.log(`[YouTube Lightbox] Section ${index + 1}: Setup complete`);
     });
 
-    // Preload the API only when the page has a lightbox video, so the first
-    // click doesn't wait for it (openLightbox also awaits it if needed)
-    if (newTriggers > 0) {
-      loadYouTubeAPI();
-    }
+    // The API is not preloaded: loading it sets youtube.com cookies, so
+    // openLightbox loads it on the first click instead
 
     return newTriggers;
   }

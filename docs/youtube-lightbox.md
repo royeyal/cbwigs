@@ -7,7 +7,7 @@ Click the play icon in a hero section to open a YouTube video in a full-screen m
 | Source | `src/js/youtube-lightbox.js`, `src/styles/youtube-lightbox.css` |
 | Loaded by | `main.js` → `initYouTubeLightbox()` |
 | Used on | `/`, `/about`, `/hairbun`, `/my-original` (and `/en` versions) |
-| Depends on | YouTube IFrame API (loaded by the script, only on pages with a hero video) |
+| Depends on | YouTube IFrame API (loaded by the script on the first play click) |
 
 ## Webflow setup
 
@@ -25,6 +25,7 @@ section.section-hero-lightbox [data-youtube-lightbox-id="VIDEO_ID"]
 ## Behavior
 
 - The modal (`.youtube-lightbox-modal`, built once and appended to `<body>`) contains a backdrop, a close button and the player. It autoplays with related videos limited to the same channel (`rel: 0`).
+- **Privacy:** nothing is requested from `youtube.com` before a visitor presses play. The modal opens immediately; on the first play it then loads the IFrame API (`youtube.com/iframe_api`, which sets cookies) and creates the player on `youtube-nocookie.com` (`host` option). Closing the modal while the API is still loading cancels the player.
 - Close with the button, a backdrop click or `Escape`. Closing destroys the player, so playback stops.
 - Accessibility: the play icon gets `role="button"`, `tabindex="0"` and Enter/Space support; the modal is `role="dialog"` + `aria-modal`, traps focus, focuses the close button on open and returns focus to the play icon on close. Page scroll is locked while open.
 
@@ -34,4 +35,4 @@ section.section-hero-lightbox [data-youtube-lightbox-id="VIDEO_ID"]
 
 ## Known issues
 
-- None currently. Fixed: the API script used to load on every page; it now loads only after a play icon with a valid video ID has been set up (and is preloaded then, so the first click doesn't wait for it). Fixed: `Webflow.push` re-ran the trigger setup and added a second set of click/keydown handlers to each play icon; set-up icons are now marked `data-youtube-lightbox-initialized` and skipped.
+- None currently. Fixed: the API script used to load on every page, and later was preloaded on every page with a hero video, setting YouTube cookies before anyone pressed play; it now loads on the first click. Fixed: `Webflow.push` re-ran the trigger setup and added a second set of click/keydown handlers to each play icon; set-up icons are now marked `data-youtube-lightbox-initialized` and skipped.
