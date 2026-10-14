@@ -2,19 +2,20 @@
  * Elegant YouTube Player for Webflow
  * Supports both regular YouTube videos (16:9) and YouTube Shorts (9:16)
  * Uses YouTube IFrame API for optimal performance and UX
+ *
+ * Nothing is requested from youtube.com until a visitor presses play: the
+ * thumbnails come from img.youtube.com (no cookies), the IFrame API loads on
+ * the first click, and the player itself runs on youtube-nocookie.com.
  */
+
+const PLAYER_HOST = 'https://www.youtube-nocookie.com';
 
 class ElegantYouTubePlayer {
   constructor() {
     this.players = new Map();
-    this.apiReady = false;
-    this.apiLoadCallbacks = [];
-    this.apiRequested = false;
+    this.apiPromise = null;
 
-    // Only fetch the YouTube API on pages that actually have a player
-    if (this.hasPendingPlayers()) {
-      this.loadYouTubeAPI();
-    }
+    this.initializePlayers();
   }
 
   /**
@@ -29,52 +30,36 @@ class ElegantYouTubePlayer {
     );
   }
 
-  hasPendingPlayers() {
-    return this.getPendingContainers().length > 0;
-  }
-
   /**
-   * Load YouTube IFrame API (once). Shares the API with youtube-lightbox.js:
-   * an existing onYouTubeIframeAPIReady callback is chained, not replaced,
-   * and the script tag is only added if no other module added it.
+   * Load the YouTube IFrame API on first play. Memoized: repeat calls share
+   * one promise. Shares the API with youtube-lightbox.js: an existing
+   * onYouTubeIframeAPIReady callback is chained, not replaced, and the script
+   * tag is only added if no other module added it.
    */
   loadYouTubeAPI() {
-    if (this.apiRequested) return;
-    this.apiRequested = true;
+    if (window.YT && window.YT.Player) return Promise.resolve();
+    if (this.apiPromise) return this.apiPromise;
 
-    // Check if API is already loaded
-    if (window.YT && window.YT.Player) {
-      this.apiReady = true;
-      this.onYouTubeAPIReady();
-      return;
-    }
+    this.apiPromise = new Promise(resolve => {
+      // Create callback for when API is ready, keeping any existing one
+      const existingCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (typeof existingCallback === 'function') {
+          existingCallback();
+        }
+        resolve();
+      };
 
-    // Create callback for when API is ready, keeping any existing one
-    const existingCallback = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      if (typeof existingCallback === 'function') {
-        existingCallback();
+      // Load the API script if no other module has added it
+      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       }
-      this.apiReady = true;
-      this.onYouTubeAPIReady();
-    };
+    });
 
-    // Load the API script if no other module has added it
-    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
-  }
-
-  /**
-   * Called when YouTube API is ready
-   */
-  onYouTubeAPIReady() {
-    this.apiLoadCallbacks.forEach(callback => callback());
-    this.apiLoadCallbacks = [];
-    this.initializePlayers();
+    return this.apiPromise;
   }
 
   /**
@@ -252,14 +237,29 @@ class ElegantYouTubePlayer {
   }
 
   /**
-   * Load and play the video
+   * Load and play the video. The first play on a page loads the IFrame API;
+   * once it is loaded the player is created in the same click.
    */
   loadVideo(container, videoId) {
     const placeholder = container.querySelector('.youtube-placeholder');
     if (placeholder) {
+      if (placeholder.classList.contains('youtube-loading')) return;
       placeholder.classList.add('youtube-loading');
     }
 
+    if (window.YT && window.YT.Player) {
+      this.createPlayer(container, videoId, placeholder);
+    } else {
+      this.loadYouTubeAPI().then(() =>
+        this.createPlayer(container, videoId, placeholder)
+      );
+    }
+  }
+
+  /**
+   * Create the IFrame player in place of the placeholder
+   */
+  createPlayer(container, videoId, placeholder) {
     // Create iframe container
     const iframeContainer = document.createElement('div');
     iframeContainer.className = 'youtube-iframe-container';
@@ -271,6 +271,7 @@ class ElegantYouTubePlayer {
 
     // Initialize YouTube player
     const player = new YT.Player(iframeContainer.id, {
+      host: PLAYER_HOST,
       videoId,
       playerVars: {
         autoplay: 1,
@@ -389,15 +390,7 @@ class ElegantYouTubePlayer {
    * Reinitialize players (useful for dynamic content)
    */
   reinitialize() {
-    if (this.apiReady) {
-      this.initializePlayers();
-      return;
-    }
-
-    if (!this.hasPendingPlayers()) return;
-
-    this.apiLoadCallbacks.push(() => this.initializePlayers());
-    this.loadYouTubeAPI();
+    this.initializePlayers();
   }
 }
 
