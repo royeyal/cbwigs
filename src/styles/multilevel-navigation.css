@@ -70,6 +70,23 @@ button:focus-visible {
   }
 }
 
+/* Desktop nav: keep the CTA labels on one line. Between 992px and 1279px
+ * the row is tight, so the links give up some padding instead of the
+ * buttons wrapping ("Get in / touch") or the logo shrinking further. */
+@media screen and (width >= 992px) {
+  .nav-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (992px <= width < 1280px) {
+  .nav .nav-link {
+    padding-right: 0.75em;
+    padding-left: 0.75em;
+  }
+}
+
 /* ———— SHOW DROPDOWN ———— */
 .nav-dropdown {
   transition:
