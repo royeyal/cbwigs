@@ -31,6 +31,15 @@
   overflow: hidden; /* the vertical reveal mask */
 }
 
+/* Both clip boxes (SplitText's .line-mask wrapper and the .line inside it)
+   are one line-height tall, which cuts off descenders. Extend each clip box
+   below the line and cancel the extra height so the layout doesn't move. */
+[data-split='heading'] .line-mask,
+[data-split='heading'] .line {
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
 [data-split='heading'] .word,
 [data-split='heading'] .letter {
   display: inline-block;

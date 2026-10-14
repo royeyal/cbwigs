@@ -25,6 +25,7 @@ Use both attributes on the same element. The Designer and Editor always show the
 - Timing: lines 0.8s / 0.08s stagger, words 0.6s / 0.06s, chars 0.4s / 0.01s, all `expo.out`.
 - After animating, the split is reverted to the original markup, so screen readers and resizing see normal text.
 - `autoSplit` re-splits if the layout changes before the animation runs.
+- Each line is clipped twice: by SplitText's `.line-mask` wrapper (`overflow: clip`) and by `.line` itself (`overflow: hidden`). Both get `padding-bottom: 0.1em; margin-bottom: -0.1em`, so descenders aren't cut off during the animation and the line spacing doesn't change.
 
 ## Known issues
 
