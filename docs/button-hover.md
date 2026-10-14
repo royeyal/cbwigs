@@ -34,3 +34,9 @@ Each variant sets two custom properties:
 ## Shapes
 
 All buttons are pills. The navbar CTA (`.nav-button`) uses the site's pill radius variable, and the mobile `.menu-button` is a circle; both are set in the Webflow Designer, not here.
+
+## Borders (Webflow)
+
+Every `.button` has a 3px border, so primary and secondary buttons are the same height. On the primary button it is `transparent`: the fill shows through it, so the pill is full size on any background, and the hover fill covers it too. Don't set it to the fill color; `neutral-darkest` is semi-transparent, so a same-color border renders as a darker rim.
+
+Over photos, the dark glass button needs a light ring to stand out. The **Primary Button with Icon** component has an **On image** variant that sets the border to `neutral` (#c8bfb3); select it on instances placed over images. As of 2026-10-14 that is the Home hero (Hero Header with CTA) and the Hairbun photo section (Contact Us with Background Image).
