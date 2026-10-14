@@ -31,6 +31,7 @@ The menu labels come from a single CMS item (the whole navbar sits inside a Coll
 ## Styling hooks
 
 - The CTA buttons (`.nav-button`) share the site-wide button hover in [button-hover.md](button-hover.md). Their pill shape and the round mobile `.menu-button` are set in Webflow.
+- From 992px up, the CTA labels never wrap (`white-space: nowrap`). Between 992px and 1279px the top-level `.nav-link`s drop to `0.75em` side padding, so the buttons fit without squeezing the logo. Webflow has no breakpoint for that range, which is why it lives here.
 - `[data-dropdown-toggle='open']` on a toggle shows its dropdown.
 - `.nav:not(.is-scrolled):has([data-dropdown-toggle='open'])` swaps the logo filter while a dropdown is open at the top of the page.
 - `:root` variables in the CSS: `--nav-bg-height`, `--cubic-default`, `--duration-fast|normal|slow`, `--shadow-elevation-low|medium|high`.
