@@ -43,4 +43,8 @@ button[data-slider="button-next"]
 
 ## Styling
 
+The prev/next buttons (`.slider__btn`) are circles: 3.5em, a 1px white border at 60% opacity, and the arrow in white. On hover and `:focus-visible` they fill white with a dark arrow. They shrink to 3em, 2.75em and 2.5em at the tablet and mobile breakpoints. The corner-bracket overlay (`.slider__btn-overlay`) from the original design is still in the Webflow markup but hidden.
+
+The script sets the buttons' `aria-label`s by locale (השקופית הקודמת / השקופית הבאה, Previous slide / Next slide), because the Webflow markup labels both "previous slide".
+
 `.slide-play-button` is an 80px circle (70px at ≤ 991px) with the same glass style as the YouTube player's play button; it reacts to `.slide__link:hover` and `:focus-visible`. Everything else (slide width, gap, caption) is in `draggable-infinite-slider.css`.

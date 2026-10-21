@@ -27,6 +27,17 @@ export function initDraggableInfiniteSlider() {
     const nextButton = document.querySelector('[data-slider="button-next"]');
     const prevButton = document.querySelector('[data-slider="button-prev"]');
 
+    // Webflow labels both buttons "previous slide"; name them per locale
+    const isHebrew = document.documentElement.lang.startsWith('he');
+    prevButton?.setAttribute(
+      'aria-label',
+      isHebrew ? 'השקופית הקודמת' : 'Previous slide'
+    );
+    nextButton?.setAttribute(
+      'aria-label',
+      isHebrew ? 'השקופית הבאה' : 'Next slide'
+    );
+
     const totalElement = document.querySelector('[data-slide-count="total"]');
     const stepElement = document.querySelector('[data-slide-count="step"]');
     const stepsParent = stepElement?.parentElement;

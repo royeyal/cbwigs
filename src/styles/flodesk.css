@@ -21,6 +21,47 @@
   font-size: 1rem !important;
 }
 
+/* Submit button: the site's button hover (see button-hover.css), a light
+   fill growing from the reading-start edge with dark text. Flodesk sets
+   `background: #000` with a higher-specificity selector, so the fill needs
+   !important. */
+[data-ff-el='root'] [data-ff-el='submit'] {
+  background-image: linear-gradient(
+    var(--_primitives---colors--neutral-lighter, #e5d8c6),
+    var(--_primitives---colors--neutral-lighter, #e5d8c6)
+  ) !important;
+  background-repeat: no-repeat !important;
+  background-origin: border-box !important;
+  background-position: left center !important;
+  background-size: 0% 100% !important;
+  cursor: pointer;
+  transition:
+    background-size 0.45s cubic-bezier(0.625, 0.05, 0, 1),
+    color 0.3s ease !important;
+}
+
+[dir='rtl'] [data-ff-el='root'] [data-ff-el='submit'] {
+  background-position: right center !important;
+}
+
+[data-ff-el='root'] [data-ff-el='submit']:focus-visible {
+  background-size: 100% 100% !important;
+  color: var(--_primitives---colors--neutral-darkest, #1a1a1ae0) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-ff-el='root'] [data-ff-el='submit']:hover {
+    background-size: 100% 100% !important;
+    color: var(--_primitives---colors--neutral-darkest, #1a1a1ae0) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ff-el='root'] [data-ff-el='submit'] {
+    transition: none !important;
+  }
+}
+
 /* RTL/LTR support for privacy policy checkbox */
 [dir='rtl'] [data-ff-el='root'] .fd-form-check__checkmark,
 [dir='rtl'] [data-ff-el='root'] .fd-form-check__input {

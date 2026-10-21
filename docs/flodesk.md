@@ -33,3 +33,5 @@ To translate another Flodesk message, add its exact English text to `errorTransl
 ## Styling
 
 `flodesk.css` forces the Webflow body and heading font variables onto the form, removes the form padding, and in RTL moves the consent checkbox to the inline-start side. Some selectors include Flodesk form IDs (`ff-698722f5…`, `ff-69876c2c…`); if the form is recreated in Flodesk those IDs change, but the generic `[class$='__accepts-gdpr-checkbox']` rule still applies.
+
+The submit button (`[data-ff-el='submit']`) gets the site's button hover: a `neutral-lighter` fill grows from the reading-start edge and the text turns `neutral-darkest`, on hover and `:focus-visible`. Flodesk sets `background: #000` with a higher-specificity selector, so these rules use `!important`.
