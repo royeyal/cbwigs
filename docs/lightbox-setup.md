@@ -120,16 +120,17 @@ The lightbox requires specific data attributes on your gallery elements:
 
 ## Accessibility
 
-- The wrapper is `role="dialog" aria-modal="true"` (set in Webflow). The script gives it an `aria-label` and gives the three buttons localized `aria-label`s, read from `document.documentElement.lang`:
+- **Button text comes from the script.** Webflow can't localize the button labels, because they are custom `<span>` elements, so the text set in the Designer (הקודם / הבא / סגירה on the Events template) is a placeholder. At init the script replaces the text of the `<span>` in each button, choosing the locale from `document.documentElement.lang`.
+- The wrapper is `role="dialog" aria-modal="true"` (set in Webflow). The script also gives it and the three buttons localized `aria-label`s:
 
-  | | Hebrew | English |
-  |---|---|---|
-  | Dialog | גלריית תמונות | Photo gallery |
-  | Prev | התמונה הקודמת | Previous image |
-  | Next | התמונה הבאה | Next image |
-  | Close | סגירה | Close |
+  | | Visible (HE) | Name (HE) | Visible (EN) | Name (EN) |
+  |---|---|---|---|---|
+  | Dialog | | גלריית תמונות | | Photo gallery |
+  | Prev | הקודם | התמונה הקודמת | Previous | Previous image |
+  | Next | הבא | התמונה הבאה | Next | Next image |
+  | Close | סגירה | סגירה | Close | Close |
 
-  Each name contains the visible text the Designer should show (הקודם / הבא / סגירה in Hebrew, prev / next / close in English), so speech-input users can say what they see. An `aria-label` already set in Webflow is kept.
+  Each name contains its visible text, so speech-input users can say what they see. An `aria-label` already set in Webflow is kept. To change a label, edit `LABELS` at the top of `lightbox-setup.js`.
 - On open, focus moves to the close button once the nav has faded in. Tab and Shift+Tab cycle through the dialog's buttons. On close, focus returns to the photo that opened it.
 - While open, `<html>` gets `.is-lightbox-open`, which sets `overflow: hidden` (with `scrollbar-gutter: stable`, so the page doesn't shift sideways). The class is removed as soon as closing starts, from the close button, Escape or a click outside.
 

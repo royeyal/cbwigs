@@ -17,21 +17,22 @@ function isRTL() {
   return false;
 }
 
-// Accessible names for the nav buttons and the dialog. The visible button
-// text is set in the Designer; each name contains the planned visible text
-// (הקודם / הבא / סגירה, prev / next / close) so speech input still matches.
+// Visible text and accessible names for the nav buttons, and the dialog's
+// name. The script owns the button text because Webflow can't localize it
+// (the labels are custom span elements). Each name contains its visible text,
+// so speech input still matches.
 const LABELS = {
   he: {
     dialog: 'גלריית תמונות',
-    prev: 'התמונה הקודמת',
-    next: 'התמונה הבאה',
-    close: 'סגירה'
+    prev: { text: 'הקודם', name: 'התמונה הקודמת' },
+    next: { text: 'הבא', name: 'התמונה הבאה' },
+    close: { text: 'סגירה', name: 'סגירה' }
   },
   en: {
     dialog: 'Photo gallery',
-    prev: 'Previous image',
-    next: 'Next image',
-    close: 'Close'
+    prev: { text: 'Previous', name: 'Previous image' },
+    next: { text: 'Next', name: 'Next image' },
+    close: { text: 'Close', name: 'Close' }
   }
 };
 
@@ -39,6 +40,13 @@ function setLabel(element, label) {
   if (element && !element.hasAttribute('aria-label')) {
     element.setAttribute('aria-label', label);
   }
+}
+
+function setButtonLabel(button, { text, name }) {
+  if (!button) return;
+  const textElement = button.querySelector('span');
+  if (textElement) textElement.textContent = text;
+  setLabel(button, name);
 }
 
 function createLightbox(
@@ -91,9 +99,9 @@ function createLightbox(
     ? LABELS.he
     : LABELS.en;
   setLabel(elements.wrapper, labels.dialog);
-  setLabel(elements.buttons.prev, labels.prev);
-  setLabel(elements.buttons.next, labels.next);
-  setLabel(elements.buttons.close, labels.close);
+  setButtonLabel(elements.buttons.prev, labels.prev);
+  setButtonLabel(elements.buttons.next, labels.next);
+  setButtonLabel(elements.buttons.close, labels.close);
 
   let isOpen = false;
   let openedFrom = null;
