@@ -26,7 +26,7 @@ All strings live in the `strings` object at the top of `flodesk.js`:
 | `privacyHref` | `https://cbwigs.co.il/privacy-policy` | `https://cbwigs.co.il/en/privacy-policy` |
 | `requiredField`, `marketingConsent` | validation messages | validation messages |
 
-The privacy URLs point at the production domain, which still serves the old WordPress site. Check they resolve once the domain moves to Webflow.
+The domain now serves the Webflow site, but as of 2026-10-21 both privacy URLs return 404: the site has no privacy-policy page yet. Update `privacyHref` once one exists.
 
 To translate another Flodesk message, add its exact English text to `errorTranslations`.
 

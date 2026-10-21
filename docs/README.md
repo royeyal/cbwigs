@@ -4,7 +4,7 @@ Custom JavaScript and CSS for the **cbwigs** Webflow site (Hebrew primary, Engli
 
 - **Architecture, commands, deploy and conventions:** [`AGENTS.md`](../AGENTS.md)
 - **Plain-English overview:** [`PROJECT_CONTEXT.md`](../PROJECT_CONTEXT.md)
-- **Staging site:** https://cbwigs.webflow.io (the `cbwigs.co.il` domain isn't connected yet)
+- **Live site:** https://www.cbwigs.co.il (also served at https://cbwigs.webflow.io)
 
 ```bash
 npm install
