@@ -33,7 +33,7 @@ Each variant sets two custom properties:
 
 ## Shapes
 
-All buttons are pills. The navbar CTA (`.nav-button`) uses the site's pill radius variable, and the mobile `.menu-button` is a circle; both are set in the Webflow Designer, not here.
+All buttons are pills. The navbar CTA (`.nav-button`) uses the site's pill radius variable, and the mobile `.menu-button` is a circle; both are set in the Webflow Designer. One exception lives in the repo: at ≤ 479px the WhatsApp button (`.nav-button.is--primary`) becomes an icon-only circle, with its label visually hidden but still read by screen readers. See [multilevel-navigation.md](multilevel-navigation.md).
 
 ## Borders (Webflow)
 

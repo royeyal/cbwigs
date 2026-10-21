@@ -1,3 +1,25 @@
+/* The script moves the wrapper to the end of <body>, so it is in the root
+   stacking context; this puts it above the navbar (z-index 100). */
+.lightbox-wrap {
+  z-index: 1000;
+  overscroll-behavior: contain;
+}
+
+/* Scroll lock while open. The gutter stays reserved so the page behind
+   doesn't shift sideways when the scrollbar goes away. */
+html.is-lightbox-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* Webflow sets the nav 2em from each side; the UserWay button sits in the
+   bottom-right corner above everything and covered the counter (Hebrew) or
+   the close button (English). Mobile puts the nav in flow instead, below. */
+.lightbox-nav {
+  right: 4.5rem;
+  left: 4.5rem;
+}
+
 /* Active Classes */
 .lightbox-wrap.is-active {
   display: flex;
@@ -20,22 +42,67 @@
   max-height: 80%;
 }
 
-/* Simple Hover on Lightbox Buttons */
-.lightbox-nav__button:hover .lightbox-nav__dot {
+/* Simple Hover on Lightbox Buttons: the dot moves outward, towards the edge
+   its button sits on. The nav row mirrors in RTL, so the direction flips. */
+[data-lightbox='prev']:hover .lightbox-nav__dot {
   transform: translate(-100%, 0);
 }
 
-.lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
+[data-lightbox='next']:hover .lightbox-nav__dot {
   transform: translate(100%, 0);
 }
 
-/* RTL Support - Flip button hover transforms */
-[dir='rtl'] .lightbox-nav__button:hover .lightbox-nav__dot {
+[dir='rtl'] [data-lightbox='prev']:hover .lightbox-nav__dot {
   transform: translate(100%, 0);
 }
 
-[dir='rtl'] .lightbox-nav__button:nth-of-type(2):hover .lightbox-nav__dot {
+[dir='rtl'] [data-lightbox='next']:hover .lightbox-nav__dot {
   transform: translate(-100%, 0);
+}
+
+/* Mobile: the nav joins the flow under the image instead of floating over
+   it, and the image stage takes whatever height is left. The counter and
+   close share a row; prev/next get the full-width row below it, centred, so
+   the UserWay button in the bottom corner doesn't cover anything. */
+@media screen and (width <= 767px) {
+  .lightbox-wrap.is-active {
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1rem 0.75rem calc(1.5rem + env(safe-area-inset-bottom));
+  }
+
+  .lightbox-img__wrap {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Fill the stage width; the desktop rule's min-width: fit-content would
+     hold the image at its intrinsic width and overflow the screen. */
+  .lightbox-img__item img {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    max-height: 100%;
+  }
+
+  .lightbox-nav {
+    position: static;
+    flex-wrap: wrap;
+    row-gap: 1.25rem;
+    width: 100%;
+  }
+
+  .lightbox-nav__col.center {
+    order: 1;
+    width: 100%;
+  }
+
+  .lightbox-nav__col.start,
+  .lightbox-nav__col.end {
+    width: 50%;
+  }
 }
 
 /* Reduced Motion Support */

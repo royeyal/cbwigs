@@ -4,7 +4,7 @@
 
 This project provides custom JavaScript and CSS for **cbwigs.co.il**, a Hebrew/English bilingual Webflow e-commerce site selling wigs. The code is authored locally, bundled with Vite, and served via a Cloudflare Worker that resolves hashed asset filenames from Vite's manifest. Webflow pages reference the Cloudflare-hosted URLs directly via custom code embeds — the HTML structure is entirely managed inside Webflow, not in this repo.
 
-The Webflow site is served at **https://cbwigs.webflow.io**. As of 2026-09-26, `cbwigs.co.il` itself still serves the old WordPress site, so test on `cbwigs.webflow.io`. It loads the production Worker, so anything deployed to production is live there immediately.
+The Webflow site is live at **https://www.cbwigs.co.il** (the domain moved from the old WordPress site; checked 2026-10-21) and is also served at **https://cbwigs.webflow.io**. Both load the production Worker, so anything deployed to production is live immediately.
 
 ## Stack
 
@@ -159,7 +159,7 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 ## What Not to Do
 
 - **Do not import GSAP or any GSAP plugin.** They are globals registered by Webflow. Importing them will create a second GSAP instance and break animations.
-- **Do not merge to `main` (or run `npm run deploy`) without verifying the change first** — both deploy to production, and `cbwigs.webflow.io` picks it up immediately. Verify on the PR's preview URL (see **Verifying a Change**).
+- **Do not merge to `main` (or run `npm run deploy`) without verifying the change first** — both deploy to production, and the live site picks it up immediately. Verify on the PR's preview URL (see **Verifying a Change**).
 - **Do not add CSS that targets Webflow class names like `.w-*` or `.wf-*`** — these are internal Webflow classes and may change. The existing exceptions are deliberate: `.w-richtext a` (rich-text links have no other hook) and `.wf-design-mode` / `.w-editor` (placeholders shown only in the Designer).
 - **Do not split the main build's CSS output** — `cssCodeSplit: false` is intentional; the Worker alias `/main.css` expects a single CSS file.
 - **Do not disable the Vite manifest** (`build.manifest: true`) — the Worker depends on it to resolve hashed filenames.
