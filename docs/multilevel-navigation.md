@@ -31,6 +31,7 @@ The menu labels come from a single CMS item (the whole navbar sits inside a Coll
 ## Styling hooks
 
 - The CTA buttons (`.nav-button`) share the site-wide button hover in [button-hover.md](button-hover.md). Their pill shape and the round mobile `.menu-button` are set in Webflow.
+- At ≤ 479px the WhatsApp button (`.nav-button.is--primary`) is a 2.5em circle with just its icon, set here (`width: 2.5em; padding: 0`). Webflow hides its label with `display: none`, which left the link with no accessible name because the icon is `aria-hidden`. This CSS overrides that with a visually-hidden pattern (1px clipped box), so screen readers still announce "דברי איתנו" / "Talk to us".
 - From 992px up, the CTA labels never wrap (`white-space: nowrap`). Between 992px and 1279px the top-level `.nav-link`s drop to `0.75em` side padding, so the buttons fit without squeezing the logo. Webflow has no breakpoint for that range, which is why it lives here.
 - `[data-dropdown-toggle='open']` on a toggle shows its dropdown.
 - `.nav:not(.is-scrolled):has([data-dropdown-toggle='open'])` swaps the logo filter while a dropdown is open at the top of the page.

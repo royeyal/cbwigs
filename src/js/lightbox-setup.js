@@ -17,6 +17,30 @@ function isRTL() {
   return false;
 }
 
+// Accessible names for the nav buttons and the dialog. The visible button
+// text is set in the Designer; each name contains the planned visible text
+// (הקודם / הבא / סגירה, prev / next / close) so speech input still matches.
+const LABELS = {
+  he: {
+    dialog: 'גלריית תמונות',
+    prev: 'התמונה הקודמת',
+    next: 'התמונה הבאה',
+    close: 'סגירה'
+  },
+  en: {
+    dialog: 'Photo gallery',
+    prev: 'Previous image',
+    next: 'Next image',
+    close: 'Close'
+  }
+};
+
+function setLabel(element, label) {
+  if (element && !element.hasAttribute('aria-label')) {
+    element.setAttribute('aria-label', label);
+  }
+}
+
 function createLightbox(
   container,
   {
@@ -50,6 +74,30 @@ function createLightbox(
     }
   };
 
+  if (!elements.wrapper || !elements.items.length) return;
+
+  // Webflow's .padding-global (position: relative; z-index: 2) gives every
+  // section its own stacking context, which traps the fixed wrapper under
+  // later sections and the navbar. On <body> it covers the whole page.
+  document.body.appendChild(elements.wrapper);
+
+  // The clicked image moves into the wrapper while open, so look for it in
+  // both places.
+  const find = selector =>
+    container.querySelector(selector) ||
+    elements.wrapper.querySelector(selector);
+
+  const labels = document.documentElement.lang.startsWith('he')
+    ? LABELS.he
+    : LABELS.en;
+  setLabel(elements.wrapper, labels.dialog);
+  setLabel(elements.buttons.prev, labels.prev);
+  setLabel(elements.buttons.next, labels.next);
+  setLabel(elements.buttons.close, labels.close);
+
+  let isOpen = false;
+  let openedFrom = null;
+
   // Create our main timeline that will coordinate all animations
   const mainTimeline = gsap.timeline();
 
@@ -60,8 +108,14 @@ function createLightbox(
 
   // ————————— CLOSE FUNCTION ————————— //
   function closeLightbox() {
+    if (!isOpen) return;
+    isOpen = false;
+
     // on close callback
     onClose?.();
+
+    document.documentElement.classList.remove('is-lightbox-open');
+    openedFrom?.focus({ preventScroll: true });
 
     // First, we clear any running animations to prevent conflicts
     mainTimeline.clear();
@@ -70,7 +124,7 @@ function createLightbox(
       elements.nav,
       elements.triggerParents,
       elements.items,
-      container.querySelector('[data-lightbox="original"]')
+      find('[data-lightbox="original"]')
     ]);
 
     const tl = gsap.timeline({
@@ -88,9 +142,7 @@ function createLightbox(
         });
 
         // Clear any lingering transform properties on the original image
-        const originalImg = container.querySelector(
-          '[data-lightbox="original"]'
-        );
+        const originalImg = find('[data-lightbox="original"]');
         if (originalImg) {
           gsap.set(originalImg, { clearProps: 'all' });
         }
@@ -109,7 +161,7 @@ function createLightbox(
     });
 
     // First, find and move back the original item
-    const originalItem = container.querySelector('[data-lightbox="original"]');
+    const originalItem = find('[data-lightbox="original"]');
     const originalParent = container.querySelector(
       '[data-lightbox="original-parent"]'
     );
@@ -147,7 +199,7 @@ function createLightbox(
     }
 
     // Find active slide
-    const activeLightboxSlide = container.querySelector(
+    const activeLightboxSlide = elements.wrapper.querySelector(
       '[data-lightbox="item"].is-active'
     );
 
@@ -204,13 +256,16 @@ function createLightbox(
 
     const clickedElement = event.target;
     const isOutside = !clickedElement.closest(
-      '[data-lightbox="item"].is-active img, [data-lightbox="nav"], [data-lightbox="close"], [data-lightbox="trigger"]'
+      '[data-lightbox="item"].is-active img, [data-lightbox="nav"], [data-lightbox="close"]'
     );
 
     if (isOutside) {
       closeLightbox();
     }
   }
+
+  // The wrapper is no longer inside the container, so listen on it directly
+  elements.wrapper.addEventListener('click', handleOutsideClick);
 
   // ————————— TOGGLE ACTIVE ITEM IN LIGHTBOX ————————— //
   function updateActiveItem(index) {
@@ -227,6 +282,10 @@ function createLightbox(
     trigger.addEventListener('click', () => {
       // On start of open callback
       onStart?.();
+
+      isOpen = true;
+      openedFrom = trigger;
+      document.documentElement.classList.add('is-lightbox-open');
 
       // Clear any running animations before starting new ones
       mainTimeline.clear();
@@ -251,11 +310,11 @@ function createLightbox(
       // Set correct lightbox item to visible
       updateActiveItem(index);
 
-      // Start listening for clicks outside of lightbox
-      container.addEventListener('click', handleOutsideClick);
-
       const tl = gsap.timeline({
         onComplete: () => {
+          // The nav is hidden until it fades in, so focus it only now
+          elements.buttons.close?.focus({ preventScroll: true });
+
           // On open callback
           onOpen?.();
         }
@@ -326,13 +385,10 @@ function createLightbox(
   });
 
   // ————————— NAV BUTTONS ————————— //
-  // In RTL, swap the button behavior to maintain intuitive navigation
-  const nextButton = isRTLLayout
-    ? elements.buttons.prev
-    : elements.buttons.next;
-  const prevButton = isRTLLayout
-    ? elements.buttons.next
-    : elements.buttons.prev;
+  // No RTL swap: the nav row mirrors in RTL, so "prev" already sits on the
+  // reading-start side (the right in Hebrew).
+  const nextButton = elements.buttons.next;
+  const prevButton = elements.buttons.prev;
 
   if (nextButton) {
     nextButton.addEventListener('click', () => {
@@ -361,11 +417,29 @@ function createLightbox(
 
   // ————————— KEYBOARD NAV ————————— //
   document.addEventListener('keydown', event => {
-    if (!elements.wrapper.classList.contains('is-active')) return;
+    if (!isOpen) return;
     switch (event.key) {
       case 'Escape':
         closeLightbox();
         break;
+      case 'Tab': {
+        // Keep focus inside the dialog
+        const buttons = Array.from(elements.wrapper.querySelectorAll('button'));
+        const first = buttons[0];
+        const last = buttons[buttons.length - 1];
+        const inside = elements.wrapper.contains(document.activeElement);
+        if (event.shiftKey && (!inside || document.activeElement === first)) {
+          event.preventDefault();
+          last?.focus();
+        } else if (
+          !event.shiftKey &&
+          (!inside || document.activeElement === last)
+        ) {
+          event.preventDefault();
+          first?.focus();
+        }
+        break;
+      }
       case 'ArrowRight':
         // In RTL, right arrow goes to previous
         if (isRTLLayout) {
