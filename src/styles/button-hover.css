@@ -92,8 +92,15 @@
   color: var(--btn-fill-text);
 }
 
+/* The .button.is-secondary.is-alternate selectors are listed on their own
+ * because Webflow sets that variant's text color with three classes, which
+ * beats the generic :is() rule and left light text on the light fill.
+ * A .card link (home page categories) fills its button when any part of
+ * the card is hovered or focused. */
 @media (hover: hover) and (pointer: fine) {
-  :is(.button, .nav-button, .copy-email-button):hover {
+  :is(.button, .nav-button, .copy-email-button):hover,
+  .button.is-secondary.is-alternate:hover,
+  .card:hover .button {
     background-size: 100% 100%;
     color: var(--btn-fill-text);
   }
@@ -103,7 +110,9 @@
   }
 }
 
-:is(.button, .nav-button, .copy-email-button):focus-visible {
+:is(.button, .nav-button, .copy-email-button):focus-visible,
+.button.is-secondary.is-alternate:focus-visible,
+.card:focus-visible .button {
   background-size: 100% 100%;
   color: var(--btn-fill-text);
 }

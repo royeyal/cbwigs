@@ -28,6 +28,9 @@ Each variant sets two custom properties:
 `--btn-fill-text` is set explicitly for every variant. A `currentcolor` default would make the label inherit its parent's color.
 
 - The fill appears on hover (`hover: hover` and `pointer: fine` devices only, so taps don't leave it stuck), on `:focus-visible`, and on a copy button in its `copied` state.
+- Webflow sets the text color of `.button.is-secondary.is-alternate` with three classes, which beats the generic `:is(.button, …):hover` rule, so the filled state lists that variant separately. Without it, the light fill appeared under the light text.
+- Inside a `.card` link (the home page's category cards), hovering or focusing anywhere on the card fills its button (`.card:hover .button`, `.card:focus-visible .button`).
+- The Flodesk footer form's submit button has the same light fill, defined in `flodesk.css` (see [flodesk.md](flodesk.md)).
 - `:active` darkens the fill.
 - `prefers-reduced-motion` turns the transition off; the fill still appears, instantly.
 

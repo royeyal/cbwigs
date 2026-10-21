@@ -52,36 +52,10 @@
   display: flex;
 }
 
+/* The corner brackets from the original design are hidden; the buttons are
+   plain circles now (see .slider__btn). The overlay markup stays in Webflow. */
 .slider__btn-overlay {
-  z-index: 2;
-  position: absolute;
-  inset: -1px;
-}
-
-.slider__btn-overlay-corner {
-  border-top: 1px solid #efeeec;
-  border-left: 1px solid #efeeec;
-  border-top-left-radius: 0.4em;
-  width: 1em;
-  height: 1em;
-}
-
-.slider__btn-overlay-corner.top-right {
-  position: absolute;
-  inset: 0% 0% auto auto;
-  transform: rotate(90deg);
-}
-
-.slider__btn-overlay-corner.bottom-right {
-  position: absolute;
-  inset: auto 0% 0% auto;
-  transform: rotate(180deg);
-}
-
-.slider__btn-overlay-corner.bottom-left {
-  position: absolute;
-  inset: auto auto 0% 0%;
-  transform: rotate(-90deg);
+  display: none;
 }
 
 .slider__count-divider {
@@ -94,15 +68,36 @@
 .slider__btn {
   color: #fff;
   background-color: #0000;
-  border: 1px solid #fff3;
-  border-radius: 0.4em;
+  border: 1px solid #fff9;
+  border-radius: 50%;
   justify-content: center;
   align-items: center;
-  width: 4em;
-  height: 4em;
+  width: 3.5em;
+  height: 3.5em;
   padding: 0;
   display: flex;
   position: relative;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Filled white with a dark arrow, like the nav buttons over the hero */
+.slider__btn:focus-visible {
+  outline-color: #fff;
+  background-color: #fff;
+  border-color: #fff;
+  color: #131313;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .slider__btn:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #131313;
+  }
 }
 
 .slider__overlay-inner {
