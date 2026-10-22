@@ -36,7 +36,7 @@ One doc per component. Each one lists its source files, which pages use it, and 
 
 | Component | What it does | Pages |
 |---|---|---|
-| [text-reveal](text-reveal.md) | SplitText heading reveal | home, about, collections, hair-extensions, hairbun, my-original |
+| [text-reveal](text-reveal.md) | SplitText heading reveal (display `h2`s automatically) | every page with a section title |
 | [gsap-slider](gsap-slider.md) | Draggable testimonial slider | home, collections, contact-us, hairbun |
 | [draggable-infinite-slider](draggable-infinite-slider.md) | Looping video/reel slider with counter | home, collections, hair-extensions |
 | [parallax-image](parallax-image.md) | Image parallax inside cards | home, events, collection-2026, hair-extensions, hairbun, my-original |

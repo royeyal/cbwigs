@@ -2,9 +2,13 @@
 
 /* Masked Text Reveal */
 
-/* Initial hide to avoid FOUC */
+/* Hide before first paint so a heading that reveals on load doesn't flash.
+   Only needed for headings on screen at load; textreveal.js picks up
+   display h2s by itself. If the script never runs, the animation below
+   shows the heading after 3s instead of leaving it hidden. */
 [data-split='heading'] {
   visibility: hidden;
+  animation: split-heading-failsafe 0s 3s forwards;
 
   /* Prevent character shift when splitting */
   font-kerning: none;
@@ -25,8 +29,15 @@
   overflow: visible;
 }
 
-/* Masking wrappers for smooth reveals */
-[data-split='heading'] .line {
+@keyframes split-heading-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Masking wrappers for smooth reveals. .split-ready is on every heading
+   textreveal.js splits, with or without data-split. */
+.split-ready .line {
   display: block;
   overflow: hidden; /* the vertical reveal mask */
 }
@@ -34,14 +45,14 @@
 /* Both clip boxes (SplitText's .line-mask wrapper and the .line inside it)
    are one line-height tall, which cuts off descenders. Extend each clip box
    below the line and cancel the extra height so the layout doesn't move. */
-[data-split='heading'] .line-mask,
-[data-split='heading'] .line {
+.split-ready .line-mask,
+.split-ready .line {
   padding-bottom: 0.1em;
   margin-bottom: -0.1em;
 }
 
-[data-split='heading'] .word,
-[data-split='heading'] .letter {
+.split-ready .word,
+.split-ready .char {
   display: inline-block;
 }
 
@@ -58,7 +69,7 @@
 .hero [data-split='heading'],
 .hero [data-split='heading'] .line,
 .hero [data-split='heading'] .word,
-.hero [data-split='heading'] .letter {
+.hero [data-split='heading'] .char {
   will-change: transform, opacity;
   backface-visibility: hidden;
   transform: translateZ(0);
