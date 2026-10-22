@@ -36,8 +36,8 @@
   background-size: 0% 100% !important;
   cursor: pointer;
   transition:
-    background-size 0.45s var(--ease-expo-in-out),
-    color 0.45s var(--ease-expo-in-out) !important;
+    background-size var(--btn-fill-duration) var(--ease-expo-in-out),
+    color var(--btn-fill-duration) var(--ease-expo-in-out) !important;
 }
 
 [dir='rtl'] [data-ff-el='root'] [data-ff-el='submit'] {
