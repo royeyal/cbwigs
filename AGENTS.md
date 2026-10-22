@@ -139,7 +139,7 @@ Requests for a path that exists in `dist/` (e.g. `/js/main.[hash].js`) are serve
 - **Module format**: ESM (`"type": "module"` in package.json); use `import`/`export` throughout
 - **No TypeScript** — plain `.js` files only
 - **GSAP globals**: `gsap`, `ScrollTrigger`, `SplitText`, `Draggable`, `InertiaPlugin`, `Flip`, `CustomEase` are loaded globally by Webflow. **Never import them.** Declared as `readonly` globals in ESLint config.
-- **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention
+- **DOM selection**: Use `data-*` attributes for selectors, not class names, following Webflow convention. One deliberate exception: `textreveal.js` reveals every `h2.heading-style-h1` / `h2.heading-style-h2` automatically, so section titles need no attribute (see `docs/text-reveal.md`). Don't add a per-element attribute requirement back for something that applies to a whole class of elements
 - **Defensive init**: Every `init*()` function must check for element existence before running (e.g. `if (!elements.length) return;`)
 - **Entry pattern**: Feature files export a named `init*()` function that `main.js` imports and calls inside its `DOMContentLoaded` listener, and do not also initialize themselves. Use this pattern for new features. Exceptions: `youtube-player.js`, `lightbox-setup.js`, and `locale-switch.js` register their own `DOMContentLoaded` listener and are imported for side effects only.
 - **Quotes**: single; **semi**: always; **indent**: 2 spaces; **no trailing commas** (enforced by Prettier via `.prettierrc`; don't add formatting rules to ESLint — they fight Prettier in the pre-commit hook)
