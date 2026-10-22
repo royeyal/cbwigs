@@ -33,6 +33,8 @@ cbwigs/
 │   │   └── *.css                 # Per-feature stylesheets
 │   ├── public/_headers           # Static-asset response headers; Vite copies it to dist/_headers
 │   └── *.html                    # Local demo/test pages (not deployed)
+├── .github/workflows/
+│   └── prune-branches.yml        # Daily: deletes branches idle 14+ days with no open PR
 ├── external/
 │   └── src/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
@@ -81,6 +83,8 @@ Deploys run automatically through Cloudflare Workers Builds (Git integration), s
 | any other branch | `npm ci && npm run build` | `npx wrangler versions upload` | Preview only: `https://<first 8 chars of version ID>-cbwigs-assets.roy-eyal.workers.dev` (printed as "Version Preview URL" in the build log) |
 
 The result appears on the PR as the **Workers Builds: cbwigs-assets** check. The GitHub check has no log text; read the log in the Cloudflare dashboard or via the API (see **Verifying a Change**).
+
+Branches are disposable: a daily GitHub Action (`.github/workflows/prune-branches.yml`) deletes every remote branch except `main` whose last commit is more than 14 days old and that has no open PR. A merged PR keeps its history, and a deleted branch can be restored from its PR page. Run it by hand from the Actions tab, with **dry_run** to list what it would delete.
 
 Manual deploy (rarely needed; also production):
 ```bash

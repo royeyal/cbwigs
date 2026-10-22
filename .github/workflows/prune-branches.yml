@@ -1,0 +1,54 @@
+# Deletes remote branches whose last commit is more than 14 days old and
+# that have no open pull request. The default branch and protected branches
+# are never touched. A deleted PR branch can be restored from the PR page.
+name: Prune stale branches
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: List the branches that would be deleted, without deleting
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete branches older than 14 days with no open PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+          cutoff=$(date -u -d '14 days ago' +%s)
+          default=$(gh api "repos/$REPO" -q .default_branch)
+          open=$(gh pr list -R "$REPO" --state open --limit 500 --json headRefName -q '.[].headRefName')
+
+          gh api --paginate "repos/$REPO/branches" -q '.[] | select(.protected | not) | .name' |
+            while read -r branch; do
+              [ "$branch" = "$default" ] && continue
+              if grep -qxF -- "$branch" <<<"$open"; then
+                echo "keep   $branch (open PR)"
+                continue
+              fi
+              encoded=$(jq -rn --arg b "$branch" '$b | @uri')
+              committed=$(gh api "repos/$REPO/branches/$encoded" -q .commit.commit.committer.date)
+              if [ "$(date -u -d "$committed" +%s)" -ge "$cutoff" ]; then
+                echo "keep   $branch (last commit $committed)"
+                continue
+              fi
+              if [ "$DRY_RUN" = 'true' ]; then
+                echo "would delete $branch (last commit $committed)"
+              else
+                gh api -X DELETE "repos/$REPO/git/refs/heads/$branch"
+                echo "delete $branch (last commit $committed)"
+              fi
+            done

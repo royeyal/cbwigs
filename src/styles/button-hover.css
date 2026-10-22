@@ -4,7 +4,9 @@
  * Base button styles live in Webflow; this only adds interactive states.
  * Each variant sets --btn-fill (fill color) and --btn-fill-text (text color
  * while filled; set explicitly per variant, since currentcolor would make
- * the label inherit its parent's color). */
+ * the label inherit its parent's color). The label color uses the fill's
+ * duration and easing (--ease-expo-in-out, main.css), so it turns as the
+ * fill crosses the middle of the button. */
 
 .button,
 .nav-button,
@@ -18,9 +20,9 @@
   background-position: left center;
   background-size: 0% 100%;
   transition:
-    background-size 0.45s cubic-bezier(0.625, 0.05, 0, 1),
+    background-size 0.45s var(--ease-expo-in-out),
     background-color 0.3s ease,
-    color 0.3s ease,
+    color 0.45s var(--ease-expo-in-out),
     border-color 0.3s ease;
 }
 
