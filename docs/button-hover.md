@@ -31,7 +31,7 @@ Each variant sets two custom properties:
 - Webflow sets the text color of `.button.is-secondary.is-alternate` with three classes, which beats the generic `:is(.button, …):hover` rule, so the filled state lists that variant separately. Without it, the light fill appeared under the light text.
 - Inside a `.card` link (the home page's category cards), hovering or focusing anywhere on the card fills its button (`.card:hover .button`, `.card:focus-visible .button`).
 - The Flodesk footer form's submit button has the same light fill, defined in `flodesk.css` (see [flodesk.md](flodesk.md)).
-- The fill and the label color both animate over 0.45s with `--ease-expo-in-out` (Expo in-out, `cubic-bezier(0.87, 0, 0.13, 1)`), defined on `:root` in `main.css`. Sharing the curve means the label changes color as the fill crosses the middle of the button. A faster color change would turn the text before the slow-starting fill reaches it, leaving light text on a light background for a moment on outline buttons.
+- The fill and the label color both animate over `--btn-fill-duration` (0.7s) with `--ease-expo-in-out` (Expo in-out, `cubic-bezier(0.87, 0, 0.13, 1)`), both defined on `:root` in `main.css`. Expo in-out barely moves at first, so it needs a longer duration than an ease-out; at 0.45s the first part of a hover looked like nothing was happening. Sharing the curve means the label changes color as the fill crosses the middle of the button. A faster color change would turn the text before the slow-starting fill reaches it, leaving light text on a light background for a moment on outline buttons.
 - `:active` darkens the fill.
 - `prefers-reduced-motion` turns the transition off; the fill still appears, instantly.
 

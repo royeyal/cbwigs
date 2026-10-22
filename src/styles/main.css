@@ -24,6 +24,9 @@
 :root {
   --ease-expo-in-out: cubic-bezier(0.87, 0, 0.13, 1);
 
+  /* Button fill and label color (button-hover.css, flodesk.css) */
+  --btn-fill-duration: 0.7s;
+
   /* --ease: cubic-bezier(0.22, 0.61, 0.36, 1); */
 }
 

@@ -20,9 +20,9 @@
   background-position: left center;
   background-size: 0% 100%;
   transition:
-    background-size 0.45s var(--ease-expo-in-out),
+    background-size var(--btn-fill-duration) var(--ease-expo-in-out),
     background-color 0.3s ease,
-    color 0.45s var(--ease-expo-in-out),
+    color var(--btn-fill-duration) var(--ease-expo-in-out),
     border-color 0.3s ease;
 }
 
