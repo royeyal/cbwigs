@@ -10,7 +10,8 @@ export function initFlodeskPrivacyText() {
       consentText:
         'בהרשמה אתן מסכימות לקבל את מדיניות הפרטיות שלנו ונותנות את הסכמתכן לקבל עדכונים מהחברה שלנו.',
       privacyText: 'מדיניות פרטיות',
-      privacyHref: 'https://cbwigs.co.il/privacy-policy', // <-- your real page
+      // Interim: the privacy section of the terms page, until /privacy-policy exists
+      privacyHref: 'https://www.cbwigs.co.il/terms-and-conditions',
       requiredField: 'זהו שדה חובה',
       marketingConsent: 'עלייך לסמן שאת מאשרת לקבל מאיתנו חומרי שיווק'
     },
@@ -18,7 +19,7 @@ export function initFlodeskPrivacyText() {
       consentText:
         'By signing up, you agree to our Privacy Policy and consent to receive updates from our company.',
       privacyText: 'Privacy policy',
-      privacyHref: 'https://cbwigs.co.il/en/privacy-policy',
+      privacyHref: 'https://www.cbwigs.co.il/en/terms-and-conditions',
       requiredField: 'This field is required',
       marketingConsent: 'You must agree to receive marketing emails'
     }
