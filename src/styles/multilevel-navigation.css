@@ -157,6 +157,22 @@ button:focus-visible {
 
 /* ————  DROPDOWN LINKS + IMAGES ———— */
 
+/* Scrim behind the card label: the brand's dark brown, eased in over the
+   bottom of the image so there is no visible band. Overrides the Webflow
+   style (a black gradient at 25% opacity, too faint on light photos). */
+.nav-dropdown__img-overlay {
+  opacity: 1;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(43 29 21 / 0%) 35%,
+    rgb(43 29 21 / 6%) 47%,
+    rgb(43 29 21 / 18%) 58%,
+    rgb(43 29 21 / 36%) 70%,
+    rgb(43 29 21 / 55%) 84%,
+    rgb(43 29 21 / 70%) 100%
+  );
+}
+
 /* .nav-dropdown__link:hover .nav-dropdown__img-overlay,
 .nav-dropdown__link:focus-visible .nav-dropdown__img-overlay {
   opacity: 0;

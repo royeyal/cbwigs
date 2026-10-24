@@ -237,3 +237,76 @@
     }
   }
 }
+
+/* stylelint-disable no-descending-specificity -- these footer links never overlap rich-text or [data-underline-link] links */
+
+/* Footer links that can't take a data attribute, with the `alt` behavior:
+   the credit link is an inline link inside a Webflow text element, and the
+   privacy link is rendered by the Flodesk embed. Both are two words, kept on
+   one line because the pseudo-element lines can't follow a wrapped link. */
+.footer16_credit-text a,
+[data-ff-el='root'] a[class$='__privacy-policy-link'] {
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -0.0625em;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 0.0625em;
+    background-color: currentcolor;
+    transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
+  }
+
+  &::before {
+    transform-origin: 0% center;
+    transform: scaleX(1) rotate(0.001deg);
+    transition-delay: 0.3s;
+  }
+
+  &::after {
+    transform-origin: 100% center;
+    transform: scaleX(0) rotate(0.001deg);
+    transition-delay: 0s;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      transform-origin: 100% center;
+      transform: scaleX(0) rotate(0.001deg);
+      transition-delay: 0s;
+    }
+
+    &:hover::after {
+      transform-origin: 0% center;
+      transform: scaleX(1) rotate(0.001deg);
+      transition-delay: 0.3s;
+    }
+  }
+
+  /* RTL Support */
+  [dir='rtl'] & {
+    &::before {
+      transform-origin: 100% center;
+    }
+
+    &::after {
+      transform-origin: 0% center;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::before {
+        transform-origin: 0% center;
+      }
+
+      &:hover::after {
+        transform-origin: 100% center;
+      }
+    }
+  }
+}
+/* stylelint-enable no-descending-specificity */
