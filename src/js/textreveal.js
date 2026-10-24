@@ -23,37 +23,61 @@ const SPLIT_TYPES = {
 // Undoes the CSS that hides [data-split="heading"] before first paint.
 const show = el => el.classList.add('split-ready');
 
+// Split lines are blocks only as wide as their own text, so a split element
+// is as wide as its longest line. Inside a parent that shrinks to fit (a grid
+// item with justify-self: end, a flex item) the parent narrows and shifts
+// until revert(), then jumps. Holding the unsplit width avoids that;
+// max-width lets it still shrink with the viewport, which re-splits.
+function pinWidth(el) {
+  const { width, maxWidth } = el.style;
+  el.style.width = getComputedStyle(el).width;
+  el.style.maxWidth = '100%';
+  return () => {
+    el.style.width = width;
+    el.style.maxWidth = maxWidth;
+  };
+}
+
 function reveal(heading, playNow) {
   const type = SPLIT_CONFIG[heading.dataset.splitReveal]
     ? heading.dataset.splitReveal
     : 'lines';
   const { duration, stagger } = SPLIT_CONFIG[type];
+  const unpinWidth = pinWidth(heading);
 
-  SplitText.create(heading, {
-    type: SPLIT_TYPES[type],
-    mask: 'lines', // wrap each line in an overflow: clip div
-    autoSplit: true,
-    linesClass: 'line',
-    wordsClass: 'word',
-    charsClass: 'char',
-    // Runs again on every re-split. SplitText reverts the animation returned
-    // here (and with it its ScrollTrigger) first, so triggers don't pile up.
-    onSplit(self) {
-      show(heading);
-      return gsap.from(self[type], {
-        yPercent: 100,
-        opacity: 0,
-        duration,
-        stagger,
-        ease: 'expo.out',
-        scrollTrigger: playNow
-          ? undefined
-          : { trigger: heading, start: 'clamp(top 90%)', once: true },
-        // Back to the original markup for screen readers and resizing
-        onComplete: () => self.revert()
-      });
-    }
-  });
+  try {
+    SplitText.create(heading, {
+      type: SPLIT_TYPES[type],
+      mask: 'lines', // wrap each line in an overflow: clip div
+      autoSplit: true,
+      linesClass: 'line',
+      wordsClass: 'word',
+      charsClass: 'char',
+      // Runs again on every re-split. SplitText reverts the animation returned
+      // here (and with it its ScrollTrigger) first, so triggers don't pile up.
+      onSplit(self) {
+        show(heading);
+        return gsap.from(self[type], {
+          yPercent: 100,
+          opacity: 0,
+          duration,
+          stagger,
+          ease: 'expo.out',
+          scrollTrigger: playNow
+            ? undefined
+            : { trigger: heading, start: 'clamp(top 90%)', once: true },
+          // Back to the original markup for screen readers and resizing
+          onComplete: () => {
+            self.revert();
+            unpinWidth();
+          }
+        });
+      }
+    });
+  } catch (error) {
+    unpinWidth();
+    throw error;
+  }
 }
 
 function initMaskTextScrollReveal() {
