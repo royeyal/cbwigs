@@ -30,6 +30,7 @@ One doc per component. Each one lists its source files, which pages use it, and 
 | [flodesk](flodesk.md) | Localizes and restyles the footer newsletter form |
 | [dynamic-current-year](dynamic-current-year.md) | Current year in the footer |
 | [relume-container](relume-container.md) | Site-wide overrides for Relume layout classes (CSS) |
+| [view-transitions](view-transitions.md) | Fade between pages; the navbar stays put (CSS) |
 | [webflow-overrides](webflow-overrides.md) | Rich-text paragraph, link and list styling (CSS) |
 
 ### Specific pages

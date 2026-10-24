@@ -1,0 +1,36 @@
+/* Cross-document view transitions: on same-origin navigation, the old page
+   fades down and out while the new one rises in with a slight overshoot.
+   The navbar ([data-view-transition='navbar'], set in Webflow) gets its own
+   transition group, so it stays in place and morphs instead of fading with
+   the page. Browsers without support navigate normally. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  [data-view-transition='navbar'] {
+    view-transition-name: navbar;
+  }
+
+  @keyframes fade-out-down {
+    to {
+      opacity: 0;
+      transform: translateY(0.375rem);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.625rem);
+    }
+  }
+
+  ::view-transition-old(root) {
+    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out-down;
+  }
+
+  ::view-transition-new(root) {
+    animation: 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both fade-in-up;
+  }
+}
