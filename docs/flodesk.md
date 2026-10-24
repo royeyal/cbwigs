@@ -23,10 +23,10 @@ All strings live in the `strings` object at the top of `flodesk.js`:
 |---|---|---|
 | `consentText` | consent sentence | consent sentence |
 | `privacyText` | `מדיניות פרטיות` | `Privacy policy` |
-| `privacyHref` | `https://cbwigs.co.il/privacy-policy` | `https://cbwigs.co.il/en/privacy-policy` |
+| `privacyHref` | `https://www.cbwigs.co.il/terms-and-conditions` | `https://www.cbwigs.co.il/en/terms-and-conditions` |
 | `requiredField`, `marketingConsent` | validation messages | validation messages |
 
-The domain now serves the Webflow site, but as of 2026-10-21 both privacy URLs return 404: there is no `/privacy-policy` page. The privacy policy is the "מדיניות פרטיות" section of `/terms-and-conditions` (and `/en/terms-and-conditions`), so `privacyHref` should point there or at a dedicated page once one exists.
+There is no `/privacy-policy` page yet (it returned 404 as of 2026-10-24), so `privacyHref` points at `/terms-and-conditions`, whose "מדיניות פרטיות" section is the current privacy text. When a dedicated privacy page is published, point both `privacyHref` values at it.
 
 To translate another Flodesk message, add its exact English text to `errorTranslations`.
 
