@@ -28,9 +28,13 @@ const show = el => el.classList.add('split-ready');
 // item with justify-self: end, a flex item) the parent narrows and shifts
 // until revert(), then jumps. Holding the unsplit width avoids that;
 // max-width lets it still shrink with the viewport, which re-splits.
+// The computed width is rounded down to 3 decimals, and split text is a
+// fraction of a pixel wider than unsplit text, so pinning it exactly wraps a
+// one-line heading onto two lines until the revert (a layout shift). Round
+// up and add 1px; max-width keeps a full-width heading inside its parent.
 function pinWidth(el) {
   const { width, maxWidth } = el.style;
-  el.style.width = getComputedStyle(el).width;
+  el.style.width = `${Math.ceil(parseFloat(getComputedStyle(el).width)) + 1}px`;
   el.style.maxWidth = '100%';
   return () => {
     el.style.width = width;
