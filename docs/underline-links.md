@@ -17,6 +17,9 @@ CSS-only animated underlines, drawn with `::before` / `::after` lines that scale
 | `.section-rich-text .w-richtext a` (all rich text on the site today) | Native text underline (from `webflow.css`) | Native underline goes away, animated line draws in |
 | `.w-richtext a` anywhere else | Native underline **and** the animated line | Animated line sweeps out and back, like `alt` |
 | `[data-hover]` on an ancestor | | Hovering the ancestor triggers its child links, so a whole card can drive the link's underline |
+| `.footer16_credit-text a`, `[data-ff-el='root'] a[class$='__privacy-policy-link']` | Underlined | Same as `alt` |
+
+The last row covers two footer links that can't take a `data-underline-link` attribute: the designer credit is an inline link inside a Webflow text element, and the Flodesk privacy link is rendered by the embed. They also get `white-space: nowrap`, because the pseudo-element lines don't follow a link that wraps onto a second line.
 
 - Hover effects are inside `@media (hover: hover) and (pointer: fine)`, so touch devices never get a stuck underline.
 - Each variant has `[dir='rtl']` rules that flip the `transform-origin`, so lines grow from the right in Hebrew.
