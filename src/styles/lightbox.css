@@ -1,0 +1,223 @@
+/*
+ * Gallery lightbox (dialog.zoom-lightbox) and the zoom hint on its thumbnails, run by
+ * src/js/lightbox.js. The dialog exists only on the published page, so all of its look lives
+ * here. See docs/lightbox.md.
+ */
+
+/* ————— Thumbnails: the hint that a click opens the lightbox ————— */
+
+/* The Events template's button around each photo. Webflow gives it overflow: hidden and the
+   rounded corners, which clip the zoom below. */
+[data-gallery] [data-lightbox='trigger'] {
+  position: relative;
+  cursor: zoom-in;
+
+  & img {
+    transition: scale 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* A slight press, like the buttons */
+  &:active {
+    scale: 0.98;
+  }
+}
+
+/* A zoom badge in the top corner at the inline end (top-left in Hebrew) */
+.zoom-badge {
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: rgb(26 26 26 / 45%);
+  color: #f4efe8;
+  backdrop-filter: blur(0.5rem);
+  pointer-events: none;
+  transition-property: opacity, scale;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  & svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+/* Hover and keyboard focus show the badge and zoom the photo inside its frame. Touch screens
+   have no hover, so they show the badge all the time. */
+@media (hover: hover) {
+  [data-gallery] [data-lightbox='trigger'] {
+    & .zoom-badge {
+      opacity: 0;
+      scale: 0.8;
+    }
+
+    &:is(:hover, :focus-visible) {
+      & img {
+        scale: 1.05;
+      }
+
+      & .zoom-badge {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+  }
+}
+
+@media (hover: none) {
+  .zoom-badge {
+    inset-block-start: 0.5rem;
+    inset-inline-end: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* ————— The lightbox ————— */
+
+dialog.zoom-lightbox {
+  /* The padding caps how large the photo grows, and leaves room for the buttons */
+  --zoom-lightbox-pad: 4.5rem;
+
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: var(--zoom-lightbox-pad);
+  border: 0;
+  overflow: hidden;
+  background-color: rgb(0 0 0 / 90%);
+  color: #f4efe8;
+  cursor: zoom-out;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  outline: none;
+
+  &[open] {
+    display: grid;
+    place-items: center;
+  }
+
+  &::backdrop {
+    background-color: transparent;
+  }
+
+  @media (width <= 767px) {
+    --zoom-lightbox-pad: 1rem;
+
+    padding-block: 4.5rem;
+  }
+}
+
+.zoom-lightbox_image {
+  grid-area: 1 / 1;
+  display: block;
+  max-width: none;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+:is(.zoom-lightbox_close, .zoom-lightbox_prev, .zoom-lightbox_next) {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(244 239 232 / 12%);
+  color: #f4efe8;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgb(244 239 232 / 25%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #f4efe8;
+    outline-offset: 3px;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.zoom-lightbox_close {
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+}
+
+/* Previous at the start of the line (right in Hebrew), next at the end */
+:is(.zoom-lightbox_prev, .zoom-lightbox_next) {
+  inset-block-start: 50%;
+  translate: 0 -50%;
+}
+
+.zoom-lightbox_prev {
+  inset-inline-start: 0.75rem;
+}
+
+.zoom-lightbox_next {
+  inset-inline-end: 0.75rem;
+}
+
+/* The chevron points right; flip the one that should point left */
+.zoom-lightbox:dir(rtl) .zoom-lightbox_next svg,
+.zoom-lightbox:dir(ltr) .zoom-lightbox_prev svg {
+  scale: -1 1;
+}
+
+.zoom-lightbox_counter {
+  position: absolute;
+  inset-block-end: 1.25rem;
+  inset-inline: 0;
+  margin: 0;
+  font-size: 0.9375rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+}
+
+@media (width <= 767px) {
+  /* Buttons go to the bottom corners, beside the counter */
+  :is(.zoom-lightbox_prev, .zoom-lightbox_next) {
+    inset-block: auto 0.5rem;
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-gallery] [data-lightbox='trigger'] {
+    &:active,
+    &:is(:hover, :focus-visible) img {
+      scale: none;
+    }
+  }
+}

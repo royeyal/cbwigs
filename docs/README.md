@@ -43,7 +43,7 @@ One doc per component. Each one lists its source files, which pages use it, and 
 | [parallax-image](parallax-image.md) | Image parallax inside cards | home, events, collection-2026, hair-extensions, hairbun, my-original |
 | [youtube-player](youtube-player.md) | Click-to-play inline YouTube (video or Short) | hairbun, my-original, events/* |
 | [youtube-lightbox](youtube-lightbox.md) | Hero play button → video modal | home, about, hairbun, my-original |
-| [lightbox-setup](lightbox-setup.md) | Image gallery lightbox with Flip | events/* |
+| [lightbox](lightbox.md) | Photo gallery: zoom hint on hover, click to zoom into a lightbox | events/* |
 | [snap-slider](snap-slider.md) | Scroll-snap image slider | hairbun |
 | [layout-grid-flip](layout-grid-flip.md) | Large/small grid toggle with Flip | hairbun |
 | [flip-counter](flip-counter.md) | Sticky flip-clock section counter | hairbun, my-original |

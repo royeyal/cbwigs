@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery lightbox - Demo</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <style>
+      /* Stand-ins for the Webflow classes on the Events template */
+      body {
+        margin: 0;
+        padding: 3rem 1.5rem 120vh;
+        font-family: system-ui, sans-serif;
+        background: #ece5dc;
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4em 1.25em;
+        max-width: 72rem;
+        margin: 0 auto;
+      }
+
+      .gallery-grid__item {
+        width: calc(33.3333% - 0.833333em);
+      }
+
+      .gallery-item__button {
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
+        border-radius: 0.75rem;
+        background: none;
+      }
+
+      .card__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+      }
+
+      @media (width <= 767px) {
+        .gallery-grid__item {
+          width: calc(50% - 0.375em);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mirrors the Events template's gallery. Toggle <html lang/dir> to test English (LTR).
+         The portrait photos check that the crop-aware zoom doesn't stretch them. -->
+    <div data-gallery class="lightbox-gallery">
+      <div class="gallery-grid">
+        <div data-lightbox="trigger-parent" class="gallery-grid__item">
+          <button data-lightbox="trigger" class="gallery-item__button">
+            <img src="https://picsum.photos/id/1011/1500/1000" alt="סירה על אגם" class="card__img is-3-2" />
+          </button>
+        </div>
+        <div data-lightbox="trigger-parent" class="gallery-grid__item">
+          <button data-lightbox="trigger" class="gallery-item__button">
+            <img src="https://picsum.photos/id/1027/1000/1500" alt="אישה בשדה (תמונה לאורך)" class="card__img is-3-2" />
+          </button>
+        </div>
+        <div data-lightbox="trigger-parent" class="gallery-grid__item">
+          <button data-lightbox="trigger" class="gallery-item__button">
+            <img src="https://picsum.photos/id/1015/1500/1000" alt="נהר בין הרים" class="card__img is-3-2" />
+          </button>
+        </div>
+        <div data-lightbox="trigger-parent" class="gallery-grid__item">
+          <button data-lightbox="trigger" class="gallery-item__button">
+            <img loading="lazy" src="https://picsum.photos/id/1035/1500/1000" alt="מפל" class="card__img is-3-2" />
+          </button>
+        </div>
+        <div data-lightbox="trigger-parent" class="gallery-grid__item">
+          <button data-lightbox="trigger" class="gallery-item__button">
+            <img loading="lazy" src="https://picsum.photos/id/1062/1000/1400" alt="כלב בשמיכה (תמונה לאורך)" class="card__img is-3-2" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
