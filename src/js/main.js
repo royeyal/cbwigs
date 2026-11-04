@@ -16,9 +16,19 @@ import { initParallaxImages } from './parallax-image.js';
 import { initDraggableInfiniteSlider } from './draggable-infinite-slider.js';
 import { initDynamicCurrentYear } from './dynamic-current-year.js';
 import { initFlodeskPrivacyText } from './flodesk.js';
+import { initLightbox } from './lightbox.js';
 import './youtube-player.js';
-import './lightbox-setup.js';
 import './locale-switch.js';
+
+// Site-wide GSAP defaults. Every tween without its own ease or duration uses
+// these, possibly Webflow's interactions too (they share this gsap). They lived at
+// the top of the old lightbox-setup.js until 2026-11; moved here unchanged.
+if (typeof gsap !== 'undefined') {
+  gsap.defaults({
+    ease: 'power4.inOut',
+    duration: 0.8
+  });
+}
 
 // Initialize all animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -74,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Flodesk privacy policy text customization
   initFlodeskPrivacyText();
+
+  // Initialize gallery lightbox (will only run if [data-gallery] triggers exist)
+  initLightbox();
 });
 
 // Export all animation functions for potential external access
@@ -93,5 +106,6 @@ export {
   initParallaxImages,
   initDraggableInfiniteSlider,
   initDynamicCurrentYear,
-  initFlodeskPrivacyText
+  initFlodeskPrivacyText,
+  initLightbox
 };
