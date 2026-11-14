@@ -58,3 +58,6 @@ temp/
 
 # Wrangler local dev state
 .wrangler/
+
+# Client guide drafts (source for the Google Doc; not part of the site)
+client-guide/
