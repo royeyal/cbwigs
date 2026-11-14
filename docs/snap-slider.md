@@ -27,12 +27,13 @@ The attribute names still say `swiper` because that is what the Webflow markup a
 ```
 
 - The script marks the list with `data-snap-track` and styles hang off that. Static (non-CMS) markup works too: if there is no `[role=list]`, the first child of `[data-swiper-wrap]` is used.
-- The arrows must be `<button>` elements; they are hidden with the `disabled` attribute at either end.
+- The arrows must be `<button>` elements. With looping off (`data-swiper-loop="false"` on `[data-swiper-group]`), they are hidden with the `disabled` attribute at either end.
 - `aria-label` is added to arrows that don't have one (`הקודם` / `הבא` in Hebrew, `Previous` / `Next` in English).
 
 ## Behavior
 
-- Swipe on touch, trackpad scroll on desktop, arrows everywhere. No mouse-drag and no infinite loop (Swiper had both).
+- Swipe on touch, trackpad scroll on desktop, arrows everywhere. No mouse-drag (Swiper had it).
+- Loops endlessly in both directions (added November 2026). The script clones the slides once before and once after the originals (clones get `data-snap-clone`, `aria-hidden="true"` and `inert`, and lose any `id`). When scrolling settles on a clone (`scrollend`, or 150 ms without scroll events where `scrollend` isn't supported), the track jumps instantly to the matching original, measured from the slides' positions so it is exact in RTL and LTR. Each arrow click also recenters first, so rapid clicks never run out of clones. Turn it off per slider with `data-swiper-loop="false"`; a slider with a single slide never loops.
 - Each arrow scrolls one slide toward the side of the slider it sits on. That is direction-proof: in RTL the left arrow (marked `data-swiper-next`) moves toward the end, in LTR the right one does.
 - Smooth scrolling respects `prefers-reduced-motion`.
 
