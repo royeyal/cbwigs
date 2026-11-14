@@ -46,8 +46,7 @@ cbwigs/
 ├── vite.config.js
 ├── wrangler.toml
 ├── eslint.config.js
-├── postcss.config.js
-└── check-parallax.js             # Browser-console debug snippet for parallax-image (not part of the build)
+└── postcss.config.js
 ```
 
 ## Commands
