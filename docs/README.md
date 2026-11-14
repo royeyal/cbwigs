@@ -3,7 +3,7 @@
 Custom JavaScript and CSS for the **cbwigs** Webflow site (Hebrew primary, English under `/en`). Webflow owns the HTML; this repo builds one JS bundle and one CSS file with Vite, and a Cloudflare Worker serves them at stable URLs that the site loads on every page.
 
 - **Architecture, commands, deploy and conventions:** [`AGENTS.md`](../AGENTS.md)
-- **Plain-English overview:** [`PROJECT_CONTEXT.md`](../PROJECT_CONTEXT.md)
+- **How the files are served:** [worker](worker.md) (Cloudflare Worker, stable URLs, caching)
 - **Live site:** https://www.cbwigs.co.il (also served at https://cbwigs.webflow.io)
 
 ```bash
@@ -51,7 +51,12 @@ One doc per component. Each one lists its source files, which pages use it, and 
 | [image-trail-following-cursor](image-trail-following-cursor.md) | Images trailing the cursor (desktop) | my-original |
 | [copy-email-to-clipboard-button](copy-email-to-clipboard-button.md) | Copy-email button | contact-us |
 
-Reference: [brand-colors](brand-colors.md) lists the Webflow color variables.
+### Infrastructure and reference
+
+| Doc | What it covers |
+|---|---|
+| [worker](worker.md) | Cloudflare Worker that serves `main.js` / `main.css` at stable URLs; cache and CORS headers |
+| [brand-colors](brand-colors.md) | The Webflow color variables |
 
 ## Adding a component
 
