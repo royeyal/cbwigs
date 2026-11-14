@@ -251,3 +251,7 @@ If content is added after load (filters, infinite scroll), call `ScrollTrigger.r
   <img class="hero__bg-image" src="image.jpg" alt="Description" />
 </div>
 ```
+
+## Debugging
+
+`check-parallax.js` in the repo root is a console snippet, not part of the build. Paste it into the browser console on a page with parallax cards: it reports whether GSAP and ScrollTrigger loaded, lists each `[data-parallax-image]` card with its speed and direction, and compares the number of ScrollTrigger instances with the number of cards. It only looks for `.card__img`, so it reports a card that uses `data-parallax-target` as having no image.

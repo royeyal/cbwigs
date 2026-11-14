@@ -38,7 +38,7 @@ cbwigs/
 ├── external/
 │   └── src/
 │       └── worker.js             # Cloudflare Worker — manifest-based asset router
-├── docs/                         # One <component>.md per source module; docs/README.md is the index (and GitHub front page)
+├── docs/                         # One <component>.md per source module, plus worker.md; docs/README.md is the index (and GitHub front page)
 ├── dist/                         # Vite build output (committed; manifest is gitignored)
 │   ├── js/main.[hash].js
 │   ├── css/style.[hash].css
@@ -47,8 +47,7 @@ cbwigs/
 ├── wrangler.toml
 ├── eslint.config.js
 ├── postcss.config.js
-├── check-parallax.js             # Standalone Node script (not part of Vite build)
-└── PROJECT_CONTEXT.md            # Plain-English architecture summary
+└── check-parallax.js             # Browser-console debug snippet for parallax-image (not part of the build)
 ```
 
 ## Commands

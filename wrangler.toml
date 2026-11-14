@@ -1,5 +1,5 @@
 name = "cbwigs-assets"
-main = "external/src/worker.js"   # <-- fix the path
+main = "external/src/worker.js"
 compatibility_date = "2025-09-06"
 
 # Serve static files from the root dist/
